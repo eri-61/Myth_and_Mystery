@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Myth&Mystery;
+
 #if UNITY_LOCALIZATION
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -13,6 +15,7 @@ namespace cherrydev
 {
     public class DialogBehaviour : MonoBehaviour
     {
+        [SerializeField] private CharacterScript characterScript;
         [SerializeField] private float _dialogCharDelay;
         [SerializeField] private List<KeyCode> _nextSentenceKeyCodes;
         [SerializeField] private bool _isCanSkippingText = true;
@@ -407,11 +410,18 @@ namespace cherrydev
 
             SentenceNodeActivatedWithParameter?.Invoke(localizedCharName, localizedText,
                 sentenceNode.GetCharacterSprite());
+            
+            if (characterScript != null)
+            {
+                characterScript.SwitchSprites(localizedCharName.ToLower());
+            }
 
             if (sentenceNode.IsExternalFunc())
                 CallExternalFunction(sentenceNode.GetExternalFunctionName());
-
+            
             WriteDialogText(localizedText);
+
+            
         }
 
         /// <summary>
