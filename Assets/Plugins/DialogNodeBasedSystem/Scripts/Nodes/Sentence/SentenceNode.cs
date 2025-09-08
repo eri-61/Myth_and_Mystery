@@ -27,6 +27,9 @@ namespace cherrydev
         public Sentence Sentence => _sentence;
 
         private string _externalButtonLabel;
+        
+        [SerializeField] private string _externalParam1;
+        [SerializeField] private string _externalParam2;
 
         private const float LabelFieldSpace = 47f;
         private const float TextFieldWidth = 100f;
@@ -113,6 +116,10 @@ namespace cherrydev
         /// <returns></returns>
         public bool IsExternalFunc() => _isExternalFunc;
 
+        //ADDED - this is for variables in external functions
+        public string GetExternalParam1() => _externalParam1;
+        public string GetExternalParam2() => _externalParam2;
+
 #if UNITY_EDITOR
 
         /// <summary>
@@ -152,6 +159,21 @@ namespace cherrydev
                 DrawCharacterSpriteHorizontal();
 
                 DrawExternalFunctionTextField();
+
+                //added this
+                if (_isExternalFunc)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField("Param 1", GUILayout.Width(LabelFieldSpace));
+                    _externalParam1 = EditorGUILayout.TextField(_externalParam1, GUILayout.Width(TextFieldWidth));
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField("Param 2", GUILayout.Width(LabelFieldSpace));
+                    _externalParam2 = EditorGUILayout.TextField(_externalParam2, GUILayout.Width(TextFieldWidth));
+                    EditorGUILayout.EndHorizontal();
+                }
+                //end
 
                 if (GUILayout.Button(_externalButtonLabel))
                     _isExternalFunc = !_isExternalFunc;

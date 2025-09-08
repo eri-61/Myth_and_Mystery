@@ -9,6 +9,7 @@ namespace cherrydev
         public delegate object ExternalFunction();
 
         private readonly Dictionary<string, ExternalFunction> _externals = new();
+        private readonly Dictionary<string, Action<string, string>> _externalsStringString = new();
 
         public ExternalFunction CallExternalFunction(string funcName)
         {
@@ -48,5 +49,26 @@ namespace cherrydev
 
             _externals[funcName] = externalFunction;
         }
+
+        public void BindExternalFunction(string funcName, Action<string, string> function)
+        {
+            if (_externalsStringString.ContainsKey(funcName))
+                _externalsStringString.Remove(funcName);
+            _externalsStringString[funcName] = function;
+        }
+
+        public void CallExternalFunctionWithParams(string funcName, string param1, string param2)
+        {
+            if (_externalsStringString.ContainsKey(funcName))
+            {
+                _externalsStringString[funcName]?.Invoke(param1, param2);
+            }
+            else
+            {
+                Debug.LogWarning($"No function found with name '{funcName}' that accepts string, string parameters.");
+                CallExternalFunction(funcName);
+            }
+        }
+
     }
 }
