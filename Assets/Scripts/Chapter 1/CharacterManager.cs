@@ -44,7 +44,7 @@ namespace Myth_Mystery
                         GameObject newCharacter = Instantiate(prefab, targetPosition.position, Quaternion.identity);
                         activeCharacters.Add(positionKey, newCharacter);
 
-                        Animator animator = newCharacter.GetComponentInChildren<Animator>();
+                        Animator animator = newCharacter.GetComponent<Animator>();
 
                         if (animator != null)
                         {
