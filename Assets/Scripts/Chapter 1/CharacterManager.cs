@@ -28,7 +28,7 @@ namespace Myth_Mystery
 
             CharacterData characterData = allCharacters.Find(c  => c.characterName.ToLower() == characterName.ToLower());
 
-            if (characterData == null)
+            if (characterData != null)
             {
                 GameObject prefab = GetPrefabVariation(characterData, variation);
 
@@ -38,6 +38,7 @@ namespace Myth_Mystery
                     if (targetPosition != null)
                     {
                         currentCharacter = Instantiate(prefab, targetPosition.position, Quaternion.identity);
+                        Debug.LogWarning($"Character '{characterName} {variation}' is at '{position}'");
                     }
                     else
                     {
