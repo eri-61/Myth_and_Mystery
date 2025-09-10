@@ -13,6 +13,7 @@ namespace DialogNodeBasedSystem.Scripts
         public GameObject leftChara;
         public GameObject middleChara;
 
+        public TextMeshPro name;
         private GameObject currentCharacterSprite;
 
         private void Start()
@@ -21,49 +22,67 @@ namespace DialogNodeBasedSystem.Scripts
             dialogBehaviour.StartDialog(dialogGraph);
         }
 
-        public void SwitchSprites(string spriteName, string position)
+        public void SwitchSprites()
         {
+            string cName = name.text;
 
+            switch (cName)
+            {
+                case "Rafael":
+                    ChangeCharacterSprite("Rafael", "right");
+                    break;
+                case "Javier":
+                    ChangeCharacterSprite("Javier", "left");
+                    break;
+                case "Lola Remy":
+                    ChangeCharacterSprite("Lola Remy", "center");
+                    break;
+                case "???":
+                    ChangeCharacterSprite("???", "center");
+                    break;
+                case "":
+                    if (currentCharacterSprite != null)
+                    {
+                        currentCharacterSprite.SetActive(false);
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Unknown character name: " + cName);
+                    break;
+            }
+        }
+
+        public void ChangeCharacterSprite(string spriteName, string position)
+        {
             if (currentCharacterSprite != null)
             {
-                Destroy(currentCharacterSprite);
+                currentCharacterSprite.SetActive(false);
             }
-
-            GameObject prefab = Resources.Load<GameObject>(spriteName);
-
-            if (prefab == null)
-            {
-                Debug.LogWarning("Sprite not found: " + spriteName);
-                return;
-            }
-
-            Transform parentTransform = null;
-
             switch (position.ToLower())
             {
-                case "right":
-                    if (rightChara != null)
-                        parentTransform = rightChara.transform;
-                    break;
                 case "left":
-                    if (leftChara != null)
-                        parentTransform = leftChara.transform;
+                    currentCharacterSprite = leftChara.transform.Find(spriteName)?.gameObject;
+                    break;
+                case "right":
+                    currentCharacterSprite = rightChara.transform.Find(spriteName)?.gameObject;
                     break;
                 case "middle":
-                    if (middleChara != null)
-                        parentTransform = middleChara.transform;
+                    currentCharacterSprite = middleChara.transform.Find(spriteName)?.gameObject;
                     break;
+                default:
+                    Debug.LogWarning("Unknown position: " + position);
+                    return;
             }
-
-            if (parentTransform != null)
+            if (currentCharacterSprite != null)
             {
-                currentCharacterSprite = Instantiate(prefab, parentTransform.position, Quaternion.identity, parentTransform);
+                currentCharacterSprite.SetActive(true);
             }
             else
             {
-                Debug.LogWarning("Invalid position specified: " + position);
+                Debug.LogWarning("Sprite not found: " + spriteName + " at position: " + position);
             }
         }
+
     }
 }
 

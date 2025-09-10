@@ -10,7 +10,6 @@ namespace cherrydev
     {
         [SerializeField] private string _functionName;
         [SerializeField] private string _description;
-        [SerializeField] private List<string> _parameters = new List<string>();
 
         [Space(10)] 
         public List<Node> ParentNodes = new();
@@ -24,20 +23,12 @@ namespace cherrydev
         private const float LabelFieldSpace = 55f;
         private const float TextFieldWidth = 100f;
 
-        private bool _showParameters = true;
-
         /// <summary>
         /// Returns the external function name
         /// </summary>
         /// <returns>External function name</returns>
         public string GetExternalFunctionName() => _functionName;
 
-
-        //added - get parameters
-        public List<string> GetParameters()
-        {
-            return _parameters;
-        }
 #if UNITY_EDITOR
 
         /// <summary>
@@ -55,37 +46,6 @@ namespace cherrydev
             GUILayout.BeginArea(Rect, nodeStyle);
             EditorGUILayout.LabelField("External Function", labelStyle);
             DrawFunctionNameField();
-            
-            //added this
-            _showParameters = EditorGUILayout.Foldout(_showParameters, "Parameters");
-    if (_showParameters)
-    {
-        EditorGUI.indentLevel++;
-
-        if (_parameters == null)
-            _parameters = new List<string>();
-
-        for (int i = 0; i < _parameters.Count; i++)
-        {
-            EditorGUILayout.BeginHorizontal();
-            _parameters[i] = EditorGUILayout.TextField(_parameters[i]);
-
-            if (GUILayout.Button("-", GUILayout.Width(20)))
-            {
-                _parameters.RemoveAt(i);
-                i--; // fix index after removal
-            }
-            EditorGUILayout.EndHorizontal();
-        }
-
-        if (GUILayout.Button("+"))
-        {
-            _parameters.Add(string.Empty);
-        }
-
-        EditorGUI.indentLevel--;
-        }
-        //end
             GUILayout.EndArea();
         }
 

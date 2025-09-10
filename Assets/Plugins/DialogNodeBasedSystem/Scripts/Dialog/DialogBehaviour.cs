@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-
 #if UNITY_LOCALIZATION
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -103,19 +102,6 @@ namespace cherrydev
 
                 if (_currentNode is SentenceNode sentenceNode)
                 {
-                
-                //added this
-                    CurrentSentenceNode = sentenceNode;
-                    if (sentenceNode.IsExternalFunc())
-                    {
-                        var funcName = sentenceNode.GetExternalFunctionName();
-                        var param1 = sentenceNode.GetExternalParam1();
-                        var param2 = sentenceNode.GetExternalParam2();
-
-                        ExternalFunctionsHandler.CallExternalFunctionWithParams(funcName, param1, param2);
-                    }
-                //end
-
                     string updatedText = sentenceNode.GetText();
                     string updatedCharName = sentenceNode.GetCharacterName();
 
@@ -303,13 +289,6 @@ namespace cherrydev
                 _boundFunctionNames.Add(funcName);
         }
 
-        public void BindExternalFunction(string funcName, Action<string, string> function)
-        {
-            ExternalFunctionsHandler.BindExternalFunction(funcName, function);
-
-            if (!_boundFunctionNames.Contains(funcName))
-                _boundFunctionNames.Add(funcName);
-        }
         /// <summary>
         /// Adding listener to OnDialogFinished UnityEvent
         /// </summary>
@@ -431,10 +410,8 @@ namespace cherrydev
 
             if (sentenceNode.IsExternalFunc())
                 CallExternalFunction(sentenceNode.GetExternalFunctionName());
-            
-            WriteDialogText(localizedText);
 
-            
+            WriteDialogText(localizedText);
         }
 
         /// <summary>
@@ -556,21 +533,6 @@ namespace cherrydev
             ExternalFunctionNode externalFunctionNode = (ExternalFunctionNode)currentNode;
             CurrentExternalFunctionNode = externalFunctionNode;
 
-            string functionName = externalFunctionNode.GetExternalFunctionName();
-            
-            List<string> parameters = externalFunctionNode.GetParameters();
-
-            if (parameters != null && parameters.Count >=2)
-
-            {
-                ExternalFunctionsHandler.CallExternalFunctionWithParams(functionName, parameters[0], parameters[1]);
-            }
-            else
-            {
-                // If no parameters, call the external function handler directly.
-                // This will call the parameterless Action if bound.
-                ExternalFunctionsHandler.CallExternalFunction(functionName);
-            }
             ExternalFunctionsHandler.CallExternalFunction(externalFunctionNode.GetExternalFunctionName());
 
             if (externalFunctionNode.ChildNode != null)
