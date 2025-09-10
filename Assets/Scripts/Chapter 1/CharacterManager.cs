@@ -12,14 +12,17 @@ namespace Myth_Mystery
         public Transform rightCharacterPosition;
         public Transform middleCharacterPosition;
 
-        private GameObject currentCharacter;
+        private Dictionary<string, GameObject> activeCharacters = new Dictionary<string, GameObject>();
 
         public void ChangeCharacter(string characterName, string variation, string position)
         {
-            if (currentCharacter != null)
+            string positionKey = position.ToLower();
+
+            if (activeCharacters.ContainsKey(positionKey) && activeCharacters[positionKey] != null)
             {
-                Destroy(currentCharacter);
-            }
+                Destroy(activeCharacters[positionKey]);
+                activeCharacters.Remove(positionKey);
+            } 
 
             if (string.IsNullOrEmpty(characterName) || characterName == "none")
             {
@@ -35,16 +38,33 @@ namespace Myth_Mystery
                 if (prefab != null)
                 {
                     Transform targetPosition = GetPositionTransform(position);
+                    
                     if (targetPosition != null)
                     {
-                        currentCharacter = Instantiate(prefab, targetPosition.position, Quaternion.identity);
-                        Debug.LogWarning($"Character '{characterName} {variation}' is at '{position}'");
+                        GameObject newCharacter = Instantiate(prefab, targetPosition.position, Quaternion.identity);
+                        activeCharacters.Add(positionKey, newCharacter);
+
+                        Animator animator = newCharacter.GetComponentInChildren<Animator>();
+
+                        if (animator != null)
+                        {
+                            Debug.Log($"Setting 'IsTalking' on {newCharacter.name} at position {positionKey}");
+                            animator.SetBool("isTalking", true);
+                        }
+
+                        else
+                        {
+                            Debug.LogError($"No Animator component found on prefab or its children for character '{characterName}'.");
+                        }
+
                     }
+
                     else
                     {
                         Debug.LogWarning($"Position '{position}' not recognized.");
                     }
                 }
+
                 else
                 {
                     Debug.LogWarning($"Variation '{variation}' not found.");
@@ -57,6 +77,29 @@ namespace Myth_Mystery
             }
         }
 
+        public void ClearCharacter(string position)
+        {
+            string positionKey = position.ToLower();
+            if (activeCharacters.ContainsKey(positionKey) && activeCharacters[positionKey] != null)
+            {
+                Destroy(activeCharacters[positionKey]);
+                activeCharacters.Remove(positionKey);
+            }
+        }
+
+        public void StopAnimation(string position)
+        {
+            string positionKey = position.ToLower();
+            if (activeCharacters.ContainsKey(positionKey) && activeCharacters[positionKey] != null)
+            {
+                Animator animator = activeCharacters[positionKey].GetComponent<Animator>();
+                if (animator != null)
+                {
+                    animator.SetBool("isTalking", false);
+                }
+
+            }
+        }
         private GameObject GetPrefabVariation(CharacterData characterData, string variation)
         {
             switch (variation.ToLower())

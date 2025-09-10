@@ -416,7 +416,16 @@ MonoBehaviour:
   characterManager: {fileID: 622530428}
   nameLabel: {fileID: 1491708006}
   charInfo: {fileID: 1092853155}
-  allCharacters: []
+  allCharacters:
+  - {fileID: 11400000, guid: 7c54510e6cf645e4480e8333955f2d65, type: 2}
+  - {fileID: 11400000, guid: e161ddaf17591634191e35115ed81b83, type: 2}
+  - {fileID: 11400000, guid: 380eb72f34e886c478d7a935ebca1291, type: 2}
+  - {fileID: 11400000, guid: 9c72636aa9d0a8a44bde54e194d900df, type: 2}
+  - {fileID: 11400000, guid: fec701dbdf6f92e4f8d803261886f498, type: 2}
+  - {fileID: 11400000, guid: fafa6c876cc1cea4f9314f9f512dc737, type: 2}
+  - {fileID: 11400000, guid: cc4a991108f49e04dbef7a2cb7964c84, type: 2}
+  - {fileID: 11400000, guid: 6bc170d7fb50eb3459a5bded632cfae9, type: 2}
+  - {fileID: 11400000, guid: 501015c2113797e4fb05299ae757ebb6, type: 2}
 --- !u!224 &592685058 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2508528655481042184, guid: 29426804abe75c141b105055a668163e, type: 3}
@@ -455,8 +464,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54577d38420c01d44a9b28330b6a8517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.DialogBehaviour
-  _dialogCharDelay: 0
-  _nextSentenceKeyCodes: 43010000
+  _dialogCharDelay: 0.05
+  _nextSentenceKeyCodes: 4301000020000000
   _isCanSkippingText: 1
   _onDialogStarted:
     m_PersistentCalls:
@@ -918,7 +927,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 725005bc0b3c68d40895f2dafacff670, type: 2}
   m_sharedMaterial: {fileID: 410277109635828334, guid: 725005bc0b3c68d40895f2dafacff670, type: 2}
@@ -1089,6 +1098,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1578928934 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1376678220389776767, guid: ceae23eb8b5c3e541bb8d992d05306e6, type: 3}
+  m_PrefabInstance: {fileID: 3286034818037256014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &1707696160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1498,7 +1518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2730878530226491824, guid: ceae23eb8b5c3e541bb8d992d05306e6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3057729833730534102, guid: ceae23eb8b5c3e541bb8d992d05306e6, type: 3}
       propertyPath: m_text
@@ -1595,22 +1615,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5289606123653095293}
   m_SourcePrefab: {fileID: 100100000, guid: ceae23eb8b5c3e541bb8d992d05306e6, type: 3}
---- !u!224 &3286034818037256015 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4990972479222239207, guid: ceae23eb8b5c3e541bb8d992d05306e6, type: 3}
-  m_PrefabInstance: {fileID: 3286034818037256014}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3286034818037256016 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1376678220389776767, guid: ceae23eb8b5c3e541bb8d992d05306e6, type: 3}
-  m_PrefabInstance: {fileID: 3286034818037256014}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &3286034818037256017 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2730878530226491824, guid: ceae23eb8b5c3e541bb8d992d05306e6, type: 3}
@@ -1628,8 +1632,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088cefe645cc51c4e8027b7a188a873f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.AnswerPanel
-  _answerButtonPrefab: {fileID: 3286034818037256016}
-  _parentTransform: {fileID: 3286034818037256015}
+  _answerButtonPrefab: {fileID: 1578928934}
+  _parentTransform: {fileID: 5289606123653095294}
+--- !u!224 &5289606123653095294 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8764933775710765196, guid: ceae23eb8b5c3e541bb8d992d05306e6, type: 3}
+  m_PrefabInstance: {fileID: 3286034818037256014}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6242372821177164319
 MonoBehaviour:
   m_ObjectHideFlags: 0
