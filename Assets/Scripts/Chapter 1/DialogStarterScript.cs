@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
+using TMPro;
 using cherrydev;
+using Myth_Mystery;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DialogNodeBasedSystem.Scripts
 {
@@ -8,83 +12,70 @@ namespace DialogNodeBasedSystem.Scripts
     {
         [SerializeField] private DialogBehaviour dialogBehaviour;
         [SerializeField] private DialogNodeGraph dialogGraph;
+        [SerializeField] private CharacterManager characterManager;
 
-        public GameObject rightChara;
-        public GameObject leftChara;
-        public GameObject middleChara;
-
-        public TextMeshPro name;
-        private GameObject currentCharacterSprite;
-
+        [Header ("Character Info")]
+        [SerializeField] private TextMeshProUGUI nameLabel;
+        [SerializeField] private TextMeshProUGUI charInfo;
+        [SerializeField] private List<CharacterData> allCharacters;
+        
         private void Start()
         {
-            dialogBehaviour.BindExternalFunction("changeSprite", SwitchSprites);
+            dialogBehaviour.BindExternalFunction("changeSprite", changeCharacter);
             dialogBehaviour.StartDialog(dialogGraph);
         }
 
-        public void SwitchSprites()
+        private void changeCharacter()
         {
-            string cName = name.text;
+            string data = charInfo.text.Trim();
+            string[] parts = data.Split('_');
 
-            switch (cName)
-            {
-                case "Rafael":
-                    ChangeCharacterSprite("Rafael", "right");
-                    break;
-                case "Javier":
-                    ChangeCharacterSprite("Javier", "left");
-                    break;
-                case "Lola Remy":
-                    ChangeCharacterSprite("Lola Remy", "center");
-                    break;
-                case "???":
-                    ChangeCharacterSprite("???", "center");
-                    break;
-                case "":
-                    if (currentCharacterSprite != null)
-                    {
-                        currentCharacterSprite.SetActive(false);
-                    }
-                    break;
-                default:
-                    Debug.LogWarning("Unknown character name: " + cName);
-                    break;
-            }
-        }
+            string charKey = "";
+            string variation = "neutral";
+            string position = "middle";
 
-        public void ChangeCharacterSprite(string spriteName, string position)
-        {
-            if (currentCharacterSprite != null)
+            if (parts.Length > 0 && !string.IsNullOrEmpty(parts[0]))
             {
-                currentCharacterSprite.SetActive(false);
+                charKey = parts[0];
+                nameLabel.text = charKey;
             }
-            switch (position.ToLower())
+
+            if (parts.Length >= 2 && !string.IsNullOrEmpty(parts[1]))
             {
-                case "left":
-                    currentCharacterSprite = leftChara.transform.Find(spriteName)?.gameObject;
-                    break;
-                case "right":
-                    currentCharacterSprite = rightChara.transform.Find(spriteName)?.gameObject;
-                    break;
-                case "middle":
-                    currentCharacterSprite = middleChara.transform.Find(spriteName)?.gameObject;
-                    break;
-                default:
-                    Debug.LogWarning("Unknown position: " + position);
-                    return;
+                variation = parts[1];
             }
-            if (currentCharacterSprite != null)
+
+            if (parts.Length >= 3 && !string.IsNullOrEmpty(parts[2]))
             {
-                currentCharacterSprite.SetActive(true);
+                position = parts[2];
             }
+
+            CharacterData charData = allCharacters.FirstOrDefault(c => c.name == charKey || c.codeName == charKey);
+
+            if (charData != null) 
+            {
+                if (charKey == charData.codeName)
+                {
+                    nameLabel.text = "???";
+                }
+                else
+                {
+                    nameLabel.text = charData.characterName;
+                }
+                characterManager.ChangeCharacter(charData.characterName, variation, position);
+
+            }
+
             else
             {
-                Debug.LogWarning("Sprite not found: " + spriteName + " at position: " + position);
+                characterManager.ChangeCharacter("none", "", "");
+                nameLabel.text = "";
             }
         }
-
     }
 }
+
+
 
 
 
