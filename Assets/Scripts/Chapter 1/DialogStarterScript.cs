@@ -19,11 +19,14 @@ namespace DialogNodeBasedSystem.Scripts
         [SerializeField] private TextMeshProUGUI charInfo;
         [SerializeField] private List<CharacterData> allCharacters;
 
+        [Header("Background")]
+        [SerializeField] private GameObject bg;
+        [SerializeField] private List<BackgroundData> allBg;
+
         private void Start()
         {
             dialogBehaviour.BindExternalFunction("changeSprite", changeCharacter);
             dialogBehaviour.BindExternalFunction("clear", clearCharacter);
-
             dialogBehaviour.StartDialog(dialogGraph);
             dialogBehaviour.SentenceEnded += OnSentenceEnded;
         }
@@ -38,7 +41,6 @@ namespace DialogNodeBasedSystem.Scripts
 
         private void OnSentenceEnded()
         {
-            Debug.Log("OnSentenceEnded event was called.");
             string data = charInfo.text.Trim();
             string[] parts = data.Split('_');
             string position = "middle";
@@ -61,15 +63,17 @@ namespace DialogNodeBasedSystem.Scripts
                 characterManager.ClearCharacter(parts[2]);
             }
         }
-
+        
         private void changeCharacter()
         {
             string data = charInfo.text.Trim();
+            Debug.Log($"changeCharacter() called with charInfo.text = '{data}'");
             string[] parts = data.Split('_');
 
             string charKey = "";
             string variation = "Neutral";
             string position = "middle";
+            string background = "";
 
             if (parts.Length > 0 && !string.IsNullOrEmpty(parts[0]))
             {
@@ -86,9 +90,14 @@ namespace DialogNodeBasedSystem.Scripts
                 position = parts[2];
             }
 
+            if (parts.Length >= 4 && !string.IsNullOrEmpty(parts[3]))
+            {
+                background = parts[3];
+            }
+
             if (charKey.ToLower() == "")
             {
-                characterManager.ChangeCharacter("none", "", "");
+                characterManager.ChangeCharacter("none", "", "","none");
                 nameLabel.text = "";
                 return;
             }
@@ -106,12 +115,12 @@ namespace DialogNodeBasedSystem.Scripts
                     nameLabel.text = charData.characterName;
                 }
 
-                characterManager.ChangeCharacter(charData.characterName, variation, position);
+                characterManager.ChangeCharacter(charData.characterName, variation, position, background);
             }
             else
             {
 
-                characterManager.ChangeCharacter("none", "", "");
+                characterManager.ChangeCharacter("none", "", "", "none");
                 nameLabel.text = "";
             }
         }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 namespace Myth_Mystery
@@ -6,15 +7,19 @@ namespace Myth_Mystery
     public class CharacterManager : MonoBehaviour
     {
         public List<CharacterData> allCharacters;
+        public List<BackgroundData> allBackgrounds;
 
         [Header("Character Positions")]
         public Transform leftCharacterPosition;
         public Transform rightCharacterPosition;
         public Transform middleCharacterPosition;
 
+        [Header("Background")]
+        public GameObject bg;
+
         private Dictionary<string, GameObject> activeCharacters = new Dictionary<string, GameObject>();
 
-        public void ChangeCharacter(string characterName, string variation, string position)
+        public void ChangeCharacter(string characterName, string variation, string position, string background)
         {
             string positionKey = position.ToLower();
 
@@ -27,18 +32,21 @@ namespace Myth_Mystery
             if (string.IsNullOrEmpty(characterName) || characterName == "none")
             {
                 return;
-            }
+            }   
 
             CharacterData characterData = allCharacters.Find(c  => c.characterName.ToLower() == characterName.ToLower());
+            BackgroundData bgData = allBackgrounds.Find(x => x.backgroundName.ToLower() == background.ToLower());
 
             if (characterData != null)
             {
                 GameObject prefab = GetPrefabVariation(characterData, variation);
+                Image bgImage = bg.GetComponent<Image>();
 
                 if (prefab != null)
                 {
                     Transform targetPosition = GetPositionTransform(position);
-                    
+                    bgImage.sprite = bgData.bgSprite;
+
                     if (targetPosition != null)
                     {
                         GameObject newCharacter = Instantiate(prefab, targetPosition.position, Quaternion.identity);
@@ -100,6 +108,7 @@ namespace Myth_Mystery
 
             }
         }
+
         private GameObject GetPrefabVariation(CharacterData characterData, string variation)
         {
             switch (variation.ToLower())
