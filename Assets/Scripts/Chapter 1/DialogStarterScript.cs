@@ -25,9 +25,9 @@ namespace DialogNodeBasedSystem.Scripts
 
         private void Start()
         {
+            dialogBehaviour.StartDialog(dialogGraph);
             dialogBehaviour.BindExternalFunction("changeSprite", changeCharacter);
             dialogBehaviour.BindExternalFunction("clear", clearCharacter);
-            dialogBehaviour.StartDialog(dialogGraph);
             dialogBehaviour.SentenceEnded += OnSentenceEnded;
         }
 

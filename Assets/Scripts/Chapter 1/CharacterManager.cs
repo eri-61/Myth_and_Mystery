@@ -21,6 +21,7 @@ namespace Myth_Mystery
 
         public void ChangeCharacter(string characterName, string variation, string position, string background)
         {
+            Debug.Log($"[CharacterManager] ChangeCharacter called with characterName='{characterName}', variation='{variation}', position='{position}', background='{background}'");
             string positionKey = position.ToLower();
 
             if (activeCharacters.ContainsKey(positionKey) && activeCharacters[positionKey] != null)
@@ -32,20 +33,30 @@ namespace Myth_Mystery
             if (string.IsNullOrEmpty(characterName) || characterName == "none")
             {
                 return;
-            }   
+            }
 
+            if (!string.IsNullOrEmpty(background) && background.ToLower() != "none")
+            {
+                BackgroundData bgData = allBackgrounds.Find(x => x.backgroundName.ToLower() == background.ToLower());
+                if (bgData != null)
+                {
+                    bg.GetComponent<Image>().sprite = bgData.bgSprite;
+                }
+                else
+                {
+                    Debug.LogWarning($"Background '{background}' not found in allBackgrounds list.");
+                }
+            }
+ 
             CharacterData characterData = allCharacters.Find(c  => c.characterName.ToLower() == characterName.ToLower());
-            BackgroundData bgData = allBackgrounds.Find(x => x.backgroundName.ToLower() == background.ToLower());
 
             if (characterData != null)
             {
                 GameObject prefab = GetPrefabVariation(characterData, variation);
-                Image bgImage = bg.GetComponent<Image>();
 
                 if (prefab != null)
                 {
                     Transform targetPosition = GetPositionTransform(position);
-                    bgImage.sprite = bgData.bgSprite;
 
                     if (targetPosition != null)
                     {

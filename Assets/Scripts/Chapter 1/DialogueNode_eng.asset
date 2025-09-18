@@ -15,8 +15,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1414.4004
-    y: 337.00003
+    x: 1936.0024
+    y: 471.40002
     width: 190
     height: 155
   IsDragging: 1
@@ -47,8 +47,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3916.7988
-    y: 244.99994
+    x: 4438.3994
+    y: 379.39993
     width: 190
     height: 155
   IsDragging: 1
@@ -80,8 +80,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1209.5977
-    y: 340.19998
+    x: 1731.1997
+    y: 474.59998
     width: 190
     height: 155
   IsDragging: 1
@@ -112,8 +112,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3305.5977
-    y: 240.19998
+    x: 3827.199
+    y: 374.59998
     width: 190
     height: 155
   IsDragging: 1
@@ -145,8 +145,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3421.5972
-    y: 136.19989
+    x: 3930.3982
+    y: 216.99988
     width: 190
     height: 80
   IsDragging: 1
@@ -171,8 +171,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 734.39844
-    y: 134.6
+    x: 1255.9995
+    y: 269
     width: 190
     height: 135
   IsDragging: 1
@@ -201,8 +201,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1612.8013
-    y: 104.19992
+    x: 2134.4033
+    y: 238.59991
     width: 190
     height: 155
   IsDragging: 1
@@ -234,8 +234,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1176.7979
-    y: -76.600174
+    x: 1698.3999
+    y: 57.79982
     width: 190
     height: 155
   IsDragging: 1
@@ -266,8 +266,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2476.7969
-    y: 250.59991
+    x: 2998.3982
+    y: 384.9999
     width: 190
     height: 155
   IsDragging: 1
@@ -298,8 +298,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 975.1985
-    y: 306.59988
+    x: 1496.7998
+    y: 440.99988
     width: 190
     height: 155
   IsDragging: 1
@@ -311,6 +311,37 @@ MonoBehaviour:
   ParentNodes:
   - {fileID: -5149413261089828655}
   ChildNode: {fileID: -6701354677561781949}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-1755612608984076422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 107.20002
+    y: 248.40005
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: ???_Angry_Middle_o1
+    Text: 
+    CharacterSprite: {fileID: 0}
+  ParentNodes: []
+  ChildNode: {fileID: 5335968237761599380}
   _isExternalFunc: 1
   _externalFunctionName: changeSprite
   CharacterNameKey: 
@@ -330,8 +361,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1841.6011
-    y: 103.39981
+    x: 2363.2034
+    y: 237.7998
     width: 190
     height: 155
   IsDragging: 1
@@ -362,16 +393,16 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 472.798
-    y: 284.19995
+    x: 1032.7993
+    y: 262.59995
     width: 190
     height: 155
   IsDragging: 1
   IsSelected: 0
   _sentence:
-    CharacterName: Rafael_Unamused_right_o2
+    CharacterName: rafael_Unamused_right_o2
     Text: 'Did you fall asleep at the office again?! '
-    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    CharacterSprite: {fileID: 0}
   ParentNodes:
   - {fileID: 1517032989413270369}
   ChildNode: {fileID: -5149413261089828655}
@@ -423,6 +454,7 @@ MonoBehaviour:
   - {fileID: 2337233147709000761}
   - {fileID: 1517032989413270369}
   - {fileID: 5335968237761599380}
+  - {fileID: -1755612608984076422}
   VariablesConfig: {fileID: 0}
   _localizationTableName: 
   _characterNamesLocalizationName: 
@@ -444,8 +476,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1403.1995
-    y: -68.6001
+    x: 1924.8018
+    y: 65.7999
     width: 190
     height: 155
   IsDragging: 1
@@ -477,8 +509,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4093.6006
-    y: 142.59991
+    x: 4541.6016
+    y: 208.99991
     width: 190
     height: 80
   IsDragging: 1
@@ -503,8 +535,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2051.2007
-    y: 97.79993
+    x: 2572.802
+    y: 232.19992
     width: 190
     height: 155
   IsDragging: 1
@@ -535,16 +567,16 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 486.39804
-    y: 60.19998
+    x: 791.99884
+    y: 258.6
     width: 190
     height: 155
   IsDragging: 1
   IsSelected: 0
   _sentence:
-    CharacterName: Javier_Dozing_left_o2
+    CharacterName: javier_Dozing_left_o2
     Text: Ugh... You're too loud.
-    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    CharacterSprite: {fileID: 0}
   ParentNodes:
   - {fileID: 6492226575460565441}
   ChildNode: {fileID: -134052789681157204}
@@ -567,8 +599,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3092.796
-    y: 248.99994
+    x: 3614.3972
+    y: 383.39993
     width: 190
     height: 155
   IsDragging: 1
@@ -600,8 +632,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4562.402
-    y: 240.19998
+    x: 5084
+    y: 374.59998
     width: 190
     height: 155
   IsDragging: 1
@@ -632,8 +664,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3498.398
-    y: 248.99994
+    x: 4019.9988
+    y: 383.39993
     width: 190
     height: 155
   IsDragging: 1
@@ -664,8 +696,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4348.0044
-    y: 248.99994
+    x: 4869.6045
+    y: 383.39993
     width: 190
     height: 155
   IsDragging: 1
@@ -696,8 +728,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2256.8003
-    y: 254.59988
+    x: 2778.4016
+    y: 388.99988
     width: 190
     height: 155
   IsDragging: 1
@@ -728,8 +760,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2367.1992
-    y: 152.19989
+    x: 2903.2004
+    y: 242.59982
     width: 190
     height: 80
   IsDragging: 1
@@ -754,8 +786,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2887.996
-    y: 249.79987
+    x: 3409.5974
+    y: 384.19986
     width: 190
     height: 155
   IsDragging: 1
@@ -787,17 +819,18 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 213.59816
-    y: 309.00015
+    x: 367.99985
+    y: 252.20016
     width: 190
     height: 155
   IsDragging: 1
   IsSelected: 0
   _sentence:
-    CharacterName: ???_Angry_middle_o1
-    Text: Hey! Wake up!
-    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
-  ParentNodes: []
+    CharacterName: ???_Angry_Middle_o1
+    Text: 'Hey! Wake up! '
+    CharacterSprite: {fileID: 0}
+  ParentNodes:
+  - {fileID: -1755612608984076422}
   ChildNode: {fileID: 6492226575460565441}
   _isExternalFunc: 1
   _externalFunctionName: changeSprite
@@ -818,14 +851,14 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 952.79785
-    y: -77.40015
+    x: 1474.3989
+    y: 56.999847
     width: 190
     height: 155
   IsDragging: 1
   IsSelected: 0
   _sentence:
-    CharacterName: Javier_Averted_Left
+    CharacterName: javier_Averted_Left
     Text: 'No. I was just resting my eyes. '
     CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   ParentNodes:
@@ -850,8 +883,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 271.19983
-    y: 63.39998
+    x: 561.6012
+    y: 64.199974
     width: 190
     height: 155
   IsDragging: 1
@@ -859,7 +892,7 @@ MonoBehaviour:
   _sentence:
     CharacterName: ???_Angry_middle_o2
     Text: 
-    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    CharacterSprite: {fileID: 0}
   ParentNodes:
   - {fileID: 5335968237761599380}
   ChildNode: {fileID: 1517032989413270369}
@@ -882,8 +915,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4139.9995
-    y: 244.99994
+    x: 4661.5986
+    y: 379.39993
     width: 190
     height: 155
   IsDragging: 1
@@ -914,8 +947,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2809.5977
-    y: 142.5998
+    x: 3303.1995
+    y: 196.19977
     width: 190
     height: 80
   IsDragging: 1
@@ -940,8 +973,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3811.9985
-    y: 136.99994
+    x: 4313.5996
+    y: 181.79993
     width: 190
     height: 80
   IsDragging: 1
@@ -966,8 +999,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3698.3984
-    y: 244.99994
+    x: 4219.999
+    y: 379.39993
     width: 190
     height: 155
   IsDragging: 1
@@ -998,8 +1031,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2678.397
-    y: 249.79987
+    x: 3199.9988
+    y: 384.19986
     width: 190
     height: 155
   IsDragging: 1
