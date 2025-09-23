@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenuScript : MonoBehaviour
 {
@@ -12,6 +13,16 @@ public class MainMenuScript : MonoBehaviour
     public Button journalBtn;
     public Button settingsBtn;
     public Button exitBtn;
+
+    [Header("Settings")]
+    public Slider musicSlider;
+    public Slider vfxSlider;
+    public Slider textSpeedSlider;
+    public Slider autoSlider;
+    public TextMeshProUGUI textSpeed;
+    public TMP_InputField textSpeedInput;
+    public TMP_InputField autoInput;
+    public Button closeBtn;
 
     [Header("Quit Confirmation Buttons")]
     public Button yesBtn;
@@ -33,6 +44,7 @@ public class MainMenuScript : MonoBehaviour
         exitBtn.onClick.AddListener(ExitGame);
         yesBtn.onClick.AddListener(() => Application.Quit());
         noBtn.onClick.AddListener(() => quitPanel.SetActive(false));
+        closeBtn.onClick.AddListener(() => settingsPanel.SetActive(false));
     }
 
     void OnDisable()
@@ -46,6 +58,7 @@ public class MainMenuScript : MonoBehaviour
         exitBtn.onClick.RemoveListener(ExitGame);
         yesBtn.onClick.RemoveListener(() => Application.Quit());
         noBtn.onClick.RemoveListener(() => quitPanel.SetActive(false));
+        closeBtn.onClick.RemoveListener(() => settingsPanel.SetActive(false));
     }
 
     void StartNewGame()

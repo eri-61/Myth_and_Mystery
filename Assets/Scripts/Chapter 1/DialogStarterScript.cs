@@ -25,10 +25,12 @@ namespace DialogNodeBasedSystem.Scripts
 
         private void Start()
         {
-            dialogBehaviour.StartDialog(dialogGraph);
             dialogBehaviour.BindExternalFunction("changeSprite", changeCharacter);
             dialogBehaviour.BindExternalFunction("clear", clearCharacter);
             dialogBehaviour.SentenceEnded += OnSentenceEnded;
+
+            dialogBehaviour.StartDialog(dialogGraph);
+
         }
 
         private void OnDestroy()
