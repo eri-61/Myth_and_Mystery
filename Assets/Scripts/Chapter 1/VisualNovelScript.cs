@@ -23,8 +23,12 @@ public class VisualNovelScript : MonoBehaviour
     public GameObject logPanel;
     public GameObject uiPanel;
 
-    [Header("Close All Panels Button")]
-    public Button closeAllBtn;
+    [Header("Close  Panels Button")]
+    public Button closeInv;
+    public Button closeMap;
+    public Button closeMenu;
+    public Button closeJournal;
+    public Button closeLog;
 
     void onEnable()
     {
@@ -36,7 +40,11 @@ public class VisualNovelScript : MonoBehaviour
         menuBtn.onClick.AddListener(OpenMenu);
         journalBtn.onClick.AddListener(OpenJournal);
         mapBtn.onClick.AddListener(OpenMap);
-        closeAllBtn.onClick.AddListener(CloseAllPanels);
+        closeInv.onClick.AddListener(ClosePanels);
+        closeMap.onClick.AddListener(ClosePanels);
+        closeMenu.onClick.AddListener(ClosePanels);
+        closeJournal.onClick.AddListener(ClosePanels);
+        closeLog.onClick.AddListener(ClosePanels);
     }
 
     void onDisable()
@@ -49,7 +57,11 @@ public class VisualNovelScript : MonoBehaviour
         menuBtn.onClick.RemoveListener(OpenMenu);
         journalBtn.onClick.RemoveListener(OpenJournal);
         mapBtn.onClick.RemoveListener(OpenMap);
-        closeAllBtn.onClick.RemoveListener(CloseAllPanels);
+        closeInv.onClick.RemoveListener(ClosePanels);
+        closeMap.onClick.RemoveListener(ClosePanels);
+        closeMenu.onClick.RemoveListener(ClosePanels);
+        closeJournal.onClick.RemoveListener(ClosePanels);
+        closeLog.onClick.RemoveListener(ClosePanels);
     }
 
     void AutoPlay()
@@ -92,12 +104,12 @@ public class VisualNovelScript : MonoBehaviour
         mapPanel.SetActive(true);
     }
 
-    void CloseAllPanels()
+    void ClosePanels()
     {
-        inventoryPanel.SetActive(false);
-        menuPanel.SetActive(false);
-        journalPanel.SetActive(false);
-        mapPanel.SetActive(false);
-        logPanel.SetActive(false);
+        if (inventoryPanel.activeSelf) inventoryPanel.SetActive(false);
+        if (menuPanel.activeSelf) menuPanel.SetActive(false);
+        if (journalPanel.activeSelf) journalPanel.SetActive(false);
+        if (mapPanel.activeSelf) mapPanel.SetActive(false);
+        if (logPanel.activeSelf) logPanel.SetActive(false);
     }
 }
