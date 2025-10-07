@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class VisualNovelScript : MonoBehaviour
 {
@@ -7,7 +8,6 @@ public class VisualNovelScript : MonoBehaviour
     public Button autoBtn;
     public Button speedBtn;
     public Button hideBtn;
-    public Button logBtn;
 
     [Header("Other Buttons")]
     public Button inventoryBtn;
@@ -17,34 +17,30 @@ public class VisualNovelScript : MonoBehaviour
 
     [Header("Panels")]
     public GameObject inventoryPanel;
-    public GameObject menuPanel;
-    public GameObject journalPanel;
+    public GameObject menuPanel; 
+    public GameObject instructionsPanel;
     public GameObject mapPanel;
-    public GameObject logPanel;
     public GameObject uiPanel;
 
     [Header("Close  Panels Button")]
     public Button closeInv;
     public Button closeMap;
     public Button closeMenu;
-    public Button closeJournal;
-    public Button closeLog;
+    public Button closeInstructions;
 
     void onEnable()
     {
         autoBtn.onClick.AddListener(AutoPlay);
         speedBtn.onClick.AddListener(ChangeSpeed);
-        hideBtn.onClick.AddListener(HideUI);
-        logBtn.onClick.AddListener(OpenLog);
+        hideBtn.onClick.AddListener(HideUI);        
         inventoryBtn.onClick.AddListener(OpenInventory);
         menuBtn.onClick.AddListener(OpenMenu);
         journalBtn.onClick.AddListener(OpenJournal);
         mapBtn.onClick.AddListener(OpenMap);
-        closeInv.onClick.AddListener(ClosePanels);
-        closeMap.onClick.AddListener(ClosePanels);
-        closeMenu.onClick.AddListener(ClosePanels);
-        closeJournal.onClick.AddListener(ClosePanels);
-        closeLog.onClick.AddListener(ClosePanels);
+        closeInv.onClick.AddListener(CloseInv);
+        closeMap.onClick.AddListener(CloseMap);
+        closeMenu.onClick.AddListener(CloseMenu);
+        closeInstructions.onClick.AddListener(CloseInstructions);
     }
 
     void onDisable()
@@ -52,16 +48,14 @@ public class VisualNovelScript : MonoBehaviour
         autoBtn.onClick.RemoveListener(AutoPlay);
         speedBtn.onClick.RemoveListener(ChangeSpeed);
         hideBtn.onClick.RemoveListener(HideUI);
-        logBtn.onClick.RemoveListener(OpenLog);
         inventoryBtn.onClick.RemoveListener(OpenInventory);
         menuBtn.onClick.RemoveListener(OpenMenu);
         journalBtn.onClick.RemoveListener(OpenJournal);
         mapBtn.onClick.RemoveListener(OpenMap);
-        closeInv.onClick.RemoveListener(ClosePanels);
-        closeMap.onClick.RemoveListener(ClosePanels);
-        closeMenu.onClick.RemoveListener(ClosePanels);
-        closeJournal.onClick.RemoveListener(ClosePanels);
-        closeLog.onClick.RemoveListener(ClosePanels);
+        closeInv.onClick.RemoveListener(CloseInv);
+        closeMap.onClick.RemoveListener(CloseMap);
+        closeMenu.onClick.RemoveListener(CloseMenu);
+        closeInstructions.onClick.RemoveListener(CloseInstructions);
     }
 
     void AutoPlay()
@@ -79,9 +73,9 @@ public class VisualNovelScript : MonoBehaviour
         uiPanel.SetActive(false);
     }
 
-    void OpenLog()
+    void OpenInstructions()
     {
-        // Implement open log functionality
+        // implement open panel with instructions for the game mechanic of the journal
     }
 
     void OpenInventory()
@@ -96,7 +90,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenJournal()
     {
-        journalPanel.SetActive(true);
+        SceneManager.LoadScene(5);
     }
 
     void OpenMap()
@@ -104,12 +98,23 @@ public class VisualNovelScript : MonoBehaviour
         mapPanel.SetActive(true);
     }
 
-    void ClosePanels()
+    void CloseInv()
     {
-        if (inventoryPanel.activeSelf) inventoryPanel.SetActive(false);
-        if (menuPanel.activeSelf) menuPanel.SetActive(false);
-        if (journalPanel.activeSelf) journalPanel.SetActive(false);
-        if (mapPanel.activeSelf) mapPanel.SetActive(false);
-        if (logPanel.activeSelf) logPanel.SetActive(false);
+        inventoryPanel.SetActive(false);
+    }
+
+    void CloseMap()
+    {
+        mapPanel.SetActive(false);
+    }
+
+    void CloseMenu()
+    {
+        menuPanel.SetActive(false);
+    }
+
+    void CloseInstructions()
+    {
+        instructionsPanel.SetActive(false);
     }
 }
