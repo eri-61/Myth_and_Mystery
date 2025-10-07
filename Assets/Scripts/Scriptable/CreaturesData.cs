@@ -11,8 +11,5 @@ public class CreaturesData : ScriptableObject
 
     public GameObject CreaturePrefab;
 
-    public int Health;
-    public int Attack;
-
     public bool hasInteracted;
 }
