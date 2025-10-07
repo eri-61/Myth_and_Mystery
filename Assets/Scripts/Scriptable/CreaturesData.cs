@@ -5,11 +5,12 @@ public class CreaturesData : ScriptableObject
 {
     public string CreatureName;
     public string shortDescription;
-    public string longDescription;
+    [TextArea] public string longDescription;
     public Sprite CreatureIcon;
     public Sprite CreatureImage;
 
     public GameObject CreaturePrefab;
+    public InventoryData weaknessItem;
 
     public bool hasInteracted;
 }
