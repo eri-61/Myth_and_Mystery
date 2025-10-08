@@ -4,7 +4,7 @@ using UnityEngine;
 public class InventoryData : ScriptableObject
 {
     public string itemName;
-    public string itemDescription;
+    [TextArea] public string itemDescription;
     public Sprite itemImage;
     public bool inInventory;
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    #region Variables
     public InventoryData[] items;
     public InventoryData[] currentItems;
 
@@ -16,16 +17,26 @@ public class InventoryManager : MonoBehaviour
     [Header("Inventory Slots")]
     public Button[] slots;
 
-    [Header("Close Button")]
+    [Header("Buttons")]
     public Button close;
+    public Button useItem;
+
+    [HideInInspector] public InventoryData selectedItem;
+    public BattleSystem battleSystem;
+    #endregion
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        battleSystem = FindObjectOfType<BattleSystem>();
+
+        useItem.onClick.AddListener(OnUseItem);
         close.onClick.AddListener(() => gameObject.SetActive(false));
+        
         LoadInventory();
     }
 
-    void onDisable()
+    void OnDisable()
     {
         foreach (Button slot in slots)
         {
@@ -62,5 +73,39 @@ public class InventoryManager : MonoBehaviour
         itemName.text = item.itemName;
         Description.text = item.itemDescription;
         itemImage.sprite = item.itemImage;
+
+        selectedItem = item;
+}
+
+    public void OnUseItem()
+    {
+        if (selectedItem == null || battleSystem.state != Battlestate.PLAYERTURN)
+            return;
+
+        if (selectedItem == battleSystem.correctItem)
+        {
+            battleSystem.dialogueText.text = $"You used {selectedItem.itemName}! It was super effective!";
+            battleSystem.enemyUnit.currentHP = 1;
+            battleSystem.enemyHUD.setHP(1);
+        }
+        else
+        {
+            battleSystem.dialogueText.text = $"You used {selectedItem.itemName}, but it had no effect!";
+            battleSystem.nextEnemyAttackDoubles = true;
+        }
+
+        // Close inventory panel
+        gameObject.SetActive(false);
+
+        // Wait then go to enemy turn
+        battleSystem.StartCoroutine(AfterUseItem());
     }
+
+    private System.Collections.IEnumerator AfterUseItem()
+    {
+        yield return new WaitForSeconds(2f);
+        battleSystem.state = Battlestate.ENEMYTURN;
+        battleSystem.StartCoroutine(battleSystem.EnemyTurn());
+    }
+
 }
