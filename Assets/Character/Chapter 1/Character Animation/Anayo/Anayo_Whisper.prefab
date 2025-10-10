@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7915762596966263247}
   - component: {fileID: 2128806297602499009}
   - component: {fileID: 4779204534032338343}
+  - component: {fileID: 7851238347211515699}
   m_Layer: 0
   m_Name: Anayo_Whisper
   m_TagString: Untagged
@@ -18,21 +19,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7915762596966263247
-Transform:
+--- !u!224 &7915762596966263247
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3136760433167873160}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18347657, y: -0.81920385, z: 0}
-  m_LocalScale: {x: 0.3246621, y: 0.3246621, z: 0.3246621}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.18347657, y: -0.81920385}
+  m_SizeDelta: {x: 17.433126, y: 26.4}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!95 &2128806297602499009
 Animator:
   serializedVersion: 7
@@ -99,8 +104,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 280919881
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7157766510140197287, guid: 7fe82de8bd82c3c46b8277d5eb84fef8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -113,3 +118,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7851238347211515699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136760433167873160}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 3
+  m_AspectRatio: 0.66034573

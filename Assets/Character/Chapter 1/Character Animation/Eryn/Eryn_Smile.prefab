@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7921219876531852554}
   - component: {fileID: 8341561120041037963}
   - component: {fileID: 3149097795999534651}
+  - component: {fileID: 4043686263144039972}
   m_Layer: 0
   m_Name: Eryn_Smile
   m_TagString: Untagged
@@ -18,21 +19,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7921219876531852554
-Transform:
+--- !u!224 &7921219876531852554
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7227993682904605277}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.34, y: -1.87, z: -81}
-  m_LocalScale: {x: 0.28862035, y: 0.28862035, z: 0.28862035}
+  m_LocalPosition: {x: 0, y: 0, z: -81}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 6.34, y: -1.87}
+  m_SizeDelta: {x: 12.112173, y: 24.92}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!212 &8341561120041037963
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -77,8 +82,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 280919881
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 2870563126608287790, guid: eb3002feadd69bd42a9610f40cef54f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -113,3 +118,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4043686263144039972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227993682904605277}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 3
+  m_AspectRatio: 0.48604226

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3692035951996199599}
   - component: {fileID: 5188115680758395316}
   - component: {fileID: 1958954336800551495}
+  - component: {fileID: 7581475401173600819}
   m_Layer: 0
   m_Name: Rafael_Flustered
   m_TagString: Untagged
@@ -18,21 +19,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3692035951996199599
-Transform:
+--- !u!224 &3692035951996199599
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6782463466856831777}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.35, y: -1.04, z: -81}
-  m_LocalScale: {x: 0.29893252, y: 0.29893252, z: 0.29893252}
+  m_LocalPosition: {x: 0, y: 0, z: -81}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 6.35, y: -1.04}
+  m_SizeDelta: {x: 15.460001, y: 28.365982}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!212 &5188115680758395316
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -77,8 +82,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 280919881
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 9034270628306994725, guid: ec7a6398fcdbce34a87255cbc8ec94af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -113,3 +118,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7581475401173600819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6782463466856831777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 3
+  m_AspectRatio: 0.5450191

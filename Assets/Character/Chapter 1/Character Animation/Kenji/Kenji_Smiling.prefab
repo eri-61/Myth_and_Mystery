@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7902651520559309188}
   - component: {fileID: 2139286192085922198}
   - component: {fileID: 2587562595624297664}
+  - component: {fileID: 5573091562595039803}
   m_Layer: 0
   m_Name: Kenji_Smiling
   m_TagString: Untagged
@@ -18,21 +19,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7902651520559309188
-Transform:
+--- !u!224 &7902651520559309188
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4830255281968232306}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4499998, y: -1.3200002, z: -81}
-  m_LocalScale: {x: 0.3188015, y: 0.3188015, z: 0.3188015}
+  m_LocalPosition: {x: 0, y: 0, z: -81}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -3.4499998, y: -1.3200002}
+  m_SizeDelta: {x: 13.002333, y: 25.82}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!212 &2139286192085922198
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -77,8 +82,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 280919881
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 2870563126608287790, guid: 6c52dad51db8eae4bb1d6f7299df2e37, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -113,3 +118,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5573091562595039803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4830255281968232306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 3
+  m_AspectRatio: 0.50357604

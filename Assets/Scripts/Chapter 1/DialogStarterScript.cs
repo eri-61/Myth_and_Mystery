@@ -5,11 +5,13 @@ using cherrydev;
 using Myth_Mystery;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 namespace DialogNodeBasedSystem.Scripts
 {
     public class DialogStarterScript : MonoBehaviour
     {
+        #region Variables
         [SerializeField] private DialogBehaviour dialogBehaviour;
         [SerializeField] private DialogNodeGraph dialogGraph;
         [SerializeField] private CharacterManager characterManager;
@@ -23,10 +25,14 @@ namespace DialogNodeBasedSystem.Scripts
         [SerializeField] private GameObject bg;
         [SerializeField] private List<BackgroundData> allBg;
 
+        public int sceneIndex = 1;
+        #endregion
+
         private void Start()
         {
             dialogBehaviour.BindExternalFunction("changeSprite", changeCharacter);
             dialogBehaviour.BindExternalFunction("clear", clearCharacter);
+            dialogBehaviour.BindExternalFunction("loadNextScene", loadNextScene);
             dialogBehaviour.SentenceEnded += OnSentenceEnded;
 
             dialogBehaviour.StartDialog(dialogGraph);
@@ -53,6 +59,11 @@ namespace DialogNodeBasedSystem.Scripts
             }
             Debug.Log($"Attempting to stop animation for position: {position}");
             characterManager.StopAnimation(position);
+        }
+
+        void loadNextScene()
+        {
+            SceneManager.LoadScene(sceneIndex);
         }
 
         private void clearCharacter()

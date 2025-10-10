@@ -56,13 +56,27 @@ namespace Myth_Mystery
 
                 if (prefab != null)
                 {
+                    //for instantiating character prefabs
                     Transform targetPosition = GetPositionTransform(position);
 
                     if (targetPosition != null)
                     {
-                        GameObject newCharacter = Instantiate(prefab, targetPosition.position, Quaternion.identity);
-                        activeCharacters.Add(positionKey, newCharacter);
+                        GameObject newCharacter = Instantiate(prefab, targetPosition);
+                        newCharacter.transform.SetParent(targetPosition, false);
 
+                        var spriteRenderer = newCharacter.GetComponent<SpriteRenderer>();
+                        if (spriteRenderer != null)
+                        {
+                            float spriteHeight = spriteRenderer.bounds.size.y;
+
+                            float targetScreenHeight = Screen.height * 0.9f;
+
+                            float worldHeight = Camera.main.orthographicSize * 2f;
+                            float scaleFactor = (worldHeight * 0.9f) / spriteHeight; 
+                            newCharacter.transform.localScale = Vector3.one * scaleFactor;
+                        }
+
+                        activeCharacters.Add(positionKey, newCharacter);
                         Animator animator = newCharacter.GetComponent<Animator>();
 
                         if (animator != null)
