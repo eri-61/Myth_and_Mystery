@@ -4,10 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class VisualNovelScript : MonoBehaviour
 {
+    #region Variables
+
     [Header("Visual Novel Buttons")]
-    public Button autoBtn;
-    public Button speedBtn;
+    public Button playBtn;
+    public Button skipBtn;
     public Button hideBtn;
+
+    [Header("Visual Novel Button - Image")]
+    public Image hsButton;
+    public Image ppButton;
+    public Sprite hideSprite;
+    public Sprite showSprite;
+    public Sprite playSprite;
+    public Sprite pauseSprite;
 
     [Header("Other Buttons")]
     public Button inventoryBtn;
@@ -28,49 +38,90 @@ public class VisualNovelScript : MonoBehaviour
     public Button closeMenu;
     public Button closeInstructions;
 
-    void onEnable()
+    [Header("Variables")]
+    bool isPaused = false;
+    bool isUIHidden = false;
+    public int SceneIndex = 1;
+    [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
+
+    #endregion
+
+    void OnEnable()
     {
-        autoBtn.onClick.AddListener(AutoPlay);
-        speedBtn.onClick.AddListener(ChangeSpeed);
+        playBtn.onClick.AddListener(AutoPlay);
+        skipBtn.onClick.AddListener(Skip);
         hideBtn.onClick.AddListener(HideUI);        
+        
         inventoryBtn.onClick.AddListener(OpenInventory);
         menuBtn.onClick.AddListener(OpenMenu);
         journalBtn.onClick.AddListener(OpenJournal);
         mapBtn.onClick.AddListener(OpenMap);
+        
         closeInv.onClick.AddListener(CloseInv);
         closeMap.onClick.AddListener(CloseMap);
         closeMenu.onClick.AddListener(CloseMenu);
         closeInstructions.onClick.AddListener(CloseInstructions);
     }
 
-    void onDisable()
+    void OnDisable()
     {
-        autoBtn.onClick.RemoveListener(AutoPlay);
-        speedBtn.onClick.RemoveListener(ChangeSpeed);
+        playBtn.onClick.RemoveListener(AutoPlay);
+        skipBtn.onClick.RemoveListener(Skip);
         hideBtn.onClick.RemoveListener(HideUI);
+        
         inventoryBtn.onClick.RemoveListener(OpenInventory);
         menuBtn.onClick.RemoveListener(OpenMenu);
         journalBtn.onClick.RemoveListener(OpenJournal);
         mapBtn.onClick.RemoveListener(OpenMap);
+        
         closeInv.onClick.RemoveListener(CloseInv);
         closeMap.onClick.RemoveListener(CloseMap);
         closeMenu.onClick.RemoveListener(CloseMenu);
         closeInstructions.onClick.RemoveListener(CloseInstructions);
     }
 
-    void AutoPlay()
+    void TogglePlayPause()
     {
-        // Implement auto play functionality
+        isPaused = !isPaused;
+        
+        if (ppButton != null)
+        {
+            ppButton.sprite = isPaused ? pauseSprite : playSprite;
+        }
+    }
+    
+    void ToggleUI()
+    {
+        isUIHidden = !isUIHidden;
+
+        if(hsButton != null)
+        {
+            hsButton.sprite = isUIHidden ? showSprite : hideSprite;
+        }
     }
 
-    void ChangeSpeed()
+    void AutoPlay()
     {
-        // Implement change speed functionality
+        TogglePlayPause();
+        if(dialogBehaviour != null)
+        {
+            if (isPaused)
+                dialogBehaviour.StopAutoPlay(); 
+            else
+                dialogBehaviour.StartAutoPlay(); 
+        }
+    }
+
+    void Skip()
+    {
+        if (dialogBehaviour != null)
+            dialogBehaviour.SkipToNextAnswerNode();
     }
 
     void HideUI()
     {
-        uiPanel.SetActive(false);
+        ToggleUI();
+        uiPanel.SetActive(!isUIHidden);
     }
 
     void OpenInstructions()

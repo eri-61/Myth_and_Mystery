@@ -1,0 +1,545 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8351928801034392254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 618.40027
+    y: 374.79977
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael
+    Text: So it seems like a Kapre is responsible for the campers disappearance
+    CharacterSprite: {fileID: -58759777962684019, guid: 68efabd53acdd2642b7f8b6402bf06a7, type: 3}
+  ParentNodes:
+  - {fileID: -6949953932250602335}
+  ChildNode: {fileID: 2216107273531743405}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-6949953932250602335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 412.8003
+    y: 373.9999
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier
+    Text: 'The giant footprints proved that the creature is massive, and if we combine
+      it with the tobacco scent then it can only be a Kapre. '
+    CharacterSprite: {fileID: 98565847381469745, guid: 594b647aa452ffe41b3dbbee2665eb2a, type: 3}
+  ParentNodes:
+  - {fileID: 5266025875910804940}
+  ChildNode: {fileID: -8351928801034392254}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-4610603883400689468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -49.599792
+    y: 321.99976
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael
+    Text: "That does make sense. But\u2026 do you have another clue that confirms
+      that its the Kapre? "
+    CharacterSprite: {fileID: -4852113615681200516, guid: 4c6d8503a6960b44eacdd1883f46417a, type: 3}
+  ParentNodes:
+  - {fileID: 6938370205485104778}
+  ChildNode: {fileID: 5266025875910804940}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-2950665615461992074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1717f3c6dba9fa40844ddacac301510, type: 3}
+  m_Name: Answer Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.AnswerNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 203.20045
+    y: 157.1998
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  Answers:
+  - 'Clues: Ash'
+  - 'Testimony: Tobacco Scent'
+  AnswerKeys: []
+  ParentNodes:
+  - {fileID: 256283857295016528}
+  ChildNodes:
+  - {fileID: 1080735628391555611}
+  - {fileID: 6938370205485104778}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f741ea10ebcf842a91c9b871dd032a, type: 3}
+  m_Name: Chapter1_Deduction
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.DialogNodeGraph
+  NodesList:
+  - {fileID: 6935643415065823243}
+  - {fileID: 4114074384995372782}
+  - {fileID: 1080735628391555611}
+  - {fileID: 6938370205485104778}
+  - {fileID: 1739878363992045915}
+  - {fileID: 4527473874557199847}
+  - {fileID: -4610603883400689468}
+  - {fileID: 256283857295016528}
+  - {fileID: 8274343509009021608}
+  - {fileID: -2950665615461992074}
+  - {fileID: 5266025875910804940}
+  - {fileID: 5657479960461601370}
+  - {fileID: -6949953932250602335}
+  - {fileID: 1547007890059244801}
+  - {fileID: -8351928801034392254}
+  - {fileID: 2216107273531743405}
+  VariablesConfig: {fileID: 0}
+  _localizationTableName: 
+  _characterNamesLocalizationName: 
+  NodeToDrawLineFrom: {fileID: 0}
+  LinePosition: {x: 0, y: 0}
+  IsLocalizationSetUp: 0
+--- !u!114 &256283857295016528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -51.199768
+    y: 165.99982
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael
+    Text: 'That does narrow it down, but I think you need to be more specific.  '
+    CharacterSprite: {fileID: -4852113615681200516, guid: 4c6d8503a6960b44eacdd1883f46417a, type: 3}
+  ParentNodes:
+  - {fileID: 1739878363992045915}
+  ChildNode: {fileID: -2950665615461992074}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &1080735628391555611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -261.59967
+    y: 16.399734
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier
+    Text: 'Hmm.. maybe its the Ash '
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: 4114074384995372782}
+  - {fileID: -2950665615461992074}
+  ChildNode: {fileID: 4527473874557199847}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &1547007890059244801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 611.2003
+    y: 221.19989
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael
+    Text: Are you sure?
+    CharacterSprite: {fileID: 7794303762941757570, guid: 208fcb43ea26cda4b9fd3a11049499d4, type: 3}
+  ParentNodes:
+  - {fileID: 5657479960461601370}
+  ChildNode: {fileID: 2216107273531743405}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &1739878363992045915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -255.99983
+    y: 165.19965
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier
+    Text: 'These footprints tell us that the creature who took them is huge.  '
+    CharacterSprite: {fileID: 98565847381469745, guid: 594b647aa452ffe41b3dbbee2665eb2a, type: 3}
+  ParentNodes:
+  - {fileID: 4114074384995372782}
+  - {fileID: 8274343509009021608}
+  ChildNode: {fileID: 256283857295016528}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &2216107273531743405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
+  m_Name: External Function Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 864.00006
+    y: 316.39984
+    width: 190
+    height: 80
+  IsDragging: 1
+  IsSelected: 0
+  _functionName: loadNext
+  _description: 
+  ParentNodes:
+  - {fileID: 1547007890059244801}
+  - {fileID: -8351928801034392254}
+  ChildNode: {fileID: 0}
+--- !u!114 &4114074384995372782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1717f3c6dba9fa40844ddacac301510, type: 3}
+  m_Name: Answer Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.AnswerNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -466.40015
+    y: 168.39978
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  Answers:
+  - 'Clues: Ash'
+  - 'Clues: Footprints'
+  - 'Testimony: Tobacco Scent'
+  AnswerKeys: []
+  ParentNodes:
+  - {fileID: 6935643415065823243}
+  ChildNodes:
+  - {fileID: 1080735628391555611}
+  - {fileID: 1739878363992045915}
+  - {fileID: 6938370205485104778}
+--- !u!114 &4527473874557199847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -55.999573
+    y: 15.599686
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael
+    Text: 'Ash can come from anywhere. Maybe it''s from the campfire? Are you sure
+      that''s the right clue?  '
+    CharacterSprite: {fileID: -4852113615681200516, guid: 4c6d8503a6960b44eacdd1883f46417a, type: 3}
+  ParentNodes:
+  - {fileID: 1080735628391555611}
+  ChildNode: {fileID: 0}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &5266025875910804940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1717f3c6dba9fa40844ddacac301510, type: 3}
+  m_Name: Answer Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.AnswerNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 193.60011
+    y: 320.39978
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  Answers:
+  - 'Clues: Ash'
+  - 'Testimony: Tobacco Scent'
+  AnswerKeys: []
+  ParentNodes:
+  - {fileID: -4610603883400689468}
+  ChildNodes:
+  - {fileID: 5657479960461601370}
+  - {fileID: -6949953932250602335}
+--- !u!114 &5657479960461601370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 418.4004
+    y: 221.99988
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier
+    Text: 'The ash? '
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: 5266025875910804940}
+  ChildNode: {fileID: 1547007890059244801}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &6935643415065823243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -668.00006
+    y: 177.19977
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael
+    Text: What clue reveals the identity of the campers disappearance?
+    CharacterSprite: {fileID: -4852113615681200516, guid: 4c6d8503a6960b44eacdd1883f46417a, type: 3}
+  ParentNodes: []
+  ChildNode: {fileID: 4114074384995372782}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &6938370205485104778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -255.99971
+    y: 325.9997
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier
+    Text: 'You said that there was a scent of tobacco coming from the forest right?
+      Then that matches the description of the Kapre, a tree giant who loves to smoke
+      tobacco. '
+    CharacterSprite: {fileID: 7794303762941757570, guid: 208fcb43ea26cda4b9fd3a11049499d4, type: 3}
+  ParentNodes:
+  - {fileID: 4114074384995372782}
+  - {fileID: -2950665615461992074}
+  - {fileID: 8274343509009021608}
+  ChildNode: {fileID: -4610603883400689468}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &8274343509009021608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1717f3c6dba9fa40844ddacac301510, type: 3}
+  m_Name: Answer Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.AnswerNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 184.00002
+    y: 11.5997925
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  Answers:
+  - 'Clues: Footprints'
+  - 'Testimony: Tobacco Scent'
+  AnswerKeys: []
+  ParentNodes: []
+  ChildNodes:
+  - {fileID: 1739878363992045915}
+  - {fileID: 6938370205485104778}

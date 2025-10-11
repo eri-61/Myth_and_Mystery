@@ -12,6 +12,7 @@ namespace DialogNodeBasedSystem.Scripts
     public class DialogStarterScript : MonoBehaviour
     {
         #region Variables
+        [Header ("Dialog System")]
         [SerializeField] private DialogBehaviour dialogBehaviour;
         [SerializeField] private DialogNodeGraph dialogGraph;
         [SerializeField] private CharacterManager characterManager;
@@ -32,7 +33,7 @@ namespace DialogNodeBasedSystem.Scripts
         {
             dialogBehaviour.BindExternalFunction("changeSprite", changeCharacter);
             dialogBehaviour.BindExternalFunction("clear", clearCharacter);
-            dialogBehaviour.BindExternalFunction("loadNextScene", loadNextScene);
+            dialogBehaviour.BindExternalFunction("loadNext", loadNextScene);
             dialogBehaviour.SentenceEnded += OnSentenceEnded;
 
             dialogBehaviour.StartDialog(dialogGraph);

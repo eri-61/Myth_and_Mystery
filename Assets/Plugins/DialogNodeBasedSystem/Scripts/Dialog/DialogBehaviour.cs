@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 #if UNITY_LOCALIZATION
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -13,6 +14,9 @@ namespace cherrydev
 {
     public class DialogBehaviour : MonoBehaviour
     {
+        private Coroutine autoPlayCoroutine;
+        private bool isAutoPlaying = false;
+
         [SerializeField] private float _dialogCharDelay;
         [SerializeField] private List<KeyCode> _nextSentenceKeyCodes;
         [SerializeField] private bool _isCanSkippingText = true;
@@ -20,7 +24,7 @@ namespace cherrydev
         [SerializeField] private bool _reloadTextOnLanguageChange = true;
 #endif
 
-        [Space(10)] 
+        [Space(10)]
         [SerializeField] private UnityEvent _onDialogStarted;
         [SerializeField] private UnityEvent _onDialogFinished;
 
@@ -33,7 +37,7 @@ namespace cherrydev
         public ModifyVariableNode CurrentModifyVariableNode { get; private set; }
         public VariableConditionNode CurrentVariableConditionNode { get; private set; }
         public ExternalFunctionNode CurrentExternalFunctionNode { get; private set; }
-        
+
         public UnityEvent OnDialogStarted => _onDialogStarted;
         public UnityEvent OnDialogFinished => _onDialogFinished;
 
@@ -76,7 +80,7 @@ namespace cherrydev
 
         public event Action<VariableConditionNode> VariableConditionNodeActivated;
         public event Action<string, bool> VariableConditionEvaluated;
-        
+
         private event Action<DialogVariablesHandler> _dialogFinished;
 
 
@@ -168,8 +172,8 @@ namespace cherrydev
         /// <param name="onVariablesHandlerInitialized"></param>
         /// <param name="onDialogFinished"></param>
         public void StartDialog(
-            DialogNodeGraph dialogNodeGraph, 
-            Action<DialogVariablesHandler> onVariablesHandlerInitialized = null, 
+            DialogNodeGraph dialogNodeGraph,
+            Action<DialogVariablesHandler> onVariablesHandlerInitialized = null,
             Action<DialogVariablesHandler> onDialogFinished = null)
         {
             _isDialogStarted = true;
@@ -185,10 +189,10 @@ namespace cherrydev
             _currentNodeGraph = dialogNodeGraph;
 
             InitializeVariablesHandler(dialogNodeGraph);
-            
+
             onVariablesHandlerInitialized?.Invoke(_variablesHandler);
             _dialogFinished = onDialogFinished;
-            
+
             DefineFirstNode(dialogNodeGraph);
             CalculateMaxAmountOfAnswerButtons();
             HandleDialogGraphCurrentNode(_currentNode);
@@ -552,7 +556,7 @@ namespace cherrydev
             _isDialogStarted = false;
 
             _dialogFinished?.Invoke(_variablesHandler);
-            
+
             foreach (string funcName in _boundFunctionNames)
                 ExternalFunctionsHandler.UnbindExternalFunction(funcName);
 
@@ -751,5 +755,136 @@ namespace cherrydev
 
             return false;
         }
-    }
+
+        //added this - skip to next answer node and autoplay
+        public void SkipToNextAnswerNode()
+        {
+            if (!_isDialogStarted || _currentNode == null)
+                return;
+
+            // Find the next AnswerNode connected in sequence
+            Node searchNode = _currentNode;
+
+            while (searchNode != null)
+            {
+                if (searchNode is SentenceNode s && s.ChildNode != null)
+                    searchNode = s.ChildNode;
+                else if (searchNode is ModifyVariableNode mv && mv.ChildNode != null)
+                    searchNode = mv.ChildNode;
+                else if (searchNode is ExternalFunctionNode ef && ef.ChildNode != null)
+                    searchNode = ef.ChildNode;
+                else if (searchNode is VariableConditionNode vc)
+                    searchNode = vc.TrueChildNode ?? vc.FalseChildNode;
+                else if (searchNode is AnswerNode)
+                {
+                    HandleAnswerNode(searchNode);
+                    return;
+                }
+                else
+                    break;
+            }
+
+            Debug.Log("No next AnswerNode found. Moving to next scene.");
+            EndDialogAndGoNextScene();
+        }
+
+
+        public void EndDialogAndGoNextScene()
+        {
+            _onDialogFinished?.Invoke();
+            _isDialogStarted = false;
+
+            DialogDisabled?.Invoke();
+
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            
+            if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+                SceneManager.LoadScene(nextSceneIndex);
+
+            else
+                Debug.LogWarning("[Dialog] No next scene found in Build Settings!");
+        }
+
+        public void StartAutoPlay()
+        {
+            if (!isAutoPlaying)
+            {
+                isAutoPlaying = true;
+                autoPlayCoroutine = StartCoroutine(AutoPlayRoutine());
+            }
+        }
+
+        public void StopAutoPlay()
+        {
+            if (isAutoPlaying)
+            {
+                isAutoPlaying = false;
+                if (autoPlayCoroutine != null)
+                {
+                    StopCoroutine(autoPlayCoroutine);
+                    autoPlayCoroutine = null;
+                }
+            }
+        }
+
+        private IEnumerator AutoPlayRoutine()
+        {
+            while (isAutoPlaying)
+            {
+                yield return new WaitUntil(() => !_isCurrentSentenceTyping);
+
+                yield return new WaitForSeconds(1.5f);
+                GoToNextSentence(); 
+            }
+        }
+
+        private void GoToNextSentence()
+        {
+            if (_currentNode == null)
+                return;
+
+            if (_currentNode is SentenceNode sentenceNode)
+            {
+                if (sentenceNode.ChildNode != null)
+                {
+                    _currentNode = sentenceNode.ChildNode;
+                    HandleDialogGraphCurrentNode(_currentNode);
+                }
+                else
+                {
+                    EndDialog();
+                }
+            }
+            else if (_currentNode is ModifyVariableNode modifyNode)
+            {
+                if (modifyNode.ChildNode != null)
+                {
+                    _currentNode = modifyNode.ChildNode;
+                    HandleDialogGraphCurrentNode(_currentNode);
+                }
+                else
+                {
+                    EndDialog();
+                }
+            }
+            else if (_currentNode is ExternalFunctionNode funcNode)
+            {
+                if (funcNode.ChildNode != null)
+                {
+                    _currentNode = funcNode.ChildNode;
+                    HandleDialogGraphCurrentNode(_currentNode);
+                }
+                else
+                {
+                    EndDialog();
+                }
+            }
+            else
+            {
+                EndDialog();
+            }
+        }
+
+    }  
+
 }
