@@ -1,11 +1,16 @@
 using System;
-using UnityEngine;
-using TMPro;
-using cherrydev;
-using Myth_Mystery;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+using cherrydev;
+using Myth_Mystery;
+
+using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
+using TMPro;
 
 namespace DialogNodeBasedSystem.Scripts
 {
@@ -26,7 +31,14 @@ namespace DialogNodeBasedSystem.Scripts
         [SerializeField] private GameObject bg;
         [SerializeField] private List<BackgroundData> allBg;
 
+        [Header("Animation Video")]
+        [SerializeField] private VideoPlayer animationVideo;
+        [SerializeField] private GameObject animationUI;
+        [SerializeField] private GameObject gUI;
+
+        [Header("Variables")]
         public int sceneIndex = 1;
+        public float waitTime = 10f;
         #endregion
 
         private void Start()
@@ -36,8 +48,27 @@ namespace DialogNodeBasedSystem.Scripts
             dialogBehaviour.BindExternalFunction("loadNext", loadNextScene);
             dialogBehaviour.SentenceEnded += OnSentenceEnded;
 
-            dialogBehaviour.StartDialog(dialogGraph);
+            StartCoroutine(PlayIntroVideoThenStartDialog());
+        }
 
+        IEnumerator PlayIntroVideoThenStartDialog()
+        {
+            gUI.SetActive(false);
+            animationUI.SetActive(true);
+
+            if (animationVideo != null) 
+            { 
+                animationVideo.Prepare();
+                yield return new WaitUntil(() => animationVideo.isPrepared);
+                animationVideo.Play();
+
+                yield return new WaitForSeconds(waitTime);
+            }
+
+            animationUI.SetActive(false);
+            gUI.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            dialogBehaviour.StartDialog(dialogGraph);
         }
 
         private void OnDestroy()

@@ -6,7 +6,7 @@ public class IntroductionAnimationScriipt : MonoBehaviour
 {
     public float waitTime = 15.5f;
     public float skipButton_waitTime = 2f;
-
+    public int SceneIndex = 1;
     public Button skipButton;
 
     void Start()
@@ -30,6 +30,6 @@ public class IntroductionAnimationScriipt : MonoBehaviour
 
     void SkipIntro()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(SceneIndex);
     }
 }
