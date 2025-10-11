@@ -77,7 +77,7 @@ public class JournalManager : MonoBehaviour
     }
 
     //journal - case file
-    public void CompleteObjective()
+    public void CompleteObjective(int index)
     {
         if (currentCaseFile != null && index >= 0 && index < currentCaseFile.objectives.Length)
         {
