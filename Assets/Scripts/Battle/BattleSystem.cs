@@ -42,12 +42,23 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
-        GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
+        GameObject playerGO = Instantiate(
+        playerPrefab,
+        playerBattleStation.position,
+        playerBattleStation.rotation,
+        playerBattleStation
+        );
         playerUnit = playerGO.GetComponent<Unit>();
-        GameObject enemyGo = Instantiate(enemyPrefab, enemyBattleStation);
-        enemyUnit = enemyGo.GetComponent<Unit>();
 
-        dialogueText.text = enemyUnit.unitName + " has ambushed you!";
+        GameObject enemyGO = Instantiate(
+            enemyPrefab,
+            enemyBattleStation.position,
+            enemyBattleStation.rotation,
+            enemyBattleStation
+        );
+        enemyUnit = enemyGO.GetComponent<Unit>();
+
+        dialogueText.text = "The " + enemyUnit.unitName + " has ambushed you!";
         
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
@@ -62,10 +73,11 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator PlayerAttack()
     {
+        dialogueText.text = "Your attack is successful!";
         bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-        
         enemyHUD.setHP(enemyUnit.currentHP);
-        dialogueText.text = "The attack is successful!";
+
+        yield return new WaitForSeconds(2f);
 
         if (isDead)
         {
@@ -79,12 +91,11 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(EnemyTurn());
         }
 
-        yield return new WaitForSeconds(2f);
     }
 
     public IEnumerator EnemyTurn()
     {
-        dialogueText.text = enemyUnit.unitName + " attacks!";
+        dialogueText.text = "The "+ enemyUnit.unitName + " attacked you!";
 
         yield return new WaitForSeconds(1f);
 
@@ -143,6 +154,14 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(EnemyTurn());
 
     }
+
+    public IEnumerator AttackSequence()
+    {
+        dialogueText.text = "You attacked the " + enemyUnit.unitName + "!";
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(PlayerAttack());
+    }
+
     void EndBattle()
     {
         if (state == Battlestate.WON)
@@ -164,7 +183,8 @@ public class BattleSystem : MonoBehaviour
     {
         if (state != Battlestate.PLAYERTURN)
             return;
-        StartCoroutine(PlayerAttack());
+
+        StartCoroutine(AttackSequence());
     }
 
     public void OnItemButton()
@@ -201,6 +221,7 @@ public class BattleSystem : MonoBehaviour
             // Right item used
             dialogueText.text = "You used the right item! The enemy is weakened!";
             enemyUnit.currentHP = 1;
+            enemyUnit.damage = 1;
             enemyHUD.setHP(enemyUnit.currentHP);
 
             state = Battlestate.ENEMYTURN;
