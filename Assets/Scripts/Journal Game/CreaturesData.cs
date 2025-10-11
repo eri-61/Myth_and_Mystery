@@ -4,8 +4,8 @@ using UnityEngine;
 public class CreaturesData : ScriptableObject
 {
     public string CreatureName;
-    public string shortDescription;
-    [TextArea] public string longDescription;
+    [TextArea] public string shortDescription;
+    [TextArea] public string longDescription; //for main menu journal more in depth
     public Sprite CreatureIcon;
     public Sprite CreatureImage;
 

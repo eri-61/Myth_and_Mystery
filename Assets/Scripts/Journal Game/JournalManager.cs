@@ -23,7 +23,7 @@ public class JournalManager : MonoBehaviour
     #region Case File Variables
     [Header("Case File UI")]
     public Image caseImage;
-    public TMProUGUI caseObjectivesText;
+    public TextMeshProUGUI caseObjectivesText;
 
     [Header("Data")]
     public CaseFileData currentCaseFile;
