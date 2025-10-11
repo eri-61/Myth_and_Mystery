@@ -14,9 +14,6 @@ namespace cherrydev
 {
     public class DialogBehaviour : MonoBehaviour
     {
-        private Coroutine autoPlayCoroutine;
-        private bool isAutoPlaying = false;
-
         [SerializeField] private float _dialogCharDelay;
         [SerializeField] private List<KeyCode> _nextSentenceKeyCodes;
         [SerializeField] private bool _isCanSkippingText = true;
@@ -756,7 +753,7 @@ namespace cherrydev
             return false;
         }
 
-        //added this - skip to next answer node and autoplay
+        //added this - skip to next answer node
         public void SkipToNextAnswerNode()
         {
             if (!_isDialogStarted || _currentNode == null)
@@ -803,86 +800,6 @@ namespace cherrydev
 
             else
                 Debug.LogWarning("[Dialog] No next scene found in Build Settings!");
-        }
-
-        public void StartAutoPlay()
-        {
-            if (!isAutoPlaying)
-            {
-                isAutoPlaying = true;
-                autoPlayCoroutine = StartCoroutine(AutoPlayRoutine());
-            }
-        }
-
-        public void StopAutoPlay()
-        {
-            if (isAutoPlaying)
-            {
-                isAutoPlaying = false;
-                if (autoPlayCoroutine != null)
-                {
-                    StopCoroutine(autoPlayCoroutine);
-                    autoPlayCoroutine = null;
-                }
-            }
-        }
-
-        private IEnumerator AutoPlayRoutine()
-        {
-            while (isAutoPlaying)
-            {
-                yield return new WaitUntil(() => !_isCurrentSentenceTyping);
-
-                yield return new WaitForSeconds(1.5f);
-                GoToNextSentence(); 
-            }
-        }
-
-        private void GoToNextSentence()
-        {
-            if (_currentNode == null)
-                return;
-
-            if (_currentNode is SentenceNode sentenceNode)
-            {
-                if (sentenceNode.ChildNode != null)
-                {
-                    _currentNode = sentenceNode.ChildNode;
-                    HandleDialogGraphCurrentNode(_currentNode);
-                }
-                else
-                {
-                    EndDialog();
-                }
-            }
-            else if (_currentNode is ModifyVariableNode modifyNode)
-            {
-                if (modifyNode.ChildNode != null)
-                {
-                    _currentNode = modifyNode.ChildNode;
-                    HandleDialogGraphCurrentNode(_currentNode);
-                }
-                else
-                {
-                    EndDialog();
-                }
-            }
-            else if (_currentNode is ExternalFunctionNode funcNode)
-            {
-                if (funcNode.ChildNode != null)
-                {
-                    _currentNode = funcNode.ChildNode;
-                    HandleDialogGraphCurrentNode(_currentNode);
-                }
-                else
-                {
-                    EndDialog();
-                }
-            }
-            else
-            {
-                EndDialog();
-            }
         }
 
     }  

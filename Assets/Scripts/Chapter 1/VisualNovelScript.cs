@@ -7,17 +7,14 @@ public class VisualNovelScript : MonoBehaviour
     #region Variables
 
     [Header("Visual Novel Buttons")]
-    public Button playBtn;
     public Button skipBtn;
     public Button hideBtn;
 
     [Header("Visual Novel Button - Image")]
     public Image hsButton;
-    public Image ppButton;
     public Sprite hideSprite;
     public Sprite showSprite;
-    public Sprite playSprite;
-    public Sprite pauseSprite;
+
 
     [Header("Other Buttons")]
     public Button inventoryBtn;
@@ -39,7 +36,6 @@ public class VisualNovelScript : MonoBehaviour
     public Button closeInstructions;
 
     [Header("Variables")]
-    bool isPaused = false;
     bool isUIHidden = false;
     public int SceneIndex = 1;
     [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
@@ -48,7 +44,6 @@ public class VisualNovelScript : MonoBehaviour
 
     void OnEnable()
     {
-        playBtn.onClick.AddListener(AutoPlay);
         skipBtn.onClick.AddListener(Skip);
         hideBtn.onClick.AddListener(HideUI);        
         
@@ -65,7 +60,6 @@ public class VisualNovelScript : MonoBehaviour
 
     void OnDisable()
     {
-        playBtn.onClick.RemoveListener(AutoPlay);
         skipBtn.onClick.RemoveListener(Skip);
         hideBtn.onClick.RemoveListener(HideUI);
         
@@ -80,16 +74,6 @@ public class VisualNovelScript : MonoBehaviour
         closeInstructions.onClick.RemoveListener(CloseInstructions);
     }
 
-    void TogglePlayPause()
-    {
-        isPaused = !isPaused;
-        
-        if (ppButton != null)
-        {
-            ppButton.sprite = isPaused ? pauseSprite : playSprite;
-        }
-    }
-    
     void ToggleUI()
     {
         isUIHidden = !isUIHidden;
@@ -97,18 +81,6 @@ public class VisualNovelScript : MonoBehaviour
         if(hsButton != null)
         {
             hsButton.sprite = isUIHidden ? showSprite : hideSprite;
-        }
-    }
-
-    void AutoPlay()
-    {
-        TogglePlayPause();
-        if(dialogBehaviour != null)
-        {
-            if (isPaused)
-                dialogBehaviour.StopAutoPlay(); 
-            else
-                dialogBehaviour.StartAutoPlay(); 
         }
     }
 
@@ -122,6 +94,7 @@ public class VisualNovelScript : MonoBehaviour
     {
         ToggleUI();
         uiPanel.SetActive(!isUIHidden);
+        skipBtn.gameObject.SetActive(!isUIHidden);
     }
 
     void OpenInstructions()
@@ -141,7 +114,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenJournal()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(SceneIndex);
     }
 
     void OpenMap()
