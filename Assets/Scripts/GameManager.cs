@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
         isNewGame = true;
-        SceneManager.LoadScene();
+        SceneManager.LoadScene(4);
     }
 
     public void LoadChapter(int index)
@@ -35,5 +35,6 @@ public class GameManager : MonoBehaviour
     public void LoadSave()
     {
         isNewGame = false;
+        //add code
     }
 }
