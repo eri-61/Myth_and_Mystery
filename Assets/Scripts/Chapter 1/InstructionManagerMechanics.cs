@@ -1,23 +1,16 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InstructionManagerMechanics : MonoBehaviour
 {
-    private const string NewGameKey = "isNewGame";
 
-    public GameOject instructionsPanel;
-    public void LoadInstructions()
+    public GameObject instructionsPanel;
+    
+    private void Start()
     {
-        bool isNewGame = !PlayerPrefs.HasKey(NewGameKey);
-
-        if (isNewGame)
+        if(GameManager.instance != null && GameManager.instance.isNewGame)
         {
             instructionsPanel.SetActive(true);
-
-            PlayerPrefs.SetInt(NewGameKey, 0);
-            PlayerPrefs.Save();
         }
-
         else
         {
             instructionsPanel.SetActive(false);
