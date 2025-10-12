@@ -56,7 +56,6 @@ namespace DialogNodeBasedSystem.Scripts
             dialogBehaviour.BindExternalFunction("showM", showMCharacter);
 
             dialogBehaviour.BindExternalFunction("loadNext", loadNextScene);
-            dialogBehaviour.BindExternalFunction("loadInstructions", loadInstructions);
 
             dialogBehaviour.BindExternalFunction("updateJournal", updateJournal);
             dialogBehaviour.BindExternalFunction("addTestimony", addTestimony);
@@ -115,11 +114,6 @@ namespace DialogNodeBasedSystem.Scripts
         public void loadNextScene()
         {
             SceneController.Instance.LoadScene(sceneIndex);
-        }
-
-        public void loadInstructions()
-        {
-            InstructionManager.Instance.LoadInstructions();
         }
 
         public void addTestimony()

@@ -7,7 +7,7 @@ public class InstructionManagerMechanics : MonoBehaviour
     
     private void Start()
     {
-        if(GameManager.instance != null && GameManager.instance.isNewGame)
+        if(GameManager.Instance != null && GameManager.Instance.isNewGame)
         {
             instructionsPanel.SetActive(true);
         }
