@@ -6,6 +6,7 @@ public class CaseFileData : ScriptableObject
     public string caseTitle;
     public Sprite caseImage;
 
+    public bool isGiven;
     public ObjectiveData[] objectives;
     
 }

@@ -55,7 +55,6 @@ public class VisualNovelScript : MonoBehaviour
         closeInv.onClick.AddListener(CloseInv);
         closeMap.onClick.AddListener(CloseMap);
         closeMenu.onClick.AddListener(CloseMenu);
-        closeInstructions.onClick.AddListener(CloseInstructions);
     }
 
     void OnDisable()
@@ -71,7 +70,6 @@ public class VisualNovelScript : MonoBehaviour
         closeInv.onClick.RemoveListener(CloseInv);
         closeMap.onClick.RemoveListener(CloseMap);
         closeMenu.onClick.RemoveListener(CloseMenu);
-        closeInstructions.onClick.RemoveListener(CloseInstructions);
     }
 
     void ToggleUI()
@@ -97,11 +95,6 @@ public class VisualNovelScript : MonoBehaviour
         skipBtn.gameObject.SetActive(!isUIHidden);
     }
 
-    void OpenInstructions()
-    {
-        // implement open panel with instructions for the game mechanic of the journal
-    }
-
     void OpenInventory()
     {
         inventoryPanel.SetActive(true);
@@ -114,7 +107,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenJournal()
     {
-        SceneManager.LoadScene(SceneIndex);
+        SceneController.Instance.LoadScene(SceneIndex);
     }
 
     void OpenMap()
@@ -137,8 +130,4 @@ public class VisualNovelScript : MonoBehaviour
         menuPanel.SetActive(false);
     }
 
-    void CloseInstructions()
-    {
-        instructionsPanel.SetActive(false);
-    }
 }

@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 1f645a30a81e066499a62140908c4c89
+guid: 81bab9ae73786164f87b3e5315f8af11
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5588244012374682611
-    second: checkpoint_0
+      213: -4214996347369068246
+    second: blankCaseFile_0
+  - first:
+      213: -1662415517539906116
+    second: blankCaseFile_1
+  - first:
+      213: -1924969660294412768
+    second: blankCaseFile_2
+  - first:
+      213: 8919155719203368457
+    second: blankCaseFile_3
+  - first:
+      213: 1191564813208041462
+    second: blankCaseFile_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,30 +121,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: checkpoint_0
+      name: blankCaseFile_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 0
-        width: 492
-        height: 489
+        x: 137
+        y: 27
+        width: 1670
+        height: 1053
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +140,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d041434bda19272b0800000000000000
-      internalID: -5588244012374682611
+      spriteID: a296f7177235185c0800000000000000
+      internalID: -4214996347369068246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blankCaseFile_1
+      rect:
+        serializedVersion: 2
+        x: 1806
+        y: 819
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbdcfe705e9ede8e0800000000000000
+      internalID: -1662415517539906116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blankCaseFile_2
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 777
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0264fbafa422945e0800000000000000
+      internalID: -1924969660294412768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blankCaseFile_3
+      rect:
+        serializedVersion: 2
+        x: 1811
+        y: 94
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90ea283fed437cb70800000000000000
+      internalID: 8919155719203368457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blankCaseFile_4
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 93
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f7be1a62e9498010800000000000000
+      internalID: 1191564813208041462
       vertices: []
       indices: 
       edges: []
@@ -161,7 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      checkpoint_0: -5588244012374682611
+      blankCaseFile_0: -4214996347369068246
+      blankCaseFile_1: -1662415517539906116
+      blankCaseFile_2: -1924969660294412768
+      blankCaseFile_3: 8919155719203368457
+      blankCaseFile_4: 1191564813208041462
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

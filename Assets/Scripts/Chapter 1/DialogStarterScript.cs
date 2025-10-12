@@ -39,6 +39,7 @@ namespace DialogNodeBasedSystem.Scripts
         [Header("Variables")]
         public int sceneIndex = 1;
         public float waitTime = 10f;
+        private TestimonyData testimonyData;
         #endregion
 
         private void Start()
@@ -46,6 +47,12 @@ namespace DialogNodeBasedSystem.Scripts
             dialogBehaviour.BindExternalFunction("changeSprite", changeCharacter);
             dialogBehaviour.BindExternalFunction("clear", clearCharacter);
             dialogBehaviour.BindExternalFunction("loadNext", loadNextScene);
+
+            dialogBehaviour.BindExternalFunction("updateJournal", updateJournal);
+            dialogBehaviour.BindExternalFunction("addTestimony", addTestimony);
+            dialogBehaviour.BindExternalFunction("addCreatures", addTestimony);
+            dialogBehaviour.BindExternalFunction("revealObjective", RevealObjective);
+
             dialogBehaviour.SentenceEnded += OnSentenceEnded;
 
             StartCoroutine(PlayIntroVideoThenStartDialog());
@@ -93,9 +100,40 @@ namespace DialogNodeBasedSystem.Scripts
             characterManager.StopAnimation(position);
         }
 
-        void loadNextScene()
+        public void loadNextScene()
         {
-            SceneManager.LoadScene(sceneIndex);
+            SceneController.Instance.LoadScene(sceneIndex);
+        }
+
+        public void addTestimony()
+        {
+            var clues = FindObjectOfType<CluesScript>();
+            clues.addTestimony(testimonyData);
+        }
+
+        public void addCreatures()
+        {
+            var creatures = FindObjectOfType<CreaturesScript>();
+            var dialog = FindObjectOfType<DialogBehaviour>();
+
+            string creatureName = dialog.VariablesHandler.GetVariableValue<string>("creatureName");
+            creatures.AddCreature(creatureName);
+        }
+
+        public void updateJournal()
+        {
+            var caseFile = FindObjectOfType<CaseFileScript>();
+            caseFile.UpdateCaseFileUI();
+        }
+
+        public void RevealObjective()
+        {
+            var caseFile = FindObjectOfType<CaseFileScript>();
+            var dialog = FindObjectOfType<DialogBehaviour>();
+
+            int objectiveIndex = dialog.VariablesHandler.GetVariableValue<int>("ObjectiveIndex");
+            
+            caseFile.RevealObjective(objectiveIndex);
         }
 
         private void clearCharacter()
@@ -108,7 +146,7 @@ namespace DialogNodeBasedSystem.Scripts
                 characterManager.ClearCharacter(parts[2]);
             }
         }
-        
+
         private void changeCharacter()
         {
             string data = charInfo.text.Trim();

@@ -4,30 +4,34 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public static SceneController Instance;
-    private int previousScene;
+    private int previousSceneIndex = -1;
     
     void Awake()
     {
-        if (Instance == null)
-        { 
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void LoadScene(int sceneIndex)
     {
-        previousScene = SceneManager.GetActiveScene().buildIndex;
+        previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneIndex);
     }
 
-    public void GoBack()
+    public void GoBackToPreviousScene()
     {
-        SceneManager.LoadScene(previousScene);
+        if (previousSceneIndex >= 0)
+        {
+            SceneManager.LoadScene(previousSceneIndex);
+        }
+        else
+        {
+            Debug.LogWarning("No previous scene");
+        }
     }
-
 }

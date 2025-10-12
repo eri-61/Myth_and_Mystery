@@ -4,5 +4,8 @@ using UnityEngine;
 public class ObjectiveData : ScriptableObject
 {
     public string description;
+
     public bool isCompleted;
+    public bool isMainObjective;
+    public bool isVisible;
 }

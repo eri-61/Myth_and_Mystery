@@ -1,11 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.SceneManagement;
-
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 
 public class JournalManager : MonoBehaviour
 {
@@ -15,28 +10,21 @@ public class JournalManager : MonoBehaviour
     public Button cluesBtn;
     public Button slBtn;
     public Button creaturesBtn;
-   
+
+    [Header("Tabs")]
+    public GameObject caseFileTab;
+    public GameObject cluesTab;
+    public GameObject creaturesTab;
+    public GameObject saveLoadTab;
+
     [Header("Close Button")]
     public Button closeBtn;
-    #endregion
 
-    #region Case File Variables
-    [Header("Case File UI")]
-    public Image caseImage;
-    public TextMeshProUGUI caseObjectivesText;
-
-    [Header("Data")]
-    public CaseFileData currentCaseFile;
-    #endregion
-
-    #region Clues Variables
-    [Header("Data")]
-    public List<CluesData> collectedClues = new();
-    public List<TestimonyData> collectedTestimonies = new();
-    #endregion
-
-    #region Creatures Variables
-
+    [Header("Scripts")]
+    public CaseFileScript csScript;
+    public CluesScript cluesScript;
+    public CreaturesScript creaturesScript;
+    public SaveLoadScript slScript;
     #endregion
 
     void OnEnable()
@@ -45,7 +33,7 @@ public class JournalManager : MonoBehaviour
         cluesBtn.onClick.AddListener(openClues);
         slBtn.onClick.AddListener(openSL);
         creaturesBtn.onClick.AddListener(openCreatures);
-        closeBtn.onClick.AddListener(CloseCaseFile);
+        closeBtn.onClick.AddListener(CloseTab);
     }
 
     void OnDisable()
@@ -54,95 +42,50 @@ public class JournalManager : MonoBehaviour
         cluesBtn.onClick.RemoveListener(openClues);
         slBtn.onClick.RemoveListener(openSL);
         creaturesBtn.onClick.RemoveListener(openCreatures);
-        closeBtn.onClick.RemoveListener(CloseCaseFile);
+        closeBtn.onClick.RemoveListener(CloseTab);
     }
 
-    //journal - clues
-    public void AddClue(CluesData clue)
-    {
-        if (!collectedClues.Contains(clue))
-        {
-            collectedClues.Add(clue);
-        }
-        UpdateCluesUI();
-    }
-
-    public void AddTestimony(TestimonyData testimony)
-    {
-        if (!collectedTestimonies.Contains(testimony))
-        {
-            collectedTestimonies.Add(testimony);
-        }
-        UpdateCluesUI();
-    }
-
-    //journal - case file
-    public void CompleteObjective(int index)
-    {
-        if (currentCaseFile != null && index >= 0 && index < currentCaseFile.objectives.Length)
-        {
-            currentCaseFile.objectives[index].isCompleted = true;
-            UpdateCaseFileUI();
-        }
-    }
-
-    public void UpdateCaseFileUI()
-    {
-        if (currentCaseFile == null) return;
-        if (caseImage != null)
-            caseImage.sprite = currentCaseFile.caseImage;
-
-        if (currentCaseFile.objectives != null && currentCaseFile.objectives.Length > 0)
-        {
-            string formattedObjectives = "";
-
-            foreach (var obj in currentCaseFile.objectives)
-            {
-                if (obj.isCompleted)
-                    formattedObjectives += $"<s>{obj.description}</s>\n"; // strikethrough
-                else
-                    formattedObjectives += $"{obj.description}\n";
-            }
-
-            caseObjectivesText.text = formattedObjectives;
-        }
-        else
-        {
-            caseObjectivesText.text = "No objectives available.";
-        }
-    }
-
-    public void UpdateCluesUI()
-    {
-        // add clues UI update logic here
-    }
-
-    public void CloseCaseFile()
-    {
-        if (PlayerPrefs.HasKey("PreviousScene"))
-        {
-            SceneManager.LoadScene(PlayerPrefs.GetInt("PreviousScene"));
-        }
-    }
     //open tabs
     void OpenCaseFile()
     {
-        UpdateCaseFileUI();
+        ShowTab(caseFileTab);
+        csScript.UpdateCaseFileUI();
     }
 
     void openClues()
     {
-        UpdateCluesUI();
+        ShowTab(cluesTab);
+        //cluesScript.UpdateCluesUI();
     }
 
     void openSL()
     {
-        // UpdateSLUI();
+        ShowTab(saveLoadTab);
+        //slScript.UpdateSLUI();
     }
 
     void openCreatures()
     {
-        // UpdateCreaturesUI();
+        ShowTab(creaturesTab);
+        //creaturesScript.UpdateCreaturesUI();
+    }
+
+    private void ShowTab(GameObject activeTab)
+    {
+        caseFileTab.SetActive(false);
+        cluesTab.SetActive(false);
+        creaturesTab.SetActive(false);
+        saveLoadTab.SetActive(false);
+
+        if (activeTab != null)
+        {
+            activeTab.SetActive(true);
+        }
+    }
+
+    private void CloseTab()
+    {
+        SceneController.Instance.GoBackToPreviousScene();
     }
 }
 
