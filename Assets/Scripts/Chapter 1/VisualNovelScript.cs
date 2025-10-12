@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class VisualNovelScript : MonoBehaviour
 {
     #region Variables
+    public VisualNovelScript Instance;
 
     [Header("Visual Novel Buttons")]
     public Button skipBtn;

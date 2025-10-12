@@ -53,14 +53,9 @@ public class MainMenuScript : MonoBehaviour
 
     void StartNewGame()
     {
-        SceneManager.LoadScene(sceneIndex);
+        GameManager.Instance.StartNewGame();
     }
 
-    void ContinueGame()
-    {
-        // Continue from autosave or last save point
-
-    }
 
     void LoadGame()
     {
