@@ -5,24 +5,14 @@ using TMPro;
 
 public class MainMenuScript : MonoBehaviour
 {
+    #region Variables
     [Header("Main Menu Buttons")]
     public Button startBtn;
-    public Button continueBtn;
     public Button loadBtn;
-    public Button loadCheckpointBtn;
+    public Button loadChapterBtn;
     public Button journalBtn;
     public Button settingsBtn;
     public Button exitBtn;
-
-    [Header("Settings")]
-    public Slider musicSlider;
-    public Slider vfxSlider;
-    public Slider textSpeedSlider;
-    public Slider autoSlider;
-    public TextMeshProUGUI textSpeed;
-    public TMP_InputField textSpeedInput;
-    public TMP_InputField autoInput;
-    public Button closeBtn;
 
     [Header("Quit Confirmation Buttons")]
     public Button yesBtn;
@@ -33,37 +23,37 @@ public class MainMenuScript : MonoBehaviour
     public GameObject loadPanel;
     public GameObject quitPanel;
 
+    [Header("Variables")]
+    public int sceneIndex = 1;
+    #endregion
+
     void OnEnable()
     {
         startBtn.onClick.AddListener(StartNewGame);
-        continueBtn.onClick.AddListener(ContinueGame);
         loadBtn.onClick.AddListener(LoadGame);
-        loadCheckpointBtn.onClick.AddListener(LoadCheckpoint);
+        loadChapterBtn.onClick.AddListener(LoadChapter);
         journalBtn.onClick.AddListener(OpenJournal);
         settingsBtn.onClick.AddListener(OpenSettings);
         exitBtn.onClick.AddListener(ExitGame);
         yesBtn.onClick.AddListener(() => Application.Quit());
         noBtn.onClick.AddListener(() => quitPanel.SetActive(false));
-        closeBtn.onClick.AddListener(() => settingsPanel.SetActive(false));
     }
 
     void OnDisable()
     {
         startBtn.onClick.RemoveListener(StartNewGame);
-        continueBtn.onClick.RemoveListener(ContinueGame);
         loadBtn.onClick.RemoveListener(LoadGame);
-        loadCheckpointBtn.onClick.RemoveListener(LoadCheckpoint);
+        loadChapterBtn.onClick.RemoveListener(LoadChapter);
         journalBtn.onClick.RemoveListener(OpenJournal);
         settingsBtn.onClick.RemoveListener(OpenSettings);
         exitBtn.onClick.RemoveListener(ExitGame);
         yesBtn.onClick.RemoveListener(() => Application.Quit());
         noBtn.onClick.RemoveListener(() => quitPanel.SetActive(false));
-        closeBtn.onClick.RemoveListener(() => settingsPanel.SetActive(false));
     }
 
     void StartNewGame()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(sceneIndex);
     }
 
     void ContinueGame()
@@ -78,9 +68,9 @@ public class MainMenuScript : MonoBehaviour
         loadPanel.SetActive(true);
     }
 
-    void LoadCheckpoint()
+    void LoadChapter()
     {
-        // Load from checkpoint
+        // Load a chapter
         loadPanel.SetActive(true);
     }
 

@@ -37,7 +37,7 @@ public class VisualNovelScript : MonoBehaviour
 
     [Header("Variables")]
     bool isUIHidden = false;
-    public int SceneIndex = 1;
+    public int journalIndex = 1;
     [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
 
     #endregion
@@ -107,7 +107,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenJournal()
     {
-        SceneController.Instance.LoadScene(SceneIndex);
+        SceneController.Instance.LoadScene(journalIndex);
     }
 
     void OpenMap()

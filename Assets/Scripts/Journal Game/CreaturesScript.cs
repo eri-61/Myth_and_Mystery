@@ -1,16 +1,61 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+using System.Collections.Generic;
 
 public class CreaturesScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    #region Variables
+    [Header("Slots")]
+    public List<Button> slots;
+
+    [Header("Creatures Details")]
+    public TextMeshProUGUI creatureName;
+    public TextMeshProUGUI creatureDescription;
+    public Image creatureImage;
+
+    [Header("Variables and Data")]
+    public List<CreaturesData> creatures = new();
+    #endregion
+
+    void OnEnable()
     {
-        
+        for(int i = 0; i < slots.Count; i++)
+        {
+            int index = i;
+            slots[i].onClick.AddListener(() => showCreatures(index));
+        }
+        UpdateCreaturesUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDisable()
     {
-        
+        for (int i = 0; i < slots.Count; i++)
+        {
+            int index = i;
+            slots[i].onClick.RemoveAllListeners();
+        }
+    }
+
+    public void AddCreature(CreaturesData newCreature)
+    {
+        if (!creatures.Contains(newCreature))
+        {
+            creatures.Add(newCreature);
+            UpdateCreaturesUI();
+        }
+    }
+
+    public void showCreatures(int index)
+    {
+        if (index < 0 || index >= creatures.Count) return;
+        var creature = creatures[index];
+        creatureName.text = creature.name;
+    }
+
+    public void UpdateCreaturesUI()
+    {
+
     }
 }

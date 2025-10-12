@@ -35,17 +35,23 @@ namespace DialogNodeBasedSystem.Scripts
         [SerializeField] private VideoPlayer animationVideo;
         [SerializeField] private GameObject animationUI;
         [SerializeField] private GameObject gUI;
+        [SerializeField] private GameObject fade;
 
         [Header("Variables")]
         public int sceneIndex = 1;
         public float waitTime = 10f;
         private TestimonyData testimonyData;
+        private CreaturesData creature;
         #endregion
 
         private void Start()
         {
             dialogBehaviour.BindExternalFunction("changeSprite", changeCharacter);
             dialogBehaviour.BindExternalFunction("clear", clearCharacter);
+           
+            dialogBehaviour.BindExternalFunction("hide", hideCharacters);
+            dialogBehaviour.BindExternalFunction("show", showLRCharacters);
+
             dialogBehaviour.BindExternalFunction("loadNext", loadNextScene);
 
             dialogBehaviour.BindExternalFunction("updateJournal", updateJournal);
@@ -72,7 +78,9 @@ namespace DialogNodeBasedSystem.Scripts
                 yield return new WaitForSeconds(waitTime);
             }
 
+            fade.SetActive(false);
             animationUI.SetActive(false);
+
             gUI.SetActive(true);
             yield return new WaitForSeconds(0.5f);
             dialogBehaviour.StartDialog(dialogGraph);
@@ -114,10 +122,7 @@ namespace DialogNodeBasedSystem.Scripts
         public void addCreatures()
         {
             var creatures = FindObjectOfType<CreaturesScript>();
-            var dialog = FindObjectOfType<DialogBehaviour>();
-
-            string creatureName = dialog.VariablesHandler.GetVariableValue<string>("creatureName");
-            creatures.AddCreature(creatureName);
+            creatures.AddCreature(creature);
         }
 
         public void updateJournal()
@@ -134,6 +139,16 @@ namespace DialogNodeBasedSystem.Scripts
             int objectiveIndex = dialog.VariablesHandler.GetVariableValue<int>("ObjectiveIndex");
             
             caseFile.RevealObjective(objectiveIndex);
+        }
+
+        //characters
+        private void hideCharacters()
+        {
+            characterManager.HideLRCharacters();
+        }
+
+        private void showLRCharacters(){
+            characterManager.ShowLRCharacters(); 
         }
 
         private void clearCharacter()

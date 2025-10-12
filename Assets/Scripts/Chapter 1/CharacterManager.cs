@@ -6,6 +6,7 @@ namespace Myth_Mystery
 {
     public class CharacterManager : MonoBehaviour
     {
+        #region Variables
         public List<CharacterData> allCharacters;
         public List<BackgroundData> allBackgrounds;
 
@@ -18,6 +19,19 @@ namespace Myth_Mystery
         public GameObject bg;
 
         private Dictionary<string, GameObject> activeCharacters = new Dictionary<string, GameObject>();
+        #endregion
+
+        public void HideLRCharacters()
+        {
+            leftCharacterPosition.gameObject.SetActive(false);
+            rightCharacterPosition.gameObject.SetActive(false);
+        }
+
+        public void ShowLRCharacters()
+        {
+            leftCharacterPosition.gameObject.SetActive(true);
+            rightCharacterPosition.gameObject.SetActive(true);
+        }
 
         public void ChangeCharacter(string characterName, string variation, string position, string background)
         {

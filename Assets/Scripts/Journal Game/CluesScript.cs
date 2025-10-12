@@ -114,12 +114,12 @@ public class CluesScript : MonoBehaviour
             {
                 if ( i< gatheredClues.Count)
                 {
-                    slotImage.sprite = gatheredClues[i].clueImage;
+                    slotImage.sprite = gatheredClues[i].clueIcon;
                 }
                 else
                 {
                     int tIndex = i - gatheredClues.Count;
-                    slotImage.sprite = gatheredTestimonies[tIndex].witnessPortrait;
+                    slotImage.sprite = gatheredTestimonies[tIndex].testimonyIcon;
                 }
                 slots[i].interactable = true;
             }
