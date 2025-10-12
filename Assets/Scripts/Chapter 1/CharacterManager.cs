@@ -21,6 +21,16 @@ namespace Myth_Mystery
         private Dictionary<string, GameObject> activeCharacters = new Dictionary<string, GameObject>();
         #endregion
 
+        public void HideMCharacter()
+        {
+            middleCharacterPosition.gameObject.SetActive(false);
+        }
+
+        public void ShowMCharacter()
+        {
+            middleCharacterPosition.gameObject.SetActive(true);
+        }
+
         public void HideLRCharacters()
         {
             leftCharacterPosition.gameObject.SetActive(false);
@@ -167,6 +177,7 @@ namespace Myth_Mystery
                 case "worried": return characterData.worriedPrefab;
                 case "glad": return characterData.gladPrefab;
                 case "give": return characterData.givePrefab;
+                case "sad": return characterData.sadPrefab;
                 case "whisper": return characterData.whisperPrefab;
                 default:
                     Debug.LogWarning($"Variation '{variation}' is not supported.");

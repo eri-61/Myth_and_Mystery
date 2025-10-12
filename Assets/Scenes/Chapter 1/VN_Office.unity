@@ -261,7 +261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &95059109
 RectTransform:
   m_ObjectHideFlags: 0
@@ -667,7 +667,7 @@ MonoBehaviour:
   animationUI: {fileID: 1458244074}
   gUI: {fileID: 1977854557}
   fade: {fileID: 95059108}
-  sceneIndex: 1
+  sceneIndex: 6
   waitTime: 10
 --- !u!114 &588850212
 MonoBehaviour:
@@ -1909,7 +1909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4892385610288229403, guid: 7d05cd08b82dd8a429db2253ac008b5e, type: 3}
       propertyPath: _isCanSkippingText
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4979983010949287461, guid: 7d05cd08b82dd8a429db2253ac008b5e, type: 3}
       propertyPath: m_SizeDelta.x

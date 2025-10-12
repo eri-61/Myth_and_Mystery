@@ -526,6 +526,7 @@ GameObject:
   - component: {fileID: 1478886903}
   - component: {fileID: 1478886902}
   - component: {fileID: 1478886901}
+  - component: {fileID: 1478886905}
   - component: {fileID: 1478886904}
   m_Layer: 0
   m_Name: Canvas
@@ -646,6 +647,18 @@ MonoBehaviour:
   loadPanel: {fileID: 991745448}
   quitPanel: {fileID: 892837638}
   sceneIndex: 4
+--- !u!114 &1478886905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478886899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285a082bac0d4ae449c261243e8a3fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneController
 --- !u!114 &1563062771 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 930208401989408887, guid: 61b52e239d848fe479ded0ab3d90a255, type: 3}

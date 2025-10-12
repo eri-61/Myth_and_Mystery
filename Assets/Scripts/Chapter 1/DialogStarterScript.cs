@@ -49,8 +49,11 @@ namespace DialogNodeBasedSystem.Scripts
             dialogBehaviour.BindExternalFunction("changeSprite", changeCharacter);
             dialogBehaviour.BindExternalFunction("clear", clearCharacter);
            
-            dialogBehaviour.BindExternalFunction("hide", hideCharacters);
+            dialogBehaviour.BindExternalFunction("hide", hideLRCharacters);
             dialogBehaviour.BindExternalFunction("show", showLRCharacters);
+
+            dialogBehaviour.BindExternalFunction("hideM", hideMCharacter);
+            dialogBehaviour.BindExternalFunction("showM", showMCharacter);
 
             dialogBehaviour.BindExternalFunction("loadNext", loadNextScene);
 
@@ -142,7 +145,17 @@ namespace DialogNodeBasedSystem.Scripts
         }
 
         //characters
-        private void hideCharacters()
+        private void showMCharacter()
+        {
+            characterManager.ShowMCharacter();
+        }
+
+        private void hideMCharacter()
+        {
+            characterManager.HideMCharacter();
+        }
+
+        private void hideLRCharacters()
         {
             characterManager.HideLRCharacters();
         }
