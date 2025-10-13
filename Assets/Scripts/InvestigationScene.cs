@@ -14,11 +14,12 @@ public class InvestigationScene : MonoBehaviour
     [SerializeField] private Button investigate;
 
     [Header("Text")]
+    [SerializeField] private GameObject character;
     [SerializeField] private GameObject dialogPanel;
     [SerializeField] private TextMeshProUGUI description;
 
     [Header("Variables")]
-    public bool characterExists = false;
+    public bool characterExists = true;
     public int talkSceneIndex = 2;
     public float dialogHide = 5f;
     public bool hasBeenClicked = false;
@@ -41,6 +42,15 @@ public class InvestigationScene : MonoBehaviour
         description.text = "Objective: Investigate the Tent to find clues.";
         dialogPanel.SetActive(true);
         
+        if (!characterExists)
+        {
+            character.SetActive(false);
+        }
+        else
+        {
+            character.SetActive(true);
+        }
+
         for (int i = 0; i < investigationPoints.Length; i++)
         {
             isPointSearched.Add(i, false);
@@ -86,6 +96,7 @@ public class InvestigationScene : MonoBehaviour
     void investigateScene()
     {
         buttons.SetActive(false);
+        character.SetActive(false);
         dialogPanel.SetActive(true);
         description.text = "Investigate the scene!";
         StartCoroutine(HideDialog(dialogHide));

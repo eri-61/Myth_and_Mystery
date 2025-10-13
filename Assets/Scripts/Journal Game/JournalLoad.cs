@@ -7,7 +7,7 @@ public class JournalLoad : MonoBehaviour
 
     void Start()
     {
-        if (GameManager.Instance.oldCaseFile = false)
+        if (!GameManager.Instance.oldCaseFile)
         {
             JournalC.interactable = false;
             JournalC.blocksRaycasts = false;
@@ -23,7 +23,7 @@ public class JournalLoad : MonoBehaviour
 
     public IEnumerator LoadJournal()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         int index = GameManager.Instance.GetJournalSceneIndex();
         SceneController.Instance.UnloadScene(index);
     }
