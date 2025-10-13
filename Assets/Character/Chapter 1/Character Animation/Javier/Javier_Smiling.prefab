@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6609174085558246714}
   - component: {fileID: 255387827605195298}
   - component: {fileID: 6340080885432826225}
-  - component: {fileID: 7596704524659959493}
+  - component: {fileID: 2780812111038739159}
   m_Layer: 0
   m_Name: Javier_Smiling
   m_TagString: Untagged
@@ -118,17 +118,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7596704524659959493
-MonoBehaviour:
+--- !u!111 &2780812111038739159
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4860379806214962725}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
-  m_AspectMode: 3
-  m_AspectRatio: 0.5840811
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 64867da6cc528104f8e71a3a47af69dc, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

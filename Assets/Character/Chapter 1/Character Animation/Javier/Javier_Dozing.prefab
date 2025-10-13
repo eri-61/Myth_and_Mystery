@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7035470530297650928}
   - component: {fileID: 827874256525935769}
   - component: {fileID: 8874525260256189823}
-  - component: {fileID: 6368820503910724559}
+  - component: {fileID: -8510158126568017294}
   m_Layer: 0
   m_Name: Javier_Dozing
   m_TagString: Untagged
@@ -118,17 +118,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6368820503910724559
-MonoBehaviour:
+--- !u!111 &-8510158126568017294
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5068511743598465375}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
-  m_AspectMode: 3
-  m_AspectRatio: 0.58087194
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 123e59075da6bc2468c22ce269ebea2f, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6911452829172710049}
   - component: {fileID: 8395878831062274076}
   - component: {fileID: 5375968412245560585}
-  - component: {fileID: 1279306873158639624}
+  - component: {fileID: 1523534640209844203}
   m_Layer: 0
   m_Name: Cassie_Smile
   m_TagString: Untagged
@@ -118,17 +118,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1279306873158639624
-MonoBehaviour:
+--- !u!111 &1523534640209844203
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037760765160548259}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
-  m_AspectMode: 3
-  m_AspectRatio: 0.53782856
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 7b9a1ea07c5996f49bca69e4dd2d93df, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

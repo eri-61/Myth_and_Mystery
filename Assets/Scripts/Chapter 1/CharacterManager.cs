@@ -162,22 +162,32 @@ namespace Myth_Mystery
         {
             switch (variation.ToLower())
             {
+                //general
+                case "neutral": return characterData.neutralPrefab;
+                case "smiling": return characterData.smilingPrefab;
+                case "sad": return characterData.sadPrefab;
+
+                //additional 
+                case "angry": return characterData.angryPrefab;
+                case "glad": return characterData.gladPrefab;
+                case "worried": return characterData.worriedPrefab;
+                case "pensive": return characterData.pensivePrefab;
+
+                //javier        
                 case "averted": return characterData.avertedPrefab;
                 case "dozing": return characterData.dozingOffPrefab;
                 case "exhausted": return characterData.exhaustedPrefab;
-                case "neutral": return characterData.neutralPrefab;
                 case "serious": return characterData.seriousPrefab;
                 case "sigh": return characterData.sighPrefab;
-                case "smiling": return characterData.smilingPrefab;
-                case "angry": return characterData.angryPrefab;
+
+                //rafael
                 case "flustered": return characterData.flusteredPrefab;
-                case "pensive": return characterData.pensivePrefab;
                 case "pout": return characterData.poutPrefab;
                 case "unamused": return characterData.unamusedPrefab;
-                case "worried": return characterData.worriedPrefab;
-                case "glad": return characterData.gladPrefab;
+                case "smug": return characterData.smugPrefab;
+
+                //anayo
                 case "give": return characterData.givePrefab;
-                case "sad": return characterData.sadPrefab;
                 case "whisper": return characterData.whisperPrefab;
                 default:
                     Debug.LogWarning($"Variation '{variation}' is not supported.");

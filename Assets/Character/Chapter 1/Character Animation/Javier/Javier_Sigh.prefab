@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2862907266264347440}
   - component: {fileID: 3352759870060542425}
   - component: {fileID: 8022980075367169207}
-  - component: {fileID: 2634713418688230601}
+  - component: {fileID: 4402665004744556212}
   m_Layer: 0
   m_Name: Javier_Sigh
   m_TagString: Untagged
@@ -118,17 +118,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2634713418688230601
-MonoBehaviour:
+--- !u!111 &4402665004744556212
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488302579190930587}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
-  m_AspectMode: 3
-  m_AspectRatio: 0.8089747
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 84e0439bf52570041a453bbabcf12dc0, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

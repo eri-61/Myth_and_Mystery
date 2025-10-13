@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class VisualNovelScript : MonoBehaviour
 {
     #region Variables
-    public VisualNovelScript Instance;
 
     [Header("Visual Novel Buttons")]
     public Button skipBtn;
@@ -39,7 +38,6 @@ public class VisualNovelScript : MonoBehaviour
     [Header("Variables")]
     bool isUIHidden = false;
     public int sceneIndex = 1;
-    public int journalIndex = 4;
     [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
 
     #endregion
@@ -109,7 +107,8 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenJournal()
     {
-        SceneController.Instance.LoadScene(journalIndex);
+        int journalIndex = GameManager.Instance.GetJournalSceneIndex();
+        SceneController.Instance.LoadAdditiveScene(journalIndex);
     }
 
     void OpenMap()

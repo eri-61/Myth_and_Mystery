@@ -26,6 +26,7 @@ public class CreaturesScript : MonoBehaviour
             GameManager.Instance.RegisterCreatures(this);
         }
     }
+
     void OnEnable()
     {
         for(int i = 0; i < slots.Count; i++)

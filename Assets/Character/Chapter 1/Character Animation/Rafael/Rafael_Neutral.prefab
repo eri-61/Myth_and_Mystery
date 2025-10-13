@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4265077193357873045}
   - component: {fileID: 4238573004601850798}
   - component: {fileID: 7646514516020547905}
-  - component: {fileID: 6421927903875045869}
+  - component: {fileID: -1693539661984431328}
   m_Layer: 0
   m_Name: Rafael_Neutral
   m_TagString: Untagged
@@ -118,17 +118,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6421927903875045869
-MonoBehaviour:
+--- !u!111 &-1693539661984431328
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6154401713937081376}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
-  m_AspectMode: 3
-  m_AspectRatio: 0.5213992
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 8fac5c6b4dc246147a541a4251fb177c, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

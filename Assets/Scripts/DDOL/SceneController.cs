@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,6 @@ public class SceneController : MonoBehaviour
     
     void Awake()
     {
-        SceneManager.LoadScene(2);
         if (Instance == null)
         {
             Instance = this;
@@ -20,12 +20,48 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        SceneManager.LoadScene(1);
+    }
+    
     public void LoadScene(int sceneIndex)
     {
         previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneIndex);
     }
 
+    public void LoadAdditiveScene(int sceneIndex)
+    {
+        StartCoroutine(LoadAdditiveSceneCoroutine(sceneIndex));
+    }
+
+    private IEnumerator LoadAdditiveSceneCoroutine(int sceneIndex)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+        while (!asyncLoad.isDone) 
+        {
+            yield return null;
+        }
+
+        Scene loadedScene = SceneManager.GetSceneByBuildIndex(sceneIndex);
+        SceneManager.SetActiveScene(loadedScene);
+    } 
+
+    public void UnloadScene(int sceneIndex)
+    {
+        StartCoroutine(UnloadSceneCoroutine(sceneIndex));
+
+    }
+
+    private IEnumerator UnloadSceneCoroutine(int sceneIndex)
+    {
+        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(sceneIndex);
+        while (!asyncUnload.isDone)
+        {
+            yield return null;
+        }
+    }
     public void GoBackToPreviousScene()
     {
         if (previousSceneIndex >= 0)

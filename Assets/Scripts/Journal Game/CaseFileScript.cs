@@ -22,6 +22,11 @@ public class CaseFileScript : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        UpdateCaseFileUI();    
+    }
+
     public void CompleteObjective(int index)
     {
         if (currentCaseFile == null || currentCaseFile.objectives == null) { return;}

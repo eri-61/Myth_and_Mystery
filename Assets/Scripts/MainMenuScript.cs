@@ -53,6 +53,7 @@ public class MainMenuScript : MonoBehaviour
 
     void StartNewGame()
     {
+        GameManager.Instance.currentChapter = 1;
         GameManager.Instance.StartNewGame();
     }
 

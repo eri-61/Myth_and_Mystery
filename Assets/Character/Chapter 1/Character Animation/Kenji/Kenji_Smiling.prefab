@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7902651520559309188}
   - component: {fileID: 2139286192085922198}
   - component: {fileID: 2587562595624297664}
-  - component: {fileID: 5573091562595039803}
+  - component: {fileID: 979914897708775061}
   m_Layer: 0
   m_Name: Kenji_Smiling
   m_TagString: Untagged
@@ -118,17 +118,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5573091562595039803
-MonoBehaviour:
+--- !u!111 &979914897708775061
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4830255281968232306}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
-  m_AspectMode: 3
-  m_AspectRatio: 0.50357604
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: bcca3dea6328c9b4f9d895270e1c3bdc, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

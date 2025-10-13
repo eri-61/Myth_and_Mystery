@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9218206864176072791}
   - component: {fileID: 861176812341841650}
   - component: {fileID: 1638553797434320783}
-  - component: {fileID: 483100962669823967}
+  - component: {fileID: -8249886622941135684}
   m_Layer: 0
   m_Name: Lola_Neutral
   m_TagString: Untagged
@@ -118,17 +118,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &483100962669823967
-MonoBehaviour:
+--- !u!111 &-8249886622941135684
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3315799618747320419}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
-  m_AspectMode: 3
-  m_AspectRatio: 0.51155424
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 5d9ec448b286de64ba158a9c6466a7c8, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

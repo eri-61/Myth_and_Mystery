@@ -27,11 +27,6 @@ public class JournalManager : MonoBehaviour
     public SaveLoadScript slScript;
     #endregion
 
-    void Start()
-    {
-        Time.timeScale = 0f;
-    }
-
     void OnEnable()
     {
         caseButton.onClick.AddListener(OpenCaseFile);
@@ -39,6 +34,7 @@ public class JournalManager : MonoBehaviour
         slBtn.onClick.AddListener(openSL);
         creaturesBtn.onClick.AddListener(openCreatures);
         closeBtn.onClick.AddListener(CloseTab);
+        Time.timeScale = 0f;
     }
 
     void OnDisable()
@@ -90,8 +86,7 @@ public class JournalManager : MonoBehaviour
 
     private void CloseTab()
     {
-        SceneController.Instance.GoBackToPreviousScene();
-        Time.timeScale = 1f;
+        GameManager.Instance.JournalClosed();
     }
 }
 

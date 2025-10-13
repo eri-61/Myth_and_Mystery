@@ -1,19 +1,27 @@
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     #region
     public static GameManager Instance;
+
+    [Header ("Variables")]
     public bool isNewGame = false;
-    public int newGameScene = 1;
+    public int currentChapter = 1;
+    public bool waitingForJournal = false;
 
     [Header("Journal")]
     public CaseFileScript cfScript;
     public CluesScript cluesScript;
     public CreaturesScript creaturesScript;
     public SaveLoadScript slScript;
+
+    [Header("Dialog")]
+    private DialogNodeBasedSystem.Scripts.DialogStarterWIInfo dialog;
     #endregion
+
     private void Awake()
     {
         if (Instance == null)
@@ -27,10 +35,47 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RegisterDialog(DialogNodeBasedSystem.Scripts.DialogStarterWIInfo dialogStarter)
+    {
+        dialog = dialogStarter;
+    }
+
+    public void WaitForJournal()
+    {
+        waitingForJournal = true;
+        int index = GetJournalSceneIndex();
+        SceneController.Instance.LoadAdditiveScene(index);
+    }
+
+    public void JournalClosed()
+    {
+        if (waitingForJournal)
+        {
+            waitingForJournal = false;
+            int index = GetJournalSceneIndex();
+            SceneController.Instance.UnloadScene(index);
+            dialog.OnJournalClosed();
+        }
+        else
+        {
+            SceneController.Instance.UnloadScene(SceneManager.GetActiveScene().buildIndex);
+            Time.timeScale = 1f;
+        }
+    }
+
+    public int GetJournalSceneIndex()
+    {
+        switch (currentChapter)
+        {
+            case 1: return 4;
+            case 2: return 5;
+            default: return 0;
+        }
+    }
     public void StartNewGame()
     {
         isNewGame = true;
-        SceneManager.LoadScene(newGameScene);
+        SceneManager.LoadScene(5);
     }
 
     public void LoadChapter(int index)
