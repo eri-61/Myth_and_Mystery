@@ -8,13 +8,16 @@ public class SceneController : MonoBehaviour
     
     void Awake()
     {
-        if (Instance != null && Instance != this)
+        SceneManager.LoadScene(2);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
         {
             Destroy(gameObject);
         }
-        
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void LoadScene(int sceneIndex)

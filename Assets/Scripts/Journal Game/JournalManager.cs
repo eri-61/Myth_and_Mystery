@@ -27,6 +27,11 @@ public class JournalManager : MonoBehaviour
     public SaveLoadScript slScript;
     #endregion
 
+    void Start()
+    {
+        Time.timeScale = 0f;
+    }
+
     void OnEnable()
     {
         caseButton.onClick.AddListener(OpenCaseFile);
@@ -86,6 +91,7 @@ public class JournalManager : MonoBehaviour
     private void CloseTab()
     {
         SceneController.Instance.GoBackToPreviousScene();
+        Time.timeScale = 1f;
     }
 }
 
