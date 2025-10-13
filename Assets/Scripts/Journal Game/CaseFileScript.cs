@@ -14,6 +14,13 @@ public class CaseFileScript : MonoBehaviour
     [Header("Data")]
     public CaseFileData currentCaseFile;
     #endregion
+    void Awake() 
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.RegisterCaseFile(this);
+        }
+    }
 
     public void CompleteObjective(int index)
     {

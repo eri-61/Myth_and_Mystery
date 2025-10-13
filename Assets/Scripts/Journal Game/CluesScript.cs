@@ -26,6 +26,14 @@ public class CluesScript : MonoBehaviour
 
     private enum EntryType { Clue, Testimony }
     private List<EntryType> entrytypes = new();
+    
+    void Awake()
+    {
+        if (GameManager.Instance != null) 
+        {
+            GameManager.Instance.RegisterClues(this);
+        }
+    }
 
     void OnEnable()
     {

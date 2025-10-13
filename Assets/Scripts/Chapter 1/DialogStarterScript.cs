@@ -32,16 +32,25 @@ namespace DialogNodeBasedSystem.Scripts
         [SerializeField] private List<BackgroundData> allBg;
 
         [Header("Animation Video")]
-        [SerializeField] private VideoPlayer animationVideo;
-        [SerializeField] private GameObject animationUI;
+        [SerializeField] private VideoPlayer caseAnimation;
+        [SerializeField] private VideoPlayer dayTimeAnimation;
+
+        [SerializeField] private GameObject caseUI;
+        [SerializeField] private GameObject dayTimeUI;
+
         [SerializeField] private GameObject gUI;
         [SerializeField] private GameObject fade;
 
         [Header("Variables")]
         public int sceneIndex = 1;
         public float waitTime = 10f;
-        private TestimonyData testimonyData;
-        private CreaturesData creature;
+
+        [Header("Scripts and Data")]
+        [SerializeField] private CaseFileScript caseFile;
+        [SerializeField] private CluesScript clues;
+        [SerializeField] private CreaturesScript creatures;
+        public TestimonyData testimonyData;
+        public CreaturesData creature;
         #endregion
 
         private void Start()
@@ -70,22 +79,35 @@ namespace DialogNodeBasedSystem.Scripts
         IEnumerator PlayIntroVideoThenStartDialog()
         {
             gUI.SetActive(false);
-            animationUI.SetActive(true);
+            caseUI.SetActive(true);
 
-            if (animationVideo != null) 
-            { 
-                animationVideo.Prepare();
-                yield return new WaitUntil(() => animationVideo.isPrepared);
-                animationVideo.Play();
+            //case number animation
+            if (caseAnimation != null) 
+            {
+                caseAnimation.Prepare();
+                yield return new WaitUntil(() => caseAnimation.isPrepared);
+                caseAnimation.Play();
 
                 yield return new WaitForSeconds(waitTime);
             }
 
-            fade.SetActive(false);
-            animationUI.SetActive(false);
+            caseUI.SetActive(false);
+            dayTimeUI.SetActive(true);
 
+            //day time animation
+            if (dayTimeUI != null) 
+            {
+                dayTimeAnimation.Play();
+                yield return new WaitForSeconds(waitTime);
+            }
+
+            dayTimeUI.SetActive(false);
+            fade.SetActive(true);
+            yield return new WaitForSeconds(10f);
+            
+            fade.SetActive(false);
             gUI.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
+
             dialogBehaviour.StartDialog(dialogGraph);
         }
 
@@ -118,28 +140,22 @@ namespace DialogNodeBasedSystem.Scripts
 
         public void addTestimony()
         {
-            var clues = FindObjectOfType<CluesScript>();
             clues.addTestimony(testimonyData);
         }
 
         public void addCreatures()
         {
-            var creatures = FindObjectOfType<CreaturesScript>();
             creatures.AddCreature(creature);
         }
 
         public void updateJournal()
         {
-            var caseFile = FindObjectOfType<CaseFileScript>();
             caseFile.UpdateCaseFileUI();
         }
 
         public void RevealObjective()
         {
-            var caseFile = FindObjectOfType<CaseFileScript>();
-            var dialog = FindObjectOfType<DialogBehaviour>();
-
-            int objectiveIndex = dialog.VariablesHandler.GetVariableValue<int>("ObjectiveIndex");
+            int objectiveIndex = dialogBehaviour.VariablesHandler.GetVariableValue<int>("ObjectiveIndex");
             
             caseFile.RevealObjective(objectiveIndex);
         }

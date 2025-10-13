@@ -19,6 +19,13 @@ public class CreaturesScript : MonoBehaviour
     public List<CreaturesData> creatures = new();
     #endregion
 
+    void Awake()
+    {
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.RegisterCreatures(this);
+        }
+    }
     void OnEnable()
     {
         for(int i = 0; i < slots.Count; i++)

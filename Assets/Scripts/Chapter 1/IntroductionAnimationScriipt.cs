@@ -25,7 +25,7 @@ public class IntroductionAnimationScriipt : MonoBehaviour
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(waitTime);
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(SceneIndex);
     }
 
     void SkipIntro()

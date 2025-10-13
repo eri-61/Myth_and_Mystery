@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class SaveLoadScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.RegisterSaveLoad(this);
+        }
     }
 }

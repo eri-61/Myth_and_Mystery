@@ -38,7 +38,8 @@ public class VisualNovelScript : MonoBehaviour
 
     [Header("Variables")]
     bool isUIHidden = false;
-    public int journalIndex = 1;
+    public int sceneIndex = 1;
+    public int journalIndex = 4;
     [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
 
     #endregion
