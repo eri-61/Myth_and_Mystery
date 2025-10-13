@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 
 using System.Collections;
+using System.Collections.Generic;
 
 public class InvestigationScene : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class InvestigationScene : MonoBehaviour
     [Header("Clues")]
     public CluesData[] clues;
 
-    [HideInInspector]private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>;
+    [HideInInspector]private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
     #endregion
     void Start()
     {
