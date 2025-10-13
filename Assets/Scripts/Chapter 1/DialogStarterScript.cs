@@ -150,8 +150,8 @@ namespace DialogNodeBasedSystem.Scripts
 
         public void updateJournal()
         {
-            SceneController.Instance.LoadAdditiveScene(GameManager.Instance.GetJournalSceneIndex());
             GameManager.Instance.oldCaseFile = false;
+            SceneController.Instance.LoadAdditiveScene(GameManager.Instance.GetJournalSceneIndex());
         }
 
         public void RevealObjective()
