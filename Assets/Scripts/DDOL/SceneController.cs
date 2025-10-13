@@ -33,6 +33,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadAdditiveScene(int sceneIndex)
     {
+        previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
         StartCoroutine(LoadAdditiveSceneCoroutine(sceneIndex));
     }
 
@@ -43,9 +44,6 @@ public class SceneController : MonoBehaviour
         {
             yield return null;
         }
-
-        Scene loadedScene = SceneManager.GetSceneByBuildIndex(sceneIndex);
-        SceneManager.SetActiveScene(loadedScene);
     } 
 
     public void UnloadScene(int sceneIndex)

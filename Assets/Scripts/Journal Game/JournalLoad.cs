@@ -1,16 +1,32 @@
+using System.Collections;
 using UnityEngine;
 
 public class JournalLoad : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public CanvasGroup JournalC;
+
     void Start()
     {
-        
+        if (GameManager.Instance.oldCaseFile = false)
+        {
+            JournalC.interactable = false;
+            JournalC.blocksRaycasts = false;
+            StartCoroutine(LoadJournal());
+            GameManager.Instance.oldCaseFile = true;
+        }
+        else
+        {
+            JournalC.interactable = true;
+            JournalC.blocksRaycasts = true;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator LoadJournal()
     {
-        
+        yield return new WaitForSeconds(10f);
+        int index = GameManager.Instance.GetJournalSceneIndex();
+        SceneController.Instance.UnloadScene(index);
     }
+
+
 }

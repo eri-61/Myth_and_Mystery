@@ -1,12 +1,15 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+using System.Collections.Generic;
 
 public class InventoryManager : MonoBehaviour
 {
     #region Variables
-    public InventoryData[] items;
-    public InventoryData[] currentItems;
+    private List<InventoryData> currentItems = new List<InventoryData>();
+    public int BattleSceneIndex = 2;
 
     [Header("Item Details")]
     public GameObject itemDetailsSection;
@@ -28,11 +31,15 @@ public class InventoryManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        battleSystem = FindObjectOfType<BattleSystem>();
+        int activeScene = SceneManager.GetActiveScene().buildIndex;
+        if(activeScene == BattleSceneIndex)
+        {
+            battleSystem = FindObjectOfType<BattleSystem>();
+        }
 
         useItem.onClick.AddListener(OnUseItem);
         close.onClick.AddListener(() => gameObject.SetActive(false));
-        
+
         LoadInventory();
     }
 
@@ -47,14 +54,14 @@ public class InventoryManager : MonoBehaviour
 
     public void LoadInventory()
     {
-        currentItems = System.Array.FindAll(items, item => item.inInventory);
+        currentItems = new List<InventoryData>(GameManager.Instance.inventory);
 
-        for (int i =0; i < slots.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
             Image slotImage = slots[i].GetComponent<Image>();
             slots[i].onClick.RemoveAllListeners();
 
-            if (i < currentItems.Length)
+            if (i < currentItems.Count)
             {
                 InventoryData item = currentItems[i];
                 slotImage.sprite = item.itemImage;
@@ -63,7 +70,7 @@ public class InventoryManager : MonoBehaviour
             }
             else
             {
-                slotImage.sprite = null; 
+                slotImage.sprite = null;
             }
         }
     }
@@ -75,8 +82,9 @@ public class InventoryManager : MonoBehaviour
         itemImage.sprite = item.itemImage;
 
         selectedItem = item;
-}
+    } 
 
+    //battle
     public void OnUseItem()
     {
         if (selectedItem == null || battleSystem.state != Battlestate.PLAYERTURN)

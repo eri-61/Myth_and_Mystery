@@ -1,6 +1,7 @@
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.SceneManagement;
+
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,12 +12,16 @@ public class GameManager : MonoBehaviour
     public bool isNewGame = false;
     public int currentChapter = 1;
     public bool waitingForJournal = false;
+    public bool oldCaseFile = false;
 
     [Header("Journal")]
     public CaseFileScript cfScript;
     public CluesScript cluesScript;
     public CreaturesScript creaturesScript;
     public SaveLoadScript slScript;
+
+    [Header ("Inventory")]
+    public List<InventoryData> inventory = new List<InventoryData>();
 
     [Header("Dialog")]
     private DialogNodeBasedSystem.Scripts.DialogStarterWIInfo dialog;
@@ -90,6 +95,7 @@ public class GameManager : MonoBehaviour
         //add code
     }
 
+    //register journal items
     public void RegisterCaseFile(CaseFileScript caseFile)
     {
         cfScript = caseFile;
@@ -108,5 +114,24 @@ public class GameManager : MonoBehaviour
     public void RegisterSaveLoad(SaveLoadScript sl)
     {
         slScript = sl;
+    }
+
+    //inventory
+    public void AddItem(InventoryData newItem)
+    {
+        if (!inventory.Contains(newItem))
+        {
+            inventory.Add(newItem);
+            newItem.inInventory = true;
+        }
+    }
+
+    public void RemoveItem(InventoryData item)
+    {
+        if (inventory.Contains(item))
+        {
+            inventory.Remove(item);
+            item.inInventory = false;
+        }
     }
 }
