@@ -78,6 +78,17 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(5);
     }
 
+    public void StartNewChapter(int chapterNumber)
+    {
+        currentChapter = chapterNumber;
+
+        if (MapManager.Instance != null)
+            MapManager.Instance.ResetMap();
+
+        InventoryManager.Instance.LoadChapterItems(GetCurrentChapterItems());
+        
+    }
+
     public void LoadChapter(int index)
     {
         isNewGame = false;

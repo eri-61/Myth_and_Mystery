@@ -99,6 +99,7 @@ namespace Myth_Mystery
                 BackgroundData bgData = allBackgrounds.Find(x => x.backgroundName.ToLower() == background.ToLower());
                 if (bgData != null)
                     bg.GetComponent<Image>().sprite = bgData.bgSprite;
+                    MapManager.Instance.UpdateLocations();
             }
 
             // Spawn new character

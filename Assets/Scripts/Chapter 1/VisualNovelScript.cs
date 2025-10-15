@@ -42,6 +42,10 @@ public class VisualNovelScript : MonoBehaviour
     bool isUIHidden = false;
     [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
 
+    private void Awake()
+    {
+        
+    }
     #endregion
 
     void OnEnable()
