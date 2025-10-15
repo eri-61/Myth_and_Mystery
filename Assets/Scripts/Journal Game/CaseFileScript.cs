@@ -13,13 +13,11 @@ public class CaseFileScript : MonoBehaviour
 
     [Header("Data")]
     public CaseFileData currentCaseFile;
+    public ObjectiveData objectves;
     #endregion
     void Awake() 
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.RegisterCaseFile(this);
-        }
+        GameManager.Instance?.RegisterCaseFile(this);
     }
 
     private void Start()

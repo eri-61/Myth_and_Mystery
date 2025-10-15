@@ -1,17 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    #region
     public static GameManager Instance;
 
-    [Header ("Variables")]
+    [Header("Variables")]
     public bool isNewGame = false;
     public int currentChapter = 1;
-    public bool waitingForJournal = false;
     public bool oldCaseFile = false;
 
     [Header("Journal")]
@@ -20,12 +17,14 @@ public class GameManager : MonoBehaviour
     public CreaturesScript creaturesScript;
     public SaveLoadScript slScript;
 
-    [Header ("Inventory")]
-    public List<InventoryData> inventory = new List<InventoryData>();
+    [Header("Chapter Items")]
+    public List<ItemData> chapter1Items;
+    public List<ItemData> chapter2Items;
+    public List<ItemData> chapter3Items;
+    public List<ItemData> chapter4Items;
 
     [Header("Dialog")]
-    private DialogNodeBasedSystem.Scripts.DialogStarterWIInfo dialog;
-    #endregion
+    private DialogNodeBasedSystem.Scripts.DialogStarter dialog;
 
     private void Awake()
     {
@@ -34,38 +33,32 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        else Destroy(gameObject);
     }
 
-    public void RegisterDialog(DialogNodeBasedSystem.Scripts.DialogStarterWIInfo dialogStarter)
+    public void RegisterDialog(DialogNodeBasedSystem.Scripts.DialogStarter dialogStarter)
     {
         dialog = dialogStarter;
     }
 
     public void WaitForJournal()
     {
-        waitingForJournal = true;
         int index = GetJournalSceneIndex();
         SceneController.Instance.LoadAdditiveScene(index);
     }
 
     public void JournalClosed()
     {
-        if (waitingForJournal)
+        int index = GetJournalSceneIndex();
+        if (SceneManager.GetSceneByBuildIndex(index).isLoaded)
         {
-            waitingForJournal = false;
-            int index = GetJournalSceneIndex();
             SceneController.Instance.UnloadScene(index);
+        }
+
+        Time.timeScale = 1f;
+
+        if (dialog != null)
             dialog.OnJournalClosed();
-        }
-        else
-        {
-            SceneController.Instance.UnloadScene(SceneManager.GetActiveScene().buildIndex);
-            Time.timeScale = 1f;
-        }
     }
 
     public int GetJournalSceneIndex()
@@ -77,9 +70,11 @@ public class GameManager : MonoBehaviour
             default: return 0;
         }
     }
+
     public void StartNewGame()
     {
         isNewGame = true;
+        currentChapter = 1;
         SceneManager.LoadScene(5);
     }
 
@@ -92,10 +87,13 @@ public class GameManager : MonoBehaviour
     public void LoadSave()
     {
         isNewGame = false;
-        //add code
+
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.LoadChapterItems(GetCurrentChapterItems());
+        }
     }
 
-    //register journal items
     public void RegisterCaseFile(CaseFileScript caseFile)
     {
         cfScript = caseFile;
@@ -116,22 +114,44 @@ public class GameManager : MonoBehaviour
         slScript = sl;
     }
 
-    //inventory
-    public void AddItem(InventoryData newItem)
+    // Inventory operations
+    public List<ItemData> GetCurrentChapterItems()
     {
-        if (!inventory.Contains(newItem))
+        switch (currentChapter)
         {
-            inventory.Add(newItem);
-            newItem.inInventory = true;
+            case 1: return chapter1Items;
+            case 2: return chapter2Items;
+            case 3: return chapter3Items;
+            case 4: return chapter4Items;
+            default: return new List<ItemData>();
         }
     }
 
-    public void RemoveItem(InventoryData item)
+    public void AddItem(ItemData newItem)
     {
-        if (inventory.Contains(item))
+        List<ItemData> chapterItems = GetCurrentChapterItems();
+
+        if (!chapterItems.Contains(newItem))
         {
-            inventory.Remove(item);
+            chapterItems.Add(newItem);
+            newItem.inInventory = true;
+
+            if (InventoryManager.Instance != null)
+                InventoryManager.Instance.LoadChapterItems(chapterItems);
+        }
+    }
+
+    public void RemoveItem(ItemData item)
+    {
+        List<ItemData> chapterItems = GetCurrentChapterItems();
+
+        if (chapterItems.Contains(item))
+        {
+            chapterItems.Remove(item);
             item.inInventory = false;
+
+            if (InventoryManager.Instance != null)
+                InventoryManager.Instance.LoadChapterItems(chapterItems);
         }
     }
 }

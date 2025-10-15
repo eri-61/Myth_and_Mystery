@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
 using System.Collections.Generic;
 
 public class CluesScript : MonoBehaviour
@@ -20,27 +19,26 @@ public class CluesScript : MonoBehaviour
 
     [Header("Variables and Data")]
     public int sceneIndex = 1;
+    public int allCluesAndTestimonies = 0; 
     public List<CluesData> gatheredClues = new();
     public List<TestimonyData> gatheredTestimonies = new();
     #endregion
 
     private enum EntryType { Clue, Testimony }
     private List<EntryType> entrytypes = new();
-    
+
     void Awake()
     {
-        if (GameManager.Instance != null) 
-        {
-            GameManager.Instance.RegisterClues(this);
-        }
+        GameManager.Instance?.RegisterClues(this);
+        deductionButton.gameObject.SetActive(false); 
     }
 
     void OnEnable()
     {
-        for (int i = 0; i < slots.Count; i++) 
+        for (int i = 0; i < slots.Count; i++)
         {
             int index = i;
-            slots[i].onClick.AddListener(() =>showDetails(index));
+            slots[i].onClick.AddListener(() => showDetails(index));
         }
 
         deductionButton.onClick.AddListener(goToDeductionMode);
@@ -51,7 +49,6 @@ public class CluesScript : MonoBehaviour
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            int index = i;
             slots[i].onClick.RemoveAllListeners();
         }
 
@@ -67,14 +64,13 @@ public class CluesScript : MonoBehaviour
             entryDescription.text = clue.clueDescription;
             entryImage.sprite = clue.clueImage;
         }
-
-        else if (entrytypes[index] == EntryType.Testimony) 
+        else if (entrytypes[index] == EntryType.Testimony)
         {
             var testimony = gatheredTestimonies[index - gatheredClues.Count];
             entryName.text = "Witness: " + testimony.witnessName;
             entryDescription.text = testimony.testimonyText;
             entryImage.sprite = testimony.witnessPortrait;
-        }     
+        }
     }
 
     public void goToDeductionMode()
@@ -96,6 +92,7 @@ public class CluesScript : MonoBehaviour
             entrytypes.Add(EntryType.Clue);
 
             UpdateClueUI();
+            CheckDeductionButton();
         }
     }
 
@@ -107,6 +104,7 @@ public class CluesScript : MonoBehaviour
             entrytypes.Add(EntryType.Testimony);
 
             UpdateClueUI();
+            CheckDeductionButton();
         }
     }
 
@@ -114,13 +112,13 @@ public class CluesScript : MonoBehaviour
     {
         int totalEntries = gatheredClues.Count + gatheredTestimonies.Count;
 
-        for (int i = 0; i < slots.Count; i++) 
-        { 
+        for (int i = 0; i < slots.Count; i++)
+        {
             Image slotImage = slots[i].GetComponent<Image>();
 
             if (i < totalEntries)
             {
-                if ( i< gatheredClues.Count)
+                if (i < gatheredClues.Count)
                 {
                     slotImage.sprite = gatheredClues[i].clueIcon;
                 }
@@ -131,12 +129,24 @@ public class CluesScript : MonoBehaviour
                 }
                 slots[i].interactable = true;
             }
-
             else
             {
                 slotImage.sprite = null;
                 slots[i].interactable = false;
             }
+        }
+    }
+
+    private void CheckDeductionButton()
+    {
+        int totalGathered = gatheredClues.Count + gatheredTestimonies.Count;
+        if (totalGathered >= allCluesAndTestimonies)
+        {
+            deductionButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            deductionButton.gameObject.SetActive(false);
         }
     }
 }

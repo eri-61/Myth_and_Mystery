@@ -173,6 +173,10 @@ namespace cherrydev
             Action<DialogVariablesHandler> onVariablesHandlerInitialized = null,
             Action<DialogVariablesHandler> onDialogFinished = null)
         {
+            StopAllCoroutines(); 
+            _isCurrentSentenceSkipped = false;
+            _isCurrentSentenceTyping = false;
+
             _isDialogStarted = true;
             _boundFunctionNames.Clear();
 
@@ -640,28 +644,23 @@ namespace cherrydev
         private IEnumerator WriteDialogTextRoutine(string text)
         {
             _isCurrentSentenceTyping = true;
+            _isCurrentSentenceSkipped = false; // reset per sentence
             SentenceStarted?.Invoke();
 
-            foreach (char textChar in text)
+            for (int i = 0; i < text.Length; i++)
             {
                 if (_isCurrentSentenceSkipped)
                 {
                     DialogTextSkipped?.Invoke(text);
-                    _isCurrentSentenceTyping = false;
                     break;
                 }
 
                 DialogTextCharWrote?.Invoke();
-
                 yield return new WaitForSeconds(_dialogCharDelay);
             }
 
             _isCurrentSentenceTyping = false;
             SentenceEnded?.Invoke();
-
-            yield return new WaitUntil(() => CheckNextSentenceKeyCodes() && IsActive);
-
-            CheckForDialogNextNode();
         }
 
         /// <summary>
@@ -785,7 +784,6 @@ namespace cherrydev
             EndDialogAndGoNextScene();
         }
 
-
         public void EndDialogAndGoNextScene()
         {
             _onDialogFinished?.Invoke();
@@ -800,6 +798,10 @@ namespace cherrydev
 
             else
                 Debug.LogWarning("[Dialog] No next scene found in Build Settings!");
+        }
+        public void SkipCurrentSentence()
+        {
+            _isCurrentSentenceSkipped = true;
         }
 
     }  

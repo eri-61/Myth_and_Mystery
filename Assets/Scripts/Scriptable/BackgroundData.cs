@@ -7,5 +7,4 @@ public class BackgroundData : ScriptableObject
     public Sprite bgSprite;
     public string backgroundName;
 
-
 }

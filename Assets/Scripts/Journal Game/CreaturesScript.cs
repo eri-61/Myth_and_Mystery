@@ -21,10 +21,7 @@ public class CreaturesScript : MonoBehaviour
 
     void Awake()
     {
-        if(GameManager.Instance != null)
-        {
-            GameManager.Instance.RegisterCreatures(this);
-        }
+        GameManager.Instance?.RegisterCreatures(this);
     }
 
     void OnEnable()

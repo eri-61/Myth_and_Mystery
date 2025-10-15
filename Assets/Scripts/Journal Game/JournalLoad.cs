@@ -1,19 +1,18 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class JournalLoad : MonoBehaviour
 {
     public CanvasGroup JournalC;
+    public Button closeButton;
 
     void Start()
     {
+        closeButton.gameObject.SetActive(true);
         if (!GameManager.Instance.oldCaseFile)
         {
             JournalC.interactable = false;
             JournalC.blocksRaycasts = false;
-
-            StartCoroutine(AutoCloseJournal());
-
             GameManager.Instance.oldCaseFile = true;
         }
         else
@@ -23,14 +22,18 @@ public class JournalLoad : MonoBehaviour
         }
     }
 
-    public IEnumerator AutoCloseJournal()
+    private void OnEnable()
     {
-        yield return new WaitForSeconds(1f);
+        closeButton.onClick.AddListener(close);
+    }
 
-        int index = GameManager.Instance.GetJournalSceneIndex();
-        Debug.Log($"[JournalLoad] Time elapsed — unloading journal scene index {index}.");
-        SceneController.Instance.UnloadScene(index);
+    private void OnDisable()
+    {
+        closeButton.onClick.RemoveListener(close);
+    }
 
+    void close()
+    {
         GameManager.Instance.JournalClosed();
     }
 

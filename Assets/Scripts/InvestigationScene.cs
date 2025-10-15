@@ -1,59 +1,66 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
 using System.Collections;
 using System.Collections.Generic;
 
 public class InvestigationScene : MonoBehaviour
 {
-    #region Variables
-    [Header("Button")]
+    [Header("Choice")]
     [SerializeField] private GameObject buttons;
     [SerializeField] private Button talk;
     [SerializeField] private Button investigate;
 
-    [Header("Text")]
+    [Header ("Main Buttons")]
+    [SerializeField] private Button mapButton;
+    [SerializeField] private Button journalButton;
+    [SerializeField] private Button inventoryButton;
+    [SerializeField] private Button settingsButton;
+
+    [Header ("Back Button")]
+    [SerializeField] private Button backButton;
+    [SerializeField] private GameObject back;
+
+    [Header ("Panels")]
+    [SerializeField] private GameObject mapPanel;
+    [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private GameObject settingsPanel;
+
+    [Header("UI Elements")]
     [SerializeField] private GameObject character;
     [SerializeField] private GameObject dialogPanel;
     [SerializeField] private TextMeshProUGUI description;
 
-    [Header("Variables")]
+    [Header("Settings")]
     public bool characterExists = true;
     public int talkSceneIndex = 2;
-    public float dialogHide = 5f;
-    public bool hasBeenClicked = false;
-    
+    public float dialogHide = 0.5f;
+
     [Header("Investigation Points")]
+    public GameObject investigationButtons;
     public Button[] investigationPoints;
-    public string[] text;
+    [TextArea] public string[] textDescriptions;
 
-    [Header("Items")]
-    public InventoryData[] items;
-
-    [Header("Clues")]
+    [Header("Items & Clues (Match by Index)")]
+    public ItemData[] items;
     public CluesData[] clues;
 
-    [HideInInspector]private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
-    #endregion
+    private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
+
     void Start()
     {
         buttons.SetActive(true);
-        description.text = "Objective: Investigate the Tent to find clues.";
+        back.SetActive(false);
+        investigationButtons.SetActive(false);
+
+        description.text = "Objective: Investigate the area to find clues.";
         dialogPanel.SetActive(true);
-        
-        if (!characterExists)
-        {
-            character.SetActive(false);
-        }
-        else
-        {
-            character.SetActive(true);
-        }
+
+        character.SetActive(characterExists);
 
         for (int i = 0; i < investigationPoints.Length; i++)
         {
-            isPointSearched.Add(i, false);
+            isPointSearched[i] = false;
         }
     }
 
@@ -62,30 +69,40 @@ public class InvestigationScene : MonoBehaviour
         for (int i = 0; i < investigationPoints.Length; i++)
         {
             int index = i;
-            investigationPoints[i].onClick.AddListener(() => ClickInvestigationPoints(index));
+            investigationPoints[i].onClick.AddListener(() => ClickInvestigationPoint(index));
         }
-        talk.onClick.AddListener(talkToCharacter);
-        investigate.onClick.AddListener(investigateScene);
+
+        backButton.onClick.AddListener(GoBack);
+        talk.onClick.AddListener(TalkToCharacter);
+        investigate.onClick.AddListener(StartInvestigation);
+
+        journalButton.onClick.AddListener(openJournal);
+        mapButton.onClick.AddListener(openMap);
+        settingsButton.onClick.AddListener(openSettings);
+        inventoryButton.onClick.AddListener(openInventory);
+
     }
 
     void OnDisable()
     {
-        for (int i = 0; i < investigationPoints.Length; i++)
-        {
-            investigationPoints[i].onClick.RemoveAllListeners() ;
-        }
+        foreach (Button point in investigationPoints)
+            point.onClick.RemoveAllListeners();
 
-        talk.onClick.RemoveListener(talkToCharacter);
-        investigate.onClick.RemoveListener(investigateScene);
+        backButton.onClick.RemoveAllListeners();
+        talk.onClick.RemoveAllListeners();
+        investigate.onClick.RemoveAllListeners();
+
+        journalButton.onClick.RemoveAllListeners();
+        mapButton.onClick.RemoveAllListeners();
+        settingsButton.onClick.RemoveAllListeners();
+        inventoryButton.onClick.RemoveAllListeners();
     }
 
-    void talkToCharacter()
+    void TalkToCharacter()
     {
         if (!characterExists)
         {
-            dialogPanel.SetActive(true);
-            description.text = "There is no character to talk to here.";
-            StartCoroutine(HideDialog(dialogHide));
+            ShowDialog("There’s no one to talk to here.");
         }
         else
         {
@@ -93,65 +110,73 @@ public class InvestigationScene : MonoBehaviour
         }
     }
 
-    void investigateScene()
+    void GoBack()
+    {
+        back.SetActive(false);
+        investigationButtons.SetActive(false);
+        
+        buttons.SetActive(true);
+        character.SetActive(characterExists);
+
+        dialogPanel.SetActive(true);
+        description.text = "Choose an options.";
+    }
+
+    void StartInvestigation()
     {
         buttons.SetActive(false);
         character.SetActive(false);
+
+        back.SetActive(true);
+        investigationButtons.SetActive(true);
+
+        ShowDialog("Click on the areas you want to investigate.");
+    }
+
+    void ClickInvestigationPoint(int index)
+    {
         dialogPanel.SetActive(true);
-        description.text = "Investigate the scene!";
+
+        if (isPointSearched[index])
+        {
+            ShowDialog("You’ve already searched this area.");
+            return;
+        }
+
+        if (index < textDescriptions.Length)
+            description.text = textDescriptions[index];
+        else
+            description.text = "There’s nothing of interest here.";
+
+        if (index < clues.Length && clues[index] != null)
+        {
+            AddClueToJournal(clues[index]);
+        }
+
+        if (index < items.Length && items[index] != null)
+        {
+            AddToInventory(items[index]);
+        }
+
+        isPointSearched[index] = true;
         StartCoroutine(HideDialog(dialogHide));
     }
 
-    void ClickInvestigationPoints(int i)
+    void ShowDialog(string message)
     {
+        description.text = message;
         dialogPanel.SetActive(true);
-        if(isPointSearched.ContainsKey(i) && isPointSearched[i])
-        {
-            description.text = "You've already searched this area.";
-        }
-        else
-        {
-            switch (i)
-            {
-                case 0:
-                    description.text = text[i];
-                    AddClueToJournal(clues[i]);
-                    isPointSearched[i] = true;
-                    break;
-                case 1:
-                    description.text = text[i];
-                    AddClueToJournal(clues[i]);
-                    isPointSearched[i] = true;
-                    break;
-                case 2:
-                    description.text = text[i];
-                    AddClueToJournal(clues[i]);
-                    isPointSearched[i] = true;
-                    break;
-                case 3:
-                    description.text = text[i];
-                    AddClueToJournal(clues[i]);
-                    isPointSearched[i] = true;
-                    break;
-                default: 
-                    description.text = "You found nothing of interest here.";
-                    isPointSearched[i] = true;
-                    break;
-
-            }
-        }
+        StopAllCoroutines();
         StartCoroutine(HideDialog(dialogHide));
     }
 
     void AddClueToJournal(CluesData clue)
     {
-
         GameManager.Instance.cluesScript.AddClues(clue);
     }
 
-    void AddToInventory(InventoryData newItem)
+    void AddToInventory(ItemData newItem)
     {
-
         GameManager.Instance.AddItem(newItem);
     }
 
@@ -159,5 +184,26 @@ public class InvestigationScene : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         dialogPanel.SetActive(false);
+    }
+
+    void openJournal()
+    {
+        int journalIndex = GameManager.Instance.GetJournalSceneIndex();
+        SceneController.Instance.LoadAdditiveScene(journalIndex);
+    }
+
+    void openInventory()
+    {
+        inventoryPanel.SetActive(true);
+    }
+
+    void openSettings()
+    {
+        settingsPanel.SetActive(true);
+    }
+
+    void openMap()
+    {
+        MapManager.Instance.ShowMap();
     }
 }

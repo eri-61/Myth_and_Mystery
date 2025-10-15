@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public enum Battlestate { START, PLAYERTURN, ENEMYTURN, WON, LOST }
+public enum DodgeResult { NotAttempted, Success, Failed }
 
 public class BattleSystem : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class BattleSystem : MonoBehaviour
     public Transform enemyBattleStation;
 
     public Battlestate state;
+    public DodgeResult dodgeResult = DodgeResult.NotAttempted;
 
     public Unit playerUnit;
     public Unit enemyUnit;
@@ -25,15 +27,12 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD enemyHUD;
     public BattleHUD playerHUD;
 
-    private bool playerDodged = false;
-
     public GameObject inventoryPanel;
 
     [HideInInspector] public bool nextEnemyAttackDoubles = false;
-    public InventoryData correctItem;
+    public ItemData correctItem;
     #endregion
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         state = Battlestate.START;
@@ -43,10 +42,10 @@ public class BattleSystem : MonoBehaviour
     IEnumerator SetupBattle()
     {
         GameObject playerGO = Instantiate(
-        playerPrefab,
-        playerBattleStation.position,
-        playerBattleStation.rotation,
-        playerBattleStation
+            playerPrefab,
+            playerBattleStation.position,
+            playerBattleStation.rotation,
+            playerBattleStation
         );
         playerUnit = playerGO.GetComponent<Unit>();
 
@@ -59,7 +58,7 @@ public class BattleSystem : MonoBehaviour
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         dialogueText.text = "The " + enemyUnit.unitName + " has ambushed you!";
-        
+
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
@@ -84,50 +83,70 @@ public class BattleSystem : MonoBehaviour
             state = Battlestate.WON;
             EndBattle();
         }
-        
         else
         {
             state = Battlestate.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
-
     }
 
     public IEnumerator EnemyTurn()
     {
-        dialogueText.text = "The "+ enemyUnit.unitName + " attacked you!";
-
+        dialogueText.text = "The " + enemyUnit.unitName + " attacked you!";
         yield return new WaitForSeconds(1f);
 
-        int damage = enemyUnit.damage;
-
-        if(nextEnemyAttackDoubles)
-        {
-            damage *= 2;
-            nextEnemyAttackDoubles = false;
-            dialogueText.text = "The "+ enemyUnit.unitName + "'s strikes harder due to you using the wrong item!";
-            yield return new WaitForSeconds(2f);
-        }
-
-        if (playerDodged)
+        if (dodgeResult == DodgeResult.Success)
         {
             dialogueText.text = "You dodged the attack!";
-            playerDodged = false;
             yield return new WaitForSeconds(2f);
         }
-        else
+        else if (dodgeResult == DodgeResult.Failed)
         {
-            bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-            playerHUD.setHP(playerUnit.currentHP);
+            dialogueText.text = "You failed to dodge!";
+            yield return new WaitForSeconds(2f);
 
+            int damage = enemyUnit.damage;
+            if (nextEnemyAttackDoubles)
+            {
+                damage *= 2;
+                nextEnemyAttackDoubles = false;
+                dialogueText.text = "The " + enemyUnit.unitName + "'s strikes harder due to you using the wrong item!";
+                yield return new WaitForSeconds(2f);
+            }
+
+            bool isDead = playerUnit.TakeDamage(damage);
+            playerHUD.setHP(playerUnit.currentHP);
             if (isDead)
             {
                 state = Battlestate.LOST;
                 EndBattle();
                 yield break;
             }
-
         }
+        else
+        {
+            int damage = enemyUnit.damage;
+            if (nextEnemyAttackDoubles)
+            {
+                damage *= 2;
+                nextEnemyAttackDoubles = false;
+                dialogueText.text = "The " + enemyUnit.unitName + "'s strikes harder due to you using the wrong item!";
+                yield return new WaitForSeconds(2f);
+            }
+
+            bool isDead = playerUnit.TakeDamage(damage);
+            playerHUD.setHP(playerUnit.currentHP);
+            if (isDead)
+            {
+                state = Battlestate.LOST;
+                EndBattle();
+                yield break;
+            }
+        }
+
+        // Reset dodgeResult for next turn
+        dodgeResult = DodgeResult.NotAttempted;
+
         state = Battlestate.PLAYERTURN;
         PlayerTurn();
     }
@@ -137,22 +156,12 @@ public class BattleSystem : MonoBehaviour
         float dodgeChance = 0.15f;
         float roll = Random.Range(0f, 1f);
 
-        if (roll < dodgeChance)
-        {
-            dialogueText.text = "You dodged the attack!";
-            playerDodged = true;
-        }
-        else
-        {
-            dialogueText.text = "Dodge failed!";
-            playerDodged = false;
-        }
+        dodgeResult = (roll < dodgeChance) ? DodgeResult.Success : DodgeResult.Failed;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.2f); 
 
         state = Battlestate.ENEMYTURN;
         StartCoroutine(EnemyTurn());
-
     }
 
     public IEnumerator AttackSequence()
@@ -166,7 +175,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == Battlestate.WON)
         {
-            dialogueText.text = "You won agaisnt the "+enemyUnit.unitName + "!";
+            dialogueText.text = "You won agaisnt the " + enemyUnit.unitName + "!";
         }
         else if (state == Battlestate.LOST)
         {
@@ -209,32 +218,4 @@ public class BattleSystem : MonoBehaviour
 
         StartCoroutine(HandleDodge());
     }
-
-    public void UseItem(InventoryData item)
-    {
-        if (state != Battlestate.PLAYERTURN)
-            return;
-     
-        
-        if(item == correctItem)
-        {
-            // Right item used
-            dialogueText.text = "You used the right item! The enemy is weakened!";
-            enemyUnit.currentHP = 1;
-            enemyUnit.damage = 1;
-            enemyHUD.setHP(enemyUnit.currentHP);
-
-            state = Battlestate.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
-        }
-        else
-        {
-            // Wrong item used
-            dialogueText.text = "You used the wrong item! The enemy is enraged!";
-            nextEnemyAttackDoubles = true;
-            state = Battlestate.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
-        }
-    }
-
 }

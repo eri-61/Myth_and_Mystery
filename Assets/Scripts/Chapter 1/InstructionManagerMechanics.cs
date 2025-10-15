@@ -1,19 +1,29 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InstructionManagerMechanics : MonoBehaviour
 {
-
+    [Header("Instructions Panel")]
     public GameObject instructionsPanel;
-    
-    private void Start()
+    public Button close;
+
+    private void OnEnable()
     {
-        if(GameManager.Instance != null && GameManager.Instance.isNewGame)
-        {
-            instructionsPanel.SetActive(true);
-        }
-        else
-        {
-            instructionsPanel.SetActive(false);
-        }
+        close.onClick.AddListener(HideInstructions);    
+    }
+
+    private void OnDisable()
+    {
+        close.onClick.RemoveAllListeners();
+    }
+
+    public void ShowInstructions()
+    {
+        instructionsPanel?.SetActive(true);
+    }
+
+    public void HideInstructions()
+    {
+        instructionsPanel?.SetActive(false);
     }
 }

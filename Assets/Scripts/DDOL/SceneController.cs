@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,7 @@ public class SceneController : MonoBehaviour
     
     public void LoadScene(int sceneIndex)
     {
+ 
         previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneIndex);
     }
@@ -35,6 +37,10 @@ public class SceneController : MonoBehaviour
     {
         previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
         StartCoroutine(LoadAdditiveSceneCoroutine(sceneIndex));
+
+        Scene scene = SceneManager.GetSceneByBuildIndex(previousSceneIndex);
+        SceneManager.SetActiveScene(scene);
+
     }
 
     private IEnumerator LoadAdditiveSceneCoroutine(int sceneIndex)
@@ -71,4 +77,18 @@ public class SceneController : MonoBehaviour
             Debug.LogWarning("No previous scene");
         }
     }
+
+    //for map
+    public void OpenMapOverlay()
+    {
+        if (MapManager.Instance != null)
+        {
+            MapManager.Instance.ShowMap();
+        }
+        else
+        {
+            Debug.LogWarning("MapManager not found in scene!");
+        }
+    }
+
 }

@@ -1,61 +1,56 @@
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
-    #region Variables
-    private List<InventoryData> currentItems = new List<InventoryData>();
-    public int BattleSceneIndex = 2;
+    public static InventoryManager Instance;
 
-    [Header("Item Details")]
     public GameObject itemDetailsSection;
     public Image itemImage;
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI Description;
-
-    [Header("Inventory Slots")]
     public Button[] slots;
-
-    [Header("Buttons")]
     public Button close;
     public Button useItem;
-
-    [HideInInspector] public InventoryData selectedItem;
     public BattleSystem battleSystem;
-    #endregion
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private List<ItemData> currentItems = new List<ItemData>();
+    [HideInInspector] public ItemData selectedItem;
+
+    private void Awake()
     {
-        int activeScene = SceneManager.GetActiveScene().buildIndex;
-        if(activeScene == BattleSceneIndex)
+        if (Instance == null)
         {
-            battleSystem = FindObjectOfType<BattleSystem>();
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else Destroy(gameObject);
+    }
 
-        useItem.onClick.AddListener(OnUseItem);
+    private void Start()
+    {
         close.onClick.AddListener(() => gameObject.SetActive(false));
-
-        LoadInventory();
+        useItem.onClick.AddListener(OnUseItem);
     }
 
-    void OnDisable()
+    public void LoadChapterItems(List<ItemData> items)
     {
-        foreach (Button slot in slots)
+        currentItems.Clear();
+
+        // Only include items that are inInventory
+        foreach (var item in items)
         {
-            slot.onClick.RemoveAllListeners();
+            if (item.inInventory)
+                currentItems.Add(item);
         }
-        close.onClick.RemoveListener(() => gameObject.SetActive(false));
+
+        LoadInventoryUI();
     }
 
-    public void LoadInventory()
+    private void LoadInventoryUI()
     {
-        currentItems = new List<InventoryData>(GameManager.Instance.inventory);
-
         for (int i = 0; i < slots.Length; i++)
         {
             Image slotImage = slots[i].GetComponent<Image>();
@@ -63,32 +58,27 @@ public class InventoryManager : MonoBehaviour
 
             if (i < currentItems.Count)
             {
-                InventoryData item = currentItems[i];
-                slotImage.sprite = item.itemImage;
-
-                slots[i].onClick.AddListener(() => LoadItemDetails(item));
+                ItemData item = currentItems[i];
+                slotImage.sprite = item.itemSprite;
+                slots[i].onClick.AddListener(() => ShowItemDetails(item));
             }
-            else
-            {
-                slotImage.sprite = null;
-            }
+            else slotImage.sprite = null;
         }
     }
 
-    public void LoadItemDetails(InventoryData item)
+    private void ShowItemDetails(ItemData item)
     {
+        selectedItem = item;
         itemName.text = item.itemName;
         Description.text = item.itemDescription;
-        itemImage.sprite = item.itemImage;
+        itemImage.sprite = item.itemSprite;
+        itemDetailsSection.SetActive(true);
+    }
 
-        selectedItem = item;
-    } 
-
-    //battle
-    public void OnUseItem()
+    private void OnUseItem()
     {
-        if (selectedItem == null || battleSystem.state != Battlestate.PLAYERTURN)
-            return;
+        if (selectedItem == null || battleSystem == null) return;
+        if (battleSystem.state != Battlestate.PLAYERTURN) return;
 
         if (selectedItem == battleSystem.correctItem)
         {
@@ -102,10 +92,7 @@ public class InventoryManager : MonoBehaviour
             battleSystem.nextEnemyAttackDoubles = true;
         }
 
-        // Close inventory panel
         gameObject.SetActive(false);
-
-        // Wait then go to enemy turn
         battleSystem.StartCoroutine(AfterUseItem());
     }
 
@@ -116,4 +103,11 @@ public class InventoryManager : MonoBehaviour
         battleSystem.StartCoroutine(battleSystem.EnemyTurn());
     }
 
+    public void AddItem(ItemData newItem)
+    {
+        newItem.inInventory = true;
+
+        // Refresh the UI for this chapter
+        LoadChapterItems(GameManager.Instance.GetCurrentChapterItems());
+    }
 }

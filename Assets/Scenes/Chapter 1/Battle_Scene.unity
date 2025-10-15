@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.275, y: 0.5}
   m_AnchorMax: {x: 0.275, y: 0.5}
-  m_AnchoredPosition: {x: 375.36554, y: 110.11}
-  m_SizeDelta: {x: 285, y: 154.24}
+  m_AnchoredPosition: {x: 375.36554, y: 96.83868}
+  m_SizeDelta: {x: 285, y: 95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &375986908
 CanvasRenderer:
@@ -556,7 +556,7 @@ RectTransform:
   m_AnchorMin: {x: 0.275, y: 0.5}
   m_AnchorMax: {x: 0.275, y: 0.5}
   m_AnchoredPosition: {x: 5.590393, y: -32.453613}
-  m_SizeDelta: {x: 285, y: 195}
+  m_SizeDelta: {x: 285, y: 95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1489394987
 CanvasRenderer:
@@ -748,10 +748,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1551402696}
-  - {fileID: 1419924062}
-  - {fileID: 308137002}
   - {fileID: 375986906}
   - {fileID: 1489394985}
+  - {fileID: 1419924062}
+  - {fileID: 308137002}
   - {fileID: 820684198}
   - {fileID: 1070540607}
   m_Father: {fileID: 0}
@@ -778,6 +778,7 @@ MonoBehaviour:
   playerBattleStation: {fileID: 1489394985}
   enemyBattleStation: {fileID: 375986906}
   state: 0
+  dodgeResult: 0
   playerUnit: {fileID: 0}
   enemyUnit: {fileID: 0}
   dialogueText: {fileID: 6502281190328287801}

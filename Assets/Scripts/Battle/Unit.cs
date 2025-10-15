@@ -11,9 +11,11 @@ public class Unit : MonoBehaviour
 
     [Header ("Damage")]
     public int damage;
+
     public bool TakeDamage(int dmg)
     {
         currentHP -= dmg;
+
         if (currentHP <= 0)
         {
             currentHP = 0;
@@ -26,5 +28,5 @@ public class Unit : MonoBehaviour
     }
 
     [Header ("Weakness")]
-    public InventoryData weaknessItem;
+    public ItemData weaknessItem;
 }

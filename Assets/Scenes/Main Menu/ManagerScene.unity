@@ -149,11 +149,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   isNewGame: 0
-  newGameScene: 1
+  currentChapter: 1
+  oldCaseFile: 0
   cfScript: {fileID: 0}
   cluesScript: {fileID: 0}
   creaturesScript: {fileID: 0}
   slScript: {fileID: 0}
+  chapter1Items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  chapter2Items: []
+  chapter3Items: []
+  chapter4Items: []
 --- !u!4 &14542676
 Transform:
   m_ObjectHideFlags: 0

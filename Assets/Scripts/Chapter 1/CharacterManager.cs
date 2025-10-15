@@ -23,56 +23,86 @@ namespace Myth_Mystery
 
         public void HideMCharacter()
         {
-            middleCharacterPosition.gameObject.SetActive(false);
+            StopAnimation("middle");
+
+            if (activeCharacters.ContainsKey("middle") && activeCharacters["middle"] != null)
+                activeCharacters["middle"].SetActive(false);
         }
 
         public void ShowMCharacter()
         {
-            middleCharacterPosition.gameObject.SetActive(true);
+            if (activeCharacters.ContainsKey("middle") && activeCharacters["middle"] != null)
+            {
+                activeCharacters["middle"].SetActive(true);
+                ResetAnimatorState(activeCharacters["middle"]);
+            }
         }
 
         public void HideLRCharacters()
         {
-            leftCharacterPosition.gameObject.SetActive(false);
-            rightCharacterPosition.gameObject.SetActive(false);
+            StopAnimation("left");
+            StopAnimation("right");
+
+            if (activeCharacters.ContainsKey("left") && activeCharacters["left"] != null)
+                activeCharacters["left"].SetActive(false);
+            if (activeCharacters.ContainsKey("right") && activeCharacters["right"] != null)
+                activeCharacters["right"].SetActive(false);
         }
 
         public void ShowLRCharacters()
         {
-            leftCharacterPosition.gameObject.SetActive(true);
-            rightCharacterPosition.gameObject.SetActive(true);
+            if (activeCharacters.ContainsKey("left") && activeCharacters["left"] != null)
+            {
+                activeCharacters["left"].SetActive(true);
+                ResetAnimatorState(activeCharacters["left"]);
+            }
+            if (activeCharacters.ContainsKey("right") && activeCharacters["right"] != null)
+            {
+                activeCharacters["right"].SetActive(true);
+                ResetAnimatorState(activeCharacters["right"]);
+            }
         }
 
         public void ChangeCharacter(string characterName, string variation, string position, string background)
         {
-            Debug.Log($"[CharacterManager] ChangeCharacter called with characterName='{characterName}', variation='{variation}', position='{position}', background='{background}'");
             string positionKey = position.ToLower();
 
+            // If character already exists, check if it's the same one
             if (activeCharacters.ContainsKey(positionKey) && activeCharacters[positionKey] != null)
             {
-                Destroy(activeCharacters[positionKey]);
-                activeCharacters.Remove(positionKey);
-            } 
+                GameObject existing = activeCharacters[positionKey];
+                CharacterData existingData = allCharacters.Find(c => c.characterName.ToLower() == characterName.ToLower());
+                GameObject expectedPrefab = existingData != null ? GetPrefabVariation(existingData, variation) : null;
 
-            if (string.IsNullOrEmpty(characterName) || characterName == "none")
-            {
-                return;
+                // Same prefab & character
+                if (expectedPrefab != null && existing.name.StartsWith(expectedPrefab.name, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    Animator existingAnimator = existing.GetComponent<Animator>();
+                    if (existingAnimator != null)
+                        existingAnimator.SetBool("isTalking", true);
+
+                    return;
+                }
+
+                // Otherwise, destroy and replace
+                Destroy(existing);
+                activeCharacters.Remove(positionKey);
             }
 
+            // Don't spawn if none
+            if (string.IsNullOrEmpty(characterName) || characterName == "none")
+                return;
+
+            // Change background if needed
             if (!string.IsNullOrEmpty(background) && background.ToLower() != "none")
             {
                 BackgroundData bgData = allBackgrounds.Find(x => x.backgroundName.ToLower() == background.ToLower());
                 if (bgData != null)
-                {
                     bg.GetComponent<Image>().sprite = bgData.bgSprite;
-                }
-                else
-                {
-                    Debug.LogWarning($"Background '{background}' not found in allBackgrounds list.");
-                }
             }
- 
-            CharacterData characterData = allCharacters.Find(c  => c.characterName.ToLower() == characterName.ToLower());
+
+            // Spawn new character
+            CharacterData characterData = allCharacters.Find(c => c.characterName.ToLower() == characterName.ToLower());
 
             if (characterData != null)
             {
@@ -80,7 +110,6 @@ namespace Myth_Mystery
 
                 if (prefab != null)
                 {
-                    //for instantiating character prefabs
                     Transform targetPosition = GetPositionTransform(position);
 
                     if (targetPosition != null)
@@ -92,45 +121,18 @@ namespace Myth_Mystery
                         if (spriteRenderer != null)
                         {
                             float spriteHeight = spriteRenderer.bounds.size.y;
-
-                            float targetScreenHeight = Screen.height * 0.9f;
-
                             float worldHeight = Camera.main.orthographicSize * 2f;
-                            float scaleFactor = (worldHeight * 0.9f) / spriteHeight; 
+                            float scaleFactor = (worldHeight * 0.9f) / spriteHeight;
                             newCharacter.transform.localScale = Vector3.one * scaleFactor;
                         }
 
                         activeCharacters.Add(positionKey, newCharacter);
+
                         Animator animator = newCharacter.GetComponent<Animator>();
-
                         if (animator != null)
-                        {
-                            Debug.Log($"Setting 'IsTalking' on {newCharacter.name} at position {positionKey}");
                             animator.SetBool("isTalking", true);
-                        }
-
-                        else
-                        {
-                            Debug.LogError($"No Animator component found on prefab or its children for character '{characterName}'.");
-                        }
-
-                    }
-
-                    else
-                    {
-                        Debug.LogWarning($"Position '{position}' not recognized.");
                     }
                 }
-
-                else
-                {
-                    Debug.LogWarning($"Variation '{variation}' not found.");
-                }
-            }
-      
-            else
-            {
-                Debug.LogWarning($"Character '{characterName}' not found.");
             }
         }
 
@@ -151,10 +153,7 @@ namespace Myth_Mystery
             {
                 Animator animator = activeCharacters[positionKey].GetComponent<Animator>();
                 if (animator != null)
-                {
                     animator.SetBool("isTalking", false);
-                }
-
             }
         }
 
@@ -162,35 +161,35 @@ namespace Myth_Mystery
         {
             switch (variation.ToLower())
             {
-                //general
+                // general
                 case "neutral": return characterData.neutralPrefab;
                 case "smiling": return characterData.smilingPrefab;
                 case "sad": return characterData.sadPrefab;
 
-                //additional 
+                // additional
                 case "angry": return characterData.angryPrefab;
                 case "glad": return characterData.gladPrefab;
                 case "worried": return characterData.worriedPrefab;
                 case "pensive": return characterData.pensivePrefab;
 
-                //javier        
+                // javier
                 case "averted": return characterData.avertedPrefab;
                 case "dozing": return characterData.dozingOffPrefab;
                 case "exhausted": return characterData.exhaustedPrefab;
                 case "serious": return characterData.seriousPrefab;
                 case "sigh": return characterData.sighPrefab;
 
-                //rafael
+                // rafael
                 case "flustered": return characterData.flusteredPrefab;
                 case "pout": return characterData.poutPrefab;
                 case "unamused": return characterData.unamusedPrefab;
                 case "smug": return characterData.smugPrefab;
 
-                //anayo
+                // anayo
                 case "give": return characterData.givePrefab;
                 case "whisper": return characterData.whisperPrefab;
+
                 default:
-                    Debug.LogWarning($"Variation '{variation}' is not supported.");
                     return null;
             }
         }
@@ -199,16 +198,23 @@ namespace Myth_Mystery
         {
             switch (position.ToLower())
             {
-                case "left":
-                    return leftCharacterPosition;
-                case "right":
-                    return rightCharacterPosition;
-                case "middle":
-                    return middleCharacterPosition;
-                default:
-                    return null;
+                case "left": return leftCharacterPosition;
+                case "right": return rightCharacterPosition;
+                case "middle": return middleCharacterPosition;
+                default: return null;
             }
         }
 
+        //for showing / hiding characters
+        private void ResetAnimatorState(GameObject character)
+        {
+            Animator animator = character.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.Rebind(); 
+                animator.Update(0f); 
+                animator.SetBool("isTalking", false);
+            }
+        }
     }
 }

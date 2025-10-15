@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
+using System.Collections;
+using System.Collections.Generic;
+
 
 public class VisualNovelScript : MonoBehaviour
 {
@@ -37,7 +40,6 @@ public class VisualNovelScript : MonoBehaviour
 
     [Header("Variables")]
     bool isUIHidden = false;
-    public int sceneIndex = 1;
     [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
 
     #endregion
@@ -85,7 +87,10 @@ public class VisualNovelScript : MonoBehaviour
     void Skip()
     {
         if (dialogBehaviour != null)
+        {
+            dialogBehaviour.SkipCurrentSentence();
             dialogBehaviour.SkipToNextAnswerNode();
+        }
     }
 
     void HideUI()
@@ -113,7 +118,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenMap()
     {
-        mapPanel.SetActive(true);
+        MapManager.Instance.ShowMap();   
     }
 
     void CloseInv()

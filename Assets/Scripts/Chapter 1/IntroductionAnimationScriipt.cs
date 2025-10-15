@@ -20,6 +20,8 @@ public class IntroductionAnimationScriipt : MonoBehaviour
     {
         yield return new WaitForSeconds(skipButton_waitTime);
         skipButton.gameObject.SetActive(true);
+        yield return new WaitForSeconds (115f);
+        skipButton.gameObject.SetActive(false);
     }
 
     IEnumerator Wait()
