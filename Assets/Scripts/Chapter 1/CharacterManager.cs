@@ -1,6 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 namespace Myth_Mystery
 {
@@ -99,7 +100,7 @@ namespace Myth_Mystery
                 BackgroundData bgData = allBackgrounds.Find(x => x.backgroundName.ToLower() == background.ToLower());
                 if (bgData != null)
                     bg.GetComponent<Image>().sprite = bgData.bgSprite;
-                    MapManager.Instance.UpdateLocations();
+                    //MapManager.Instance.UpdateLocations();
             }
 
             // Spawn new character
@@ -137,14 +138,16 @@ namespace Myth_Mystery
             }
         }
 
-        public void ClearCharacter(string position)
+        public void ClearCharacter()
         {
-            string positionKey = position.ToLower();
-            if (activeCharacters.ContainsKey(positionKey) && activeCharacters[positionKey] != null)
-            {
-                Destroy(activeCharacters[positionKey]);
-                activeCharacters.Remove(positionKey);
-            }
+            if (activeCharacters.Count == 0)
+                return;
+
+            var lastKey = activeCharacters.Keys.Last();
+            if (activeCharacters[lastKey] != null)
+                Destroy(activeCharacters[lastKey]);
+
+            activeCharacters.Remove(lastKey);
         }
 
         public void StopAnimation(string position)

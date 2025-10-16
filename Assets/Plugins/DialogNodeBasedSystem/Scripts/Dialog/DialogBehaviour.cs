@@ -173,9 +173,6 @@ namespace cherrydev
             Action<DialogVariablesHandler> onVariablesHandlerInitialized = null,
             Action<DialogVariablesHandler> onDialogFinished = null)
         {
-            StopAllCoroutines(); 
-            _isCurrentSentenceSkipped = false;
-            _isCurrentSentenceTyping = false;
 
             _isDialogStarted = true;
             _boundFunctionNames.Clear();

@@ -83,7 +83,7 @@ namespace DialogNodeBasedSystem.Scripts
 
             dialogBehaviour.BindExternalFunction("hideM", hideMCharacter);
             dialogBehaviour.BindExternalFunction("showM", showMCharacter);
-
+            dialogBehaviour.BindExternalFunction("clear", clearCharacter);
             dialogBehaviour.BindExternalFunction("loadNext", loadNextScene);
 
             dialogBehaviour.BindExternalFunction("updateJournal", updateJournal);
@@ -135,7 +135,8 @@ namespace DialogNodeBasedSystem.Scripts
             }
 
             gUI?.SetActive(true);
-            dialogBehaviour.StartDialog(dialogGraph[0]);
+            dialogBehaviour.StartDialog(dialogGraph[dialogGraphIndex]);
+            Debug.Log("Starting dialog: " + dialogGraph[dialogGraphIndex].name);
         }
 
 
@@ -216,7 +217,7 @@ namespace DialogNodeBasedSystem.Scripts
         private void hideMCharacter() => characterManager.HideMCharacter();
         private void hideLRCharacters() => characterManager.HideLRCharacters();
         private void showLRCharacters() => characterManager.ShowLRCharacters();
-
+        private void clearCharacter() => characterManager.ClearCharacter();
         private void changeCharacter()
         {
             string data = charInfo.text.Trim();

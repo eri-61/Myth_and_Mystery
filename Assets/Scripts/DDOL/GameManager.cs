@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(5);
     }
 
-    public void StartNewChapter(int chapterNumber)
+    /*public void StartNewChapter(int chapterNumber)
     {
         currentChapter = chapterNumber;
 
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
         InventoryManager.Instance.LoadChapterItems(GetCurrentChapterItems());
         
-    }
+    }*/
 
     public void LoadChapter(int index)
     {

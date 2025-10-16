@@ -2,16 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
+/*[System.Serializable]
 public class Location
 {
     public string Name;
     public Button mainLocation;
     public int mainSceneIndex;
     public BackgroundData associatedBackground; // reference to your scriptable background
-}
+}*/
 
-public class MapManager : MonoBehaviour
+/*public class MapManager : MonoBehaviour
 {
     public static MapManager Instance;
 
@@ -110,4 +110,4 @@ public class MapManager : MonoBehaviour
         foreach (var loc in locations)
             loc.mainLocation.gameObject.SetActive(false);
     }
-}
+}*/

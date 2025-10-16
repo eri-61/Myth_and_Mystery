@@ -122,7 +122,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenMap()
     {
-        MapManager.Instance.ShowMap();   
+        //MapManager.Instance.ShowMap();   
     }
 
     void CloseInv()

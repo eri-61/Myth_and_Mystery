@@ -204,6 +204,6 @@ public class InvestigationScene : MonoBehaviour
 
     void openMap()
     {
-        MapManager.Instance.ShowMap();
+        //MapManager.Instance.ShowMap();
     }
 }

@@ -79,7 +79,7 @@ public class SceneController : MonoBehaviour
     }
 
     //for map
-    public void OpenMapOverlay()
+    /*public void OpenMapOverlay()
     {
         if (MapManager.Instance != null)
         {
@@ -89,6 +89,6 @@ public class SceneController : MonoBehaviour
         {
             Debug.LogWarning("MapManager not found in scene!");
         }
-    }
+    }*/
 
 }
