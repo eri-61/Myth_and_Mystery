@@ -414,6 +414,7 @@ namespace cherrydev
                 CallExternalFunction(sentenceNode.GetExternalFunctionName());
 
             WriteDialogText(localizedText);
+
         }
 
         /// <summary>
@@ -641,14 +642,14 @@ namespace cherrydev
         private IEnumerator WriteDialogTextRoutine(string text)
         {
             _isCurrentSentenceTyping = true;
-            _isCurrentSentenceSkipped = false; // reset per sentence
             SentenceStarted?.Invoke();
 
-            for (int i = 0; i < text.Length; i++)
+            foreach (char textChar in text)
             {
                 if (_isCurrentSentenceSkipped)
                 {
                     DialogTextSkipped?.Invoke(text);
+
                     break;
                 }
 
@@ -658,6 +659,10 @@ namespace cherrydev
 
             _isCurrentSentenceTyping = false;
             SentenceEnded?.Invoke();
+
+            yield return new WaitUntil(() => CheckNextSentenceKeyCodes() && IsActive);
+
+            CheckForDialogNextNode();
         }
 
         /// <summary>
@@ -744,7 +749,12 @@ namespace cherrydev
             {
                 if (Input.GetKeyDown(_nextSentenceKeyCodes[i]))
                     return true;
+
             }
+
+
+            if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
+                return true;
 
             return false;
         }
@@ -794,7 +804,7 @@ namespace cherrydev
                 SceneManager.LoadScene(nextSceneIndex);
 
             else
-                Debug.LogWarning("[Dialog] No next scene found in Build Settings!");
+                Debug.LogWarning("No next scene found in Build Settings!");
         }
         public void SkipCurrentSentence()
         {

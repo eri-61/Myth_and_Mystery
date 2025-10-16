@@ -41,13 +41,26 @@ namespace Myth_Mystery
 
         public void HideLRCharacters()
         {
-            StopAnimation("left");
-            StopAnimation("right");
-
-            if (activeCharacters.ContainsKey("left") && activeCharacters["left"] != null)
-                activeCharacters["left"].SetActive(false);
-            if (activeCharacters.ContainsKey("right") && activeCharacters["right"] != null)
-                activeCharacters["right"].SetActive(false);
+            foreach (var side in new string[] { "left", "right" })
+            {
+                if (activeCharacters.TryGetValue(side, out GameObject character))
+                {
+                    if (character != null)
+                    {
+                        Debug.Log($"Hiding {side} character: {character.name}");
+                        character.SetActive(false);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"{side} character is null, removing from dictionary");
+                        activeCharacters.Remove(side);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"{side} key not found in activeCharacters");
+                }
+            }
         }
 
         public void ShowLRCharacters()

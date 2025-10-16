@@ -18,8 +18,8 @@ public class VisualNovelScript : MonoBehaviour
     public Sprite hideSprite;
     public Sprite showSprite;
 
-
     [Header("Other Buttons")]
+    public GameObject buttons;
     public Button inventoryBtn;
     public Button menuBtn;
     public Button journalBtn;
@@ -41,17 +41,12 @@ public class VisualNovelScript : MonoBehaviour
     [Header("Variables")]
     bool isUIHidden = false;
     [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
-
-    private void Awake()
-    {
-        
-    }
     #endregion
 
     void OnEnable()
     {
         skipBtn.onClick.AddListener(Skip);
-        hideBtn.onClick.AddListener(HideUI);        
+        hideBtn.onClick.AddListener(HideUI);
         
         inventoryBtn.onClick.AddListener(OpenInventory);
         menuBtn.onClick.AddListener(OpenMenu);
@@ -67,7 +62,7 @@ public class VisualNovelScript : MonoBehaviour
     {
         skipBtn.onClick.RemoveListener(Skip);
         hideBtn.onClick.RemoveListener(HideUI);
-        
+
         inventoryBtn.onClick.RemoveListener(OpenInventory);
         menuBtn.onClick.RemoveListener(OpenMenu);
         journalBtn.onClick.RemoveListener(OpenJournal);
@@ -101,6 +96,7 @@ public class VisualNovelScript : MonoBehaviour
     {
         ToggleUI();
         uiPanel.SetActive(!isUIHidden);
+        buttons.SetActive(!isUIHidden);
         skipBtn.gameObject.SetActive(!isUIHidden);
     }
 

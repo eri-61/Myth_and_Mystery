@@ -293,6 +293,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4892385610288229403, guid: 7d05cd08b82dd8a429db2253ac008b5e, type: 3}
+      propertyPath: _onDialogStarted.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892385610288229403, guid: 7d05cd08b82dd8a429db2253ac008b5e, type: 3}
+      propertyPath: _onDialogStarted.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4944293163234054176, guid: 7d05cd08b82dd8a429db2253ac008b5e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -412,33 +420,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6064427577179966577, guid: 7d05cd08b82dd8a429db2253ac008b5e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4189685685202563544}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d05cd08b82dd8a429db2253ac008b5e, type: 3}
 --- !u!224 &135687906411221235 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8302454760622736632, guid: 7d05cd08b82dd8a429db2253ac008b5e, type: 3}
   m_PrefabInstance: {fileID: 8275982186190885899}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2806619099419596922 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6064427577179966577, guid: 7d05cd08b82dd8a429db2253ac008b5e, type: 3}
-  m_PrefabInstance: {fileID: 8275982186190885899}
-  m_PrefabAsset: {fileID: 0}
---- !u!210 &4189685685202563544
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2806619099419596922}
-  m_Enabled: 1
-  m_SortingLayerID: -1170739663
-  m_SortingLayer: 3
-  m_SortingOrder: 25
-  m_SortAtRoot: 0
 --- !u!1 &8188437571067782234 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 250263575932399697, guid: 7d05cd08b82dd8a429db2253ac008b5e, type: 3}

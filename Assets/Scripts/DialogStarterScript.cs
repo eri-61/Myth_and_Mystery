@@ -53,14 +53,6 @@ namespace DialogNodeBasedSystem.Scripts
         [SerializeField] private InstructionManagerMechanics instructionManager;
         private void Start()
         {
-            // Fallback assignments from GameManager
-            if (GameManager.Instance != null)
-            {
-                if (caseFile == null) caseFile = GameManager.Instance.cfScript;
-                if (clues == null) clues = GameManager.Instance.cluesScript;
-                if (creatures == null) creatures = GameManager.Instance.creaturesScript;
-            }
-
             BindExternalFunctions();
 
             dialogBehaviour.SentenceEnded += OnSentenceEnded;
@@ -155,12 +147,12 @@ namespace DialogNodeBasedSystem.Scripts
 
         public void addTestimony() => clues.addTestimony(testimonyData);
         public void addCreatures() => creatures.AddCreature(creature);
-        public void updateJournal() => caseFile?.UpdateCaseFileUI();
+        public void updateJournal() => GameManager.Instance.cfScript.UpdateCaseFileUI();
 
         public void RevealObjective()
         {
             int index = dialogBehaviour.VariablesHandler.GetVariableValue<int>("ObjectiveIndex");
-            caseFile?.RevealObjective(index);
+            GameManager.Instance.cfScript.RevealObjective(index);
         }
 
         private void ShowInstructions()
@@ -178,7 +170,6 @@ namespace DialogNodeBasedSystem.Scripts
 
         public void OnJournalClosed()
         {
-            gUI?.SetActive(true);
             characterManager.ShowLRCharacters();
             characterManager.ShowMCharacter();
 
