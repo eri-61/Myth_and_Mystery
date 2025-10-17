@@ -68,6 +68,8 @@ public class InvestigationScene : MonoBehaviour
         {
             isPointSearched[i] = false;
         }
+
+        inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
     }
 
     void OnEnable()
@@ -185,6 +187,7 @@ public class InvestigationScene : MonoBehaviour
     void OpenInventory()
     {
         PersistentObjects.instance.OpenInventory();
+        inventoryManager.LoadInventoryUI();
     }
 
     void OpenMenu()
@@ -247,15 +250,6 @@ public class InvestigationScene : MonoBehaviour
         {
             inventoryManager.AddItem(newItem);
             Debug.Log($"[InvestigationScene] Added item via serialized ref: {newItem.itemName}");
-        }
-        else if (InventoryManager.Instance != null)
-        {
-            InventoryManager.Instance.AddItem(newItem);
-            Debug.Log($"[InvestigationScene] Added item via InventoryManager.Instance: {newItem.itemName}");
-        }
-        else
-        {
-            Debug.LogWarning("[InvestigationScene] No InventoryManager found. Assign one in the Inspector or ensure InventoryManager.Instance exists.");
         }
     }
 }

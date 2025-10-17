@@ -1096,7 +1096,7 @@ GameObject:
   - component: {fileID: 7833460611895519554}
   - component: {fileID: 4452837833268325389}
   m_Layer: 5
-  m_Name: Slot2
+  m_Name: slot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1214,6 +1214,7 @@ GameObject:
   - component: {fileID: 8781328018258717829}
   - component: {fileID: 6074601147017218390}
   - component: {fileID: 1564497187935349008}
+  - component: {fileID: 3975007924860031117}
   m_Layer: 5
   m_Name: Inventory_Panel
   m_TagString: Untagged
@@ -1283,6 +1284,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3975007924860031117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8210263244393334767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12aade00d4b72504d97c4e469acb8bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
+  itemDetailsSection: {fileID: 5338627038476065675}
+  itemImage: {fileID: 7465046037558557077}
+  itemName: {fileID: 1490527421305813562}
+  Description: {fileID: 4924577200624265743}
+  slots1: {fileID: 5740719118343762354}
+  slots2: {fileID: 4452837833268325389}
+  slots3: {fileID: 3898120459143343230}
+  slots4: {fileID: 5846015028560775164}
+  slots5: {fileID: 547997303907725654}
+  slots6: {fileID: 1629722359059538577}
+  slots7: {fileID: 2258587264800204209}
+  slots8: {fileID: 4300610804895081266}
+  slots9: {fileID: 8634898609671041084}
+  close: {fileID: 5258049526743849357}
+  useItem: {fileID: 7277249887689355659}
+  battleSystem: {fileID: 0}
+  selectedItem: {fileID: 0}
 --- !u!1 &8409273138070865367
 GameObject:
   m_ObjectHideFlags: 0
