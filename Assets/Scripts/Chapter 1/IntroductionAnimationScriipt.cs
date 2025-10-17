@@ -18,15 +18,15 @@ public class IntroductionAnimationScriipt : MonoBehaviour
 
     IEnumerator WaitForSkip()
     {
-        yield return new WaitForSeconds(skipButton_waitTime);
+        yield return new WaitForSecondsRealtime(skipButton_waitTime);
         skipButton.gameObject.SetActive(true);
-        yield return new WaitForSeconds (115f);
+        yield return new WaitForSecondsRealtime(115f);
         skipButton.gameObject.SetActive(false);
     }
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSecondsRealtime(waitTime);
         SceneManager.LoadScene(SceneIndex);
     }
 

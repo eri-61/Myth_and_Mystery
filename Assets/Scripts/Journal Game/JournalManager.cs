@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class JournalManager : MonoBehaviour
 {
     #region Journal Variables
+    public GameObject Journal;
+
     [Header("Journal Buttons")]
     public Button caseButton;
     public Button cluesBtn;
@@ -86,7 +88,7 @@ public class JournalManager : MonoBehaviour
 
     private void CloseTab()
     {
-        GameManager.Instance.JournalClosed();
+        Journal.SetActive(false);
     }
 }
 

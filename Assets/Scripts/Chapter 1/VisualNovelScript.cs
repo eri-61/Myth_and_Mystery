@@ -27,7 +27,8 @@ public class VisualNovelScript : MonoBehaviour
 
     [Header("Panels")]
     public GameObject inventoryPanel;
-    public GameObject menuPanel; 
+    public GameObject menuPanel;
+    public GameObject journalPanel;
     public GameObject instructionsPanel;
     public GameObject mapPanel;
     public GameObject uiPanel;
@@ -42,6 +43,20 @@ public class VisualNovelScript : MonoBehaviour
     bool isUIHidden = false;
     [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
     #endregion
+
+    private void Awake()
+    {
+        StartCoroutine(LoadAndHidePanels());
+    }
+
+    IEnumerator LoadAndHidePanels()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        menuPanel.SetActive(false);
+        mapPanel.SetActive(false);
+        journalPanel.SetActive(false);
+        inventoryPanel.SetActive(false);
+    }
 
     void OnEnable()
     {
@@ -112,8 +127,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenJournal()
     {
-        int journalIndex = GameManager.Instance.GetJournalSceneIndex();
-        SceneController.Instance.LoadAdditiveScene(journalIndex);
+        journalPanel.SetActive(true);
     }
 
     void OpenMap()

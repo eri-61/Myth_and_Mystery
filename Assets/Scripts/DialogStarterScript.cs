@@ -54,10 +54,10 @@ namespace DialogNodeBasedSystem.Scripts
         private void Start()
         {
             BindExternalFunctions();
-
             dialogBehaviour.SentenceEnded += OnSentenceEnded;
 
             StartCoroutine(BeginSequence());
+
         }
 
         private void OnDestroy()
@@ -75,6 +75,7 @@ namespace DialogNodeBasedSystem.Scripts
 
             dialogBehaviour.BindExternalFunction("hideM", hideMCharacter);
             dialogBehaviour.BindExternalFunction("showM", showMCharacter);
+
             dialogBehaviour.BindExternalFunction("clear", clearCharacter);
             dialogBehaviour.BindExternalFunction("loadNext", loadNextScene);
 
@@ -83,7 +84,6 @@ namespace DialogNodeBasedSystem.Scripts
             dialogBehaviour.BindExternalFunction("addCreatures", addCreatures);
             dialogBehaviour.BindExternalFunction("revealObjective", RevealObjective);
 
-            dialogBehaviour.BindExternalFunction("waitForJournal", WaitForJournal);
             dialogBehaviour.BindExternalFunction("playAnimation", PlayAnimation);
 
             //instructions
@@ -95,40 +95,42 @@ namespace DialogNodeBasedSystem.Scripts
             gUI?.SetActive(false);
 
             // CASE INTRO
-            if (playCaseIntro  == true)
-            {
-                caseUI.SetActive(true);
-                caseAnimation.Play();
+            if (playCaseIntro == true && caseAnimation != null) 
+            {                                 
+                caseAnimation.Play(); 
 
-                double caseDuration = caseAnimation.clip != null ? caseAnimation.clip.length : waitTime;
-                yield return new WaitForSeconds((float)caseDuration);
+                yield return new WaitForSecondsRealtime(waitTime);
 
-                caseUI.SetActive(false); 
+                if (caseUI != null) caseUI.SetActive(false);
             }
 
             // DAYTIME INTRO
             if (playDayIntro == true)
             {
-                dayTimeUI.SetActive(true);
-                dayTimeAnimation.Play();
 
-                double dayDuration = dayTimeAnimation.clip != null ? dayTimeAnimation.clip.length : waitTime;
-                yield return new WaitForSeconds((float)dayDuration);
+                if (dayTimeUI != null) dayTimeUI.SetActive(true);
+                if (dayTimeAnimation != null)
+                {
+                    dayTimeAnimation.Play();
+                }
 
-                dayTimeUI.SetActive(false); 
+                yield return new WaitForSecondsRealtime(waitTime);
+
+                if (dayTimeUI != null) dayTimeUI.SetActive(false);
             }
 
             // FADE
             if (fade != null)
             {
                 fade.SetActive(true);
-                yield return new WaitForSeconds(fadeDuration);
+                yield return new WaitForSecondsRealtime(fadeDuration);
                 fade.SetActive(false);
             }
 
             gUI?.SetActive(true);
-            dialogBehaviour.StartDialog(dialogGraph[dialogGraphIndex]);
-            Debug.Log("Starting dialog: " + dialogGraph[dialogGraphIndex].name);
+
+            var graph = dialogGraph[dialogGraphIndex];
+            dialogBehaviour.StartDialog(graph);
         }
 
 
@@ -147,12 +149,12 @@ namespace DialogNodeBasedSystem.Scripts
 
         public void addTestimony() => clues.addTestimony(testimonyData);
         public void addCreatures() => creatures.AddCreature(creature);
-        public void updateJournal() => GameManager.Instance.cfScript.UpdateCaseFileUI();
+        public void updateJournal() => caseFile.UpdateCaseFileUI();
 
         public void RevealObjective()
         {
             int index = dialogBehaviour.VariablesHandler.GetVariableValue<int>("ObjectiveIndex");
-            GameManager.Instance.cfScript.RevealObjective(index);
+            caseFile.RevealObjective(index);
         }
 
         private void ShowInstructions()
@@ -160,20 +162,6 @@ namespace DialogNodeBasedSystem.Scripts
             instructionManager?.ShowInstructions();
         }
 
-         public void WaitForJournal()
-        {
-            characterManager.HideLRCharacters();
-            characterManager.HideMCharacter();
-
-            GameManager.Instance.WaitForJournal();
-        }
-
-        public void OnJournalClosed()
-        {
-            characterManager.ShowLRCharacters();
-            characterManager.ShowMCharacter();
-
-        }
         public void PlayAnimation() => StartCoroutine(PlayAnimationRoutine());
         private IEnumerator PlayAnimationRoutine()
         {
@@ -186,19 +174,18 @@ namespace DialogNodeBasedSystem.Scripts
             dayTimeUI.SetActive(true);
             dayTimeAnimation.Play();
 
-            double videoDuration = dayTimeAnimation.clip != null ? dayTimeAnimation.clip.length : waitTime;
-            yield return new WaitForSeconds((float)videoDuration);
+            yield return new WaitForSecondsRealtime(waitTime);
 
             dayTimeUI.SetActive(false);
 
             if (fade != null)
             {
                 fade.SetActive(true);
-                yield return new WaitForSeconds(fadeDuration);
+                yield return new WaitForSecondsRealtime(waitTime);
                 fade.SetActive(false);
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
             if (dialogGraph != null)
                 dialogBehaviour.StartDialog(dialogGraph[dialogGraphIndex + 1]);
         }

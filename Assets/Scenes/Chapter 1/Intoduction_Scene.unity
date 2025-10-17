@@ -173,7 +173,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 0
-  m_AspectRatio: 2
+  m_AspectRatio: 3
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -227,7 +227,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -80, y: 26.270004}
+  m_AnchoredPosition: {x: -80, y: 26.27002}
   m_SizeDelta: {x: 160, y: 52.54001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &365122744
@@ -345,7 +345,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 111792842}
-  m_Father: {fileID: 426253289}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IntroductionAnimationScriipt
   waitTime: 120
   skipButton_waitTime: 2
-  SceneIndex: 6
+  SceneIndex: 4
   skipButton: {fileID: 365122744}
 --- !u!1 &426253286
 GameObject:
@@ -520,8 +520,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 385139853}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1119978784
@@ -598,3 +597,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 426253289}
   - {fileID: 1119978787}
+  - {fileID: 385139853}

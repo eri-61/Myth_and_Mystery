@@ -105,9 +105,6 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(ItemData newItem)
     {
-        newItem.inInventory = true;
-
-        // Refresh the UI for this chapter
-        LoadChapterItems(GameManager.Instance.GetCurrentChapterItems());
+     // add code later
     }
 }

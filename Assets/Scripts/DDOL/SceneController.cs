@@ -78,17 +78,4 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    //for map
-    /*public void OpenMapOverlay()
-    {
-        if (MapManager.Instance != null)
-        {
-            MapManager.Instance.ShowMap();
-        }
-        else
-        {
-            Debug.LogWarning("MapManager not found in scene!");
-        }
-    }*/
-
 }

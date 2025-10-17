@@ -24,6 +24,7 @@ public class InvestigationScene : MonoBehaviour
     [Header ("Panels")]
     [SerializeField] private GameObject mapPanel;
     [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private GameObject journalPanel;
     [SerializeField] private GameObject settingsPanel;
 
     [Header("UI Elements")]
@@ -44,6 +45,10 @@ public class InvestigationScene : MonoBehaviour
     [Header("Items & Clues (Match by Index)")]
     public ItemData[] items;
     public CluesData[] clues;
+
+    [Header("Items & Clues script")]
+    [SerializeField] private CluesScript CluesScript;
+    [SerializeField] private InventoryManager inventoryManager;
 
     private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
 
@@ -172,12 +177,12 @@ public class InvestigationScene : MonoBehaviour
 
     void AddClueToJournal(CluesData clue)
     {
-        GameManager.Instance.cluesScript.AddClues(clue);
+        CluesScript.AddClues(clue);
     }
 
     void AddToInventory(ItemData newItem)
     {
-        GameManager.Instance.AddItem(newItem);
+        inventoryManager.AddItem(newItem);
     }
 
     IEnumerator HideDialog(float delay)
@@ -188,8 +193,7 @@ public class InvestigationScene : MonoBehaviour
 
     void openJournal()
     {
-        int journalIndex = GameManager.Instance.GetJournalSceneIndex();
-        SceneController.Instance.LoadAdditiveScene(journalIndex);
+        journalPanel.SetActive(true);
     }
 
     void openInventory()
