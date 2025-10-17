@@ -52,10 +52,10 @@ public class VisualNovelScript : MonoBehaviour
     IEnumerator LoadAndHidePanels()
     {
         yield return new WaitForSecondsRealtime(0.5f);
-        menuPanel.SetActive(false);
-        mapPanel.SetActive(false);
-        journalPanel.SetActive(false);
-        inventoryPanel.SetActive(false);
+        menuPanel?.SetActive(false);
+        mapPanel?.SetActive(false);
+        journalPanel?.SetActive(false);
+        inventoryPanel?.SetActive(false);
     }
 
     void OnEnable()

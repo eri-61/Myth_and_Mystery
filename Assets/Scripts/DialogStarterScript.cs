@@ -129,8 +129,7 @@ namespace DialogNodeBasedSystem.Scripts
 
             gUI?.SetActive(true);
 
-            var graph = dialogGraph[dialogGraphIndex];
-            dialogBehaviour.StartDialog(graph);
+            dialogBehaviour.StartDialog(dialogGraph[dialogGraphIndex]);
         }
 
 
