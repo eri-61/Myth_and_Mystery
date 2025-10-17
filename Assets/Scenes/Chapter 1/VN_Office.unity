@@ -380,7 +380,7 @@ MonoBehaviour:
   playDayIntro: 1
   dayTimeAnimation: {fileID: 432447792}
   dayTimeUI: {fileID: 432447790}
-  clip: {fileID: 0}
+  clip: {fileID: 32900000, guid: 580c5f7e5bfa13f4da65cd5f7745d673, type: 3}
   sceneIndex: 5
   fadeDuration: 5
   waitTime: 8
@@ -410,7 +410,7 @@ MonoBehaviour:
   journalBtn: {fileID: 5013000283534847043}
   mapBtn: {fileID: 6218139149831994722}
   instructionsPanel: {fileID: 0}
-  uiPanel: {fileID: 1977854557}
+  uiPanel: {fileID: 7960805800298423709}
   closeInv: {fileID: 474863508}
   closeMap: {fileID: 1805348040}
   closeMenu: {fileID: 530193144}
@@ -1321,10 +1321,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25b15073b0279d4caae9b679f57abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  persistentObjects: {fileID: 0}
-  cfScript: {fileID: 0}
-  cluesScript: {fileID: 0}
-  creaturesScript: {fileID: 0}
+  persistentObjects: {fileID: 1430927057}
+  cfScript: {fileID: 1243348667}
+  cluesScript: {fileID: 1243348666}
+  creaturesScript: {fileID: 1243348665}
 --- !u!4 &804732801
 Transform:
   m_ObjectHideFlags: 0
@@ -3731,7 +3731,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3548571772673079312, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
   m_PrefabInstance: {fileID: 7960805800298423707}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7960805800298423709}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54577d38420c01d44a9b28330b6a8517, type: 3}
@@ -4249,6 +4249,11 @@ PrefabInstance:
 --- !u!1 &7960805800298423708 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5506715835612498419, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
+  m_PrefabInstance: {fileID: 7960805800298423707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7960805800298423709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8188437571067782234, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
   m_PrefabInstance: {fileID: 7960805800298423707}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7986730708166246648 stripped

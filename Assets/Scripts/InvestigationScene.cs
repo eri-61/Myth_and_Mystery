@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 
 public class InvestigationScene : MonoBehaviour
 {
@@ -11,17 +12,17 @@ public class InvestigationScene : MonoBehaviour
     [SerializeField] private Button talk;
     [SerializeField] private Button investigate;
 
-    [Header ("Main Buttons")]
+    [Header("Main Buttons")]
     [SerializeField] private Button mapButton;
     [SerializeField] private Button journalButton;
     [SerializeField] private Button inventoryButton;
     [SerializeField] private Button settingsButton;
 
-    [Header ("Back Button")]
+    [Header("Back Button")]
     [SerializeField] private Button backButton;
     [SerializeField] private GameObject back;
 
-    [Header ("Panels")]
+    [Header("Panels")]
     [SerializeField] private GameObject mapPanel;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject journalPanel;
@@ -119,7 +120,7 @@ public class InvestigationScene : MonoBehaviour
     {
         back.SetActive(false);
         investigationButtons.SetActive(false);
-        
+
         buttons.SetActive(true);
         character.SetActive(characterExists);
 
@@ -175,16 +176,6 @@ public class InvestigationScene : MonoBehaviour
         StartCoroutine(HideDialog(dialogHide));
     }
 
-    void AddClueToJournal(CluesData clue)
-    {
-        CluesScript.AddClues(clue);
-    }
-
-    void AddToInventory(ItemData newItem)
-    {
-        inventoryManager.AddItem(newItem);
-    }
-
     IEnumerator HideDialog(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -224,5 +215,47 @@ public class InvestigationScene : MonoBehaviour
     void CloseMenu()
     {
         PersistentObjects.instance.CloseSettings();
+    }
+    void AddClueToJournal(CluesData clue)
+    {
+        if (clue == null)
+        {
+            Debug.LogWarning("[InvestigationScene] AddClueToJournal called with null clue.");
+            return;
+        }
+
+        if (CluesScript != null)
+        {
+            GameManager.Instance.cluesScript.AddClues(clue);
+            Debug.Log($"[InvestigationScene] Added clue: {clue.clueName}");
+        }
+        else
+        {
+            Debug.LogWarning("[InvestigationScene] CluesScript reference is not set in the Inspector.");
+        }
+    }
+
+    void AddToInventory(ItemData newItem)
+    {
+        if (newItem == null)
+        {
+            Debug.LogWarning("[InvestigationScene] AddToInventory called with null item.");
+            return;
+        }
+
+        if (inventoryManager != null)
+        {
+            inventoryManager.AddItem(newItem);
+            Debug.Log($"[InvestigationScene] Added item via serialized ref: {newItem.itemName}");
+        }
+        else if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.AddItem(newItem);
+            Debug.Log($"[InvestigationScene] Added item via InventoryManager.Instance: {newItem.itemName}");
+        }
+        else
+        {
+            Debug.LogWarning("[InvestigationScene] No InventoryManager found. Assign one in the Inspector or ensure InventoryManager.Instance exists.");
+        }
     }
 }

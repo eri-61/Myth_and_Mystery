@@ -15,8 +15,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 5028.6094
-    y: 295.89984
+    x: -3494.5906
+    y: 117.49988
     width: 190
     height: 155
   IsDragging: 1
@@ -48,8 +48,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4859.802
-    y: 579.099
+    x: -3663.3997
+    y: 400.69894
     width: 190
     height: 80
   IsDragging: 1
@@ -74,8 +74,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2170.1948
-    y: 318.2998
+    x: -6353.006
+    y: 139.89983
     width: 190
     height: 155
   IsDragging: 1
@@ -106,8 +106,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 251.78632
-    y: 151.90024
+    x: -8271.415
+    y: -26.499695
     width: 190
     height: 155
   IsDragging: 1
@@ -119,6 +119,38 @@ MonoBehaviour:
   ParentNodes:
   - {fileID: 2602364130423617034}
   ChildNode: {fileID: 9067649438904816418}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-7136443120775984408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -929.6
+    y: 119.60004
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_flustered_right_o4
+    Text: ...
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: 145102349331669546}
+  ChildNode: {fileID: -3491114585801003548}
   _isExternalFunc: 1
   _externalFunctionName: changeSprite
   CharacterNameKey: 
@@ -138,8 +170,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3604.5977
-    y: 320.6999
+    x: -4918.6045
+    y: 142.29991
     width: 190
     height: 155
   IsDragging: 1
@@ -170,8 +202,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1818.1978
-    y: 142.30014
+    x: -6705.003
+    y: -36.099792
     width: 190
     height: 80
   IsDragging: 1
@@ -196,8 +228,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3646.9985
-    y: 198.29984
+    x: -4876.204
+    y: 19.899902
     width: 190
     height: 80
   IsDragging: 1
@@ -222,8 +254,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2970.1982
-    y: 315.8998
+    x: -5553.004
+    y: 137.49983
     width: 190
     height: 155
   IsDragging: 1
@@ -255,8 +287,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3975.8008
-    y: 499.8992
+    x: -4547.4023
+    y: 321.49908
     width: 190
     height: 80
   IsDragging: 1
@@ -281,8 +313,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 29.397797
-    y: 147.09995
+    x: -8493.802
+    y: -31.299988
     width: 190
     height: 155
   IsDragging: 1
@@ -312,8 +344,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1546.9902
-    y: 298.29984
+    x: -6976.21
+    y: 119.89987
     width: 190
     height: 155
   IsDragging: 1
@@ -344,8 +376,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2613.3994
-    y: 185.50029
+    x: -5909.802
+    y: 7.100342
     width: 190
     height: 80
   IsDragging: 1
@@ -355,6 +387,64 @@ MonoBehaviour:
   ParentNodes:
   - {fileID: 1025891452837913848}
   ChildNode: {fileID: 4535136358306902114}
+--- !u!114 &-5062512840086303718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -1576.8
+    y: 122.00003
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_smiling_right_o4
+    Text: I did!
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: 94823593417928074}
+  ChildNode: {fileID: 6917700822078099825}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-4507831430235846039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
+  m_Name: External Function Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -2202.4001
+    y: 155.59999
+    width: 190
+    height: 80
+  IsDragging: 1
+  IsSelected: 0
+  _functionName: hideM
+  _description: 
+  ParentNodes:
+  - {fileID: -89771292456940038}
+  ChildNode: {fileID: -3194203433666162324}
 --- !u!114 &-3825093147562893319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,8 +460,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2368.5947
-    y: 317.49976
+    x: -6154.6064
+    y: 139.09978
     width: 190
     height: 155
   IsDragging: 1
@@ -383,6 +473,38 @@ MonoBehaviour:
   ParentNodes:
   - {fileID: -7855430475066297181}
   ChildNode: {fileID: 1025891452837913848}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-3491114585801003548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -726.39996
+    y: 120.399956
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_pout_right_o4
+    Text: 'I see you also did a good job cleaning the place. '
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: -7136443120775984408}
+  ChildNode: {fileID: 3030982552905270613}
   _isExternalFunc: 1
   _externalFunctionName: changeSprite
   CharacterNameKey: 
@@ -402,8 +524,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4407.002
-    y: 315.09988
+    x: -4116.2007
+    y: 136.6999
     width: 190
     height: 155
   IsDragging: 1
@@ -434,8 +556,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4632.5996
-    y: 560.69934
+    x: -3890.6018
+    y: 382.29932
     width: 210
     height: 155
   IsDragging: 1
@@ -449,6 +571,32 @@ MonoBehaviour:
   ParentNodes:
   - {fileID: -3041024724311729147}
   ChildNode: {fileID: -8395962226440592209}
+--- !u!114 &-3194203433666162324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
+  m_Name: External Function Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -2013.6001
+    y: 155.59999
+    width: 190
+    height: 80
+  IsDragging: 1
+  IsSelected: 0
+  _functionName: show
+  _description: 
+  ParentNodes:
+  - {fileID: -4507831430235846039}
+  ChildNode: {fileID: 94823593417928074}
 --- !u!114 &-3094813963063920313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,8 +612,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1143.7866
-    y: 17.499908
+    x: -7379.415
+    y: -160.90002
     width: 190
     height: 155
   IsDragging: 1
@@ -496,8 +644,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4395.798
-    y: 621.4989
+    x: -4127.405
+    y: 443.09897
     width: 190
     height: 80
   IsDragging: 1
@@ -522,8 +670,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3166.1968
-    y: 319.89996
+    x: -5357.005
+    y: 141.49998
     width: 190
     height: 155
   IsDragging: 1
@@ -555,8 +703,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4215.802
-    y: 322.3
+    x: -4307.4014
+    y: 143.90001
     width: 190
     height: 155
   IsDragging: 1
@@ -587,8 +735,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4021.4004
-    y: 110.29996
+    x: -4501.802
+    y: -68.099976
     width: 190
     height: 80
   IsDragging: 1
@@ -598,6 +746,122 @@ MonoBehaviour:
   ParentNodes:
   - {fileID: 1822516025426321095}
   ChildNode: {fileID: 454017593297128676}
+--- !u!114 &-1159047299424628311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
+  m_Name: External Function Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -77.600006
+    y: 163.6
+    width: 190
+    height: 80
+  IsDragging: 1
+  IsSelected: 0
+  _functionName: updateJournal
+  _description: 
+  ParentNodes:
+  - {fileID: -1053548613021839013}
+  ChildNode: {fileID: 3129510146300389799}
+--- !u!114 &-1053548613021839013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -300.79996
+    y: 127.599945
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_neutral_right_o4
+    Text: Check your journal.
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: 3030982552905270613}
+  ChildNode: {fileID: -1159047299424628311}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-165761211946839104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
+  m_Name: External Function Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 554.4
+    y: 148.40002
+    width: 190
+    height: 80
+  IsDragging: 1
+  IsSelected: 1
+  _functionName: laodNext
+  _description: 
+  ParentNodes:
+  - {fileID: 4649911120252285205}
+  ChildNode: {fileID: 0}
+--- !u!114 &-89771292456940038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -2417.6003
+    y: 119.600006
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier_smiling_middle_o4
+    Text: Welcome back.
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: 1310928331513870069}
+  ChildNode: {fileID: -4507831430235846039}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,12 +924,93 @@ MonoBehaviour:
   - {fileID: -3310724690434508593}
   - {fileID: 5238123641704679709}
   - {fileID: 2602364130423617034}
+  - {fileID: 1310928331513870069}
+  - {fileID: 2130233922770704603}
+  - {fileID: -89771292456940038}
+  - {fileID: 94823593417928074}
+  - {fileID: -4507831430235846039}
+  - {fileID: -3194203433666162324}
+  - {fileID: -5062512840086303718}
+  - {fileID: 6917700822078099825}
+  - {fileID: 145102349331669546}
+  - {fileID: -7136443120775984408}
+  - {fileID: -3491114585801003548}
+  - {fileID: 3030982552905270613}
+  - {fileID: -1053548613021839013}
+  - {fileID: -1159047299424628311}
+  - {fileID: 3129510146300389799}
+  - {fileID: 4649911120252285205}
+  - {fileID: -165761211946839104}
   VariablesConfig: {fileID: 11400000, guid: 0829b9f03ae4c74438213d44ce83a2e1, type: 2}
   _localizationTableName: 
   _characterNamesLocalizationName: 
   NodeToDrawLineFrom: {fileID: 0}
   LinePosition: {x: 0, y: 0}
   IsLocalizationSetUp: 0
+--- !u!114 &94823593417928074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -1775.2004
+    y: 114.80005
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier_serious_left_o4
+    Text: Did you get the tickets?
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: -3194203433666162324}
+  ChildNode: {fileID: -5062512840086303718}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &145102349331669546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -1140.8
+    y: 114.80005
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier_smiling_left_o4
+    Text: Good job.
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: 6917700822078099825}
+  ChildNode: {fileID: -7136443120775984408}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
 --- !u!114 &454017593297128676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,8 +1026,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4020.6025
-    y: 312.69986
+    x: -4502.5996
+    y: 134.2999
     width: 190
     height: 155
   IsDragging: 1
@@ -714,8 +1059,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2030.1985
-    y: 139.90012
+    x: -6493.002
+    y: -38.499817
     width: 190
     height: 80
   IsDragging: 1
@@ -740,8 +1085,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4617.4023
-    y: 313.4999
+    x: -3905.799
+    y: 135.09995
     width: 190
     height: 155
   IsDragging: 1
@@ -772,8 +1117,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 5227.009
-    y: 304.69995
+    x: -3296.1902
+    y: 125.49997
     width: 190
     height: 155
   IsDragging: 1
@@ -804,8 +1149,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2562.9956
-    y: 321.49988
+    x: -5960.206
+    y: 143.0999
     width: 190
     height: 155
   IsDragging: 1
@@ -817,6 +1162,38 @@ MonoBehaviour:
   ParentNodes:
   - {fileID: -3825093147562893319}
   ChildNode: {fileID: -5212768245674441284}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &1310928331513870069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -2634.4001
+    y: 119.600006
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_smiling_middle_o3
+    Text: I'm bacl!
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: 2130233922770704603}
+  ChildNode: {fileID: -89771292456940038}
   _isExternalFunc: 1
   _externalFunctionName: changeSprite
   CharacterNameKey: 
@@ -836,8 +1213,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3874.9983
-    y: 186.30022
+    x: -4648.204
+    y: 7.9002686
     width: 190
     height: 80
   IsDragging: 1
@@ -862,17 +1239,43 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 5443.8066
-    y: 330.30038
+    x: -3092.991
+    y: 161.50041
     width: 190
     height: 80
   IsDragging: 1
   IsSelected: 0
-  _functionName: loadNext
+  _functionName: hide
   _description: 
   ParentNodes:
   - {fileID: 721915090467518990}
-  ChildNode: {fileID: 0}
+  ChildNode: {fileID: 2130233922770704603}
+--- !u!114 &2130233922770704603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
+  m_Name: External Function Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -2861.6003
+    y: 150.79997
+    width: 190
+    height: 80
+  IsDragging: 1
+  IsSelected: 0
+  _functionName: loadAnimation
+  _description: 
+  ParentNodes:
+  - {fileID: 1921923907782483021}
+  ChildNode: {fileID: 1310928331513870069}
 --- !u!114 &2271584011467382156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,8 +1291,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 929.3894
-    y: 19.89981
+    x: -7593.8115
+    y: -158.50012
     width: 190
     height: 155
   IsDragging: 1
@@ -920,8 +1323,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 163.99765
-    y: 33.1998
+    x: -8359.202
+    y: -145.20013
     width: 190
     height: 80
   IsDragging: 1
@@ -931,6 +1334,71 @@ MonoBehaviour:
   ParentNodes:
   - {fileID: -5741906668632469825}
   ChildNode: {fileID: -7783975010145417165}
+--- !u!114 &3030982552905270613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -516.8
+    y: 122.79999
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_pensive_right_o4
+    Text: We should double check the case file before we go.
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: -3491114585801003548}
+  ChildNode: {fileID: -1053548613021839013}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &3129510146300389799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 144.79999
+    y: 126.800026
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier_serious_left_o4
+    Text: According to the Case File, we need to go to Cagayan de Oro to investigate
+      why Cassie and her friends went missing.
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: -1159047299424628311}
+  ChildNode: {fileID: 4649911120252285205}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
 --- !u!114 &3346958784832500946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,8 +1414,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3385.3965
-    y: 319.09985
+    x: -5137.8057
+    y: 140.69987
     width: 190
     height: 155
   IsDragging: 1
@@ -978,8 +1446,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1971.7942
-    y: 313.4999
+    x: -6551.4062
+    y: 135.09995
     width: 190
     height: 155
   IsDragging: 1
@@ -1010,12 +1478,12 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4193.4014
-    y: 496.70035
+    x: -4329.802
+    y: 318.30023
     width: 190
     height: 80
   IsDragging: 1
-  IsSelected: 1
+  IsSelected: 0
   _functionName: show
   _description: 
   ParentNodes:
@@ -1036,8 +1504,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1347.7927
-    y: 7.099884
+    x: -7175.408
+    y: -171.30005
     width: 190
     height: 155
   IsDragging: 1
@@ -1069,8 +1537,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2842.999
-    y: 197.49991
+    x: -5680.202
+    y: 19.099976
     width: 190
     height: 80
   IsDragging: 1
@@ -1080,6 +1548,39 @@ MonoBehaviour:
   ParentNodes:
   - {fileID: -5212768245674441284}
   ChildNode: {fileID: 4684888937745359150}
+--- !u!114 &4649911120252285205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 340.8001
+    y: 122.00004
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_pensive_right_o4
+    Text: "Then let\u2019s get ready. We\u2019ll head to Cagayan de Oro and start
+      our investigation at the campsite."
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: 3129510146300389799}
+  ChildNode: {fileID: -165761211946839104}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
 --- !u!114 &4684888937745359150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,8 +1596,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 2770.999
-    y: 313.49985
+    x: -5752.202
+    y: 135.09988
     width: 190
     height: 155
   IsDragging: 1
@@ -1128,8 +1629,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4390.998
-    y: 528.69995
+    x: -4132.2046
+    y: 350.29993
     width: 190
     height: 80
   IsDragging: 1
@@ -1154,8 +1655,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4620.802
-    y: 172.39977
+    x: -3902.3997
+    y: -6.000183
     width: 190
     height: 80
   IsDragging: 1
@@ -1180,8 +1681,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4834.202
-    y: 167.90031
+    x: -3688.9993
+    y: -10.499634
     width: 190
     height: 80
   IsDragging: 1
@@ -1206,8 +1707,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1356.593
-    y: 314.29996
+    x: -7166.6084
+    y: 135.89998
     width: 190
     height: 135
   IsDragging: 1
@@ -1239,8 +1740,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3446.996
-    y: 199.10025
+    x: -5076.206
+    y: 20.700317
     width: 190
     height: 80
   IsDragging: 1
@@ -1265,8 +1766,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1784.592
-    y: 319.1001
+    x: -6738.6084
+    y: 140.70012
     width: 190
     height: 155
   IsDragging: 1
@@ -1297,8 +1798,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 701.3859
-    y: 159.0999
+    x: -7821.8154
+    y: -19.300049
     width: 190
     height: 135
   IsDragging: 1
@@ -1312,6 +1813,38 @@ MonoBehaviour:
   ChildNodes:
   - {fileID: 2271584011467382156}
   - {fileID: 9220332022055496356}
+--- !u!114 &6917700822078099825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -1375.2
+    y: 122.00006
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_smug_right_o4
+    Text: Here are two freshly bought tickets to Cagayan de Oro
+    CharacterSprite: {fileID: 1722161700555090276, guid: 764d7979c9a20bf4ca9d53a3400d144e, type: 3}
+  ParentNodes:
+  - {fileID: -5062512840086303718}
+  ChildNode: {fileID: 145102349331669546}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
 --- !u!114 &7231830117809149030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,8 +1860,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1551.7976
-    y: 475.8996
+    x: -6971.4023
+    y: 297.4995
     width: 190
     height: 155
   IsDragging: 1
@@ -1359,8 +1892,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 4828.6064
-    y: 291.0999
+    x: -3694.595
+    y: 112.69995
     width: 190
     height: 155
   IsDragging: 1
@@ -1391,8 +1924,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1780.5955
-    y: 512.6996
+    x: -6742.6045
+    y: 334.2995
     width: 190
     height: 80
   IsDragging: 1
@@ -1417,8 +1950,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 1143.7866
-    y: 319.09998
+    x: -7379.415
+    y: 140.7
     width: 190
     height: 155
   IsDragging: 1
@@ -1450,8 +1983,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 3825.3987
-    y: 323.0999
+    x: -4697.8047
+    y: 144.69994
     width: 190
     height: 155
   IsDragging: 1
@@ -1482,8 +2015,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 497.39142
-    y: 150.30008
+    x: -8025.8096
+    y: -28.099854
     width: 190
     height: 155
   IsDragging: 1
@@ -1514,8 +2047,8 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: 936.5886
-    y: 319.89996
+    x: -7586.6123
+    y: 141.49998
     width: 190
     height: 155
   IsDragging: 1
