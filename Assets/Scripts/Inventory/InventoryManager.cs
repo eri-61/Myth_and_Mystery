@@ -34,24 +34,16 @@ public class InventoryManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        close.onClick.AddListener(() => gameObject.SetActive(false));
+        close.onClick.AddListener(CloseInv);
         useItem.onClick.AddListener(OnUseItem);
     }
 
-    public void LoadChapterItems(List<ItemData> items)
+    private void OnDisable()
     {
-        currentItems.Clear();
-
-        // Only include items that are inInventory
-        foreach (var item in items)
-        {
-            if (item.inInventory)
-                currentItems.Add(item);
-        }
-
-        LoadInventoryUI();
+        close.onClick.RemoveAllListeners();
+        useItem.onClick.RemoveAllListeners();
     }
 
     private void LoadInventoryUI()
@@ -125,5 +117,11 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Log($"[InventoryManager] Added item: {newItem.itemName}");
     }
+
+    void CloseInv()
+    {
+        PersistentObjects.instance.CloseInventory();
+    }
+
 
 }
