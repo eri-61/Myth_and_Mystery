@@ -36,7 +36,7 @@ public class InvestigationScene : MonoBehaviour
     [Header("Settings")]
     public bool characterExists = true;
     public int talkSceneIndex = 2;
-    public float dialogHide = 0.5f;
+    public float dialogHide = 0.05f;
 
     [Header("Investigation Points")]
     public GameObject investigationButtons;
