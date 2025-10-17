@@ -1,14 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
+
     #region Variables
     public static GameManager Instance;
+    public PersistentObjects persistentObjects;
 
-    [Header("Persistent Objects")]
-    public GameObject[] persistentObjects;
+    public CaseFileScript cfScript;
+    public CluesScript cluesScript;
+    public CreaturesScript creaturesScript;
 
     #endregion
 
@@ -23,29 +27,28 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            MarkPersistentObjects();
+            DontDestroyOnLoad(persistentObjects.gameObject);
         }
-    }
-
-    private void MarkPersistentObjects()
-    {
-        foreach (GameObject obj in persistentObjects)
-        {
-            if (obj != null)
-            {
-                DontDestroyOnLoad(obj);
-            }
-        }
-
     }
 
     private void CleanUpAndDestroy()
     {
-        foreach(GameObject obj in persistentObjects)
-        {
-            Destroy(obj);
-        }
-
+        Destroy(persistentObjects.gameObject);
         Destroy(gameObject);
+    }
+
+    public void RegitsterCaseFile(CaseFileScript file)
+    {
+        cfScript = file;
+    }
+
+    public void RegisterClues(CluesScript clues)
+    {
+        cluesScript = clues;
+    } 
+
+    public void RegisterCreatures(CreaturesScript creatures)
+    {
+        creaturesScript = creatures;
     }
 }

@@ -81,10 +81,10 @@ public class InvestigationScene : MonoBehaviour
         talk.onClick.AddListener(TalkToCharacter);
         investigate.onClick.AddListener(StartInvestigation);
 
-        journalButton.onClick.AddListener(openJournal);
-        mapButton.onClick.AddListener(openMap);
-        settingsButton.onClick.AddListener(openSettings);
-        inventoryButton.onClick.AddListener(openInventory);
+        journalButton.onClick.AddListener(OpenJournal);
+        mapButton.onClick.AddListener(OpenMap);
+        settingsButton.onClick.AddListener(OpenMenu);
+        inventoryButton.onClick.AddListener(OpenInventory);
 
     }
 
@@ -191,23 +191,38 @@ public class InvestigationScene : MonoBehaviour
         dialogPanel.SetActive(false);
     }
 
-    void openJournal()
+    void OpenInventory()
     {
-        journalPanel.SetActive(true);
+        PersistentObjects.instance.OpenInventory();
     }
 
-    void openInventory()
+    void OpenMenu()
     {
-        inventoryPanel.SetActive(true);
+        PersistentObjects.instance.OpenSettings();
     }
 
-    void openSettings()
+    void OpenJournal()
     {
-        settingsPanel.SetActive(true);
+        PersistentObjects.instance.OpenJournal();
     }
 
-    void openMap()
+    void OpenMap()
     {
-        //MapManager.Instance.ShowMap();
+        PersistentObjects.instance.OpenMap();
+    }
+
+    void CloseInv()
+    {
+        PersistentObjects.instance.CloseInventory();
+    }
+
+    void CloseMap()
+    {
+        PersistentObjects.instance.CloseMap();
+    }
+
+    void CloseMenu()
+    {
+        PersistentObjects.instance.CloseSettings();
     }
 }

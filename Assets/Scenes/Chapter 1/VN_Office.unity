@@ -194,6 +194,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2925978756984485777, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
   m_PrefabInstance: {fileID: 1243348660}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &83127880 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 296406240037259119, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
+  m_PrefabInstance: {fileID: 1805348038}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &95059108
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,11 +412,7 @@ MonoBehaviour:
   menuBtn: {fileID: 7986730708166246648}
   journalBtn: {fileID: 5013000283534847043}
   mapBtn: {fileID: 6218139149831994722}
-  inventoryPanel: {fileID: 474863509}
-  menuPanel: {fileID: 530193145}
-  journalPanel: {fileID: 1243348662}
   instructionsPanel: {fileID: 0}
-  mapPanel: {fileID: 1805348041}
   uiPanel: {fileID: 1977854557}
   closeInv: {fileID: 474863508}
   closeMap: {fileID: 1805348040}
@@ -421,11 +428,11 @@ Transform:
   m_GameObject: {fileID: 124345818}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3138.4622}
+  m_LocalScale: {x: 18.461544, y: 18.461544, z: 18.461544}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 588850210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &147438367
 MonoBehaviour:
@@ -794,12 +801,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 457443305}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3138.4612}
+  m_LocalScale: {x: 18.46154, y: 18.46154, z: 18.46154}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 588850210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &474863508 stripped
 MonoBehaviour:
@@ -1252,9 +1259,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 124345821}
   - {fileID: 1404634637}
   - {fileID: 1977854558}
   - {fileID: 389216107}
+  - {fileID: 457443308}
+  - {fileID: 1378422971}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1313,8 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25b15073b0279d4caae9b679f57abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  persistentObjects:
-  - {fileID: 1430927051}
+  persistentObjects: {fileID: 0}
 --- !u!4 &804732801
 Transform:
   m_ObjectHideFlags: 0
@@ -2854,8 +2863,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1378422971}
   - component: {fileID: 1378422974}
-  - component: {fileID: 1378422973}
-  - component: {fileID: 1378422972}
   m_Layer: 6
   m_Name: Animation
   m_TagString: Untagged
@@ -2870,61 +2877,21 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378422970}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.78446466, y: 0.78446466, z: 0.78446466}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1458244075}
   - {fileID: 432447791}
   - {fileID: 95059109}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 588850210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!114 &1378422972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378422970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &1378422973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378422970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_AnchoredPosition: {x: 400, y: 184.61542}
+  m_SizeDelta: {x: 1019.8039, y: 470.67874}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1378422974
 Canvas:
   m_ObjectHideFlags: 0
@@ -2939,7 +2906,7 @@ Canvas:
   m_PlaneDistance: 10
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
@@ -3079,6 +3046,9 @@ GameObject:
   - component: {fileID: 1430927055}
   - component: {fileID: 1430927054}
   - component: {fileID: 1430927053}
+  - component: {fileID: 1430927056}
+  - component: {fileID: 1430927057}
+  - component: {fileID: 1430927058}
   m_Layer: 6
   m_Name: Panels
   m_TagString: Untagged
@@ -3172,6 +3142,57 @@ Canvas:
   m_SortingLayerID: 1778214791
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1430927056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430927051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &1430927057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430927051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778d5c2b8099fbf4f8df633026a3528f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersistentObjects
+  inventoryPanel: {fileID: 474863509}
+  journalPanel: {fileID: 1243348662}
+  menuPanel: {fileID: 530193145}
+  mapPanel: {fileID: 1805348041}
+--- !u!114 &1430927058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430927051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.StandaloneInputModule
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!114 &1434355510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3454,6 +3475,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e275d4d7fc5336b429c36f80057fe567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapManager
+  mainMap: {fileID: 1805348041}
+  closeButton: {fileID: 1805348040}
+  locations:
+  - Name: Campsite
+    mainLocation: {fileID: 1805348044}
+    mainSceneIndex: 7
+    associatedBackground: {fileID: 11400000, guid: 93697fc221f61c349bc9b9bc1a65b2a2, type: 2}
+  - Name: Tent
+    mainLocation: {fileID: 83127880}
+    mainSceneIndex: 6
+    associatedBackground: {fileID: 11400000, guid: 42b606896ea17a945a47b7375732ad0f, type: 2}
+  - Name: Forest
+    mainLocation: {fileID: 1805348043}
+    mainSceneIndex: 13
+    associatedBackground: {fileID: 11400000, guid: 90abc6ed2265bfd4cbee905ca6777fc8, type: 2}
+  - Name: Lambago
+    mainLocation: {fileID: 1805348042}
+    mainSceneIndex: 14
+    associatedBackground: {fileID: 11400000, guid: 7f84e3eb7eeb7804a9d57f720080530d, type: 2}
+  visitedLocations: 
 --- !u!4 &1746556327
 Transform:
   m_ObjectHideFlags: 0
@@ -3627,6 +3668,39 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 646055525918924520, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
   m_PrefabInstance: {fileID: 1805348038}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1805348042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8690847329428582833, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
+  m_PrefabInstance: {fileID: 1805348038}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &1805348043 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9126647613459419905, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
+  m_PrefabInstance: {fileID: 1805348038}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &1805348044 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3115898545678712470, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
+  m_PrefabInstance: {fileID: 1805348038}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!114 &1974468882 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1490527421305813562, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
@@ -4228,8 +4302,5 @@ SceneRoots:
   - {fileID: 1746556327}
   - {fileID: 532323603}
   - {fileID: 1578464212}
-  - {fileID: 457443308}
   - {fileID: 1211087584}
-  - {fileID: 124345821}
   - {fileID: 588850210}
-  - {fileID: 1378422971}

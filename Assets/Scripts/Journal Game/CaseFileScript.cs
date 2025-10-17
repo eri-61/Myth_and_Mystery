@@ -16,6 +16,10 @@ public class CaseFileScript : MonoBehaviour
     public ObjectiveData objectves;
     #endregion
 
+    private void Awake()
+    {
+        GameManager.Instance.RegitsterCaseFile(this);
+    }
     private void Start()
     {
         UpdateCaseFileUI();    

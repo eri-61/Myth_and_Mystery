@@ -29,7 +29,8 @@ public class CluesScript : MonoBehaviour
 
     void Awake()
     {
-        deductionButton.gameObject.SetActive(false); 
+        deductionButton.gameObject.SetActive(false);
+        GameManager.Instance.RegisterClues(this);
     }
 
     void OnEnable()

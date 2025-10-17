@@ -43,9 +43,6 @@ namespace DialogNodeBasedSystem.Scripts
         public float waitTime = 10f;
 
         [Header("Scripts and Data")]
-        [SerializeField] private CaseFileScript caseFile;
-        [SerializeField] private CluesScript clues;
-        [SerializeField] private CreaturesScript creatures;
         public TestimonyData testimonyData;
         public CreaturesData creature;
 
@@ -129,7 +126,7 @@ namespace DialogNodeBasedSystem.Scripts
 
             gUI?.SetActive(true);
 
-            dialogBehaviour.StartDialog(dialogGraph[dialogGraphIndex]);
+            dialogBehaviour.StartDialog(dialogGraph[0]);
         }
 
 
@@ -146,14 +143,14 @@ namespace DialogNodeBasedSystem.Scripts
 
         public void loadNextScene() => SceneController.Instance.LoadScene(sceneIndex);
 
-        public void addTestimony() => clues.addTestimony(testimonyData);
-        public void addCreatures() => creatures.AddCreature(creature);
-        public void updateJournal() => caseFile.UpdateCaseFileUI();
+        public void addTestimony() => GameManager.Instance.cluesScript.addTestimony(testimonyData);
+        public void addCreatures() => GameManager.Instance.creaturesScript.AddCreature(creature);
+        public void updateJournal() => GameManager.Instance.cfScript.UpdateCaseFileUI();
 
         public void RevealObjective()
         {
             int index = dialogBehaviour.VariablesHandler.GetVariableValue<int>("ObjectiveIndex");
-            caseFile.RevealObjective(index);
+            GameManager.Instance.cfScript.RevealObjective(index);
         }
 
         private void ShowInstructions()

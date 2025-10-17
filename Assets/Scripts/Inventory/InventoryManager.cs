@@ -5,12 +5,16 @@ using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
+    #region Variables
     public static InventoryManager Instance;
 
+    [Header("item detals")]
     public GameObject itemDetailsSection;
     public Image itemImage;
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI Description;
+
+    [Header("ui")]
     public Button[] slots;
     public Button close;
     public Button useItem;
@@ -18,6 +22,7 @@ public class InventoryManager : MonoBehaviour
 
     private List<ItemData> currentItems = new List<ItemData>();
     [HideInInspector] public ItemData selectedItem;
+    #endregion
 
     private void Awake()
     {
@@ -107,4 +112,5 @@ public class InventoryManager : MonoBehaviour
     {
      // add code later
     }
+
 }

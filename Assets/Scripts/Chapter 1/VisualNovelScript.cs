@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class VisualNovelScript : MonoBehaviour
 {
     #region Variables
@@ -26,11 +25,7 @@ public class VisualNovelScript : MonoBehaviour
     public Button mapBtn;
 
     [Header("Panels")]
-    public GameObject inventoryPanel;
-    public GameObject menuPanel;
-    public GameObject journalPanel;
     public GameObject instructionsPanel;
-    public GameObject mapPanel;
     public GameObject uiPanel;
 
     [Header("Close  Panels Button")]
@@ -42,20 +37,23 @@ public class VisualNovelScript : MonoBehaviour
     [Header("Variables")]
     bool isUIHidden = false;
     [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
+
     #endregion
 
-    private void Awake()
+    private void Start()
     {
         StartCoroutine(LoadAndHidePanels());
     }
 
     IEnumerator LoadAndHidePanels()
     {
+        var ui = GameManager.Instance.persistentObjects;
+
         yield return new WaitForSecondsRealtime(0.5f);
-        menuPanel?.SetActive(false);
-        mapPanel?.SetActive(false);
-        journalPanel?.SetActive(false);
-        inventoryPanel?.SetActive(false);
+        ui.menuPanel?.SetActive(false);
+        ui.mapPanel?.SetActive(false);
+        ui.journalPanel?.SetActive(false);
+        ui.inventoryPanel?.SetActive(false);
     }
 
     void OnEnable()
@@ -117,37 +115,37 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenInventory()
     {
-        inventoryPanel.SetActive(true);
+        PersistentObjects.instance.OpenInventory();
     }
 
     void OpenMenu()
     {
-        menuPanel.SetActive(true);
+        PersistentObjects.instance.OpenSettings();
     }
 
     void OpenJournal()
     {
-        journalPanel.SetActive(true);
+        PersistentObjects.instance.OpenJournal();
     }
 
     void OpenMap()
     {
-        //MapManager.Instance.ShowMap();   
+        PersistentObjects.instance.OpenMap();
     }
 
     void CloseInv()
     {
-        inventoryPanel.SetActive(false);
+        PersistentObjects.instance.CloseInventory();
     }
 
     void CloseMap()
     {
-        mapPanel.SetActive(false);
+        PersistentObjects.instance.CloseMap();
     }
 
     void CloseMenu()
     {
-        menuPanel.SetActive(false);
+        PersistentObjects.instance.CloseSettings();
     }
 
 }
