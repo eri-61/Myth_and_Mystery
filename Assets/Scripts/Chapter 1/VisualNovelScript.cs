@@ -42,18 +42,10 @@ public class VisualNovelScript : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LoadAndHidePanels());
-    }
-
-    IEnumerator LoadAndHidePanels()
-    {
-        var ui = GameManager.Instance.persistentObjects;
-
-        yield return new WaitForSecondsRealtime(0.5f);
-        ui.menuPanel?.SetActive(false);
-        ui.mapPanel?.SetActive(false);
-        ui.journalPanel?.SetActive(false);
-        ui.inventoryPanel?.SetActive(false);
+        PersistentObjects.instance.CloseInventory();
+        PersistentObjects.instance.CloseMap();
+        PersistentObjects.instance.CloseJournal();
+        PersistentObjects.instance.CloseSettings();
     }
 
     void OnEnable()

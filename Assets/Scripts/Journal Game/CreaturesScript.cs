@@ -56,10 +56,25 @@ public class CreaturesScript : MonoBehaviour
         if (index < 0 || index >= creatures.Count) return;
         var creature = creatures[index];
         creatureName.text = creature.name;
+        creatureDescription.text = creature.shortDescription;
+        creatureImage.sprite = creature.CreatureImage;
     }
 
     public void UpdateCreaturesUI()
     {
-
+        for (int i = 0; i < slots.Count; i++)
+        {
+            Image slotImage = slots[i].GetComponent<Image>();
+            if (i < creatures.Count && creatures[i] != null)
+            {
+                slotImage.sprite = creatures[i].CreatureIcon;
+                slots[i].interactable = true;
+            }
+            else
+            {
+                slotImage.sprite = null;
+                slots[i].interactable = false;
+            }
+        }
     }
 }

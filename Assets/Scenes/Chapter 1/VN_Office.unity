@@ -380,15 +380,12 @@ MonoBehaviour:
   playDayIntro: 1
   dayTimeAnimation: {fileID: 432447792}
   dayTimeUI: {fileID: 432447790}
-  clip: {fileID: 0}
+  clip: {fileID: 32900000, guid: 580c5f7e5bfa13f4da65cd5f7745d673, type: 3}
   sceneIndex: 5
   fadeDuration: 5
   waitTime: 8
-  caseFile: {fileID: 1243348667}
-  clues: {fileID: 1243348666}
-  creatures: {fileID: 1243348665}
   testimonyData: {fileID: 0}
-  creature: {fileID: 0}
+  creature: {fileID: 11400000, guid: e2c2322c80a291847bfd6b6264f7139d, type: 2}
   instructionManager: {fileID: 0}
 --- !u!114 &124345820
 MonoBehaviour:
@@ -413,7 +410,7 @@ MonoBehaviour:
   journalBtn: {fileID: 5013000283534847043}
   mapBtn: {fileID: 6218139149831994722}
   instructionsPanel: {fileID: 0}
-  uiPanel: {fileID: 1977854557}
+  uiPanel: {fileID: 7960805800298423709}
   closeInv: {fileID: 474863508}
   closeMap: {fileID: 1805348040}
   closeMenu: {fileID: 530193144}
@@ -802,7 +799,7 @@ Transform:
   m_GameObject: {fileID: 457443305}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3138.4612}
+  m_LocalPosition: {x: 0, y: 0, z: 3138.4617}
   m_LocalScale: {x: 18.46154, y: 18.46154, z: 18.46154}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1259,11 +1256,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 457443308}
+  - {fileID: 1578464212}
   - {fileID: 124345821}
   - {fileID: 1404634637}
   - {fileID: 1977854558}
   - {fileID: 389216107}
-  - {fileID: 457443308}
   - {fileID: 1378422971}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1323,7 +1321,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25b15073b0279d4caae9b679f57abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  persistentObjects: {fileID: 0}
+  persistentObjects: {fileID: 1430927057}
+  cfScript: {fileID: 1243348667}
+  cluesScript: {fileID: 1243348666}
+  creaturesScript: {fileID: 1243348665}
 --- !u!4 &804732801
 Transform:
   m_ObjectHideFlags: 0
@@ -1416,37 +1417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3510f065fdc9a40a6cd95e262e2cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Myth_Mystery.CharacterManager
---- !u!1 &1211087583
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1211087584}
-  m_Layer: 0
-  m_Name: =======
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1211087584
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211087583}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 223.06406}
-  m_LocalScale: {x: 2.3121417, y: 2.3121417, z: 2.3121417}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1239390893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2321,6 +2291,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -268
       objectReference: {fileID: 0}
+    - target: {fileID: 1951556626792137111, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
+      propertyPath: creatures.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951556626792137111, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
+      propertyPath: 'creatures.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 82a5e0e8a5835ea4da169c2f3d27f6f1, type: 2}
+    - target: {fileID: 1951556626792137111, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
+      propertyPath: 'creatures.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 40ab41d6575398843a9a6f250b363970, type: 2}
     - target: {fileID: 2475874124198522222, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -3047,8 +3029,8 @@ GameObject:
   - component: {fileID: 1430927054}
   - component: {fileID: 1430927053}
   - component: {fileID: 1430927056}
-  - component: {fileID: 1430927057}
   - component: {fileID: 1430927058}
+  - component: {fileID: 1430927057}
   m_Layer: 6
   m_Name: Panels
   m_TagString: Untagged
@@ -3440,11 +3422,11 @@ Transform:
   m_GameObject: {fileID: 1578464209}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -179.99997}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_LocalPosition: {x: 0, y: 0, z: -184.6154}
+  m_LocalScale: {x: 33.23077, y: 33.23077, z: 33.23077}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 588850210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1746556325
 GameObject:
@@ -3749,7 +3731,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3548571772673079312, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
   m_PrefabInstance: {fileID: 7960805800298423707}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7960805800298423709}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54577d38420c01d44a9b28330b6a8517, type: 3}
@@ -4269,6 +4251,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5506715835612498419, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
   m_PrefabInstance: {fileID: 7960805800298423707}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7960805800298423709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8188437571067782234, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
+  m_PrefabInstance: {fileID: 7960805800298423707}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7986730708166246648 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 546161775454034448, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
@@ -4301,6 +4288,4 @@ SceneRoots:
   - {fileID: 817514820}
   - {fileID: 1746556327}
   - {fileID: 532323603}
-  - {fileID: 1578464212}
-  - {fileID: 1211087584}
   - {fileID: 588850210}

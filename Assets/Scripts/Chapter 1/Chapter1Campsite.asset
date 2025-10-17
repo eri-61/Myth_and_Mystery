@@ -1,58 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4389163264416811299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
-  m_Name: External Function Node
-  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
-  NodeGraph: {fileID: 11400000}
-  Rect:
-    serializedVersion: 2
-    x: -1062.3993
-    y: 124.400085
-    width: 190
-    height: 80
-  IsDragging: 1
-  IsSelected: 0
-  _functionName: clear
-  _description: 
-  ParentNodes:
-  - {fileID: 7508510624848102611}
-  ChildNode: {fileID: 8075031557088316667}
---- !u!114 &-3695249699190537672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
-  m_Name: External Function Node
-  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
-  NodeGraph: {fileID: 11400000}
-  Rect:
-    serializedVersion: 2
-    x: 253.5994
-    y: 163.60004
-    width: 190
-    height: 80
-  IsDragging: 1
-  IsSelected: 1
-  _functionName: loadNext
-  _description: 
-  ParentNodes:
-  - {fileID: 5548013209583858258}
-  ChildNode: {fileID: 0}
---- !u!114 &-375693235472565774
+--- !u!114 &-5125770645978971380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,24 +15,24 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: -446.4
-    y: 110.80014
+    x: -69.60004
+    y: 66.79999
     width: 190
-    height: 155
+    height: 135
   IsDragging: 1
   IsSelected: 0
   _sentence:
-    CharacterName: Javier_serious_left_c1
-    Text: 'I''ll go and investigate this tent. '
-    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    CharacterName: Javier
+    Text: What's weird
+    CharacterSprite: {fileID: 3426842005286985484, guid: 2e2fd4d5fb679924ebbc1b99e85ea624, type: 3}
   ParentNodes:
-  - {fileID: -337643719206774868}
-  ChildNode: {fileID: 3700029310394908456}
-  _isExternalFunc: 1
-  _externalFunctionName: changeSprite
+  - {fileID: 6846085851057723679}
+  ChildNode: {fileID: 4299497274751875526}
+  _isExternalFunc: 0
+  _externalFunctionName: 
   CharacterNameKey: 
   SentenceTextKey: 
---- !u!114 &-337643719206774868
+--- !u!114 &-2862284546677835720
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,21 +47,21 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: -648.7998
-    y: 109.2001
+    x: 332.00006
+    y: 68.39997
     width: 190
-    height: 155
+    height: 135
   IsDragging: 1
   IsSelected: 0
   _sentence:
-    CharacterName: Rafael_pensive_right_c1
-    Text: Okay. I'll explore that tent.
-    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    CharacterName: Rafael
+    Text: There's a strong stench of tobacco from the forest
+    CharacterSprite: {fileID: -465961148448325185, guid: 8569dfe0afbbf074bb43606cfaa600f0, type: 3}
   ParentNodes:
-  - {fileID: 8075031557088316667}
-  ChildNode: {fileID: -375693235472565774}
-  _isExternalFunc: 1
-  _externalFunctionName: changeSprite
+  - {fileID: 4299497274751875526}
+  ChildNode: {fileID: 1803287620408607195}
+  _isExternalFunc: 0
+  _externalFunctionName: 
   CharacterNameKey: 
   SentenceTextKey: 
 --- !u!114 &11400000
@@ -129,21 +77,19 @@ MonoBehaviour:
   m_Name: Chapter1Campsite
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.DialogNodeGraph
   NodesList:
-  - {fileID: 7508510624848102611}
-  - {fileID: 8075031557088316667}
-  - {fileID: -4389163264416811299}
-  - {fileID: -337643719206774868}
-  - {fileID: -375693235472565774}
-  - {fileID: 3700029310394908456}
-  - {fileID: 5548013209583858258}
-  - {fileID: -3695249699190537672}
+  - {fileID: 5746202736049359691}
+  - {fileID: 6846085851057723679}
+  - {fileID: -5125770645978971380}
+  - {fileID: 4299497274751875526}
+  - {fileID: -2862284546677835720}
+  - {fileID: 1803287620408607195}
   VariablesConfig: {fileID: 0}
   _localizationTableName: 
   _characterNamesLocalizationName: 
   NodeToDrawLineFrom: {fileID: 0}
   LinePosition: {x: 0, y: 0}
   IsLocalizationSetUp: 0
---- !u!114 &3700029310394908456
+--- !u!114 &1803287620408607195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,18 +104,18 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: -220.79968
-    y: 143.6001
+    x: 562.4001
+    y: 93.20001
     width: 190
     height: 80
   IsDragging: 1
-  IsSelected: 0
-  _functionName: clear
+  IsSelected: 1
+  _functionName: addTestimony
   _description: 
   ParentNodes:
-  - {fileID: -375693235472565774}
-  ChildNode: {fileID: 5548013209583858258}
---- !u!114 &5548013209583858258
+  - {fileID: -2862284546677835720}
+  ChildNode: {fileID: 0}
+--- !u!114 &4299497274751875526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,24 +130,24 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: -15.199646
-    y: 110.80002
+    x: 123.20001
+    y: 62.79998
     width: 190
-    height: 155
+    height: 135
   IsDragging: 1
   IsSelected: 0
   _sentence:
-    CharacterName: Javier_Neutral_middle_c1
-    Text: I should go ahead and investigate the tent.
-    CharacterSprite: {fileID: -5474274716191949957, guid: 897344146a2c2ae45b0c99c87f52baf6, type: 3}
+    CharacterName: Rafael
+    Text: Can you not smell that?
+    CharacterSprite: {fileID: -1683120552684579808, guid: caa39fd4d9012424ba59e4530a9f8ef7, type: 3}
   ParentNodes:
-  - {fileID: 3700029310394908456}
-  ChildNode: {fileID: -3695249699190537672}
-  _isExternalFunc: 1
-  _externalFunctionName: changeSprite
+  - {fileID: -5125770645978971380}
+  ChildNode: {fileID: -2862284546677835720}
+  _isExternalFunc: 0
+  _externalFunctionName: 
   CharacterNameKey: 
   SentenceTextKey: 
---- !u!114 &7508510624848102611
+--- !u!114 &5746202736049359691
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -216,23 +162,23 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: -1283.1993
-    y: 113.20007
+    x: -480.8
+    y: 68.39999
     width: 190
-    height: 155
+    height: 135
   IsDragging: 1
   IsSelected: 0
   _sentence:
-    CharacterName: Rafael_Neutral_middle_c1
-    Text: We've arrived at the campsite
-    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    CharacterName: Javier
+    Text: We've arrived at the last known location of the campers.
+    CharacterSprite: {fileID: 3426842005286985484, guid: 2e2fd4d5fb679924ebbc1b99e85ea624, type: 3}
   ParentNodes: []
-  ChildNode: {fileID: -4389163264416811299}
-  _isExternalFunc: 1
-  _externalFunctionName: changeSprite
+  ChildNode: {fileID: 6846085851057723679}
+  _isExternalFunc: 0
+  _externalFunctionName: 
   CharacterNameKey: 
   SentenceTextKey: 
---- !u!114 &8075031557088316667
+--- !u!114 &6846085851057723679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,20 +193,20 @@ MonoBehaviour:
   NodeGraph: {fileID: 11400000}
   Rect:
     serializedVersion: 2
-    x: -858.39954
-    y: 113.20007
+    x: -271.19998
+    y: 69.19998
     width: 190
-    height: 155
+    height: 135
   IsDragging: 1
   IsSelected: 0
   _sentence:
-    CharacterName: Javier_Serious_left_c1
-    Text: We should investigate seperately to find more clues.
-    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    CharacterName: Rafael
+    Text: That's weird
+    CharacterSprite: {fileID: -4852113615681200516, guid: 4c6d8503a6960b44eacdd1883f46417a, type: 3}
   ParentNodes:
-  - {fileID: -4389163264416811299}
-  ChildNode: {fileID: -337643719206774868}
-  _isExternalFunc: 1
-  _externalFunctionName: changeSprite
+  - {fileID: 5746202736049359691}
+  ChildNode: {fileID: -5125770645978971380}
+  _isExternalFunc: 0
+  _externalFunctionName: 
   CharacterNameKey: 
   SentenceTextKey: 
