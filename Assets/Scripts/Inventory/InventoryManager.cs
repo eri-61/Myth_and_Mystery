@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -29,35 +30,27 @@ public class InventoryManager : MonoBehaviour
     [Header("Nav Bar")]
     public Button close;
     public Button useItem;
-    public BattleSystem battleSystem;
 
     private List<ItemData> currentItems = new List<ItemData>();
     [HideInInspector] public ItemData selectedItem;
     #endregion
 
+    public event Action<ItemData> OnUseItemReq;
     private void Awake()
     {
         
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        close.onClick.AddListener(() => gameObject.SetActive(false));
+        close.onClick.AddListener(CloseInv);
         useItem.onClick.AddListener(OnUseItem);
     }
 
-    public void LoadChapterItems(List<ItemData> items)
+    private void OnDisable()
     {
-        currentItems.Clear();
-
-        // Only include items that are inInventory
-        foreach (var item in items)
-        {
-            if (item.inInventory)
-                currentItems.Add(item);
-        }
-
-        LoadInventoryUI();
+        close.onClick.RemoveAllListeners();
+        useItem.onClick.RemoveAllListeners();
     }
 
     public void LoadInventoryUI()
@@ -162,35 +155,7 @@ public class InventoryManager : MonoBehaviour
         itemImage.sprite = item.itemSprite;
         itemDetailsSection.SetActive(true);
     }
-
-    private void OnUseItem()
-    {
-        if (selectedItem == null || battleSystem == null) return;
-        if (battleSystem.state != Battlestate.PLAYERTURN) return;
-
-        if (selectedItem == battleSystem.correctItem)
-        {
-            battleSystem.dialogueText.text = $"You used {selectedItem.itemName}! It was super effective!";
-            battleSystem.enemyUnit.currentHP = 1;
-            battleSystem.enemyHUD.setHP(1);
-        }
-        else
-        {
-            battleSystem.dialogueText.text = $"You used {selectedItem.itemName}, but it had no effect!";
-            battleSystem.nextEnemyAttackDoubles = true;
-        }
-
-        gameObject.SetActive(false);
-        battleSystem.StartCoroutine(AfterUseItem());
-    }
-
-    private System.Collections.IEnumerator AfterUseItem()
-    {
-        yield return new WaitForSeconds(2f);
-        battleSystem.state = Battlestate.ENEMYTURN;
-        battleSystem.StartCoroutine(battleSystem.EnemyTurn());
-    }
-
+ 
     public void AddItem(ItemData newItem)
     {
         if (newItem == null)
@@ -209,4 +174,18 @@ public class InventoryManager : MonoBehaviour
         Debug.Log($"[InventoryManager] Added item: {newItem.itemName}");
     }
 
+    void CloseInv()
+    {
+        PersistentObjects.instance.CloseInventory();
+    }
+
+    private void OnUseItem()
+    {
+        if (selectedItem == null)
+        {
+            return;
+        }
+        OnUseItemReq?.Invoke(selectedItem);
+        CloseInv();
+    }
 }

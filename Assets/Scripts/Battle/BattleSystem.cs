@@ -144,7 +144,6 @@ public class BattleSystem : MonoBehaviour
             }
         }
 
-        // Reset dodgeResult for next turn
         dodgeResult = DodgeResult.NotAttempted;
 
         state = Battlestate.PLAYERTURN;
@@ -201,14 +200,48 @@ public class BattleSystem : MonoBehaviour
         if (state != Battlestate.PLAYERTURN)
             return;
 
+        if(InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.OnUseItemReq -= OnInventoryUseItem; // guard double-subscribe
+            InventoryManager.Instance.OnUseItemReq += OnInventoryUseItem;
+        }
         inventoryPanel.SetActive(true);
         dialogueText.text = "Choose an item to use:";
     }
 
-    public void oncloseInventory()
+    private void OnInventoryUseItem(ItemData item)
     {
-        inventoryPanel.SetActive(false);
-        dialogueText.text = "Choose an action:";
+        if (InventoryManager.Instance != null)
+            InventoryManager.Instance.OnUseItemReq -= OnInventoryUseItem;
+
+        UseItemInBattle(item);
+    }
+
+
+    private void UseItemInBattle(ItemData item)
+    {
+        if (state != Battlestate.PLAYERTURN) return;
+        if (item == null) return;
+        if (item == correctItem)
+        {
+            dialogueText.text = $"You used {item.itemName}! It was super effective!";
+            enemyUnit.currentHP = 1;
+            enemyHUD.setHP(1);
+        }
+        else
+        {
+            dialogueText.text = $"You used {item.itemName}, but it had no effect!";
+            nextEnemyAttackDoubles = true;
+        }
+        state = Battlestate.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+    public IEnumerator AfterUseItem()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        state = Battlestate.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
     }
 
     public void OnDodgeButton()
@@ -218,4 +251,5 @@ public class BattleSystem : MonoBehaviour
 
         StartCoroutine(HandleDodge());
     }
+
 }
