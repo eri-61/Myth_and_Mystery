@@ -110,7 +110,20 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(ItemData newItem)
     {
-     // add code later
+        if (newItem == null)
+        {
+            Debug.LogWarning("[InventoryManager] AddItem called with null.");
+            return;
+        }
+
+        newItem.inInventory = true;
+
+        if (!currentItems.Contains(newItem))
+            currentItems.Add(newItem);
+
+        LoadInventoryUI();
+
+        Debug.Log($"[InventoryManager] Added item: {newItem.itemName}");
     }
 
 }
