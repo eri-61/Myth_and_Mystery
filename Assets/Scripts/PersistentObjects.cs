@@ -19,6 +19,10 @@ public class PersistentObjects : MonoBehaviour
         }
 
         instance = this;
+        mapPanel.SetActive(false);
+        journalPanel.SetActive(false);
+        inventoryPanel.SetActive(false);
+        menuPanel.SetActive(false);
         DontDestroyOnLoad(gameObject);
     }
 

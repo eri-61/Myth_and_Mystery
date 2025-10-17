@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -633,7 +634,42 @@ namespace cherrydev
         /// Writing dialog text
         /// </summary>
         /// <param name="text"></param>
-        private void WriteDialogText(string text) => StartCoroutine(WriteDialogTextRoutine(text));
+        //private void WriteDialogText(string text) => StartCoroutine(WriteDialogTextRoutine(text));
+        private async void WriteDialogText(string text) 
+        {
+            await WriteDialogTextAsync(text);
+        }
+
+
+        private async Task WriteDialogTextAsync(string text)
+        {
+            _isCurrentSentenceTyping = true;
+            SentenceStarted?.Invoke();
+
+            foreach (char textChar in text)
+            {
+                if (_isCurrentSentenceSkipped)
+                {
+                    DialogTextSkipped?.Invoke(text);
+                    _isCurrentSentenceTyping = false;
+                    break;
+                }
+
+                DialogTextCharWrote?.Invoke();
+                await Task.Delay(TimeSpan.FromSeconds(_dialogCharDelay));
+            }
+
+            _isCurrentSentenceTyping = false;
+            SentenceEnded?.Invoke();
+
+            //yield return new WaitUntil(() => CheckNextSentenceKeyCodes() && IsActive);
+            while (!CheckNextSentenceKeyCodes() && IsActive)
+            {
+                await Task.Delay(25);
+            }
+            CheckForDialogNextNode();
+        }
+
 
         /// <summary>
         /// Writing dialog text coroutine
@@ -650,7 +686,7 @@ namespace cherrydev
                 if (_isCurrentSentenceSkipped)
                 {
                     DialogTextSkipped?.Invoke(text);
-
+                    //_isCurrentSentenceTyping = false;
                     break;
                 }
 
