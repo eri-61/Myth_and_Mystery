@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6911452829172710049}
   - component: {fileID: 5375968412245560585}
-  - component: {fileID: 1523534640209844203}
-  - component: {fileID: 6027243771903366364}
-  - component: {fileID: 8735659365139276808}
+  - component: {fileID: 1279306873158639624}
+  - component: {fileID: -1939775978554428401}
+  - component: {fileID: 2899490476436773750}
   m_Layer: 0
   m_Name: Cassie_Smile
   m_TagString: Untagged
@@ -34,11 +34,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000011920929, y: -12.655}
-  m_SizeDelta: {x: 1361.2441, y: 2531}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!95 &5375968412245560585
 Animator:
   serializedVersion: 7
@@ -61,23 +61,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &1523534640209844203
-Animation:
+--- !u!114 &1279306873158639624
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037760765160548259}
   m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: 7b9a1ea07c5996f49bca69e4dd2d93df, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
---- !u!222 &6027243771903366364
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 3
+  m_AspectRatio: 0.53782856
+--- !u!222 &-1939775978554428401
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +83,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037760765160548259}
   m_CullTransparentMesh: 1
---- !u!114 &8735659365139276808
+--- !u!114 &2899490476436773750
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
