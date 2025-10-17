@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,7 +36,12 @@ namespace cherrydev
         /// <summary>
         /// Increasing max visible characters
         /// </summary>
-        public void IncreaseMaxVisibleCharacters() => _dialogText.maxVisibleCharacters++;
+        //public void IncreaseMaxVisibleCharacters() => _dialogText.maxVisibleCharacters++;
+        public void IncreaseMaxVisibleCharacters()
+        {
+            _dialogText.maxVisibleCharacters++;
+            Debug.Log($"IncreaseMaxVisibleCharacters: {_dialogText.maxVisibleCharacters}");
+        }
         
         /// <summary>
         /// Assigning dialog name text, character image sprite and dialog text
