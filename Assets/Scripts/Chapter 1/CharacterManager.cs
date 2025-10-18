@@ -149,6 +149,9 @@ namespace Myth_Mystery
                         if (animator != null)
                             animator.SetBool("isTalking", true);
 
+                        EnsureStartTalking(newCharacter);
+
+
 
                     }
                 }

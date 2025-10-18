@@ -21,6 +21,9 @@ public class DialogStarter_Deduction : MonoBehaviour
 
     [Header ("scene index")]
     public int sceneIndex = 1;
+
+    [Header("Data")]
+    public TestimonyData testimony;
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,9 +31,12 @@ public class DialogStarter_Deduction : MonoBehaviour
     {
         dialogBehaviour.BindExternalFunction("loadNext", loadNextScene);
         dialogBehaviour.BindExternalFunction("goBack", GoBackToPrevious);
+        dialogBehaviour.BindExternalFunction("addTestimony", addTestimony);
+
         dialogBehaviour.StartDialog(dialogGraph);
     }
 
+    public void addTestimony() => GameManager.Instance.cluesScript.addTestimony(testimony);
 
     void loadNextScene()
     {

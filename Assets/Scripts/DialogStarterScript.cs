@@ -25,6 +25,7 @@ namespace DialogNodeBasedSystem.Scripts
         [Header("Optional UI References")]
         [SerializeField] private GameObject gUI;
         [SerializeField] private GameObject fade;
+        [SerializeField] private GameObject fade2;
 
         [Header("Animations (Optional)")]
         [SerializeField] private bool playCaseIntro = false;
@@ -174,16 +175,12 @@ namespace DialogNodeBasedSystem.Scripts
 
             dayTimeUI.SetActive(false);
 
-            if (fade != null)
+            if (fade2 != null)
             {
-                fade.SetActive(true);
+                fade2.SetActive(true);
                 yield return new WaitForSecondsRealtime(waitTime);
-                fade.SetActive(false);
+                fade2.SetActive(false);
             }
-
-            yield return new WaitForSecondsRealtime(1f);
-            if (dialogGraph != null)
-                dialogBehaviour.StartDialog(dialogGraph[dialogGraphIndex + 1]);
         }
 
         // Characters

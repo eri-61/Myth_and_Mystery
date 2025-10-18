@@ -32,6 +32,7 @@ public class CluesScript : MonoBehaviour
     {
         deductionButton.gameObject.SetActive(false);
         GameManager.Instance.RegisterClues(this);
+
     }
 
     void OnEnable()
@@ -149,10 +150,10 @@ public class CluesScript : MonoBehaviour
             }
             else
             {
-                slotImage.sprite = null;
                 slots[i].interactable = false;
             }
         }
+        CheckDeductionButton();
     }
 
     private void CheckDeductionButton()
