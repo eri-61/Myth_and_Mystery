@@ -634,14 +634,15 @@ namespace cherrydev
         /// Writing dialog text
         /// </summary>
         /// <param name="text"></param>
-        //private void WriteDialogText(string text) => StartCoroutine(WriteDialogTextRoutine(text));
-        private async void WriteDialogText(string text) 
+       //private void WriteDialogText(string text) => StartCoroutine(WriteDialogTextRoutine(text));
+       
+    private async void WriteDialogText(string text) 
         {
             await WriteDialogTextAsync(text);
         }
 
 
-        private async Task WriteDialogTextAsync(string text)
+     private async Task WriteDialogTextAsync(string text)
         {
             _isCurrentSentenceTyping = true;
             SentenceStarted?.Invoke();
@@ -676,31 +677,50 @@ namespace cherrydev
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        private IEnumerator WriteDialogTextRoutine(string text)
+      /*  private IEnumerator WriteDialogTextRoutine(string text)
         {
-            _isCurrentSentenceTyping = true;
-            SentenceStarted?.Invoke();
+            yield return null;
+            float grace = 0.06f;
+            float elapsed = 0f;
+            while (elapsed < grace)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                yield return null;
+            }
 
-            foreach (char textChar in text)
+            for (int i = 0; i < text.Length; i++)
             {
                 if (_isCurrentSentenceSkipped)
                 {
+                    // When skipped, notify listeners with the full text and stop typing
                     DialogTextSkipped?.Invoke(text);
-                    //_isCurrentSentenceTyping = false;
+                    _isCurrentSentenceTyping = false;
                     break;
                 }
 
                 DialogTextCharWrote?.Invoke();
-                yield return new WaitForSeconds(_dialogCharDelay);
+                yield return new WaitForSecondsRealtime(_dialogCharDelay);
+            }
+
+            // If not skipped, ensure whole sentence ended
+            if (!_isCurrentSentenceSkipped)
+            {
+
+                DialogTextSkipped?.Invoke(text);
             }
 
             _isCurrentSentenceTyping = false;
             SentenceEnded?.Invoke();
 
+            // Wait for player input to continue.
+            // First, consume any still-held buttons so a lingering press doesn't immediately advance.
+            while (Input.anyKey || Input.touchCount > 0 || Input.GetMouseButton(0))
+                yield return null;
+
             yield return new WaitUntil(() => CheckNextSentenceKeyCodes() && IsActive);
 
             CheckForDialogNextNode();
-        }
+        }*/
 
         /// <summary>
         /// Checking is next dialog node has a child node
@@ -769,7 +789,8 @@ namespace cherrydev
         /// </summary>
         private void HandleSentenceSkipping()
         {
-            if (!_isDialogStarted || !_isCanSkippingText)
+            // Only consider skipping when a dialog is started, skipping allowed and the sentence is actively typing.
+            if (!_isDialogStarted || !_isCanSkippingText || !_isCurrentSentenceTyping)
                 return;
 
             if (CheckNextSentenceKeyCodes() && !_isCurrentSentenceSkipped)

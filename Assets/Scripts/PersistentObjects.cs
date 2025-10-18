@@ -10,6 +10,9 @@ public class PersistentObjects : MonoBehaviour
     public GameObject menuPanel;
     public GameObject mapPanel;
 
+    [Header("Camera")]
+    public Camera main;
+
     private void Awake()
     {
         if (instance != null && instance != this)

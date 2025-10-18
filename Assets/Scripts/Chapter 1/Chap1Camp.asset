@@ -1,0 +1,496 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7676622330715900927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -1222.3992
+    y: 186.79999
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: 
+    Text: '*rustle* *ruslte*'
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: 138671985590752149}
+  ChildNode: {fileID: -6998397594669464176}
+  _isExternalFunc: 0
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-7598305036135845107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1717f3c6dba9fa40844ddacac301510, type: 3}
+  m_Name: Answer Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.AnswerNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -100.80002
+    y: 182.80008
+    width: 190
+    height: 135
+  IsDragging: 1
+  IsSelected: 0
+  Answers:
+  - Yes.
+  - No.
+  AnswerKeys: []
+  ParentNodes:
+  - {fileID: -1255135031180159009}
+  ChildNodes:
+  - {fileID: -3915661402084557213}
+  - {fileID: -7008342949381164879}
+--- !u!114 &-7008342949381164879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 175.19998
+    y: 304.40002
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier_serious_left_c1
+    Text: No. We should focus at the task at hand and investigate the forest.
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: -7598305036135845107}
+  ChildNode: {fileID: -4237907180525192267}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-6998397594669464176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
+  m_Name: External Function Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -1070.3994
+    y: 66.79996
+    width: 190
+    height: 80
+  IsDragging: 1
+  IsSelected: 0
+  _functionName: hideM
+  _description: 
+  ParentNodes:
+  - {fileID: -7676622330715900927}
+  ChildNode: {fileID: 3591741865825818806}
+--- !u!114 &-5768428617642380331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
+  m_Name: External Function Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 370.4
+    y: 147.60016
+    width: 190
+    height: 80
+  IsDragging: 1
+  IsSelected: 0
+  _functionName: loadAnimation
+  _description: 
+  ParentNodes:
+  - {fileID: -3915661402084557213}
+  ChildNode: {fileID: 2029459085513838799}
+--- !u!114 &-4237907180525192267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 379.19998
+    y: 300.40002
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_pensive_right_c1
+    Text: Okay. Let's hurry and check out the forest.
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: -7008342949381164879}
+  ChildNode: {fileID: 509273839265179506}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-3915661402084557213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 165.59995
+    y: 117.20007
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier_serious_left_c1
+    Text: Yes. Let's investigate, maybe it will lead us to some clues.
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: -7598305036135845107}
+  ChildNode: {fileID: -5768428617642380331}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-1255135031180159009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -345.60004
+    y: 172.40009
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_pensive_right_c1
+    Text: Should we go investigatie?
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: -502653711019002945}
+  ChildNode: {fileID: -7598305036135845107}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-1214242809028718574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -763.99994
+    y: 177.19998
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_worried_right_c1
+    Text: Do you hear that?
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: 3591741865825818806}
+  ChildNode: {fileID: -502653711019002945}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &-502653711019002945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -553.60004
+    y: 174.00003
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier_averted_left_c1
+    Text: Yes. It sounds like some leaves rustling.
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: -1214242809028718574}
+  ChildNode: {fileID: -1255135031180159009}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f741ea10ebcf842a91c9b871dd032a, type: 3}
+  m_Name: Chap1Camp
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.DialogNodeGraph
+  NodesList:
+  - {fileID: 406236834447715314}
+  - {fileID: 138671985590752149}
+  - {fileID: -7676622330715900927}
+  - {fileID: -502653711019002945}
+  - {fileID: 3591741865825818806}
+  - {fileID: -1214242809028718574}
+  - {fileID: -6998397594669464176}
+  - {fileID: -1255135031180159009}
+  - {fileID: -7598305036135845107}
+  - {fileID: -7008342949381164879}
+  - {fileID: -3915661402084557213}
+  - {fileID: -4237907180525192267}
+  - {fileID: -5768428617642380331}
+  - {fileID: 509273839265179506}
+  - {fileID: 2029459085513838799}
+  VariablesConfig: {fileID: 0}
+  _localizationTableName: 
+  _characterNamesLocalizationName: 
+  NodeToDrawLineFrom: {fileID: 0}
+  LinePosition: {x: 0, y: 0}
+  IsLocalizationSetUp: 0
+--- !u!114 &138671985590752149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -1427.199
+    y: 179.59995
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Javier_serious_middle_c1
+    Text: Yes. We should try to find some clues before it gets dark.
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: 406236834447715314}
+  ChildNode: {fileID: -7676622330715900927}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &406236834447715314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -1639.9988
+    y: 177.99997
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_pensive_middle_c1
+    Text: Now that we know that the culprit is a kapre.Should we go look for clues
+      in the forest?
+    CharacterSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes: []
+  ChildNode: {fileID: 138671985590752149}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &509273839265179506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4b3c64aaf434ea0df52154c1c7680, type: 3}
+  m_Name: External Function Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.ExternalFunctionNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 579.20026
+    y: 333.20023
+    width: 190
+    height: 80
+  IsDragging: 1
+  IsSelected: 0
+  _functionName: loadAnimation
+  _description: 
+  ParentNodes:
+  - {fileID: -4237907180525192267}
+  ChildNode: {fileID: 0}
+--- !u!114 &2029459085513838799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: 596.00006
+    y: 102.00003
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: 
+    Text: 
+    CharacterSprite: {fileID: 0}
+  ParentNodes:
+  - {fileID: -5768428617642380331}
+  ChildNode: {fileID: 0}
+  _isExternalFunc: 1
+  _externalFunctionName: 
+  CharacterNameKey: 
+  SentenceTextKey: 
+--- !u!114 &3591741865825818806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32a464d8ccff4e40a60c45b40a1e648, type: 3}
+  m_Name: Sentence Node
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::cherrydev.SentenceNode
+  NodeGraph: {fileID: 11400000}
+  Rect:
+    serializedVersion: 2
+    x: -996.79944
+    y: 172.40002
+    width: 190
+    height: 155
+  IsDragging: 1
+  IsSelected: 0
+  _sentence:
+    CharacterName: Rafael_worried_right_c1
+    Text: '!!!'
+    CharacterSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  ParentNodes:
+  - {fileID: -6998397594669464176}
+  ChildNode: {fileID: -1214242809028718574}
+  _isExternalFunc: 1
+  _externalFunctionName: changeSprite
+  CharacterNameKey: 
+  SentenceTextKey: 

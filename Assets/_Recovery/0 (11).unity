@@ -593,17 +593,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8781328018258717829, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
   m_PrefabInstance: {fileID: 209244531}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &209244533 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3975007924860031117, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
-  m_PrefabInstance: {fileID: 209244531}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69256041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12aade00d4b72504d97c4e469acb8bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
 --- !u!1 &211974497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2874,7 +2863,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1c423d06a1b32e45bfa61093fa1d736, type: 2}
   clues: []
   CluesScript: {fileID: 0}
-  inventoryManager: {fileID: 209244533}
+  inventoryManager: {fileID: 0}
 --- !u!1 &1221116256
 GameObject:
   m_ObjectHideFlags: 0

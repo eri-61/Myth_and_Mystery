@@ -24,6 +24,7 @@ public class CluesScript : MonoBehaviour
     public List<TestimonyData> gatheredTestimonies = new();
     #endregion
 
+    public Dialog result;
     private enum EntryType { Clue, Testimony }
     private List<EntryType> entrytypes = new();
 
@@ -80,8 +81,18 @@ public class CluesScript : MonoBehaviour
 
     public void deductionComplete()
     {
-        deductionButton.interactable = false;
-        entryDescription.text += "\n\n<b>Deduction Complete!</b>";
+        if (result == Dialog.RIGHT)
+        {
+            deductionButton.interactable = false;
+            entryDescription.text += "\n\n<b>Deduction Complete!</b>";
+        }
+
+        else if (result == Dialog.WRONG)
+        {
+            entryDescription.text += "\n\n<b>Wrong Deduction!</b>";
+
+        }
+
     }
 
     public void AddClues(CluesData newClue)

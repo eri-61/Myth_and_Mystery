@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -129,6 +130,7 @@ namespace Myth_Mystery
 
                     if (targetPosition != null)
                     {
+             
                         GameObject newCharacter = Instantiate(prefab, targetPosition);
                         newCharacter.transform.SetParent(targetPosition, false);
 
@@ -146,6 +148,8 @@ namespace Myth_Mystery
                         Animator animator = newCharacter.GetComponent<Animator>();
                         if (animator != null)
                             animator.SetBool("isTalking", true);
+
+
                     }
                 }
             }
@@ -233,5 +237,65 @@ namespace Myth_Mystery
                 animator.SetBool("isTalking", false);
             }
         }
+        private void EnsureStartTalking(GameObject newCharacter)
+        {
+            if (newCharacter == null) return;
+
+            Animator animator = newCharacter.GetComponent<Animator>();
+            if (animator == null)
+            {
+                // try children
+                animator = newCharacter.GetComponentInChildren<Animator>();
+                if (animator != null)
+                    Debug.Log($"[CharacterManager] Animator found on child of '{newCharacter.name}'.");
+            }
+
+            if (animator == null)
+            {
+                Debug.LogWarning($"[CharacterManager] No Animator found on '{newCharacter.name}' (or its children). Cannot play talking animation.");
+                return;
+            }
+
+            // Log animator controller and parameters for debugging
+            var controller = animator.runtimeAnimatorController;
+            Debug.Log($"[CharacterManager] Animator found on '{newCharacter.name}'. Controller: {(controller != null ? controller.name : "null")}");
+            foreach (var p in animator.parameters)
+            {
+                Debug.Log($"[CharacterManager] Animator param: Name='{p.name}', Type={p.type}, Default={p.defaultBool}");
+            }
+
+            const string talkParam = "isTalking";
+
+            // If the animator has the boolean parameter, set it
+            bool hasBool = animator.parameters.Any(p => p.type == AnimatorControllerParameterType.Bool && p.name == talkParam);
+            if (hasBool)
+            {
+                animator.SetBool(talkParam, true);
+                // Force update to apply immediately
+                animator.Update(0f);
+                Debug.Log($"[CharacterManager] Set '{talkParam}' = true on animator for '{newCharacter.name}'.");
+                return;
+            }
+
+            // Fallback: try to play the first clip on the runtime controller (if any)
+            if (controller != null && controller.animationClips != null && controller.animationClips.Length > 0)
+            {
+                string clipName = controller.animationClips[0].name;
+                try
+                {
+                    animator.Play(clipName);
+                    animator.Update(0f);
+                    Debug.Log($"[CharacterManager] Fallback played clip '{clipName}' on '{newCharacter.name}'.");
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[CharacterManager] Fallback Play('{clipName}') failed: {ex.Message}");
+                }
+            }
+
+            Debug.LogWarning($"[CharacterManager] Animator on '{newCharacter.name}' has no '{talkParam}' bool and no usable clips to play as fallback. Check Animator Controller.");
+        }
     }
 }
+
