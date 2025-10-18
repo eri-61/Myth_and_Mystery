@@ -42,6 +42,7 @@ public class InvestigationScene : MonoBehaviour
     public GameObject investigationButtons;
     public Button[] investigationPoints;
     [TextArea] public string[] textDescriptions;
+    public int tentScene = 1;
 
     [Header("Items & Clues (Match by Index)")]
     public ItemData[] items;
@@ -126,14 +127,13 @@ public class InvestigationScene : MonoBehaviour
         buttons.SetActive(true);
         character.SetActive(characterExists);
 
-        dialogPanel.SetActive(true);
-        description.text = "Choose an options.";
     }
 
     void StartInvestigation()
     {
         buttons.SetActive(false);
         character.SetActive(false);
+        dialogPanel.SetActive(false);
 
         back.SetActive(true);
         investigationButtons.SetActive(true);
@@ -143,8 +143,6 @@ public class InvestigationScene : MonoBehaviour
 
     void ClickInvestigationPoint(int index)
     {
-        dialogPanel.SetActive(true);
-
         if (isPointSearched[index])
         {
             ShowDialog("You’ve already searched this area.");
@@ -152,9 +150,9 @@ public class InvestigationScene : MonoBehaviour
         }
 
         if (index < textDescriptions.Length)
-            description.text = textDescriptions[index];
+            ShowDialog(textDescriptions[index]);
         else
-            description.text = "There’s nothing of interest here.";
+            ShowDialog("There’s nothing of interest here.");
 
         if (index < clues.Length && clues[index] != null)
         {
@@ -172,8 +170,8 @@ public class InvestigationScene : MonoBehaviour
 
     void ShowDialog(string message)
     {
-        description.text = message;
         dialogPanel.SetActive(true);
+        description.text = message;
         StopAllCoroutines();
         StartCoroutine(HideDialog(dialogHide));
     }
@@ -252,4 +250,10 @@ public class InvestigationScene : MonoBehaviour
             Debug.Log($"[InvestigationScene] Added item via serialized ref: {newItem.itemName}");
         }
     }
+
+    public void GoToScene()
+    {
+        SceneController.Instance.LoadScene(tentScene);
+    }
+    
 }

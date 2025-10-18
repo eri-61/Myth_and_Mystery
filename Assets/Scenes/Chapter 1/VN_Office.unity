@@ -194,17 +194,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2925978756984485777, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
   m_PrefabInstance: {fileID: 1243348660}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &83127880 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 296406240037259119, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
-  m_PrefabInstance: {fileID: 1805348038}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &95059108
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +360,8 @@ MonoBehaviour:
   dayTimeAnimation: {fileID: 432447792}
   dayTimeUI: {fileID: 432447790}
   clip: {fileID: 32900000, guid: 580c5f7e5bfa13f4da65cd5f7745d673, type: 3}
-  sceneIndex: 5
+  nextSceneIndex: 1
+  puzzleIndex: 1
   fadeDuration: 5
   waitTime: 8
   testimonyData: {fileID: 0}
@@ -3556,19 +3546,19 @@ MonoBehaviour:
   closeButton: {fileID: 1805348040}
   locations:
   - Name: Campsite
-    mainLocation: {fileID: 1805348044}
+    mainLocation: {fileID: 0}
     mainSceneIndex: 7
     associatedBackground: {fileID: 11400000, guid: 93697fc221f61c349bc9b9bc1a65b2a2, type: 2}
   - Name: Tent
-    mainLocation: {fileID: 83127880}
+    mainLocation: {fileID: 0}
     mainSceneIndex: 6
     associatedBackground: {fileID: 11400000, guid: 42b606896ea17a945a47b7375732ad0f, type: 2}
   - Name: Forest
-    mainLocation: {fileID: 1805348043}
+    mainLocation: {fileID: 0}
     mainSceneIndex: 13
     associatedBackground: {fileID: 11400000, guid: 90abc6ed2265bfd4cbee905ca6777fc8, type: 2}
   - Name: Lambago
-    mainLocation: {fileID: 1805348042}
+    mainLocation: {fileID: 0}
     mainSceneIndex: 14
     associatedBackground: {fileID: 11400000, guid: 7f84e3eb7eeb7804a9d57f720080530d, type: 2}
   visitedLocations: 
@@ -3630,19 +3620,19 @@ PrefabInstance:
     - target: {fileID: 1894167961505817778, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
       propertyPath: locations.Array.data[0].mainLocation
       value: 
-      objectReference: {fileID: 1805348044}
+      objectReference: {fileID: 0}
     - target: {fileID: 1894167961505817778, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
       propertyPath: locations.Array.data[1].mainLocation
       value: 
-      objectReference: {fileID: 83127880}
+      objectReference: {fileID: 0}
     - target: {fileID: 1894167961505817778, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
       propertyPath: locations.Array.data[2].mainLocation
       value: 
-      objectReference: {fileID: 1805348043}
+      objectReference: {fileID: 0}
     - target: {fileID: 1894167961505817778, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
       propertyPath: locations.Array.data[3].mainLocation
       value: 
-      objectReference: {fileID: 1805348042}
+      objectReference: {fileID: 0}
     - target: {fileID: 1894167961505817778, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
       propertyPath: locations.Array.data[0].mainSceneIndex
       value: 7
@@ -3793,7 +3783,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6567720066552481955, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4330673458116038276, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
+    - {fileID: 944121893243540408, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
+    - {fileID: 651644426138302479, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
@@ -3818,39 +3811,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 646055525918924520, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
   m_PrefabInstance: {fileID: 1805348038}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1805348042 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8690847329428582833, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
-  m_PrefabInstance: {fileID: 1805348038}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!114 &1805348043 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9126647613459419905, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
-  m_PrefabInstance: {fileID: 1805348038}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!114 &1805348044 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3115898545678712470, guid: e381af29a8bdd1042ab992f7103a7869, type: 3}
-  m_PrefabInstance: {fileID: 1805348038}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1977854557 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8207311712423985326, guid: b75544c533bcec84d9141e38a28201dc, type: 3}

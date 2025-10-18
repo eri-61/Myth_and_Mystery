@@ -39,7 +39,8 @@ namespace DialogNodeBasedSystem.Scripts
         [SerializeField] private VideoClip clip;
 
         [Header("Scene & Timing")]
-        public int sceneIndex = 1;
+        public int nextSceneIndex = 1;
+        public int puzzleIndex = 1;
         public float fadeDuration = 1.0f;
         public float waitTime = 10f;
 
@@ -68,13 +69,15 @@ namespace DialogNodeBasedSystem.Scripts
         {
             dialogBehaviour.BindExternalFunction("changeSprite", changeCharacter);
 
+            //characters
             dialogBehaviour.BindExternalFunction("hide", hideLRCharacters);
             dialogBehaviour.BindExternalFunction("show", showLRCharacters);
-
             dialogBehaviour.BindExternalFunction("hideM", hideMCharacter);
             dialogBehaviour.BindExternalFunction("showM", showMCharacter);
-
             dialogBehaviour.BindExternalFunction("clear", clearCharacter);
+
+            //load scenes
+            dialogBehaviour.BindExternalFunction("loadPuzzle", LoadPuzzleScene);
             dialogBehaviour.BindExternalFunction("loadNext", loadNextScene);
 
             dialogBehaviour.BindExternalFunction("updateJournal", updateJournal);
@@ -83,7 +86,6 @@ namespace DialogNodeBasedSystem.Scripts
             dialogBehaviour.BindExternalFunction("revealObjective", RevealObjective);
 
             dialogBehaviour.BindExternalFunction("playAnimation", PlayAnimation);
-
             //instructions
             dialogBehaviour.BindExternalFunction("loadInstructions", ShowInstructions);
         }
@@ -142,8 +144,9 @@ namespace DialogNodeBasedSystem.Scripts
 
         // External Functions
 
-        public void loadNextScene() => SceneController.Instance.LoadScene(sceneIndex);
+        public void loadNextScene() => SceneController.Instance.LoadScene(nextSceneIndex);
 
+        public void LoadPuzzleScene() => SceneController.Instance.LoadScene(puzzleIndex);
         public void addTestimony() => GameManager.Instance.cluesScript.addTestimony(testimonyData);
         public void addCreatures() => GameManager.Instance.creaturesScript.AddCreature(creature);
         public void updateJournal() => GameManager.Instance.cfScript.UpdateCaseFileUI();

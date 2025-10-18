@@ -221,16 +221,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c54510e6cf645e4480e8333955f2d65, type: 2}
   gUI: {fileID: 1735697026}
   fade: {fileID: 2136479533}
-  playCaseIntro: 1
-  caseAnimation: {fileID: 394555940}
-  caseUI: {fileID: 394555936}
-  playDayIntro: 1
-  dayTimeAnimation: {fileID: 611868320}
-  dayTimeUI: {fileID: 611868316}
-  clip: {fileID: 32900000, guid: 580c5f7e5bfa13f4da65cd5f7745d673, type: 3}
-  sceneIndex: 5
-  fadeDuration: 5
-  waitTime: 8
+  fade2: {fileID: 0}
+  playCaseIntro: 0
+  caseAnimation: {fileID: 0}
+  caseUI: {fileID: 0}
+  playDayIntro: 0
+  dayTimeAnimation: {fileID: 0}
+  dayTimeUI: {fileID: 0}
+  clip: {fileID: 0}
+  nextSceneIndex: 9
+  puzzleIndex: 10
+  fadeDuration: 2
+  waitTime: 0
   testimonyData: {fileID: 0}
   creature: {fileID: 11400000, guid: e2c2322c80a291847bfd6b6264f7139d, type: 2}
   instructionManager: {fileID: 0}
@@ -4176,8 +4178,6 @@ GameObject:
   - component: {fileID: 2136479534}
   - component: {fileID: 2136479538}
   - component: {fileID: 2136479537}
-  - component: {fileID: 2136479536}
-  - component: {fileID: 2136479535}
   m_Layer: 6
   m_Name: Fade
   m_TagString: Untagged
@@ -4204,44 +4204,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &2136479535
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136479533}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 49ec1098fcf3678418c2ed7c95510d65, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 2
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!111 &2136479536
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136479533}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: 3ee378e8c0408ca4283ad9cbb1f2fc3c, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!114 &2136479537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4262,7 +4224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6486641604215316067, guid: 82633b9acebfb5440871657ffc3a7615, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
