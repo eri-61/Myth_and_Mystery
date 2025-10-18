@@ -1,18 +1,19 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class MazePlayerController : MonoBehaviour
+public class MazePlayerController_wCollectibles : MonoBehaviour
 {
-    public GenerateMaze generateMaze;
+    public GenerateMaze_wCollectibles CE;
     public Vector2Int currentCell;
 
     private Camera cam;
     private bool isDragging = false;
     private Vector3 dragStartWorldPos;
     private Vector2Int dragDirection = Vector2Int.zero;
+    private int moveCount = 0;
 
     private void Awake()
     {
-        generateMaze = FindAnyObjectByType<GenerateMaze>();
+        CE = FindAnyObjectByType<GenerateMaze_wCollectibles>();
     }
 
     private void Start()
@@ -36,7 +37,7 @@ public class MazePlayerController : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (!isDragging || generateMaze == null)
+        if (!isDragging || CE == null)
             return;
 
         isDragging = false;
@@ -46,7 +47,6 @@ public class MazePlayerController : MonoBehaviour
 
         Vector3 dragVector = dragEndWorldPos - dragStartWorldPos;
 
-        // Decide movement direction
         if (Mathf.Abs(dragVector.x) > Mathf.Abs(dragVector.y))
             dragDirection = dragVector.x > 0 ? Vector2Int.right : Vector2Int.left;
         else
@@ -57,7 +57,7 @@ public class MazePlayerController : MonoBehaviour
 
     private void TryMoveToNextRoom()
     {
-        RoomScript currentRoom = generateMaze.rooms[currentCell.x, currentCell.y];
+        RoomScript currentRoom = CE.rooms[currentCell.x, currentCell.y];
 
         RoomScript.Direction dir = RoomScript.Direction.NONE;
         if (dragDirection == Vector2Int.up) dir = RoomScript.Direction.TOP;
@@ -80,13 +80,37 @@ public class MazePlayerController : MonoBehaviour
             case RoomScript.Direction.RIGHT: nextCell.x += 1; break;
         }
 
-        if (nextCell.x < 0 || nextCell.x >= generateMaze.numX || nextCell.y < 0 || nextCell.y >= generateMaze.numY)
+        if (nextCell.x < 0 || nextCell.x >= CE.numX || nextCell.y < 0 || nextCell.y >= CE.numY)
             return;
 
-        RoomScript nextRoom = generateMaze.rooms[nextCell.x, nextCell.y];
+        RoomScript nextRoom = CE.rooms[nextCell.x, nextCell.y];
         transform.position = new Vector3(nextRoom.transform.position.x, nextRoom.transform.position.y, -1f);
         currentCell = nextCell;
 
+        // Move player visually
+        transform.position = new Vector3(nextRoom.transform.position.x, nextRoom.transform.position.y, -1f);
+        currentCell = nextCell;
+
+        moveCount++;
         Debug.Log($"Moved to room {currentCell}");
+
+        CE.OnPlayerMove();
+
+        CheckForCollectiblePickup();
+    }
+
+    private void CheckForCollectiblePickup()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.2f);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Collectibles"))
+            {
+                Debug.Log($"Picked up {hit.name}");
+                Destroy(hit.gameObject);
+                CE.CollectibleCollected(hit.name);
+                break;
+            }
+        }
     }
 }
