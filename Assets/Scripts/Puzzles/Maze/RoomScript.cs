@@ -34,12 +34,18 @@ public class RoomScript : MonoBehaviour
 
     Dictionary<Direction, bool> dirFlags = new Dictionary<Direction, bool>();
 
-    private void Start()
+    private void Awake()
     {
         walls[Direction.TOP] = TopWall;
         walls[Direction.RIGHT] = RightWall;
         walls[Direction.LEFT] = LeftWall;
         walls[Direction.BOTTOM] = BottomWall;
+
+        foreach (Direction dir in walls.Keys)
+        {
+            dirFlags[dir] = true;
+            walls[dir].SetActive(true);
+        }
     }
 
     private void SetActive(Direction dir, bool flag)
@@ -51,5 +57,14 @@ public class RoomScript : MonoBehaviour
     {
         dirFlags[dir] = flag;
         SetActive(dir, flag);
+    }
+
+    public bool CanMove(Direction dir)
+    {
+        if (dirFlags.ContainsKey(dir))
+        {
+            return dirFlags[dir] == false; 
+        }
+        return false;
     }
 }

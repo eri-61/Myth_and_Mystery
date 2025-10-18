@@ -1,20 +1,27 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class GenerateMaze : MonoBehaviour
 {
     [SerializeField] GameObject roomPrefab;
+    [SerializeField] private GameObject loadingPanel; 
 
-    RoomScript[,] rooms = null;
+    public RoomScript[,] rooms = null;
+    MazePlayerController player;
 
-    [SerializeField] int numX = 10;
-    [SerializeField] int numY = 10;
+    [SerializeField] private GameObject playerPrefab;
+    private GameObject playerInstance;
 
-    float roomWidth;
-    float roomHeight;
+    [SerializeField] public int numX = 10;
+    [SerializeField] public int numY = 10;
+
+    public float roomWidth ;
+    public float roomHeight ;
 
     Stack<RoomScript> stack = new Stack<RoomScript>();
 
@@ -39,41 +46,84 @@ public class GenerateMaze : MonoBehaviour
 
     private void SetCamera()
     {
-        Camera.main.transform.position = new Vector3
-            (numX * (roomWidth - 1) / 2,
-            numY * (roomHeight - 1) / 2,
-            -100.0f);
+        // Calculate the maze's total width and height in world units
+        float mazeWidth = numX * roomWidth;
+        float mazeHeight = numY * roomHeight;
 
-        float min_value = Mathf.Min
-            (numX * (roomWidth - 1),
-            numY * roomHeight - 1);
+        // Center the camera on the maze
+        Camera.main.transform.position = new Vector3(
+            mazeWidth / 2 - roomWidth / 2,
+            mazeHeight / 2 - roomHeight / 2,
+            -10f 
+        );
 
-        Camera.main.orthographicSize = min_value * 0.75f;
+        // Adjust zoom so the whole maze fits, but not too small
+        float screenAspect = (float)Screen.width / (float)Screen.height;
+        float targetAspect = mazeWidth / mazeHeight;
 
+        float orthographicSize;
+
+        if (screenAspect >= targetAspect)
+        {
+            // Screen is wider than maze
+            orthographicSize = mazeHeight / 2f;
+        }
+        else
+        {
+            // Screen is taller than maze
+            orthographicSize = (mazeWidth / 2f) / screenAspect;
+        }
+
+        // Apply a zoom-in factor (smaller number = more zoom)
+        Camera.main.orthographicSize = orthographicSize * 1f;
     }
 
     private void Start()
     {
-        GetRoomSize();
+        StartCoroutine(GenerateMazeWithLoading());
+    }
 
-        rooms = new RoomScript[numX, numY];
+    private IEnumerator GenerateMazeWithLoading()
+    {
+        if (loadingPanel != null)
+            loadingPanel.SetActive(true);
 
-        for (int i = 0; i < numX; i++)
+        foreach (Transform child in transform)
+            child.gameObject.SetActive(false);
+
+        InitializeRooms();
+        CreateMaze();
+
+        while (generating)
+            yield return null;
+
+        yield return StartCoroutine(GenerateMazeInstant());
+
+        foreach (Transform child in transform)
+            child.gameObject.SetActive(true);
+
+        if (loadingPanel != null)
+            loadingPanel.SetActive(false);
+    }
+
+    IEnumerator GenerateMazeInstant()
+    {
+        generating = true;
+        bool done = false;
+        while (!done)
         {
-            for (int j = 0; j < numY; j++)
-            {
-                GameObject room = Instantiate(roomPrefab,
-                    new Vector3(i * roomWidth, j * roomHeight, 0.0f),
-                    Quaternion.identity);
-
-                room.name = "Room_" + i.ToString() + "_" + j.ToString();
-                rooms[i, j] = room.GetComponent<RoomScript>();
-                rooms[i, j].Index = new Vector2Int(i, j);
-            }
+            done = GenerateStep();
+            yield return null;
         }
 
-        SetCamera();
+        generating = false;
+        yield return null;
+
+        CreateExit();
+        SpawnPlayer();
     }
+
+
 
     private void RemoveWall(int x, int y, RoomScript.Direction dir)
     {
@@ -227,19 +277,40 @@ public class GenerateMaze : MonoBehaviour
         RemoveWall(numX - 1, numY - 1, RoomScript.Direction.RIGHT);
 
         stack.Push(rooms[0, 0]);
-        StartCoroutine(Coroutine_Generate());
     }
 
-    IEnumerator Coroutine_Generate()
+    private void SpawnPlayer()
     {
-        generating = true;
-        bool flag = false;
-        while (!flag)
+        if (rooms == null || rooms[0, 0] == null)
         {
-            flag = GenerateStep();
-            yield return new WaitForSeconds(0.05f);
+            Debug.LogError("Rooms not ready, cannot spawn player.");
+            return;
         }
-        generating = false;
+
+        // Lower-left room (0,0)
+        RoomScript startRoom = rooms[0, 0];
+        Vector3 spawnPos = startRoom.transform.position;
+
+        // Spawn player
+        playerInstance = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
+        playerInstance.name = "Player";
+        playerInstance.transform.SetParent(transform); // Keep hierarchy tidy
+
+        // Fixed scale — visible for testing
+        playerInstance.transform.localScale = new Vector3(100f, 100f, 1f);
+
+        // Set z position to be on top
+        playerInstance.transform.position = new Vector3(spawnPos.x, spawnPos.y, -1f);
+
+        // Pass reference to maze
+        var controller = playerInstance.GetComponent<MazePlayerController>();
+        if (controller != null)
+        {
+            controller.generateMaze = this;
+            controller.currentCell = new Vector2Int(0, 0);
+        }
+
+        Debug.Log($"✅ Player spawned at {spawnPos} with scale {playerInstance.transform.localScale}");
     }
 
     private void Reset()
@@ -257,16 +328,57 @@ public class GenerateMaze : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void CreateExit()
     {
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
+        // Top-right cell (exit)
+        RoomScript exitRoom = rooms[numX - 1, numY - 1];
+
+        // Open right wall
+        exitRoom.SetDirFlag(RoomScript.Direction.RIGHT, false);
+
+        // Create a small visible "Exit" marker outside the maze
+        Vector3 exitPos = exitRoom.transform.position + new Vector3(roomWidth, 0, 0);
+
+        GameObject exit = new GameObject("ExitZone");
+        exit.transform.position = exitPos;
+        exit.transform.localScale = new Vector3(roomWidth * 0.8f, roomHeight * 0.8f, 1f);
+
+        BoxCollider2D col = exit.AddComponent<BoxCollider2D>();
+        col.isTrigger = true;
+
+        SpriteRenderer rend = exit.AddComponent<SpriteRenderer>();
+        rend.color = new Color(0, 1, 0, 0.3f); // green transparent
+        rend.sortingOrder = 10;
+
+        Debug.Log(" Exit created at: " + exitPos);
+    }
+
+    private void InitializeRooms()
+    {
+        GetRoomSize();
+
+        rooms = new RoomScript[numX, numY];
+
+        for (int i = 0; i < numX; i++)
         {
-            if (!generating)
+            for (int j = 0; j < numY; j++)
             {
-                CreateMaze();
+                GameObject room = Instantiate(roomPrefab,
+                    new Vector3(i * roomWidth, j * roomHeight, 0.0f),
+                    Quaternion.identity);
+
+                room.name = $"Room_{i}_{j}";
+                room.transform.SetParent(transform); // keeps things tidy
+
+                var roomScript = room.GetComponent<RoomScript>();
+                rooms[i, j] = roomScript;
+                rooms[i, j].Index = new Vector2Int(i, j);
             }
         }
+
+        SetCamera();
     }
+
 }
 
 

@@ -53,6 +53,7 @@ public class InvestigationScene : MonoBehaviour
     [SerializeField] private InventoryManager inventoryManager;
 
     private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
+    private Coroutine hideDialogCoroutine;
 
     void Start()
     {
@@ -133,7 +134,6 @@ public class InvestigationScene : MonoBehaviour
     {
         buttons.SetActive(false);
         character.SetActive(false);
-        dialogPanel.SetActive(false);
 
         back.SetActive(true);
         investigationButtons.SetActive(true);
@@ -172,15 +172,22 @@ public class InvestigationScene : MonoBehaviour
     {
         dialogPanel.SetActive(true);
         description.text = message;
-        StopAllCoroutines();
-        StartCoroutine(HideDialog(dialogHide));
+
+        // Stop previous coroutine if running
+        if (hideDialogCoroutine != null)
+        {
+            StopCoroutine(hideDialogCoroutine);
+        }
+        hideDialogCoroutine = StartCoroutine(HideDialog(dialogHide));
     }
 
     IEnumerator HideDialog(float delay)
     {
         yield return new WaitForSeconds(delay);
         dialogPanel.SetActive(false);
+        hideDialogCoroutine = null;
     }
+
 
     void OpenInventory()
     {
