@@ -79,20 +79,27 @@ public class CluesScript : MonoBehaviour
         SceneController.Instance.LoadScene(sceneIndex);
     }
 
-    public void deductionComplete()
+    public void DeductionComplete(Dialog result)
     {
-        if (result == Dialog.RIGHT)
+        this.result = result;
+
+        if (deductionButton != null)
         {
-            deductionButton.interactable = false;
-            entryDescription.text += "\n\n<b>Deduction Complete!</b>";
+            if (result == Dialog.RIGHT)
+            {
+                deductionButton.interactable = false;
+                entryDescription.text = "<b> Deduction Completed.</b>";
+            }
+            else if (result == Dialog.WRONG)
+            {
+                entryDescription.text = "<b>Wrong Deduction.</b>";
+            }
         }
-
-        else if (result == Dialog.WRONG)
+        else
         {
-            entryDescription.text += "\n\n<b>Wrong Deduction!</b>";
+            Debug.Log("[CluesScript] Deduction result stored; UI not present to update now.");
 
         }
-
     }
 
     public void AddClues(CluesData newClue)

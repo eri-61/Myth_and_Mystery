@@ -23,7 +23,6 @@ public class DialogStarter_Deduction : MonoBehaviour
     public int sceneIndex = 1;
     #endregion
 
-    public Dialog result = Dialog.NONE;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,13 +34,35 @@ public class DialogStarter_Deduction : MonoBehaviour
 
     void loadNextScene()
     {
-        result = Dialog.RIGHT;
+        if (GameManager.Instance != null && GameManager.Instance.cluesScript)
+        {
+            GameManager.Instance.cluesScript.DeductionComplete(Dialog.RIGHT);
+        }
+        else
+        {
+            var clue = FindAnyObjectByType<CluesScript>();
+            if (clue != null)
+            {
+                clue.DeductionComplete(Dialog.RIGHT);
+            }
+        }
         SceneController.Instance.LoadScene(sceneIndex);
     }
 
     void GoBackToPrevious()
     {
-        result = Dialog.WRONG;
+        if (GameManager.Instance != null && GameManager.Instance.cluesScript)
+        {
+            GameManager.Instance.cluesScript.DeductionComplete(Dialog.WRONG);
+        }
+        else
+        {
+            var clue = FindAnyObjectByType<CluesScript>();
+            if (clue != null)
+            {
+                clue.DeductionComplete(Dialog.WRONG);
+            }
+        }
         SceneController.Instance.LoadScene(sceneIndex);
     }
 
