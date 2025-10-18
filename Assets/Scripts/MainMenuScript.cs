@@ -40,6 +40,13 @@ public class MainMenuScript : MonoBehaviour
     public int achievementSceneIndex = 1;
     #endregion
 
+    private void Start()
+    {
+        loadChap2.interactable = false;
+        loadChap3.interactable = false;
+        loadChap4.interactable = false;
+    }
+
     void OnEnable()
     {
         //main

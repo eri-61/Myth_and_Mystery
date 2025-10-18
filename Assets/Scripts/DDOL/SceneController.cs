@@ -7,7 +7,7 @@ public class SceneController : MonoBehaviour
 {
     public static SceneController Instance;
     private int previousSceneIndex = -1;
-    
+
     void Awake()
     {
         if (Instance == null)
@@ -28,7 +28,7 @@ public class SceneController : MonoBehaviour
     
     public void LoadScene(int sceneIndex)
     {
- 
+        
         previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneIndex);
     }
