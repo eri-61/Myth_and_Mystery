@@ -27,6 +27,9 @@ public class GenerateMaze : MonoBehaviour
 
     bool generating = false;
 
+    public int nextScene = 1;
+    public int lostScene = 2;
+
     private void GetRoomSize()
     {
         SpriteRenderer[] spriteRenderers = roomPrefab.GetComponentsInChildren<SpriteRenderer>();
@@ -377,6 +380,22 @@ public class GenerateMaze : MonoBehaviour
         }
 
         SetCamera();
+    }
+
+    public void GameWin()
+    {
+        Debug.Log("🎉 You escaped the maze!");
+        // Disable player input (optional)
+        if (playerInstance != null)
+            playerInstance.GetComponent<MazePlayerController>().enabled = false;
+
+        SceneController.Instance.LoadScene(nextScene);
+    }
+
+    public void GameLost()
+    {
+        SceneController.Instance.LoadScene(lostScene);
+
     }
 
 }
