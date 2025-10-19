@@ -57,16 +57,6 @@ public class InventoryManager : MonoBehaviour
     {
         int idx = 1;
 
-        //slots1 = InventoryManager.Instance.;
-        //slots2 = InventoryManager.Instance.slots2;
-        //slots3 = InventoryManager.Instance.slots3;
-        //slots4 = InventoryManager.Instance.slots4;
-        //slots5 = InventoryManager.Instance.slots5;
-        //slots6 = InventoryManager.Instance.slots6;
-        //slots7 = InventoryManager.Instance.slots7;
-        //slots8 = InventoryManager.Instance.slots8;
-        //slots9 = InventoryManager.Instance.slots9;
-
         foreach (var itm in currentItems)
         {
             if (idx == 1)

@@ -210,20 +210,6 @@ public class InvestigationScene : MonoBehaviour
         PersistentObjects.instance.OpenMap();
     }
 
-    void CloseInv()
-    {
-        PersistentObjects.instance.CloseInventory();
-    }
-
-    void CloseMap()
-    {
-        PersistentObjects.instance.CloseMap();
-    }
-
-    void CloseMenu()
-    {
-        PersistentObjects.instance.CloseSettings();
-    }
     void AddClueToJournal(CluesData clue)
     {
         if (clue == null)

@@ -11,6 +11,8 @@ public class MazePlayerController_wCollectibles : MonoBehaviour
     private Vector2Int dragDirection = Vector2Int.zero;
     private int moveCount = 0;
 
+    private Rigidbody2D rb;
+
     private void Awake()
     {
         CE = FindAnyObjectByType<GenerateMaze_wCollectibles>();
@@ -20,12 +22,33 @@ public class MazePlayerController_wCollectibles : MonoBehaviour
     {
         cam = Camera.main;
 
-        // Ensure collider for OnMouseDown to work
-        if (GetComponent<Collider2D>() == null)
+        // Ensure collider for physics / triggers
+        Collider2D col = GetComponent<Collider2D>();
+        if (col == null)
         {
-            BoxCollider2D col = gameObject.AddComponent<BoxCollider2D>();
-            col.isTrigger = true;
+            BoxCollider2D box = gameObject.AddComponent<BoxCollider2D>();
+            box.isTrigger = false; // not a trigger — Exit uses a trigger collider
         }
+        else
+        {
+            col.isTrigger = false;
+        }
+
+        // Ensure a Rigidbody2D exists. Use Kinematic so we can MovePosition and still get trigger callbacks.
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.simulated = true;
+        }
+
+        // ensure the player GameObject has the "Player" tag so ExitZoneTrigger sees it
+        try
+        {
+            gameObject.tag = "Player";
+        }
+        catch { /* ignore if tag missing */ }
     }
 
     private void OnMouseDown()
@@ -80,17 +103,25 @@ public class MazePlayerController_wCollectibles : MonoBehaviour
             case RoomScript.Direction.RIGHT: nextCell.x += 1; break;
         }
 
-        if (nextCell.x < 0 || nextCell.x >= CE.numX || nextCell.y < 0 || nextCell.y >= CE.numY)
-            return;
+        // when movement would leave the grid, attempt exit via physics move
+        if (nextCell.x < 0 || nextCell.x >= CE.numX || nextCell.y < 0 || nextCell.y >= CE.numY) return;
 
         RoomScript nextRoom = CE.rooms[nextCell.x, nextCell.y];
-        transform.position = new Vector3(nextRoom.transform.position.x, nextRoom.transform.position.y, -1f);
-        currentCell = nextCell;
 
-        // Move player visually
-        transform.position = new Vector3(nextRoom.transform.position.x, nextRoom.transform.position.y, -1f);
-        currentCell = nextCell;
+        // Move via Rigidbody2D to keep physics consistent
+        if (rb != null)
+        {
+            Vector2 target = new Vector2(nextRoom.transform.position.x, nextRoom.transform.position.y);
+            rb.MovePosition(target);
+            // ensure z ordering
+            transform.position = new Vector3(transform.position.x, transform.position.y, -1f);
+        }
+        else
+        {
+            transform.position = new Vector3(nextRoom.transform.position.x, nextRoom.transform.position.y, -1f);
+        }
 
+        currentCell = nextCell;
         moveCount++;
         Debug.Log($"Moved to room {currentCell}");
 

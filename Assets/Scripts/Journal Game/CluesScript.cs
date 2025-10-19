@@ -24,7 +24,6 @@ public class CluesScript : MonoBehaviour
     public List<TestimonyData> gatheredTestimonies = new();
     #endregion
 
-    public Dialog result;
     private enum EntryType { Clue, Testimony }
     private List<EntryType> entrytypes = new();
 
@@ -80,7 +79,7 @@ public class CluesScript : MonoBehaviour
         SceneController.Instance.LoadScene(sceneIndex);
     }
 
-    public void DeductionComplete(Dialog result)
+    /*public void DeductionComplete(Dialog result)
     {
         this.result = result;
 
@@ -101,7 +100,7 @@ public class CluesScript : MonoBehaviour
             Debug.Log("[CluesScript] Deduction result stored; UI not present to update now.");
 
         }
-    }
+    }*/
 
     public void AddClues(CluesData newClue)
     {

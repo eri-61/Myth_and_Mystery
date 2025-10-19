@@ -27,6 +27,22 @@ public class PersistentObjects : MonoBehaviour
         inventoryPanel.SetActive(false);
         menuPanel.SetActive(false);
         DontDestroyOnLoad(gameObject);
+
+        if (main == null)
+        {
+            main = Camera.main;
+        }
+
+        if(main == null)
+        {
+            GameObject camObj = new GameObject("PersistentMainCamera");
+            main = camObj.AddComponent<Camera>();
+            main.tag = "MainCamera";
+        }
+
+        main.transform.SetParent(transform);
+        DontDestroyOnLoad(main.gameObject);
+
     }
 
     public void OpenJournal() => journalPanel.SetActive(true);

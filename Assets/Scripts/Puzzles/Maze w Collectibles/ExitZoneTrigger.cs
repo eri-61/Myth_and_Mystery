@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class ExitZoneTrigger : MonoBehaviour
 {
+    public GenerateMaze_wCollectibles mazeGen;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("ExitZone"))
         {
-            GenerateMaze_wCollectibles maze = FindObjectOfType<GenerateMaze_wCollectibles>();
-            if (maze != null)
+            if (other.name == "ExitZone")
             {
-                maze.OnPlayerExit();
+                Debug.Log("Reached Exit!");
+                mazeGen.OnPlayerExit();
             }
         }
     }
