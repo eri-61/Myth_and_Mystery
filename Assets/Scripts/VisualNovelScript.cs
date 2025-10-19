@@ -36,8 +36,6 @@ public class VisualNovelScript : MonoBehaviour
 
     [Header("Variables")]
     bool isUIHidden = false;
-    [SerializeField] private cherrydev.DialogBehaviour dialogBehaviour;
-
     #endregion
 
     private void Start()
@@ -90,11 +88,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void Skip()
     {
-        if (dialogBehaviour != null)
-        {
-            dialogBehaviour.SkipCurrentSentence();
-            dialogBehaviour.SkipToNextAnswerNode();
-        }
+        //add skip
     }
 
     void HideUI()

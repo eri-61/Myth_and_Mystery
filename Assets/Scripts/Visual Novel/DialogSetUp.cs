@@ -1,24 +1,17 @@
 using UnityEngine;
 
+[System.Serializable]
 public class Dialog
 {
     public string Name;
     public bool isQuestion;
+    [TextArea] public string dialogText;
     public Transform transform;
     public GameObject characterPrefab;
+    public AudioClip voiceClip;
 }
 
 public class DialogSetUp : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Dialog[] sceneDialogs;
 }
