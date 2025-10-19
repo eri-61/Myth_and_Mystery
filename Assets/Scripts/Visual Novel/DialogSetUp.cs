@@ -5,9 +5,9 @@ using UnityEngine.Events;
 public class Dialog
 {
     public string Name;
-    public bool isQuestion;
     [TextArea] public string dialogText;
 
+    public bool isQuestion;
     public Choice[] choices;
 
     public Transform transform;
@@ -15,17 +15,19 @@ public class Dialog
     public AudioClip voiceClip;
 
     [HideInInspector] public bool isTalking;
-
-[System.Serializable]
-public class Choice
-{
-    public string choiceText;
-    public int nextDialogIndex;
-
-    public UnityEvent onChoiceSelected;
 }
 
-public class DialogSetUp : MonoBehaviour
-{
-    public Dialog[] sceneDialogs;
-}
+    [System.Serializable]
+    public class Choice
+    {
+        public string choiceText;
+        public int nextDialogIndex;
+
+        public UnityEvent onChoiceSelected;
+    }
+
+    public class DialogSetUp : MonoBehaviour
+    {
+        public Dialog[] sceneDialogs;
+    }
+
