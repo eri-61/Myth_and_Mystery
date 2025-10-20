@@ -14,11 +14,12 @@ public struct DialogSection
     public string[] dialog;
 
     public bool endAfterDialog;
+    public int nextDialog;
 
     public BranchPoint branchPoint;
     public Characters[] characters;
 
-    public Sprite background;
+    public Sprite[] background;
 }
 
 [System.Serializable]

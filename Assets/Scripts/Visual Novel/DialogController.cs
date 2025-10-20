@@ -58,17 +58,21 @@ public class DialogController : MonoBehaviour
     {
         DialogSection current = dialogTree.sections[section];
 
-        if (current.background != null) 
-        {
-            bgImage.sprite = current.background;
-        }
-
         ShowCharacters(current);
 
         for (int i = 0; i < current.dialog.Length; i++)
         {
             nameText.text = current.characterName[i];
             dialogText.text = "";
+
+            if (current.background != null && current.background.Length > 0)
+            {
+                Sprite bgToUse = (i < current.background.Length) ? current.background[i] : current.background[current.background.Length - 1];
+                if (bgToUse != null && bgImage != null)
+                {
+                    bgImage.sprite = bgToUse;
+                }
+            }
 
             Characters? currentSpeaker = null;
             foreach (var c in current.characters)
@@ -111,25 +115,32 @@ public class DialogController : MonoBehaviour
             }
         }
 
-        if (dialogTree.sections[section].endAfterDialog)
+        if (!string.IsNullOrEmpty(current.branchPoint.question))
         {
-            OnDialogEnded?.Invoke();
-            dialogBox.SetActive(false);
+            dialogText.text = current.branchPoint.question;
+            ShowAnswers(current.branchPoint);
+
+            while (!answerTriggered)
+                yield return null;
+
+            answerBox.SetActive(false);
+            answerTriggered = false;
+
+            int next = current.branchPoint.answers[answerIndex].nextElement;
+            if (next >= 0 && next < dialogTree.sections.Length)
+                StartCoroutine(RunDialog(dialogTree, next));
+
             yield break;
         }
 
-        dialogText.text = dialogTree.sections[section].branchPoint.question;
-        ShowAnswers(dialogTree.sections[section].branchPoint);
-
-        while(answerTriggered == false)
+        if (current.nextDialog >= 0 && current.nextDialog < dialogTree.sections.Length)
         {
-            yield return null;
+            StartCoroutine(RunDialog(dialogTree, current.nextDialog));
+            yield break;
         }
 
-        answerBox.SetActive(false);
-        answerTriggered = false;
-
-        StartCoroutine(RunDialog(dialogTree, dialogTree.sections[section].branchPoint.answers[answerIndex].nextElement));
+        OnDialogEnded?.Invoke();
+        dialogBox.SetActive(false);
     }
 
     void ShowCharacters(DialogSection section)
