@@ -319,7 +319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 124345821}
   - component: {fileID: 124345820}
-  - component: {fileID: 124345822}
+  - component: {fileID: 124345824}
   - component: {fileID: 124345823}
   m_Layer: 0
   m_Name: Scripts
@@ -375,102 +375,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &124345822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124345818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a485806b05dbffb44b544f94f54b45ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogSetUp
-  sceneDialog:
-  - characterName:
-    - Rafael
-    - Javier
-    - Rafael
-    dialog:
-    - Hey! Javier, wake up! Wake up, it's time to open the agency!
-    - Ugh.. You're too loud.
-    - Seriously? Did you fall asleep at the office again?
-    endAfterDialog: 0
-    branchPoint:
-      question: What would you answer Rafael?
-      answers:
-      - answerLabel: Yes... Sorry I fell asleep reviewing cases
-        nextElement: 1
-      - answerLabel: No... I was just resting my eyes for a few seconds
-        nextElement: 2
-    characters:
-    - charaName: Rafael
-      transform: {fileID: 667379146}
-      characterPrefab: {fileID: 963812418090814742, guid: 54dc9849852385744b62e571b45ca441, type: 3}
-      voiceClip: {fileID: 8300000, guid: a11580b521912b34487b74f0b5e51599, type: 3}
-      isTalking: 0
-    - charaName: Javier
-      transform: {fileID: 1260085540}
-      characterPrefab: {fileID: 8314928333923898037, guid: 8dca2188baea0b74e87a6867af5a8956, type: 3}
-      voiceClip: {fileID: 8300000, guid: a11580b521912b34487b74f0b5e51599, type: 3}
-      isTalking: 0
-    - charaName: Rafael
-      transform: {fileID: 667379146}
-      characterPrefab: {fileID: 963812418090814742, guid: 54dc9849852385744b62e571b45ca441, type: 3}
-      voiceClip: {fileID: 8300000, guid: a11580b521912b34487b74f0b5e51599, type: 3}
-      isTalking: 0
-    background: {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
-  - characterName:
-    - Javier
-    - Rafael
-    dialog:
-    - Yes... Sorry I fell asleep reviewing cases.
-    - Hmph... I told you that you should stop sleeping here because it's bad for
-      your back.
-    endAfterDialog: 0
-    branchPoint:
-      question: 
-      answers:
-      - answerLabel: 
-        nextElement: 3
-    characters:
-    - charaName: Javier
-      transform: {fileID: 1260085540}
-      characterPrefab: {fileID: 5068511743598465375, guid: 7aca185d58db1954c9ee0fac51e9b2c2, type: 3}
-      voiceClip: {fileID: 8300000, guid: a11580b521912b34487b74f0b5e51599, type: 3}
-      isTalking: 0
-    - charaName: Rafael
-      transform: {fileID: 667379146}
-      characterPrefab: {fileID: 8256252293960858144, guid: 3c211ad4eb42fa44682c469e1cd43ea6, type: 3}
-      voiceClip: {fileID: 8300000, guid: a11580b521912b34487b74f0b5e51599, type: 3}
-      isTalking: 0
-    background: {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
-  - characterName:
-    - Javier
-    - Rafael
-    dialog:
-    - Yes... Sorry I fell asleep reviewing cases.
-    - Hmph... I told you that you should stop sleeping here because it's bad for
-      your back.
-    endAfterDialog: 0
-    branchPoint:
-      question: 
-      answers:
-      - answerLabel: 
-        nextElement: 3
-    characters:
-    - charaName: Javier
-      transform: {fileID: 1260085540}
-      characterPrefab: {fileID: 5068511743598465375, guid: 7aca185d58db1954c9ee0fac51e9b2c2, type: 3}
-      voiceClip: {fileID: 8300000, guid: a11580b521912b34487b74f0b5e51599, type: 3}
-      isTalking: 0
-    - charaName: Rafael
-      transform: {fileID: 667379146}
-      characterPrefab: {fileID: 8256252293960858144, guid: 3c211ad4eb42fa44682c469e1cd43ea6, type: 3}
-      voiceClip: {fileID: 8300000, guid: a11580b521912b34487b74f0b5e51599, type: 3}
-      isTalking: 0
-    background: {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
 --- !u!114 &124345823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,13 +390,28 @@ MonoBehaviour:
   dialogText: {fileID: 7960805800298423710}
   nameText: {fileID: 7960805800298423711}
   dialogBox: {fileID: 7960805800298423712}
-  typingSpeed: 0.5
+  typingSpeed: 0.05
   answerBox: {fileID: 1130214709}
   answerObjects:
   - {fileID: 236979075}
   - {fileID: 222693679}
   characters: {fileID: 348461427}
   isTalking: 1
+  bgImage: {fileID: 1404634641}
+--- !u!114 &124345824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124345818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaaa044fecb8f424eba53b4fb53bd2c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VN_Office
+  dialogTree: {fileID: 11400000, guid: 1125966352b0f0b4f82c0cb05599d981, type: 2}
+  startSection: 0
 --- !u!114 &147438367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +465,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 216498672}
+  - component: {fileID: 216498674}
+  - component: {fileID: 216498673}
   m_Layer: 5
   m_Name: middle
   m_TagString: Untagged
@@ -570,8 +491,46 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 295}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &216498673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216498671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &216498674
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216498671}
+  m_CullTransparentMesh: 1
 --- !u!1 &222693677
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,8 +853,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -37.500004}
+  m_SizeDelta: {x: 0, y: -75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &348461429
 MonoBehaviour:
@@ -1801,6 +1760,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 667379146}
+  - component: {fileID: 667379148}
+  - component: {fileID: 667379147}
   m_Layer: 5
   m_Name: right
   m_TagString: Untagged
@@ -1825,8 +1786,46 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 295}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &667379147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667379145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &667379148
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667379145}
+  m_CullTransparentMesh: 1
 --- !u!1 &804732799
 GameObject:
   m_ObjectHideFlags: 0
@@ -3714,6 +3713,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1260085540}
+  - component: {fileID: 1260085542}
+  - component: {fileID: 1260085541}
   m_Layer: 5
   m_Name: left
   m_TagString: Untagged
@@ -3738,8 +3739,46 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 295}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1260085541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260085539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1260085542
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260085539}
+  m_CullTransparentMesh: 1
 --- !u!114 &1353965270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4929,7 +4968,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1629595560164198194, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 348461428}
     - targetCorrespondingSourceObject: {fileID: 9123173718198708107, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
       insertIndex: -1

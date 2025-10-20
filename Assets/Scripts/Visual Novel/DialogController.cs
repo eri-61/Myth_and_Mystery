@@ -1,30 +1,35 @@
 using System;
 using System.Collections;
 using System.Transactions;
+using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class DialogController : MonoBehaviour
 {
     public static DialogController instance;
 
-    [Header ("DialogBox")]
+    [Header("DialogBox")]
     [SerializeField] TextMeshProUGUI dialogText;
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] GameObject dialogBox;
     [SerializeField] float typingSpeed;
 
-    [Header ("Question and Answer")]
+    [Header("Question and Answer")]
     [SerializeField] GameObject answerBox;
     [SerializeField] Button[] answerObjects;
 
-    [Header ("Characters")]
+    [Header("Characters")]
     [SerializeField] GameObject characters;
+    [SerializeField] Transform leftAnchor;
+    [SerializeField] Transform middleAnchor;
+    [SerializeField] Transform rightAnchor;
     public bool isTalking = true;
 
     [Header("Background")]
-    Image bgImage;
+    [SerializeField] Image bgImage;
 
     public static event Action OnDialogStarted;
     public static event Action OnDialogEnded;
@@ -45,11 +50,24 @@ public class DialogController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (!dialogBox.activeSelf) return;
+
+        if (Input.GetMouseButtonDown(0))
+            SkipLine();
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            SkipLine();
+    }
+
+
     public void StartDialog(DialogTree dialogTree, int startSection)
     {
         ResetDialog();
         dialogBox.SetActive(true);
         answerBox.SetActive(false);
+        skipLineTriggered = false;
         OnDialogStarted?.Invoke();
         StartCoroutine(RunDialog(dialogTree, startSection));
     }
@@ -65,6 +83,7 @@ public class DialogController : MonoBehaviour
             nameText.text = current.characterName[i];
             dialogText.text = "";
 
+            // Set background
             if (current.background != null && current.background.Length > 0)
             {
                 Sprite bgToUse = (i < current.background.Length) ? current.background[i] : current.background[current.background.Length - 1];
@@ -74,6 +93,7 @@ public class DialogController : MonoBehaviour
                 }
             }
 
+            // Find speaker
             Characters? currentSpeaker = null;
             foreach (var c in current.characters)
             {
@@ -84,37 +104,49 @@ public class DialogController : MonoBehaviour
                 }
             }
 
+            // Start talking animation
             if (currentSpeaker.HasValue)
             {
                 Animator animator = currentSpeaker.Value.characterPrefab.GetComponent<Animator>();
                 if (animator != null)
-                {
                     animator.SetBool("isTalking", true);
-                }
             }
+
+            // Typing effect
+            dialogText.text = "";
+            skipLineTriggered = false;
 
             foreach (char letter in current.dialog[i])
             {
+                if (skipLineTriggered)
+                {
+                    Debug.Log("Skip triggered!");
+                    dialogText.text = current.dialog[i];
+                    break;
+
+                }
+
                 dialogText.text += letter;
                 yield return new WaitForSeconds(typingSpeed);
             }
 
+            // End talking
             if (currentSpeaker.HasValue)
             {
                 Animator anim = currentSpeaker.Value.characterPrefab.GetComponent<Animator>();
                 if (anim != null)
-                {
                     anim.SetBool("isTalking", false);
-                }
             }
 
+            // Wait for click before continuing
             skipLineTriggered = false;
-            while (skipLineTriggered)
+            while (!skipLineTriggered)
             {
                 yield return null;
             }
         }
 
+        // Branching logic (after all lines in this section)
         if (!string.IsNullOrEmpty(current.branchPoint.question))
         {
             dialogText.text = current.branchPoint.question;
@@ -128,23 +160,28 @@ public class DialogController : MonoBehaviour
 
             int next = current.branchPoint.answers[answerIndex].nextElement;
             if (next >= 0 && next < dialogTree.sections.Length)
+            {
                 StartCoroutine(RunDialog(dialogTree, next));
-
-            yield break;
+                yield break;
+            }
         }
 
+        // Move to next dialog section
         if (current.nextDialog >= 0 && current.nextDialog < dialogTree.sections.Length)
         {
             StartCoroutine(RunDialog(dialogTree, current.nextDialog));
             yield break;
         }
 
+        // End of dialog
         OnDialogEnded?.Invoke();
         dialogBox.SetActive(false);
     }
 
+
     void ShowCharacters(DialogSection section)
     {
+        // Clear existing characters
         foreach (Transform child in characters.transform)
         {
             Destroy(child.gameObject);
@@ -152,21 +189,38 @@ public class DialogController : MonoBehaviour
 
         foreach (var c in section.characters)
         {
-            if (c.characterPrefab == null || c.transform == null) continue;
+            if (c.characterPrefab == null) continue;
 
-            GameObject newChar = Instantiate(c.characterPrefab, c.transform);
+            Transform parentAnchor = middleAnchor; // default
+
+            switch (c.position)
+            {
+                case CharacterPosition.Left:
+                    parentAnchor = leftAnchor;
+                    break;
+                case CharacterPosition.Middle:
+                    parentAnchor = middleAnchor;
+                    break;
+                case CharacterPosition.Right:
+                    parentAnchor = rightAnchor;
+                    break;
+            }
+
+            GameObject newChar = Instantiate(c.characterPrefab, parentAnchor);
             newChar.transform.localScale = Vector3.one;
+            newChar.transform.localPosition = Vector3.zero;
+            newChar.transform.localRotation = Quaternion.identity;
         }
-
     }
+
     void ResetDialog()
     {
-        StopAllCoroutines();
         dialogBox.SetActive(true);
-        answerBox.SetActive(true);
+        answerBox.SetActive(false);
         skipLineTriggered = false;
         answerTriggered = false;
     }
+
 
     void ShowAnswers(BranchPoint branchPoint)
     {
