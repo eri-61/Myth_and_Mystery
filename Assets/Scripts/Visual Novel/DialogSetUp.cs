@@ -1,14 +1,20 @@
 using UnityEngine;
-using UnityEngine.Events;
+
+[CreateAssetMenu]
+public class DialogTree : ScriptableObject
+{
+    public DialogSection[] sections;
+}
 
 [System.Serializable]
-public class Dialog
+public struct DialogSection
 {
-    public string Name;
-    [TextArea] public string dialogText;
+    public string characterName;
+    [TextArea] public string dialog;
 
-    public bool isQuestion;
-    public Choice[] choices;
+    public bool endAfterDialog;
+
+    public BranchPoint branchPoint;
 
     public Transform transform;
     public GameObject characterPrefab;
@@ -17,17 +23,23 @@ public class Dialog
     [HideInInspector] public bool isTalking;
 }
 
-    [System.Serializable]
-    public class Choice
-    {
-        public string choiceText;
-        public int nextDialogIndex;
+[System.Serializable]
+public struct BranchPoint
+{
+    [TextArea]
+    public string question;
+    public Answer[] answers;
+}
 
-        public UnityEvent onChoiceSelected;
-    }
+[System.Serializable]
+public struct Answer
+{
+    public string answerLabel;
+    public int nextElement;
+}
 
-    public class DialogSetUp : MonoBehaviour
-    {
-        public Dialog[] sceneDialogs;
-    }
+public class DialogSetUp : MonoBehaviour
+{
+    public DialogSection[] sceneDialog;
+}
 

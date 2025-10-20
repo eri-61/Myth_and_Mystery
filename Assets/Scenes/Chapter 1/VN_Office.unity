@@ -319,6 +319,8 @@ GameObject:
   m_Component:
   - component: {fileID: 124345821}
   - component: {fileID: 124345820}
+  - component: {fileID: 124345822}
+  - component: {fileID: 124345823}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -354,21 +356,463 @@ MonoBehaviour:
   closeMap: {fileID: 1805348040}
   closeMenu: {fileID: 530193144}
   closeInstructions: {fileID: 0}
---- !u!4 &124345821
-Transform:
+--- !u!224 &124345821
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124345818}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3138.4622}
-  m_LocalScale: {x: 18.461544, y: 18.461544, z: 18.461544}
+  m_LocalPosition: {x: 0, y: 0, z: 3138.4646}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 588850210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &124345822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124345818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a485806b05dbffb44b544f94f54b45ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogSetUp
+  sceneDialog:
+  - characterName: Rafael
+    dialog: Hey! Javier, wake up! Wake up, it's time to open the agency!
+    endAfterDialog: 0
+    branchPoint:
+      question: 
+      answers: []
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Javier
+    dialog: Ugh.. You're too loud.
+    endAfterDialog: 0
+    branchPoint:
+      question: 
+      answers: []
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: Seriosly?
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 4
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 3
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: Huh?! Resting your eyes?! I can see the mess you've made in the office.
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: 'Hmph... I told you that you should stop sleeping here because it''s
+      bad for your back. '
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Door
+    dialog: '*Knock* * Knock*'
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: Let's continue this talk later...
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: ???
+    dialog: Hello? Are you open yet?
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: Please come in. Sorry about the mess.
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Javier
+    dialog: Welcome to Myth & Mystery Detective Agency. How may we help you?
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Lola Remy
+    dialog: Good morning, hijos, the mess is fine. I am Remedios but you may call
+      me Lola Remy
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Lola Remy
+    dialog: 'You see.... I''m here because my apo and her friends went missing a
+      week ago. '
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: Missing?
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Lola Remy
+    dialog: 'Yes. They went to Cagayan de Oro to go camping and then they never returned. '
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: Have you gone to someone else  about this ma'am?
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Lola Remy
+    dialog: Yes, and they told me that maybe the kids got into an accident or did
+      something they shouldn't have.
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Lola Remy
+    dialog: I don't have a concrete evidence but, I believe that something happened
+      to them on that campsite....
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Lola Remy
+    dialog: 'That''s why I came to your agency because I heard that you were experts
+      in matters like this. '
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: 'Do you have any additional information that we can use. '
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Lola Remy
+    dialog: 'I only have their pictures and the location of their campsite... '
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Javier
+    dialog: Don't worry ma'am. Those are enough.
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Lola Remy
+    dialog: Please help me find them .... or at the very least know what happened...
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Lola Remy
+    dialog: Leave it to us, lola.
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Lola Remy
+    dialog: Goodbye.
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: We should get all out things and get ready for tomorrow.
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Javier
+    dialog: 'No... We should start investigating today, the sooner the better. '
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Javier
+    dialog: 'It''s been a week since those kids were last heard from, and if they
+      are still alive, a single second might mean life or death. '
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: Okay, then I'll drive to NAIA while you ready our things and clean the
+      mess you've made.
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+  - characterName: Rafael
+    dialog: Okay...
+    endAfterDialog: 0
+    branchPoint:
+      question: Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 0
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 0
+    transform: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    voiceClip: {fileID: 0}
+    isTalking: 0
+--- !u!114 &124345823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124345818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00588bb5c94006349a73455dcf194366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogController
+  dialogText: {fileID: 7960805800298423710}
+  nameText: {fileID: 7960805800298423711}
+  dialogBox: {fileID: 7960805800298423712}
+  answerBox: {fileID: 1130214709}
+  answerObjects:
+  - {fileID: 236979075}
+  - {fileID: 222693679}
 --- !u!114 &147438367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +857,283 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &216498671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 216498672}
+  m_Layer: 5
+  m_Name: middle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &216498672
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216498671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 348461428}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &222693677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 222693678}
+  - component: {fileID: 222693681}
+  - component: {fileID: 222693680}
+  - component: {fileID: 222693679}
+  m_Layer: 5
+  m_Name: answerButton2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &222693678
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222693677}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000618, y: 1.0000618, z: 1.0000618}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 640236344}
+  m_Father: {fileID: 1130214710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -237.11539}
+  m_SizeDelta: {x: 600, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &222693679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222693677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 222693680}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &222693680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222693677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.7137255, g: 0.5764706, b: 0.41176474, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &222693681
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222693677}
+  m_CullTransparentMesh: 1
+--- !u!1 &236979073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 236979074}
+  - component: {fileID: 236979077}
+  - component: {fileID: 236979076}
+  - component: {fileID: 236979075}
+  m_Layer: 5
+  m_Name: answerButton1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &236979074
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236979073}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1238343610}
+  m_Father: {fileID: 1130214710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -132.11539}
+  m_SizeDelta: {x: 600, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &236979075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236979073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 236979076}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &236979076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236979073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.7137255, g: 0.5764706, b: 0.41176474, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &236979077
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236979073}
+  m_CullTransparentMesh: 1
 --- !u!114 &279629765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +1178,71 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &348461427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 348461428}
+  - component: {fileID: 348461429}
+  m_Layer: 5
+  m_Name: CharacterSprites
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &348461428
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348461427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1260085540}
+  - {fileID: 216498672}
+  - {fileID: 667379146}
+  m_Father: {fileID: 1977854558}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &348461429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348461427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &389216106
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,8 +1463,8 @@ Transform:
   - {fileID: 530193143}
   - {fileID: 1239390894}
   - {fileID: 1805348039}
-  - {fileID: 1578464212}
   - {fileID: 1243348661}
+  - {fileID: 1578464212}
   - {fileID: 1824837062}
   - {fileID: 804732801}
   m_Father: {fileID: 0}
@@ -695,11 +1481,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778d5c2b8099fbf4f8df633026a3528f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PersistentObjects
-  inventoryPanel: {fileID: 0}
-  journalPanel: {fileID: 0}
-  menuPanel: {fileID: 0}
-  mapPanel: {fileID: 0}
-  main: {fileID: 0}
+  inventoryPanel: {fileID: 2022294490}
+  journalPanel: {fileID: 1243348662}
+  menuPanel: {fileID: 1805348041}
+  mapPanel: {fileID: 1974893978}
+  main: {fileID: 1578464211}
 --- !u!114 &474863508 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5258049526743849357, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
@@ -1190,6 +1976,177 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &640236343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 640236344}
+  - component: {fileID: 640236346}
+  - component: {fileID: 640236345}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &640236344
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640236343}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 222693678}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &640236345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640236343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Answer 2
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: f92c4101d03a3cb46b50aa07f7992fa2, type: 2}
+  m_sharedMaterial: {fileID: -8732241220652590237, guid: f92c4101d03a3cb46b50aa07f7992fa2, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &640236346
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640236343}
+  m_CullTransparentMesh: 1
+--- !u!1 &667379145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 667379146}
+  m_Layer: 5
+  m_Name: right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &667379146
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667379145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 348461428}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &804732799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,7 +2176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25b15073b0279d4caae9b679f57abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  persistentObjects: {fileID: 0}
+  persistentObjects: {fileID: 440980192}
   cfScript: {fileID: 1243348667}
   cluesScript: {fileID: 1243348666}
   creaturesScript: {fileID: 1243348665}
@@ -1238,6 +2195,204 @@ Transform:
   m_Children: []
   m_Father: {fileID: 440980191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1130214709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1130214710}
+  - component: {fileID: 1130214711}
+  m_Layer: 5
+  m_Name: answerBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1130214710
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130214709}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 236979074}
+  - {fileID: 222693678}
+  m_Father: {fileID: 7960805800298423709}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1130214711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130214709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 600, y: 100}
+  m_Spacing: {x: 0, y: 5}
+  m_Constraint: 1
+  m_ConstraintCount: 1
+--- !u!1 &1238343609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1238343610}
+  - component: {fileID: 1238343612}
+  - component: {fileID: 1238343611}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1238343610
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238343609}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 236979074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1238343611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238343609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Answer 1
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: f92c4101d03a3cb46b50aa07f7992fa2, type: 2}
+  m_sharedMaterial: {fileID: -8732241220652590237, guid: f92c4101d03a3cb46b50aa07f7992fa2, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1238343612
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238343609}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1239390893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2869,20 +4024,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a485806b05dbffb44b544f94f54b45ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogSetUp
-  sceneDialogs:
-  - Name: 
-    dialogText: 
-    isQuestion: 1
-    choices:
-    - choiceText: 
-      nextDialogIndex: 0
-      onChoiceSelected:
-        m_PersistentCalls:
-          m_Calls: []
-    transform: {fileID: 0}
-    characterPrefab: {fileID: 0}
-    voiceClip: {fileID: 0}
-    isTalking: 0
+  sceneDialog: []
+--- !u!1 &1260085539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1260085540}
+  m_Layer: 5
+  m_Name: left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1260085540
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260085539}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 348461428}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1353965270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3683,10 +4860,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 440980191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1974893978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2267927722001549941, guid: 74e5883fa4682ac4f85e7f43e17dd735, type: 3}
+  m_PrefabInstance: {fileID: 530193142}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1977854558 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1629595560164198194, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
   m_PrefabInstance: {fileID: 7960805800298423707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2022294490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8210263244393334767, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 1239390893}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2109666434
 GameObject:
@@ -3954,6 +5141,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2356011347899176436, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 68.46155
+      objectReference: {fileID: 0}
     - target: {fileID: 3961937323298972034, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4056,7 +5247,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1629595560164198194, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 348461428}
+    - targetCorrespondingSourceObject: {fileID: 9123173718198708107, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1130214710}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 155479323182917864, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
       insertIndex: -1
@@ -4065,6 +5262,38 @@ PrefabInstance:
 --- !u!1 &7960805800298423708 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5506715835612498419, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
+  m_PrefabInstance: {fileID: 7960805800298423707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &7960805800298423709 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9123173718198708107, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
+  m_PrefabInstance: {fileID: 7960805800298423707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7960805800298423710 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4954787097259057720, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
+  m_PrefabInstance: {fileID: 7960805800298423707}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &7960805800298423711 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4609261967078976728, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
+  m_PrefabInstance: {fileID: 7960805800298423707}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &7960805800298423712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4178640717029164904, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
   m_PrefabInstance: {fileID: 7960805800298423707}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7986730708166246648 stripped
