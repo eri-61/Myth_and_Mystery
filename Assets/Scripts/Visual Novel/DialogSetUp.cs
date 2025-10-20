@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -9,18 +10,15 @@ public class DialogTree : ScriptableObject
 [System.Serializable]
 public struct DialogSection
 {
-    public string characterName;
-    [TextArea] public string dialog;
+    public string[] characterName;
+    public string[] dialog;
 
     public bool endAfterDialog;
 
     public BranchPoint branchPoint;
+    public Characters[] characters;
 
-    public Transform transform;
-    public GameObject characterPrefab;
-    public AudioClip voiceClip;
-
-    [HideInInspector] public bool isTalking;
+    public Sprite background;
 }
 
 [System.Serializable]
@@ -36,6 +34,17 @@ public struct Answer
 {
     public string answerLabel;
     public int nextElement;
+}
+
+[System.Serializable]
+public struct Characters
+{
+    public string charaName;
+    public Transform transform;
+    public GameObject characterPrefab;
+    public AudioClip voiceClip;
+
+    [HideInInspector] public bool isTalking;
 }
 
 public class DialogSetUp : MonoBehaviour

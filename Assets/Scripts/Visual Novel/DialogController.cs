@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Transactions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,12 +9,22 @@ public class DialogController : MonoBehaviour
 {
     public static DialogController instance;
 
+    [Header ("DialogBox")]
     [SerializeField] TextMeshProUGUI dialogText;
     [SerializeField] TextMeshProUGUI nameText;
-    
     [SerializeField] GameObject dialogBox;
+    [SerializeField] float typingSpeed;
+
+    [Header ("Question and Answer")]
     [SerializeField] GameObject answerBox;
     [SerializeField] Button[] answerObjects;
+
+    [Header ("Characters")]
+    [SerializeField] GameObject characters;
+    public bool isTalking = true;
+
+    [Header("Background")]
+    Image bgImage;
 
     public static event Action OnDialogStarted;
     public static event Action OnDialogEnded;
@@ -37,22 +48,67 @@ public class DialogController : MonoBehaviour
     public void StartDialog(DialogTree dialogTree, int startSection)
     {
         ResetDialog();
-        nameText.text = name;
         dialogBox.SetActive(true);
+        answerBox.SetActive(false);
         OnDialogStarted?.Invoke();
         StartCoroutine(RunDialog(dialogTree, startSection));
     }
 
     IEnumerator RunDialog(DialogTree dialogTree, int section)
     {
-        for (int i = 0; i < dialogTree.sections[section].dialog.Length; i++)
+        DialogSection current = dialogTree.sections[section];
+
+        if (current.background != null) 
         {
-            dialogText.text = dialogTree.sections[section].dialog;
-            while (skipLineTriggered == false)
+            bgImage.sprite = current.background;
+        }
+
+        ShowCharacters(current);
+
+        for (int i = 0; i < current.dialog.Length; i++)
+        {
+            nameText.text = current.characterName[i];
+            dialogText.text = "";
+
+            Characters? currentSpeaker = null;
+            foreach (var c in current.characters)
+            {
+                if (c.charaName == current.characterName[i])
+                {
+                    currentSpeaker = c;
+                    break;
+                }
+            }
+
+            if (currentSpeaker.HasValue)
+            {
+                Animator animator = currentSpeaker.Value.characterPrefab.GetComponent<Animator>();
+                if (animator != null)
+                {
+                    animator.SetBool("isTalking", true);
+                }
+            }
+
+            foreach (char letter in current.dialog[i])
+            {
+                dialogText.text += letter;
+                yield return new WaitForSeconds(typingSpeed);
+            }
+
+            if (currentSpeaker.HasValue)
+            {
+                Animator anim = currentSpeaker.Value.characterPrefab.GetComponent<Animator>();
+                if (anim != null)
+                {
+                    anim.SetBool("isTalking", false);
+                }
+            }
+
+            skipLineTriggered = false;
+            while (skipLineTriggered)
             {
                 yield return null;
             }
-            skipLineTriggered = false;
         }
 
         if (dialogTree.sections[section].endAfterDialog)
@@ -76,6 +132,22 @@ public class DialogController : MonoBehaviour
         StartCoroutine(RunDialog(dialogTree, dialogTree.sections[section].branchPoint.answers[answerIndex].nextElement));
     }
 
+    void ShowCharacters(DialogSection section)
+    {
+        foreach (Transform child in characters.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var c in section.characters)
+        {
+            if (c.characterPrefab == null || c.transform == null) continue;
+
+            GameObject newChar = Instantiate(c.characterPrefab, c.transform);
+            newChar.transform.localScale = Vector3.one;
+        }
+
+    }
     void ResetDialog()
     {
         StopAllCoroutines();
