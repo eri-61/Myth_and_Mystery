@@ -101,7 +101,7 @@ public class DialogController : MonoBehaviour
         {
             nameText.text = current.characterName[i];
             dialogText.text = "";
-            ShowCharacters(current);
+            ShowCharacters(current, i);
 
             // Set background
             if (current.background != null && current.background.Length > 0)
@@ -206,31 +206,52 @@ public class DialogController : MonoBehaviour
         nextButton.gameObject.SetActive(true);
     }
 
-    void ShowCharacters(DialogSection section)
+    void ShowCharacters(DialogSection section, int index)
     {
+        foreach (Transform child in characters.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
         foreach (var c in section.characters)
         {
             if (c.characterPrefab == null) continue;
 
-            Transform parentAnchor = characters.transform;
+            // Find existing instance by name
+            Transform existing = characters.transform.Find(c.charaName);
+            GameObject charObj;
 
-            switch (c.position)
+            if (existing == null)
             {
-                case CharacterPosition.Left:
-                    parentAnchor = leftAnchor;
-                    break;
-                case CharacterPosition.Middle:
-                    parentAnchor = middleAnchor;
-                    break;
-                case CharacterPosition.Right:
-                    parentAnchor = rightAnchor;
-                    break;
+                // Create new instance if not already present
+                Transform parentAnchor = characters.transform;
+
+                switch (c.position)
+                {
+                    case CharacterPosition.Left:
+                        parentAnchor = leftAnchor;
+                        break;
+                    case CharacterPosition.Middle:
+                        parentAnchor = middleAnchor;
+                        break;
+                    case CharacterPosition.Right:
+                        parentAnchor = rightAnchor;
+                        break;
+                }
+
+                charObj = Instantiate(c.characterPrefab, parentAnchor);
+                charObj.name = c.charaName; // so we can find it next time
+                charObj.transform.localScale = Vector3.one;
+                charObj.transform.localPosition = Vector3.zero;
+                charObj.transform.localRotation = Quaternion.identity;
+            }
+            else
+            {
+                charObj = existing.gameObject;
             }
 
-            GameObject newChar = Instantiate(c.characterPrefab, parentAnchor);
-            newChar.transform.localScale = Vector3.one;
-            newChar.transform.localPosition = Vector3.zero;
-            newChar.transform.localRotation = Quaternion.identity;
+            // Make visible
+            charObj.SetActive(true);
         }
     }
 
