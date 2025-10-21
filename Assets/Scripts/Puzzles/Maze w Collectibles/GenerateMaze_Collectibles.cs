@@ -810,11 +810,10 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         if (collectedCount >= TotalCollectibles)
         {
             if (text != null)
-                text.text = "You escaped the maze!";
+                text.text = "You escaped the forest!";
             else
                 Debug.LogWarning("[GenerateMaze] UI text reference is not assigned; skipping victory UI update.");
 
-            Debug.Log(" Player exited the maze — You Win!");
             if (SceneController.Instance != null)
                 SceneController.Instance.LoadScene(gameWin);
             else

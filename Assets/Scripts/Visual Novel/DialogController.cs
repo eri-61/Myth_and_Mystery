@@ -97,12 +97,11 @@ public class DialogController : MonoBehaviour
     {
         DialogSection current = dialogTree.sections[section];
 
-        ShowCharacters(current);
-
         for (int i = 0; i < current.dialog.Length; i++)
         {
             nameText.text = current.characterName[i];
             dialogText.text = "";
+            ShowCharacters(current);
 
             // Set background
             if (current.background != null && current.background.Length > 0)
@@ -128,9 +127,15 @@ public class DialogController : MonoBehaviour
             // Start talking animation
             if (currentSpeaker.HasValue)
             {
+                AudioSource audio = currentSpeaker.Value.characterPrefab.GetComponent<AudioSource>();
+                audio.Play();
+
                 Animator animator = currentSpeaker.Value.characterPrefab.GetComponent<Animator>();
                 if (animator != null)
+                {
                     animator.SetBool("isTalking", true);
+
+                }
             }
 
             // Typing effect
@@ -141,7 +146,6 @@ public class DialogController : MonoBehaviour
             {
                 if (skipLineTriggered)
                 {
-                    Debug.LogWarning("Skip triggered!");
                     dialogText.text = current.dialog[i];
                     break;
                 }
@@ -149,11 +153,13 @@ public class DialogController : MonoBehaviour
                 dialogText.text += letter;
                 yield return new WaitForSecondsRealtime(typingSpeed);
             }
-            Debug.LogWarning("Stopped typing!");
             
             // End talking
             if (currentSpeaker.HasValue)
             {
+                AudioSource audio = currentSpeaker.Value.characterPrefab.GetComponent<AudioSource>();
+                audio.Stop();
+
                 Animator anim = currentSpeaker.Value.characterPrefab.GetComponent<Animator>();
                 if (anim != null)
                     anim.SetBool("isTalking", false);
@@ -202,12 +208,6 @@ public class DialogController : MonoBehaviour
 
     void ShowCharacters(DialogSection section)
     {
-        var characterPosition = characters.GetComponentInChildren<Transform>();
-        foreach (Transform child in characterPosition)
-        {
-            Destroy(child.gameObject);
-        }
-
         foreach (var c in section.characters)
         {
             if (c.characterPrefab == null) continue;
