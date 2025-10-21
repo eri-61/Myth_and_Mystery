@@ -44,7 +44,6 @@ public struct Characters
     public string charaName;
     public CharacterPosition position;
     public GameObject characterPrefab;
-    public AudioClip voiceClip;
 
     [HideInInspector] public bool isTalking;
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using System.Transactions;
 using System.Xml.Serialization;
 using TMPro;
@@ -120,16 +121,16 @@ public class DialogController : MonoBehaviour
             {
                 if (skipLineTriggered)
                 {
-                    Debug.Log("Skip triggered!");
+                    Debug.LogWarning("Skip triggered!");
                     dialogText.text = current.dialog[i];
                     break;
-
                 }
 
                 dialogText.text += letter;
-                yield return new WaitForSeconds(typingSpeed);
+                yield return new WaitForSecondsRealtime(typingSpeed);
             }
-
+            Debug.LogWarning("Stopped typing!");
+            
             // End talking
             if (currentSpeaker.HasValue)
             {
@@ -181,8 +182,8 @@ public class DialogController : MonoBehaviour
 
     void ShowCharacters(DialogSection section)
     {
-        // Clear existing characters
-        foreach (Transform child in characters.transform)
+        var characterPosition = characters.GetComponentInChildren<Transform>();
+        foreach (Transform child in characterPosition)
         {
             Destroy(child.gameObject);
         }
@@ -191,7 +192,7 @@ public class DialogController : MonoBehaviour
         {
             if (c.characterPrefab == null) continue;
 
-            Transform parentAnchor = middleAnchor; // default
+            Transform parentAnchor = characters.transform;
 
             switch (c.position)
             {
@@ -220,7 +221,6 @@ public class DialogController : MonoBehaviour
         skipLineTriggered = false;
         answerTriggered = false;
     }
-
 
     void ShowAnswers(BranchPoint branchPoint)
     {
