@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VN_Office : MonoBehaviour
 {
@@ -17,4 +18,6 @@ public class VN_Office : MonoBehaviour
             Debug.LogWarning("Dialog Controller / Tree missing");
         }
     }
+
+    
 }

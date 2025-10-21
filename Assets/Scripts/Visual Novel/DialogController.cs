@@ -32,6 +32,10 @@ public class DialogController : MonoBehaviour
     [Header("Background")]
     [SerializeField] Image bgImage;
 
+    [Header("Next Scene")]
+    [SerializeField] int sceneIndex;
+    [SerializeField] Button nextButton;
+
     public static event Action OnDialogStarted;
     public static event Action OnDialogEnded;
 
@@ -51,6 +55,21 @@ public class DialogController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        nextButton.onClick.AddListener(NextScene);
+    }
+
+    private void OnDisable()
+    {
+        nextButton.onClick.RemoveAllListeners();
+    }
+
+    void NextScene()
+    {
+        SceneController.Instance.LoadScene(sceneIndex);
+    }
+
     private void Update()
     {
         if (!dialogBox.activeSelf) return;
@@ -66,6 +85,7 @@ public class DialogController : MonoBehaviour
     public void StartDialog(DialogTree dialogTree, int startSection)
     {
         ResetDialog();
+        nextButton.gameObject.SetActive(false);
         dialogBox.SetActive(true);
         answerBox.SetActive(false);
         skipLineTriggered = false;
@@ -177,8 +197,8 @@ public class DialogController : MonoBehaviour
         // End of dialog
         OnDialogEnded?.Invoke();
         dialogBox.SetActive(false);
+        nextButton.gameObject.SetActive(true);
     }
-
 
     void ShowCharacters(DialogSection section)
     {

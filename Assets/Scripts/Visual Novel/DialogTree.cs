@@ -36,6 +36,7 @@ public struct Answer
 {
     public string answerLabel;
     public int nextElement;
+    public Event Event;
 }
 
 [System.Serializable]
