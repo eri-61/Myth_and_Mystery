@@ -23,10 +23,8 @@ public class DialogController : MonoBehaviour
     [SerializeField] Button[] answerObjects;
 
     [Header("Characters")]
-    [SerializeField] GameObject characters;
-    [SerializeField] Transform leftAnchor;
-    [SerializeField] Transform middleAnchor;
-    [SerializeField] Transform rightAnchor;
+    [SerializeField] GameObject charactersParent; // parent/container for spawned characters
+    GameObject activeCharacterInstance; // currently spawned character instance
     public bool isTalking = true;
 
     [Header("Background")]
@@ -113,28 +111,17 @@ public class DialogController : MonoBehaviour
                 }
             }
 
-            // Find speaker
-            Characters? currentSpeaker = null;
-            foreach (var c in current.characters)
+            // If we have a spawned character instance, play audio / start talking animation on the instance
+            if (activeCharacterInstance != null)
             {
-                if (c.charaName == current.characterName[i])
+                if (activeCharacterInstance.TryGetComponent(out AudioSource audio))
                 {
-                    currentSpeaker = c;
-                    break;
+                    audio.Play();
                 }
-            }
 
-            // Start talking animation
-            if (currentSpeaker.HasValue)
-            {
-                AudioSource audio = currentSpeaker.Value.characterPrefab.GetComponent<AudioSource>();
-                audio.Play();
-
-                Animator animator = currentSpeaker.Value.characterPrefab.GetComponent<Animator>();
-                if (animator != null)
+                if (activeCharacterInstance.TryGetComponent(out Animator animator))
                 {
                     animator.SetBool("isTalking", true);
-
                 }
             }
 
@@ -154,14 +141,15 @@ public class DialogController : MonoBehaviour
                 yield return new WaitForSecondsRealtime(typingSpeed);
             }
             
-            // End talking
-            if (currentSpeaker.HasValue)
+            // End talking on the instance
+            if (activeCharacterInstance != null)
             {
-                AudioSource audio = currentSpeaker.Value.characterPrefab.GetComponent<AudioSource>();
-                audio.Stop();
+                if (activeCharacterInstance.TryGetComponent(out AudioSource audio))
+                {
+                    audio.Stop();
+                }
 
-                Animator anim = currentSpeaker.Value.characterPrefab.GetComponent<Animator>();
-                if (anim != null)
+                if (activeCharacterInstance.TryGetComponent(out Animator anim))
                     anim.SetBool("isTalking", false);
             }
 
@@ -176,20 +164,35 @@ public class DialogController : MonoBehaviour
         // Branching logic (after all lines in this section)
         if (!string.IsNullOrEmpty(current.branchPoint.question))
         {
-            dialogText.text = current.branchPoint.question;
-            ShowAnswers(current.branchPoint);
-
-            while (!answerTriggered)
-                yield return null;
-
-            answerBox.SetActive(false);
-            answerTriggered = false;
-
-            int next = current.branchPoint.answers[answerIndex].nextElement;
-            if (next >= 0 && next < dialogTree.sections.Length)
+            // If there are no answers, skip branching
+            if (current.branchPoint.answers == null || current.branchPoint.answers.Length == 0)
             {
-                StartCoroutine(RunDialog(dialogTree, next));
-                yield break;
+                Debug.LogWarning("BranchPoint has a question but no answers defined. Skipping branch.");
+            }
+            else
+            {
+                dialogText.text = current.branchPoint.question;
+                ShowAnswers(current.branchPoint);
+
+                while (!answerTriggered)
+                    yield return null;
+
+                // Safely clamp answerIndex
+                int chosen = Mathf.Clamp(answerIndex, 0, current.branchPoint.answers.Length - 1);
+
+                // Remove listeners to avoid duplicate handlers next time
+                for (int i = 0; i < answerObjects.Length; i++)
+                    answerObjects[i].onClick.RemoveAllListeners();
+
+                answerBox.SetActive(false);
+                answerTriggered = false;
+
+                int next = current.branchPoint.answers[chosen].nextElement;
+                if (next >= 0 && next < dialogTree.sections.Length)
+                {
+                    StartCoroutine(RunDialog(dialogTree, next));
+                    yield break;
+                }
             }
         }
 
@@ -208,50 +211,34 @@ public class DialogController : MonoBehaviour
 
     void ShowCharacters(DialogSection section, int index)
     {
-        foreach (Transform child in characters.transform)
+        // Clear previously spawned instances under the parent
+        if (charactersParent != null)
         {
-            child.gameObject.SetActive(false);
+            for (int i = charactersParent.transform.childCount - 1; i >= 0; i--)
+            {
+                Destroy(charactersParent.transform.GetChild(i).gameObject);
+            }
         }
 
+        activeCharacterInstance = null;
+
+        // Determine who's speaking for this line
+        string speakerName = (section.characterName != null && index < section.characterName.Length) ? section.characterName[index] : null;
+        if (string.IsNullOrEmpty(speakerName)) return;
+
+        // Spawn only the speaker's prefab (one at a time)
         foreach (var c in section.characters)
         {
             if (c.characterPrefab == null) continue;
+            if (c.charaName != speakerName) continue;
 
-            // Find existing instance by name
-            Transform existing = characters.transform.Find(c.charaName);
-            GameObject charObj;
+            Transform parentAnchor = (charactersParent != null) ? charactersParent.transform : null;
 
-            if (existing == null)
-            {
-                // Create new instance if not already present
-                Transform parentAnchor = characters.transform;
-
-                switch (c.position)
-                {
-                    case CharacterPosition.Left:
-                        parentAnchor = leftAnchor;
-                        break;
-                    case CharacterPosition.Middle:
-                        parentAnchor = middleAnchor;
-                        break;
-                    case CharacterPosition.Right:
-                        parentAnchor = rightAnchor;
-                        break;
-                }
-
-                charObj = Instantiate(c.characterPrefab, parentAnchor);
-                charObj.name = c.charaName; // so we can find it next time
-                charObj.transform.localScale = Vector3.one;
-                charObj.transform.localPosition = Vector3.zero;
-                charObj.transform.localRotation = Quaternion.identity;
-            }
-            else
-            {
-                charObj = existing.gameObject;
-            }
-
-            // Make visible
-            charObj.SetActive(true);
+            activeCharacterInstance = Instantiate(c.characterPrefab, parentAnchor);
+            activeCharacterInstance.transform.localScale = Vector3.one;
+            activeCharacterInstance.transform.localPosition = Vector3.zero;
+            activeCharacterInstance.transform.localRotation = Quaternion.identity;
+            break;
         }
     }
 
@@ -265,17 +252,39 @@ public class DialogController : MonoBehaviour
 
     void ShowAnswers(BranchPoint branchPoint)
     {
-        answerBox.SetActive(true);
-        for(int i = 0; i<3; i++)
+        // Guard against null answers
+        if (branchPoint.answers == null || branchPoint.answers.Length == 0)
         {
+            Debug.LogWarning("ShowAnswers called with no answers. Hiding answer box.");
+            answerBox.SetActive(false);
+            return;
+        }
+
+        answerBox.SetActive(true);
+
+        int btnCount = answerObjects != null ? answerObjects.Length : 0;
+        for (int i = 0; i < btnCount; i++)
+        {
+            var btn = answerObjects[i];
+            btn.onClick.RemoveAllListeners();
+
             if (i < branchPoint.answers.Length)
             {
-                answerObjects[i].GetComponentInChildren<TextMeshProUGUI>().text = branchPoint.answers[i].answerLabel;
-                answerObjects[i].gameObject.SetActive(true);
+                int captured = i; // capture loop variable
+                btn.onClick.AddListener(() => AnswerQuestion(captured));
+
+                var label = btn.GetComponentInChildren<TextMeshProUGUI>();
+                if (label != null)
+                    label.text = branchPoint.answers[i].answerLabel;
+                else
+                    Debug.LogWarning($"Answer button at index {i} has no TextMeshProUGUI child.");
+
+                btn.gameObject.SetActive(true);
             }
             else
             {
-                answerObjects[i].gameObject.SetActive(false);
+                // no corresponding answer, hide the button
+                btn.gameObject.SetActive(false);
             }
         }
     }

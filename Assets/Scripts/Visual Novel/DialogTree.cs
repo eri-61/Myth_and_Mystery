@@ -43,7 +43,6 @@ public struct Answer
 public struct Characters
 {
     public string charaName;
-    public CharacterPosition position;
     public GameObject characterPrefab;
 
     [HideInInspector] public bool isTalking;
