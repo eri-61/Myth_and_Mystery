@@ -160,35 +160,24 @@ public class DialogController : MonoBehaviour
         // Branching logic (after all lines in this section)
         if (!string.IsNullOrEmpty(current.branchPoint.question))
         {
-            // If there are no answers, skip branching
-            if (current.branchPoint.answers == null || current.branchPoint.answers.Length == 0)
+            dialogText.text = current.branchPoint.question;
+            ShowAnswers(current.branchPoint);
+
+            while (!answerTriggered)
+                yield return null;
+
+            // Remove listeners to avoid duplicate handlers next time
+            for (int i = 0; i < answerObjects.Length; i++)
+                answerObjects[i].onClick.RemoveAllListeners();
+
+            answerBox.SetActive(false);
+            answerTriggered = false;
+
+            int next = current.branchPoint.answers[answerIndex].nextElement;
+            if (next >= 0 && next < dialogTree.sections.Length)
             {
-                Debug.LogWarning("BranchPoint has a question but no answers defined. Skipping branch.");
-            }
-            else
-            {
-                dialogText.text = current.branchPoint.question;
-                ShowAnswers(current.branchPoint);
-
-                while (!answerTriggered)
-                    yield return null;
-
-                // Safely clamp answerIndex
-                int chosen = Mathf.Clamp(answerIndex, 0, current.branchPoint.answers.Length - 1);
-
-                // Remove listeners to avoid duplicate handlers next time
-                for (int i = 0; i < answerObjects.Length; i++)
-                    answerObjects[i].onClick.RemoveAllListeners();
-
-                answerBox.SetActive(false);
-                answerTriggered = false;
-
-                int next = current.branchPoint.answers[chosen].nextElement;
-                if (next >= 0 && next < dialogTree.sections.Length)
-                {
-                    StartCoroutine(RunDialog(dialogTree, next));
-                    yield break;
-                }
+                StartCoroutine(RunDialog(dialogTree, next));
+                yield break;
             }
         }
 
@@ -228,8 +217,7 @@ public class DialogController : MonoBehaviour
             Transform parentAnchor = (charactersParent != null) ? charactersParent.transform : null;
 
             activeCharacterInstance = Instantiate(c.characterPrefab, parentAnchor);
-            activeCharacterInstance.transform.localScale = c.characterPrefab.transform.localScale;
-
+            activeCharacterInstance.transform.localScale = Vector3.one;
             activeCharacterInstance.transform.localPosition = Vector3.zero;
             activeCharacterInstance.transform.localRotation = Quaternion.identity;
             break;
@@ -246,37 +234,21 @@ public class DialogController : MonoBehaviour
 
     void ShowAnswers(BranchPoint branchPoint)
     {
-        if (branchPoint.answers == null || branchPoint.answers.Length == 0)
-        {
-            Debug.LogWarning("ShowAnswers called with no answers. Hiding answer box.");
-            answerBox.SetActive(false);
-            return;
-        }
-
         answerBox.SetActive(true);
-
-        int btnCount = answerObjects != null ? answerObjects.Length : 0;
-        for (int i = 0; i < btnCount; i++)
+        for(int i = 0; i<3; i++)
         {
-            var btn = answerObjects[i];
-            btn.onClick.RemoveAllListeners();
-
             if (i < branchPoint.answers.Length)
             {
-                int captured = i; 
+                var btn = answerObjects[i];
+                btn.onClick.RemoveAllListeners(); // ensure no duplicate listeners
+                int captured = i;
                 btn.onClick.AddListener(() => AnswerQuestion(captured));
-
-                var label = btn.GetComponentInChildren<TextMeshProUGUI>();
-                if (label != null)
-                    label.text = branchPoint.answers[i].answerLabel;
-                else
-                    Debug.LogWarning($"Answer button at index {i} has no TextMeshProUGUI child.");
-
+                btn.GetComponentInChildren<TextMeshProUGUI>().text = branchPoint.answers[i].answerLabel;
                 btn.gameObject.SetActive(true);
             }
             else
             {
-                btn.gameObject.SetActive(false);
+                answerObjects[i].gameObject.SetActive(false);
             }
         }
     }
