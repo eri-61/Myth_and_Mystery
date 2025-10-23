@@ -5,7 +5,12 @@ using TMPro;
 
 public class SettingsScript : MonoBehaviour
 {
+    public static SettingsScript instance;
+
     #region Variables
+    [Header ("Panel")]
+    public GameObject settingsPanel;
+
     [Header("Slider")]
     public Slider musicSlider;     
     public Slider vfxSlider;       
@@ -26,8 +31,20 @@ public class SettingsScript : MonoBehaviour
     #endregion
 
     Coroutine sampleCoroutine;
-    bool suppressChangeEvents = false; 
+    bool suppressChangeEvents = false;
 
+    private void Start()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     private void OnEnable()
     {
         closeBtn.onClick.AddListener(CloseSettings);
@@ -74,10 +91,15 @@ public class SettingsScript : MonoBehaviour
         if (vfxInput != null) vfxInput.onEndEdit.RemoveListener(OnVFXInputEndEdit);
         if (textSpeedInput != null) textSpeedInput.onEndEdit.RemoveListener(OnTextSpeedInputEndEdit);
     }
-
-    void CloseSettings()
+    
+    public void OpenSettings()
     {
-        PersistentObjects.instance.CloseSettings();
+       settingsPanel.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        settingsPanel.SetActive(false);
     }
 
     void QuitGame()

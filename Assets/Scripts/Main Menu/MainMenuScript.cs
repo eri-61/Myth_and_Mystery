@@ -26,7 +26,6 @@ public class MainMenuScript : MonoBehaviour
     public Button loadChap4;
 
     [Header("Panels")]
-    public GameObject settingsPanel;
     public GameObject loadPanel;
     public GameObject quitPanel;
 
@@ -45,6 +44,8 @@ public class MainMenuScript : MonoBehaviour
         loadChap2.interactable = false;
         loadChap3.interactable = false;
         loadChap4.interactable = false;
+
+        SettingsScript.instance.settingsPanel.SetActive(false);
     }
 
     void OnEnable()
@@ -115,7 +116,7 @@ public class MainMenuScript : MonoBehaviour
 
     void OpenSettings()
     {
-        settingsPanel.SetActive(true);
+        SettingsScript.instance.OpenSettings();
     }
 
     void ExitGame()

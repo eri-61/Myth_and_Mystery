@@ -44,7 +44,6 @@ public class VisualNovelScript : MonoBehaviour
         PersistentObjects.instance.CloseInventory();
         PersistentObjects.instance.CloseMap();
         PersistentObjects.instance.CloseJournal();
-        PersistentObjects.instance.CloseSettings();
 
         skipBtn.onClick.AddListener(Skip);
         hideBtn.onClick.AddListener(HideUI);
@@ -106,7 +105,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenMenu()
     {
-        PersistentObjects.instance.OpenSettings();
+        SettingsScript.instance.OpenSettings();
     }
 
     void OpenJournal()
@@ -131,7 +130,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void CloseMenu()
     {
-        PersistentObjects.instance.CloseSettings();
+        SettingsScript.instance.CloseSettings();
     }
 
 }

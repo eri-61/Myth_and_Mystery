@@ -197,7 +197,7 @@ public class InvestigationScene : MonoBehaviour
 
     void OpenMenu()
     {
-        PersistentObjects.instance.OpenSettings();
+        SettingsScript.instance.OpenSettings();
     }
 
     void OpenJournal()
