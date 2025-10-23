@@ -23,8 +23,8 @@ public class DialogController : MonoBehaviour
     [SerializeField] Button[] answerObjects;
 
     [Header("Characters")]
-    [SerializeField] GameObject charactersParent; // parent/container for spawned characters
-    GameObject activeCharacterInstance; // currently spawned character instance
+    [SerializeField] GameObject charactersParent; 
+    GameObject activeCharacterInstance; 
     public bool isTalking = true;
 
     [Header("Background")]
@@ -101,7 +101,6 @@ public class DialogController : MonoBehaviour
             dialogText.text = "";
             ShowCharacters(current, i);
 
-            // Set background
             if (current.background != null && current.background.Length > 0)
             {
                 Sprite bgToUse = (i < current.background.Length) ? current.background[i] : current.background[current.background.Length - 1];
@@ -111,7 +110,6 @@ public class DialogController : MonoBehaviour
                 }
             }
 
-            // If we have a spawned character instance, play audio / start talking animation on the instance
             if (activeCharacterInstance != null)
             {
                 if (activeCharacterInstance.TryGetComponent(out AudioSource audio))
@@ -125,7 +123,6 @@ public class DialogController : MonoBehaviour
                 }
             }
 
-            // Typing effect
             dialogText.text = "";
             skipLineTriggered = false;
 
@@ -141,7 +138,6 @@ public class DialogController : MonoBehaviour
                 yield return new WaitForSecondsRealtime(typingSpeed);
             }
             
-            // End talking on the instance
             if (activeCharacterInstance != null)
             {
                 if (activeCharacterInstance.TryGetComponent(out AudioSource audio))
@@ -211,7 +207,6 @@ public class DialogController : MonoBehaviour
 
     void ShowCharacters(DialogSection section, int index)
     {
-        // Clear previously spawned instances under the parent
         if (charactersParent != null)
         {
             for (int i = charactersParent.transform.childCount - 1; i >= 0; i--)
@@ -222,11 +217,9 @@ public class DialogController : MonoBehaviour
 
         activeCharacterInstance = null;
 
-        // Determine who's speaking for this line
         string speakerName = (section.characterName != null && index < section.characterName.Length) ? section.characterName[index] : null;
         if (string.IsNullOrEmpty(speakerName)) return;
 
-        // Spawn only the speaker's prefab (one at a time)
         foreach (var c in section.characters)
         {
             if (c.characterPrefab == null) continue;
@@ -235,7 +228,8 @@ public class DialogController : MonoBehaviour
             Transform parentAnchor = (charactersParent != null) ? charactersParent.transform : null;
 
             activeCharacterInstance = Instantiate(c.characterPrefab, parentAnchor);
-            activeCharacterInstance.transform.localScale = Vector3.one;
+            activeCharacterInstance.transform.localScale = c.characterPrefab.transform.localScale;
+
             activeCharacterInstance.transform.localPosition = Vector3.zero;
             activeCharacterInstance.transform.localRotation = Quaternion.identity;
             break;
@@ -252,7 +246,6 @@ public class DialogController : MonoBehaviour
 
     void ShowAnswers(BranchPoint branchPoint)
     {
-        // Guard against null answers
         if (branchPoint.answers == null || branchPoint.answers.Length == 0)
         {
             Debug.LogWarning("ShowAnswers called with no answers. Hiding answer box.");
@@ -270,7 +263,7 @@ public class DialogController : MonoBehaviour
 
             if (i < branchPoint.answers.Length)
             {
-                int captured = i; // capture loop variable
+                int captured = i; 
                 btn.onClick.AddListener(() => AnswerQuestion(captured));
 
                 var label = btn.GetComponentInChildren<TextMeshProUGUI>();
@@ -283,7 +276,6 @@ public class DialogController : MonoBehaviour
             }
             else
             {
-                // no corresponding answer, hide the button
                 btn.gameObject.SetActive(false);
             }
         }
