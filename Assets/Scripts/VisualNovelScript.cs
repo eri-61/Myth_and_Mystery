@@ -36,6 +36,7 @@ public class VisualNovelScript : MonoBehaviour
 
     [Header("Variables")]
     bool isUIHidden = false;
+    bool skipAllMode = false;
     #endregion
 
     private void Start()
@@ -44,18 +45,15 @@ public class VisualNovelScript : MonoBehaviour
         PersistentObjects.instance.CloseMap();
         PersistentObjects.instance.CloseJournal();
         PersistentObjects.instance.CloseSettings();
-    }
 
-    void OnEnable()
-    {
         skipBtn.onClick.AddListener(Skip);
         hideBtn.onClick.AddListener(HideUI);
-        
+
         inventoryBtn.onClick.AddListener(OpenInventory);
         menuBtn.onClick.AddListener(OpenMenu);
         journalBtn.onClick.AddListener(OpenJournal);
         mapBtn.onClick.AddListener(OpenMap);
-        
+
         closeInv.onClick.AddListener(CloseInv);
         closeMap.onClick.AddListener(CloseMap);
         closeMenu.onClick.AddListener(CloseMenu);
@@ -88,7 +86,9 @@ public class VisualNovelScript : MonoBehaviour
 
     void Skip()
     {
-        //add skip
+        skipAllMode = !skipAllMode;
+        if (DialogController.instance != null)
+            DialogController.instance.ToggleSkipAll(skipAllMode);
     }
 
     void HideUI()

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7282805693496561760}
   - component: {fileID: 2994601201542351023}
   - component: {fileID: 8395739632402549139}
+  - component: {fileID: -9084817902853338753}
   - component: {fileID: 6270112541648207598}
   - component: {fileID: -2359117472589340614}
   m_Layer: 0
@@ -115,6 +116,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-9084817902853338753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109511865993098689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2208e38124ac54242b86ee8c07be32b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TalkAnimator
+  frames:
+  - {fileID: 3196904741869534206, guid: f154ed96de5420e44acc8ecdf2070c29, type: 3}
+  - {fileID: 2602890789952119651, guid: faae5e851df5c834ead5c522a9619826, type: 3}
+  - {fileID: 3196904741869534206, guid: f154ed96de5420e44acc8ecdf2070c29, type: 3}
+  frameRate: 8
 --- !u!111 &6270112541648207598
 Animation:
   m_ObjectHideFlags: 0

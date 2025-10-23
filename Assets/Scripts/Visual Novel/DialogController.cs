@@ -1,11 +1,7 @@
 using System;
 using System.Collections;
-using System.Threading;
-using System.Transactions;
-using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class DialogController : MonoBehaviour
@@ -16,7 +12,7 @@ public class DialogController : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogText;
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] GameObject dialogBox;
-    [SerializeField] float typingSpeed;
+    [SerializeField] float typingSpeed = 0.05f;
 
     [Header("Question and Answer")]
     [SerializeField] GameObject answerBox;
@@ -40,6 +36,9 @@ public class DialogController : MonoBehaviour
     bool skipLineTriggered;
     bool answerTriggered;
     int answerIndex;
+
+    bool skipAll = false;
+    float savedTypingSpeed;
 
     private void Awake()
     {
@@ -110,16 +109,22 @@ public class DialogController : MonoBehaviour
                 }
             }
 
+            // Use GetComponentInChildren so we find Animator/AudioSource placed on child Image/GameObject
             if (activeCharacterInstance != null)
             {
-                if (activeCharacterInstance.TryGetComponent(out AudioSource audio))
-                {
+                var audio = activeCharacterInstance.GetComponentInChildren<AudioSource>();
+                if (audio != null)
                     audio.Play();
-                }
 
-                if (activeCharacterInstance.TryGetComponent(out Animator animator))
+                var animator = activeCharacterInstance.GetComponentInChildren<Animator>();
+                var talkAnim = activeCharacterInstance.GetComponentInChildren<TalkAnimator>();
+                if (animator != null)
                 {
                     animator.SetBool("isTalking", true);
+                }
+                else if (talkAnim != null)
+                {
+                    talkAnim.SetTalking(true);
                 }
             }
 
@@ -135,49 +140,71 @@ public class DialogController : MonoBehaviour
                 }
 
                 dialogText.text += letter;
-                yield return new WaitForSecondsRealtime(typingSpeed);
+
+                if (skipAll)
+                    yield return null;
+                else
+                    yield return new WaitForSecondsRealtime(typingSpeed);
+
             }
             
             if (activeCharacterInstance != null)
             {
-                if (activeCharacterInstance.TryGetComponent(out AudioSource audio))
-                {
+                var audio = activeCharacterInstance.GetComponentInChildren<AudioSource>();
+                if (audio != null)
                     audio.Stop();
-                }
 
-                if (activeCharacterInstance.TryGetComponent(out Animator anim))
+                var anim = activeCharacterInstance.GetComponentInChildren<Animator>();
+                if (anim != null)
                     anim.SetBool("isTalking", false);
             }
 
             // Wait for click before continuing
             skipLineTriggered = false;
-            while (!skipLineTriggered)
+
+            if (skipAll)
             {
                 yield return null;
+            }
+            else
+            {
+                while (!skipLineTriggered)
+                    yield return null;
             }
         }
 
         // Branching logic (after all lines in this section)
         if (!string.IsNullOrEmpty(current.branchPoint.question))
         {
-            dialogText.text = current.branchPoint.question;
-            ShowAnswers(current.branchPoint);
-
-            while (!answerTriggered)
-                yield return null;
-
-            // Remove listeners to avoid duplicate handlers next time
-            for (int i = 0; i < answerObjects.Length; i++)
-                answerObjects[i].onClick.RemoveAllListeners();
-
-            answerBox.SetActive(false);
-            answerTriggered = false;
-
-            int next = current.branchPoint.answers[answerIndex].nextElement;
-            if (next >= 0 && next < dialogTree.sections.Length)
+            // If there are no answers, skip branching
+            if (current.branchPoint.answers == null || current.branchPoint.answers.Length == 0)
             {
-                StartCoroutine(RunDialog(dialogTree, next));
-                yield break;
+                Debug.LogWarning("BranchPoint has a question but no answers defined. Skipping branch.");
+            }
+            else
+            {
+                dialogText.text = current.branchPoint.question;
+                ShowAnswers(current.branchPoint);
+
+                while (!answerTriggered)
+                    yield return null;
+
+                // Safely clamp answerIndex
+                int chosen = Mathf.Clamp(answerIndex, 0, current.branchPoint.answers.Length - 1);
+
+                // Remove listeners to avoid duplicate handlers next time
+                for (int i = 0; i < answerObjects.Length; i++)
+                    answerObjects[i].onClick.RemoveAllListeners();
+
+                answerBox.SetActive(false);
+                answerTriggered = false;
+
+                int next = current.branchPoint.answers[chosen].nextElement;
+                if (next >= 0 && next < dialogTree.sections.Length)
+                {
+                    StartCoroutine(RunDialog(dialogTree, next));
+                    yield break;
+                }
             }
         }
 
@@ -196,6 +223,7 @@ public class DialogController : MonoBehaviour
 
     void ShowCharacters(DialogSection section, int index)
     {
+        // Clear previously spawned instances under the parent
         if (charactersParent != null)
         {
             for (int i = charactersParent.transform.childCount - 1; i >= 0; i--)
@@ -216,10 +244,34 @@ public class DialogController : MonoBehaviour
 
             Transform parentAnchor = (charactersParent != null) ? charactersParent.transform : null;
 
-            activeCharacterInstance = Instantiate(c.characterPrefab, parentAnchor);
-            activeCharacterInstance.transform.localScale = Vector3.one;
-            activeCharacterInstance.transform.localPosition = Vector3.zero;
-            activeCharacterInstance.transform.localRotation = Quaternion.identity;
+            // Instantiate while preserving the prefab's local transform (use worldPositionStays = false to keep local values)
+            if (parentAnchor != null)
+                activeCharacterInstance = Instantiate(c.characterPrefab, parentAnchor, false);
+            else
+                activeCharacterInstance = Instantiate(c.characterPrefab);
+
+            // If prefab is UI (RectTransform) copy the prefab RectTransform values so top/bottom numbers are preserved.
+            var prefabRT = c.characterPrefab.GetComponent<RectTransform>();
+            var instRT = activeCharacterInstance.GetComponent<RectTransform>();
+            if (prefabRT != null && instRT != null)
+            {
+                // copy anchors/pivot/size/position/scale so the offsets you tuned in the prefab remain identical
+                instRT.anchorMin = prefabRT.anchorMin;
+                instRT.anchorMax = prefabRT.anchorMax;
+                instRT.pivot = prefabRT.pivot;
+                instRT.anchoredPosition = prefabRT.anchoredPosition;
+                instRT.sizeDelta = prefabRT.sizeDelta;
+                instRT.localScale = prefabRT.localScale;
+            }
+            else
+            {
+                // Non-UI fallback: keep prefab localScale and reset position/rotation relative to parent
+                activeCharacterInstance.transform.localScale = c.characterPrefab.transform.localScale;
+                activeCharacterInstance.transform.localPosition = Vector3.zero;
+                activeCharacterInstance.transform.localRotation = Quaternion.identity;
+            }
+
+            SetVFXVolumeOnInstance(activeCharacterInstance, AudioManager.Instance != null ? AudioManager.Instance.VFXVolume : 1f);
             break;
         }
     }
@@ -234,28 +286,78 @@ public class DialogController : MonoBehaviour
 
     void ShowAnswers(BranchPoint branchPoint)
     {
-        answerBox.SetActive(true);
-        for(int i = 0; i<3; i++)
+        if (branchPoint.answers == null || branchPoint.answers.Length == 0)
         {
+            Debug.LogWarning("ShowAnswers called with no answers. Hiding answer box.");
+            answerBox.SetActive(false);
+            return;
+        }
+
+        answerBox.SetActive(true);
+
+        int btnCount = answerObjects != null ? answerObjects.Length : 0;
+        for (int i = 0; i < btnCount; i++)
+        {
+            var btn = answerObjects[i];
+            btn.onClick.RemoveAllListeners();
+
             if (i < branchPoint.answers.Length)
             {
-                var btn = answerObjects[i];
-                btn.onClick.RemoveAllListeners(); // ensure no duplicate listeners
-                int captured = i;
+                int captured = i; 
                 btn.onClick.AddListener(() => AnswerQuestion(captured));
-                btn.GetComponentInChildren<TextMeshProUGUI>().text = branchPoint.answers[i].answerLabel;
+
+                var label = btn.GetComponentInChildren<TextMeshProUGUI>();
+                if (label != null)
+                    label.text = branchPoint.answers[i].answerLabel;
+                else
+                    Debug.LogWarning($"Answer button at index {i} has no TextMeshProUGUI child.");
+
                 btn.gameObject.SetActive(true);
             }
             else
             {
-                answerObjects[i].gameObject.SetActive(false);
+                btn.gameObject.SetActive(false);
             }
         }
     }
 
+
+    void SetVFXVolumeOnInstance(GameObject inst, float vol)
+    {
+        if (inst == null) return;
+        var audios = inst.GetComponentsInChildren<AudioSource>();
+        foreach (var a in audios)
+            a.volume = vol;
+    }
+
+    void OnVFXVolumeChanged(float vol)
+    {
+        SetVFXVolumeOnInstance(activeCharacterInstance, vol);
+    }
+
     public void SkipLine()
     {
-        skipLineTriggered=true;
+        skipLineTriggered = true;
+    }
+
+    public void ToggleSkipAll(bool on)
+    {
+        if (on == skipAll) return;
+        skipAll = on;
+        if (skipAll)
+        {
+            savedTypingSpeed = typingSpeed;
+            typingSpeed = 0f;
+        }
+        else
+        {
+            typingSpeed = savedTypingSpeed > 0f ? savedTypingSpeed : 0.04f;
+        }
+    }
+
+    public void SetTypingSpeed(float speed)
+    {
+        typingSpeed = Mathf.Max(0f, speed);
     }
 
     public void AnswerQuestion(int answer)

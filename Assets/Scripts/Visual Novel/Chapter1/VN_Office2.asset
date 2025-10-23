@@ -31,9 +31,9 @@ MonoBehaviour:
     - Good job
     - ...
     - By the way, we should review the case file before we go to the site.
-    - Open your journal.
+    - 'Open your journal. '
     endAfterDialog: 0
-    nextDialog: 0
+    nextDialog: 1
     branchPoint:
       question: 
       answers: []
@@ -78,7 +78,7 @@ MonoBehaviour:
     - According to the Case File, our client wants us to investigate her apo's disappearance.
     - Our main objective by going to Cagayan de Oro is find clues on why they disappeared,
     - hmm... Okay then let's prepare our stuff to go to Cagayan de Oro.
-    endAfterDialog: 0
+    endAfterDialog: 1
     nextDialog: 0
     branchPoint:
       question: 

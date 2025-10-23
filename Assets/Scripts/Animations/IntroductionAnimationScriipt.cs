@@ -8,6 +8,7 @@ public class IntroductionAnimationScriipt : MonoBehaviour
     public float skipButton_waitTime = 2f;
     public int SceneIndex = 1;
     public Button skipButton;
+    public float musicVolume = 1f;
 
     void Start()
     {
