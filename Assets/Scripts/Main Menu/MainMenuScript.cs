@@ -96,7 +96,7 @@ public class MainMenuScript : MonoBehaviour
 
     void StartNewGame()
     {
-        SceneController.Instance.LoadScene(newGameSceneIndex);
+        SceneManager.LoadScene(newGameSceneIndex);
     }
 
     void LoadGame()
@@ -129,22 +129,22 @@ public class MainMenuScript : MonoBehaviour
     //load panels
     void LoadChapter1()
     {
-        SceneController.Instance.LoadScene(chapter1SceneIndex);
+        SceneManager.LoadScene(chapter1SceneIndex);
     }
 
     void LoadChapter2()
     {
-        SceneController.Instance.LoadScene(chapter2SceneIndex);
+        SceneManager.LoadScene(chapter2SceneIndex);
     }
 
     void LoadChapter3()
     {
-        SceneController.Instance.LoadScene(chapter3SceneIndex);
+        SceneManager.LoadScene(chapter3SceneIndex);
     }
 
     void LoadChapter4()
     {
-        SceneController.Instance.LoadScene(chapter4SceneIndex);
+        SceneManager.LoadScene(chapter4SceneIndex);
     }
 
     void CloseLoad()

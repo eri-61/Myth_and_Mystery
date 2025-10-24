@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NoPuzzle : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class NoPuzzle : MonoBehaviour
         bg.SetActive(true);
 
         yield return new WaitForSecondsRealtime(1f);
-        SceneController.Instance.LoadScene(nextScseneIndex);
+        SceneManager.LoadScene(nextScseneIndex);
 
     }
 }

@@ -3,8 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Content;
-
+using UnityEngine.SceneManagement;
 public class InvestigationScene : MonoBehaviour
 {
     [Header("Choice")]
@@ -116,7 +115,7 @@ public class InvestigationScene : MonoBehaviour
         }
         else
         {
-            SceneController.Instance.LoadScene(talkSceneIndex);
+            SceneManager.LoadScene(talkSceneIndex);
         }
     }
 
@@ -173,12 +172,7 @@ public class InvestigationScene : MonoBehaviour
         dialogPanel.SetActive(true);
         description.text = message;
 
-        // Stop previous coroutine if running
-        if (hideDialogCoroutine != null)
-        {
-            StopCoroutine(hideDialogCoroutine);
-        }
-        hideDialogCoroutine = StartCoroutine(HideDialog(dialogHide));
+        StartCoroutine(HideDialog(dialogHide));
     }
 
     IEnumerator HideDialog(float delay)
@@ -246,7 +240,7 @@ public class InvestigationScene : MonoBehaviour
 
     public void GoToScene()
     {
-        SceneController.Instance.LoadScene(tentScene);
+        SceneManager.LoadScene(tentScene);
     }
     
 }

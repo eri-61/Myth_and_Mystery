@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class CluesScript : MonoBehaviour
 {
@@ -76,7 +77,7 @@ public class CluesScript : MonoBehaviour
 
     public void goToDeductionMode()
     {
-        SceneController.Instance.LoadScene(sceneIndex);
+        SceneManager.LoadScene(sceneIndex);
     }
 
     /*public void DeductionComplete(Dialog result)

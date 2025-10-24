@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GenerateMaze : MonoBehaviour
 {
@@ -389,12 +390,12 @@ public class GenerateMaze : MonoBehaviour
         if (playerInstance != null)
             playerInstance.GetComponent<MazePlayerController>().enabled = false;
 
-        SceneController.Instance.LoadScene(nextScene);
+       SceneManager.LoadScene(nextScene);
     }
 
     public void GameLost()
     {
-        SceneController.Instance.LoadScene(lostScene);
+        SceneManager.LoadScene(lostScene);
 
     }
 

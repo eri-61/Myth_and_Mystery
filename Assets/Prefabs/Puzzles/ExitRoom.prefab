@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 731248547166462473}
   m_Layer: 0
   m_Name: ExitRoom
-  m_TagString: Untagged
+  m_TagString: Exit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a10c9d4d5056624d872ae7ef92e9b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExitZoneTrigger
+  mazeGen: {fileID: 0}
 --- !u!65 &731248547166462473
 BoxCollider:
   m_ObjectHideFlags: 0

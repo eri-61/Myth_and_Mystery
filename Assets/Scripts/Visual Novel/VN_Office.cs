@@ -7,7 +7,7 @@ public class VN_Office : MonoBehaviour
     [Header("Dialog Setup")]
     [SerializeField] private DialogTree dialogTree;
     [SerializeField] private int startSection = 0;
-
+/*
     [Header ("Scriptable Objects)")]
     [SerializeField] private CluesData addClue;
     [SerializeField] private ObjectiveData addObjectives;
@@ -24,20 +24,21 @@ public class VN_Office : MonoBehaviour
     bool testimonyAdded = false;
     bool objectiveRevealed = false;
     bool waitingForThisDialogEnd = false;
+*/
     #endregion
     void Start()
     {
         if (DialogController.instance != null && dialogTree != null)
         {
             DialogController.instance.StartDialog(dialogTree, startSection);
-            waitingForThisDialogEnd = true;
+            //waitingForThisDialogEnd = true;
         }
         else
         {
             Debug.LogWarning("Dialog Controller / Tree missing");
         }
     }
-
+    /*
     private void OnEnable()
     {
         DialogController.OnDialogEnded += HandleDialogEnded;
@@ -48,6 +49,7 @@ public class VN_Office : MonoBehaviour
         DialogController.OnDialogEnded -= HandleDialogEnded;
     }
 
+    
     void HandleDialogEnded()
     {
         if (!waitingForThisDialogEnd) return;
@@ -110,6 +112,6 @@ public class VN_Office : MonoBehaviour
 
         waitingForThisDialogEnd = false;
     }
-
+    */
 
 }

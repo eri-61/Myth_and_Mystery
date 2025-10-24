@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GenerateMaze_wCollectibles : MonoBehaviour
 {
@@ -19,13 +20,11 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     MazePlayerController_wCollectibles player;
     [SerializeField] private GameObject playerPrefab;
     private GameObject playerInstance;
-    [SerializeField] private float playerSizeFactor = 0.6f; // adjustable in Inspector
+    [SerializeField] private float playerSizeFactor = 0.6f; 
 
     [Header("Room")]
     [SerializeField] GameObject roomPrefab;
     public GameObject exitInstance;
-
-
     [SerializeField] private Sprite exitSprite;
 
     [SerializeField] public int numX = 10;
@@ -107,15 +106,12 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         // Safety: avoid zero sizes
         if (roomWidth <= 0f) roomWidth = 1f;
         if (roomHeight <= 0f) roomHeight = 1f;
-
-        Debug.Log($"[GenerateMaze] roomSize calculated: roomWidth={roomWidth:F3}, roomHeight={roomHeight:F3}");
     }
 
     private void SetCamera()
     {
         if (roomWidth <= 0f || roomHeight <= 0f || numX <= 0 || numY <= 0)
         {
-            Debug.LogWarning("[GenerateMaze] SetCamera: invalid room or maze dimensions.");
             return;
         }
 
@@ -131,14 +127,13 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         Camera cam = Camera.main;
         if (cam == null)
         {
-            Debug.LogError("[GenerateMaze] SetCamera: Camera.main is null.");
             return;
         }
 
         cam.transform.position = center;
 
         float screenAspect = (float)Screen.width / (float)Screen.height;
-        float padding = 1.10f; // slightly larger padding for phone screens
+        float padding = 1.10f; 
 
         float targetOrtho;
         float mazeAspect = mazeWidth / mazeHeight;
@@ -157,9 +152,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         cam.orthographic = true;
         cam.orthographicSize = targetOrtho;
 
-        Debug.Log($"[GenerateMaze] SetCamera: maze {mazeWidth:F2}x{mazeHeight:F2}, screenAspect={screenAspect:F2}, targetOrtho={targetOrtho:F2}");
-
-        // Verify if the maze fits; if not, scale maze root to fit viewport
         float viewHeight = cam.orthographicSize * 2f;
         float viewWidth = viewHeight * screenAspect;
 
@@ -181,7 +173,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
                 -10f
             );
 
-            Debug.Log($"[GenerateMaze] Maze scaled by {scale:F3} to fit viewport (view {viewWidth:F2}x{viewHeight:F2}).");
         }
         else
         {
@@ -242,13 +233,11 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     {
         if (collectiblePrefabs == null || collectiblePrefabs.Length == 0)
         {
-            Debug.LogWarning("⚠️ No collectible prefabs assigned!");
             return;
         }
 
         if (rooms == null)
         {
-            Debug.LogWarning("[GenerateMaze] SpawnCollectibles: rooms is null.");
             return;
         }
 
@@ -311,7 +300,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         {
             if (spawnIndex >= candidates.Count)
             {
-                Debug.LogWarning("[GenerateMaze] Not enough candidate rooms for all collectibles.");
                 break;
             }
 
@@ -326,17 +314,14 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
             collectible.name = $"Collectible_{prefab.name}";
             spawnedCollectibles.Add(collectible);
 
-            // Ensure tag for pickup detection (safe)
             try
             {
                 collectible.tag = "Collectibles";
             }
             catch (Exception)
             {
-                Debug.LogWarning("[GenerateMaze] Tag 'Collectibles' not defined. Set the tag in the Editor for better identification.");
             }
 
-            // Ensure it has a trigger collider so OverlapCircle / trigger checks find it
             Collider2D existingCol = collectible.GetComponent<Collider2D>();
             if (existingCol == null)
             {
@@ -348,7 +333,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
                 existingCol.isTrigger = true;
             }
 
-            // Optional: add kinematic rigidbody so physics triggers behave consistently
             if (collectible.GetComponent<Rigidbody2D>() == null)
             {
                 var rb = collectible.AddComponent<Rigidbody2D>();
@@ -377,7 +361,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         }
         return open;
     }
-
 
     private void CreateExtraConnections(int attempts)
     {
@@ -433,27 +416,22 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         if (enemySpawned) return;
         if (rooms == null || rooms[0, 0] == null)
         {
-            Debug.LogError("[SpawnEnemy] Rooms not initialized.");
             return;
         }
 
         if (enemyPrefab == null)
         {
-            Debug.LogWarning("[SpawnEnemy] enemyPrefab is not assigned.");
             return;
         }
 
         RoomScript startRoom = rooms[0, 0];
         Vector3 spawnPos = startRoom.transform.position;
 
-        // Instantiate as child so it inherits maze root scaling
         enemyInstance = Instantiate(enemyPrefab, spawnPos, Quaternion.identity, transform);
         enemyInstance.name = "KapreEnemy";
 
-        // Desired world size (adjust factor)
         float desiredWorldSize = Mathf.Min(roomWidth, roomHeight) * enemySizeFactor;
 
-        // Account for maze root lossly scale (if maze was scaled to fit viewport)
         float mazeScale = Mathf.Abs(transform.lossyScale.x);
         if (Mathf.Approximately(mazeScale, 0f)) mazeScale = 1f;
 
@@ -468,13 +446,11 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
                 float uniform = Mathf.Clamp(Mathf.Min(sx, sy), 0.01f, 100f);
                 enemyInstance.transform.localScale = new Vector3(uniform, uniform, 1f);
 
-                // center sprite
                 sr.transform.localPosition = Vector3.zero;
                 sr.transform.localRotation = Quaternion.identity;
 
-                // ensure visible above tiles
                 sr.sortingOrder = Mathf.Max(sr.sortingOrder, 50);
-                // set z slightly above room
+
                 enemyInstance.transform.position = new Vector3(spawnPos.x, spawnPos.y, -0.5f);
             }
             else
@@ -485,7 +461,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         else
         {
             enemyInstance.transform.localScale = Vector3.one;
-            Debug.LogWarning("[SpawnEnemy] Enemy prefab has no SpriteRenderer child; adjust prefab PPU/scale in Editor.");
         }
 
         MazeEnemyController enemyCtrl = enemyInstance.GetComponent<MazeEnemyController>();
@@ -493,7 +468,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
             enemyCtrl.Initialize(this, playerInstance);
 
         enemySpawned = true;
-        Debug.Log($"Kapre spawned at {spawnPos} with localScale {enemyInstance.transform.localScale}");
     }
 
     public void CollectibleCollected(string name)
@@ -503,7 +477,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
 
         if (total == 0)
         {
-            Debug.LogWarning("[GenerateMaze] Total collectibles is 0 — cannot progress to exit. Check collectiblePrefabs or spawnedCollectibles.");
             return;
         }
 
@@ -798,11 +771,8 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("💀 Game Over! The enemy caught you!");
-
-        if (SceneController.Instance != null)
-            SceneController.Instance.LoadScene(gameOver);
-        else
-            Debug.LogError("[GenerateMaze] SceneController.Instance is null. Cannot load GameOver scene.");
+        SceneManager.LoadScene(gameOver);
+      
     }
 
     public void OnPlayerExit()
@@ -811,13 +781,13 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         {
             if (text != null)
                 text.text = "You escaped the forest!";
-            else
-                Debug.LogWarning("[GenerateMaze] UI text reference is not assigned; skipping victory UI update.");
 
-            if (SceneController.Instance != null)
-                SceneController.Instance.LoadScene(gameWin);
             else
-                Debug.LogError("[GenerateMaze] SceneController.Instance is null. Cannot load Win scene.");
+            {
+                Debug.LogWarning("[GenerateMaze] UI text reference is not assigned; skipping victory UI update.");
+            } 
+
+            SceneManager.LoadScene(gameWin);
         }
         else
         {
@@ -851,9 +821,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     {
         // Top-right cell (exit)
         RoomScript exitRoom = rooms[numX - 1, numY - 1];
-
-        // Open right wall (optional if you still want a visual passage)
-        exitRoom.SetDirFlag(RoomScript.Direction.RIGHT, false);
 
         // Position the exit directly in the last room
         Vector3 exitPos = exitRoom.transform.position;

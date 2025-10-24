@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -78,7 +79,7 @@ public class MapManager : MonoBehaviour
         if (locIndex >= 0) visitedLocations[locIndex] = true;
 
         if (loc.mainSceneIndex >= 0)
-            SceneController.Instance.LoadScene(loc.mainSceneIndex);
+            SceneManager.LoadScene(loc.mainSceneIndex);
     }
 
     public void RevealLocation(int index)

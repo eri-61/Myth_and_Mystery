@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;  
 
 public class DialogController : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class DialogController : MonoBehaviour
 
     void NextScene()
     {
-        SceneController.Instance.LoadScene(sceneIndex);
+        SceneManager.LoadScene(sceneIndex);
     }
 
     private void Update()
