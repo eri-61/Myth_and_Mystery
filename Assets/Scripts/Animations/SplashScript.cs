@@ -16,6 +16,7 @@ public class SplashScript : MonoBehaviour
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(waitTime);
+        SaveManager sm = new SaveManager();
         SceneManager.LoadScene(SceneIndex);
     }
 }

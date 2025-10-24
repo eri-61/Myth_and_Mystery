@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class JournalManager : MonoBehaviour
 {
@@ -63,6 +64,17 @@ public class JournalManager : MonoBehaviour
 
     void openSL()
     {
+        //Saving Game here
+
+        var curGS = SaveManager.Instance.GetGameState();
+        if (curGS != null) 
+        {
+            curGS.LastSaveDateTime = DateTime.Now;
+            SaveManager.Instance.SaveGameState(SaveManager.Instance.SelectedSaveIndex);
+
+            SaveManager.Instance.PrintGameStatus();
+        }
+
         ShowTab(saveLoadTab);
         //slScript.UpdateSLUI();
     }

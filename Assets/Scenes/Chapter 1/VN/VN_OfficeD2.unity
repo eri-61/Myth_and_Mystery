@@ -416,14 +416,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaaa044fecb8f424eba53b4fb53bd2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VN_Office
-  dialogTree: {fileID: 11400000, guid: 1125966352b0f0b4f82c0cb05599d981, type: 2}
+  dialogTree: {fileID: 11400000, guid: f72a5bb62188cb04d8101268526618c0, type: 2}
   startSection: 0
-  caseAnimation: 1
-  caseUI: {fileID: 1458244074}
-  caseVideo: {fileID: 1458244076}
-  dayAnimation: 1
+  caseAnimation: 0
+  caseUI: {fileID: 0}
+  caseVideo: {fileID: 0}
+  dayAnimation: 0
   dayUI: {fileID: 432447790}
-  dayVideo: {fileID: 432447792}
+  dayVideo: {fileID: 0}
   fadeUI: {fileID: 95059108}
 --- !u!114 &147438367
 MonoBehaviour:
@@ -1511,7 +1511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8303507cde9bfcb40a2f8e04dd9ae843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameChapter1
-  CurrentDialog: 1
+  CurrentDialog: 2
   CurrentObjective: 0
 --- !u!1 &640236343
 GameObject:

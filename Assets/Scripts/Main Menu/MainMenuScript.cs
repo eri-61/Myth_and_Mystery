@@ -41,13 +41,47 @@ public class MainMenuScript : MonoBehaviour
 
     private void Start()
     {
-        SettingsScript.instance.CloseSettings();
+        if (SettingsScript.instance == null)
+        {
+            //SettingsScript.instance.CloseSettings();
+        }
         loadPanel.SetActive(false);
         quitPanel.SetActive(false);
-
+        loadChap1.interactable = false;
         loadChap2.interactable = false;
         loadChap3.interactable = false;
         loadChap4.interactable = false;
+
+
+
+        if(SaveManager.Instance == null)
+        {
+            SaveManager sm = new SaveManager();
+        }
+        
+        SaveManager.Instance.InitGameStates();
+
+        switch (SaveManager.Instance.CurrentGameState.PlayerSaves.Count)
+        {
+            case 1:
+                loadChap1.interactable = true;
+                break;
+            case 2:
+                loadChap1.interactable = true;
+                loadChap2.interactable = true;
+                break;
+            case 3:
+                loadChap1.interactable = true;
+                loadChap2.interactable = true;
+                loadChap3.interactable = true;
+                break;
+            case 4:
+                loadChap1.interactable = true;
+                loadChap2.interactable = true;
+                loadChap3.interactable = true;
+                loadChap4.interactable = true;
+                break;
+        }
     }
 
     void OnEnable()
@@ -96,6 +130,10 @@ public class MainMenuScript : MonoBehaviour
 
     void StartNewGame()
     {
+        int svIndex = SaveManager.Instance.NewGameState();
+
+        SaveManager.Instance.PrintGameStatus();
+
         SceneManager.LoadScene(newGameSceneIndex);
     }
 
@@ -129,12 +167,28 @@ public class MainMenuScript : MonoBehaviour
     //load panels
     void LoadChapter1()
     {
-        SceneManager.LoadScene(chapter1SceneIndex);
+        //temp Save 1
+        SaveManager.Instance.LoadGameState(0);
+        SaveManager.Instance.PrintGameStatus();
+
+        //Load Chapter
+        //if Chapter 1 Dialog 2, then load "VN_OfficeD2"
+        SceneManager.LoadScene("VN_Office");
+
+        //SceneManager.LoadScene(chapter1SceneIndex);
     }
 
     void LoadChapter2()
     {
-        SceneManager.LoadScene(chapter2SceneIndex);
+        //temp Save 2
+        SaveManager.Instance.LoadGameState(1);
+        SaveManager.Instance.PrintGameStatus();
+
+        //Load Chapter
+        //if Chapter 1 Dialog 2, then load "VN_OfficeD2"
+        SceneManager.LoadScene("VN_OfficeD2");
+
+        //SceneManager.LoadScene(chapter2SceneIndex);
     }
 
     void LoadChapter3()

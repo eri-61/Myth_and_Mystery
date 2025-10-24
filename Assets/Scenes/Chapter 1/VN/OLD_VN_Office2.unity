@@ -977,6 +977,7 @@ GameObject:
   - component: {fileID: 38829704}
   - component: {fileID: 38829703}
   - component: {fileID: 38829702}
+  - component: {fileID: 38829706}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1071,6 +1072,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &38829706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38829701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8303507cde9bfcb40a2f8e04dd9ae843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameChapter1
+  CurrentDialog: 2
+  CurrentObjective: 0
 --- !u!1 &176610441
 GameObject:
   m_ObjectHideFlags: 0
@@ -4055,13 +4070,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VN_Office
   dialogTree: {fileID: 11400000, guid: f72a5bb62188cb04d8101268526618c0, type: 2}
   startSection: 0
-  addClue: {fileID: 0}
-  addObjectives: {fileID: 0}
-  addTestimony: {fileID: 0}
-  objectiveIndexToReveal: -1
-  revealObjectiveOnDialogEnd: 0
-  addClueOnDialogEnd: 0
-  addTestimonyOnDialogEnd: 0
+  caseAnimation: 0
+  caseUI: {fileID: 0}
+  caseVideo: {fileID: 0}
+  dayAnimation: 0
+  dayUI: {fileID: 0}
+  dayVideo: {fileID: 0}
+  fadeUI: {fileID: 0}
 --- !u!114 &1657719534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4887,7 +4902,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 38829705}
   - {fileID: 1865512295}
-  - {fileID: 208343308}
   - {fileID: 417726826}
   - {fileID: 176610444}
   - {fileID: 793500854}
+  - {fileID: 208343308}
