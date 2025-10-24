@@ -118,14 +118,9 @@ public class DialogController : MonoBehaviour
                     audio.Play();
 
                 var animator = activeCharacterInstance.GetComponentInChildren<Animator>();
-                var talkAnim = activeCharacterInstance.GetComponentInChildren<TalkAnimator>();
                 if (animator != null)
                 {
                     animator.SetBool("isTalking", true);
-                }
-                else if (talkAnim != null)
-                {
-                    talkAnim.SetTalking(true);
                 }
             }
 

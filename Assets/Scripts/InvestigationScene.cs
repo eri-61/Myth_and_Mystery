@@ -172,7 +172,13 @@ public class InvestigationScene : MonoBehaviour
         dialogPanel.SetActive(true);
         description.text = message;
 
-        StartCoroutine(HideDialog(dialogHide));
+        if (hideDialogCoroutine != null)
+        {
+            StopCoroutine(hideDialogCoroutine);
+            hideDialogCoroutine = null;
+        }
+
+        hideDialogCoroutine = StartCoroutine(HideDialog(dialogHide));
     }
 
     IEnumerator HideDialog(float delay)
