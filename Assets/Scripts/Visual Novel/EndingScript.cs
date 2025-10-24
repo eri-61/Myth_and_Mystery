@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using TMPro;
+
 using System.Collections;
 public class EndingScript : MonoBehaviour
 {
@@ -10,9 +13,11 @@ public class EndingScript : MonoBehaviour
 
     [SerializeField] private string[] text;
 
+    bool allowSceneLoad;
     void Start()
     {
         button.gameObject.SetActive(false);
+        allowSceneLoad = false;
         StartCoroutine(showEnding());
     }
 
@@ -27,8 +32,11 @@ public class EndingScript : MonoBehaviour
     }
     void BackToMain()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        if (!allowSceneLoad) return;
+
+        SceneManager.LoadScene(1);
     }
+
     IEnumerator showEnding()
     {
         yield return new WaitForSecondsRealtime(2f);
@@ -46,7 +54,19 @@ public class EndingScript : MonoBehaviour
         yield return new WaitForSecondsRealtime(2f);
         endingText.text = text[3];
 
-        yield return new WaitForSecondsRealtime(2f);
+
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+
+        Input.ResetInputAxes();
         button.gameObject.SetActive(true);
+        button.interactable = false;
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        button.interactable = true;
+        allowSceneLoad = true;
     }
 }

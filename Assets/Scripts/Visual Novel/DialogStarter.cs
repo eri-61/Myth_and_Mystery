@@ -1,42 +1,83 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
-public class VN_Office : MonoBehaviour
+public class DialogStarter : MonoBehaviour
 {
     #region Variables
     [Header("Dialog Setup")]
     [SerializeField] private DialogTree dialogTree;
     [SerializeField] private int startSection = 0;
-/*
-    [Header ("Scriptable Objects)")]
-    [SerializeField] private CluesData addClue;
-    [SerializeField] private ObjectiveData addObjectives;
-    [SerializeField] private TestimonyData addTestimony;
 
-    [Header ("Variables")]
-    [SerializeField] private int objectiveIndexToReveal = -1;
-    [SerializeField] private bool revealObjectiveOnDialogEnd = false;
+    [Header ("Animations")]
+    [SerializeField] private bool caseAnimation = false;
+    [SerializeField] private GameObject caseUI;
+    [SerializeField] private VideoPlayer caseVideo;
 
-    [SerializeField] private bool addClueOnDialogEnd = false;
-    [SerializeField] private bool addTestimonyOnDialogEnd = false;
+    [SerializeField] private bool dayAnimation = false;
+    [SerializeField] private GameObject dayUI;
+    [SerializeField] private VideoPlayer dayVideo;
 
-    bool clueAdded = false;
-    bool testimonyAdded = false;
-    bool objectiveRevealed = false;
-    bool waitingForThisDialogEnd = false;
-*/
+    [SerializeField] private GameObject fadeUI;
+
+    /*
+        [Header ("Scriptable Objects)")]
+        [SerializeField] private CluesData addClue;
+        [SerializeField] private ObjectiveData addObjectives;
+        [SerializeField] private TestimonyData addTestimony;
+
+        [Header ("Variables")]
+        [SerializeField] private int objectiveIndexToReveal = -1;
+        [SerializeField] private bool revealObjectiveOnDialogEnd = false;
+
+        [SerializeField] private bool addClueOnDialogEnd = false;
+        [SerializeField] private bool addTestimonyOnDialogEnd = false;
+
+        bool clueAdded = false;
+        bool testimonyAdded = false;
+        bool objectiveRevealed = false;
+        bool waitingForThisDialogEnd = false;
+    */
     #endregion
     void Start()
     {
-        if (DialogController.instance != null && dialogTree != null)
+        StartCoroutine(BeginSequence());
+    }
+
+    IEnumerator BeginSequence()
+    {
+        //play case
+        if (caseUI!= null && caseVideo != null && caseAnimation)
         {
-            DialogController.instance.StartDialog(dialogTree, startSection);
-            //waitingForThisDialogEnd = true;
+            yield return new WaitForSecondsRealtime(1f);
+            caseUI.SetActive(true);
+            caseVideo.Play();
+            yield return new WaitForSecondsRealtime((float)caseVideo.clip.length);
+            caseVideo.Stop();
         }
-        else
+
+        //play day
+        if (dayUI != null && dayVideo !=null && dayAnimation)
         {
-            Debug.LogWarning("Dialog Controller / Tree missing");
+            yield return new WaitForSecondsRealtime(1f);
+            caseUI.SetActive(false);
+            dayUI.SetActive(true);
+            dayVideo.Play();
+            yield return new WaitForSecondsRealtime((float)dayVideo.clip.length);
+            dayVideo.Stop(); 
         }
+        //play fade
+        if (fadeUI != null)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            dayUI.SetActive(false);
+            fadeUI.SetActive(true);
+            yield return new WaitForSecondsRealtime(5f);
+            fadeUI.SetActive(false);
+        }
+
+        DialogController.instance.StartDialog(dialogTree, startSection);
     }
     /*
     private void OnEnable()
