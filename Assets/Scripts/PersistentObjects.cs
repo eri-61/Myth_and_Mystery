@@ -28,18 +28,18 @@ public class PersistentObjects : MonoBehaviour
 
         if (main == null)
         {
-            main = Camera.main;
+            //main = Camera.main;
         }
 
         if(main == null)
         {
-            GameObject camObj = new GameObject("PersistentMainCamera");
-            main = camObj.AddComponent<Camera>();
-            main.tag = "MainCamera";
+            //GameObject camObj = new GameObject("PersistentMainCamera");
+            //main = camObj.AddComponent<Camera>();
+            //main.tag = "MainCamera";
         }
 
-        main.transform.SetParent(transform);
-        DontDestroyOnLoad(main.gameObject);
+        //main.transform.SetParent(transform);
+        //DontDestroyOnLoad(main.gameObject);
 
     }
 

@@ -20,14 +20,14 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            CleanUpAndDestroy();
-            return;
+            //CleanUpAndDestroy();
+            //return;
         }
         else
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            DontDestroyOnLoad(persistentObjects.gameObject);
+            //Instance = this;
+            //DontDestroyOnLoad(gameObject);
+            //ontDestroyOnLoad(persistentObjects.gameObject);
         }
     }
 
