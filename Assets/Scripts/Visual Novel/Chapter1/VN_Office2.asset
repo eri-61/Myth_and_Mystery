@@ -22,6 +22,7 @@ MonoBehaviour:
     - Javier
     - Rafael
     - Rafael
+    - Rafael
     dialog:
     - I'm back!
     - Welcome back.
@@ -38,16 +39,10 @@ MonoBehaviour:
       question: 
       answers: []
     characters:
-    - charaName: Javier
-      characterPrefab: {fileID: 0}
-      isTalking: 0
-    - charaName: Javier
-      characterPrefab: {fileID: 0}
-      isTalking: 0
     - charaName: Rafael
       characterPrefab: {fileID: 0}
       isTalking: 0
-    - charaName: Rafael
+    - charaName: Javier
       characterPrefab: {fileID: 0}
       isTalking: 0
     - charaName: Javier
@@ -59,7 +54,16 @@ MonoBehaviour:
     - charaName: Rafael
       characterPrefab: {fileID: 0}
       isTalking: 0
-    - charaName: 
+    - charaName: Javier
+      characterPrefab: {fileID: 0}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 0}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 0}
+      isTalking: 0
+    - charaName: Rafael
       characterPrefab: {fileID: 0}
       isTalking: 0
     background:
@@ -71,15 +75,17 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
   - characterName:
-    - Rafael
     - Javier
+    - Javier
+    - Rafael
     dialog:
     - According to the Case File, our client wants us to investigate her apo's disappearance.
     - Our main objective by going to Cagayan de Oro is find clues on why they disappeared,
     - hmm... Okay then let's prepare our stuff to go to Cagayan de Oro.
     endAfterDialog: 1
-    nextDialog: 0
+    nextDialog: -1
     branchPoint:
       question: 
       answers: []

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SettingsScript : MonoBehaviour
 {
@@ -30,21 +31,86 @@ public class SettingsScript : MonoBehaviour
     public Button closeBtn;
     #endregion
 
+    [Header("Modal settings (optional)")]
+    [Tooltip("If empty a Canvas + GraphicRaycaster will be added to the panel at runtime.")]
+    [SerializeField] Canvas panelCanvas;
+    [Tooltip("Sorting order used when opening the settings to guarantee it's on top of other UI.")]
+    [SerializeField] int overrideSortingOrder = 1000;
+
     Coroutine sampleCoroutine;
     bool suppressChangeEvents = false;
 
-    private void Start()
+    void Start()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
+            return;
+        }
+
+        EnsureModalSetup();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        CloseSettings();
+    }
+
+    void EnsureModalSetup()
+    {
+        if (settingsPanel == null) return;
+
+        panelCanvas = settingsPanel.GetComponent<Canvas>();
+        if (panelCanvas == null)
+        {
+            panelCanvas = settingsPanel.AddComponent<Canvas>();
+            settingsPanel.AddComponent<GraphicRaycaster>();
+        }
+
+        var cg = settingsPanel.GetComponent<CanvasGroup>();
+        if (cg == null)
+            cg = settingsPanel.AddComponent<CanvasGroup>();
+        cg.blocksRaycasts = true; 
+        cg.interactable = true;
+
+        if (settingsPanel.transform.Find("Blocker") == null)
+        {
+            var blockerGO = new GameObject("Blocker", typeof(RectTransform));
+            blockerGO.transform.SetParent(settingsPanel.transform, false);
+
+            var rt = blockerGO.GetComponent<RectTransform>();
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.sizeDelta = Vector2.zero;
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
+
+            var img = blockerGO.AddComponent<Image>();
+            img.color = new Color(0f, 0f, 0f, 0f);
+            img.raycastTarget = true;
+
+            blockerGO.transform.SetAsFirstSibling();
+        }
+
+        panelCanvas = settingsPanel.GetComponent<Canvas>();
+        if (panelCanvas != null)
+        {
+            panelCanvas.overrideSorting = false; 
         }
     }
-    
+
     private void OnEnable()
     {
         closeBtn.onClick.AddListener(CloseSettings);
@@ -91,21 +157,45 @@ public class SettingsScript : MonoBehaviour
         if (vfxInput != null) vfxInput.onEndEdit.RemoveListener(OnVFXInputEndEdit);
         if (textSpeedInput != null) textSpeedInput.onEndEdit.RemoveListener(OnTextSpeedInputEndEdit);
     }
-    
+
     public void OpenSettings()
     {
-       settingsPanel.SetActive(true);
+        if (settingsPanel == null) return;
+
+        EnsureModalSetup();
+
+        settingsPanel.transform.SetAsLastSibling();
+
+        // force this panel's canvas to be top-most
+        if (panelCanvas != null)
+        {
+            panelCanvas.overrideSorting = true;
+            panelCanvas.sortingOrder = overrideSortingOrder;
+        }
+
+        var cg = settingsPanel.GetComponent<CanvasGroup>();
+        if (cg != null)
+        {
+            cg.blocksRaycasts = true;
+            cg.interactable = true;
+        }
+
+        settingsPanel.SetActive(true);
     }
 
     public void CloseSettings()
     {
+        if (settingsPanel == null) return;
+
+        if (panelCanvas != null)
+        {
+            panelCanvas.overrideSorting = false;
+        }
+
         settingsPanel.SetActive(false);
     }
 
-    void QuitGame()
-    {
-        Application.Quit();
-    }
+    void QuitGame() => Application.Quit();
 
     void ApplySettingsChanges()
     {
@@ -125,60 +215,60 @@ public class SettingsScript : MonoBehaviour
 
         if (DialogController.instance != null)
             DialogController.instance.SetTypingSpeed(textSpeedValue);
+
+        CloseSettings();
     }
 
     #region Slider/Input 
     void OnMusicSliderChanged(float percent)
     {
+        if (suppressChangeEvents) return;
         if (musicInput != null) musicInput.text = Mathf.RoundToInt(percent).ToString();
-        if (AudioManager.Instance != null) AudioManager.Instance.SetMusicVolumePercent(percent);
     }
 
     void OnVFXSliderChanged(float percent)
     {
+        if (suppressChangeEvents) return;
         if (vfxInput != null) vfxInput.text = Mathf.RoundToInt(percent).ToString();
-        if (AudioManager.Instance != null) AudioManager.Instance.SetVFXVolumePercent(percent);
     }
 
     void OnTextSpeedSliderChanged(float v)
     {
+        if (suppressChangeEvents) return;
         if (textSpeedInput != null) textSpeedInput.text = v.ToString("0.###");
         UpdateTextSpeedSample(v);
-        if (DialogController.instance != null)
-            DialogController.instance.SetTypingSpeed(v);
     }
 
     void OnMusicInputEndEdit(string s)
     {
+        if (suppressChangeEvents) return;
         if (int.TryParse(s, out int v))
         {
             v = Mathf.Clamp(v, 0, 100);
             if (musicSlider != null) musicSlider.value = v;
-            if (AudioManager.Instance != null) AudioManager.Instance.SetMusicVolumePercent(v);
             musicInput.text = v.ToString();
         }
     }
 
     void OnVFXInputEndEdit(string s)
     {
+        if (suppressChangeEvents) return;
         if (int.TryParse(s, out int v))
         {
             v = Mathf.Clamp(v, 0, 100);
             if (vfxSlider != null) vfxSlider.value = v;
-            if (AudioManager.Instance != null) AudioManager.Instance.SetVFXVolumePercent(v);
             vfxInput.text = v.ToString();
         }
     }
 
     void OnTextSpeedInputEndEdit(string s)
     {
+        if (suppressChangeEvents) return;
         if (float.TryParse(s, out float v))
         {
             v = Mathf.Max(0f, v);
             if (textSpeedSlider != null) textSpeedSlider.value = v;
             UpdateTextSpeedSample(v);
-            if (DialogController.instance != null)
-                DialogController.instance.SetTypingSpeed(v);
         }
     }
     #endregion

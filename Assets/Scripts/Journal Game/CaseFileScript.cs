@@ -20,6 +20,7 @@ public class CaseFileScript : MonoBehaviour
     {
         GameManager.Instance.RegitsterCaseFile(this);
     }
+
     private void Start()
     {
         UpdateCaseFileUI();    
@@ -45,6 +46,20 @@ public class CaseFileScript : MonoBehaviour
         UpdateCaseFileUI();
     }
 
+    public void RevealObjective(ObjectiveData objectiveData)
+    {
+        if (currentCaseFile == null || currentCaseFile.objectives == null) return;
+
+        for (int i= 0; i < currentCaseFile.objectives.Length; i++)
+        {
+            if (currentCaseFile.objectives[i] == objectiveData)
+            {
+                currentCaseFile.objectives[i].isVisible = true;
+                UpdateCaseFileUI();
+                return;
+            }
+        }
+    }
 
     public void UpdateCaseFileUI()
     {

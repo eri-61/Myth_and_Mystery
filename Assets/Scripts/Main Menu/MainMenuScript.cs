@@ -41,11 +41,13 @@ public class MainMenuScript : MonoBehaviour
 
     private void Start()
     {
+        SettingsScript.instance.CloseSettings();
+        loadPanel.SetActive(false);
+        quitPanel.SetActive(false);
+
         loadChap2.interactable = false;
         loadChap3.interactable = false;
         loadChap4.interactable = false;
-
-        SettingsScript.instance.settingsPanel.SetActive(false);
     }
 
     void OnEnable()

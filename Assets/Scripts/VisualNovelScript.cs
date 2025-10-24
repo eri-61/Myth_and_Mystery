@@ -31,7 +31,6 @@ public class VisualNovelScript : MonoBehaviour
     [Header("Close  Panels Button")]
     public Button closeInv;
     public Button closeMap;
-    public Button closeMenu;
     public Button closeInstructions;
 
     [Header("Variables")]
@@ -55,7 +54,6 @@ public class VisualNovelScript : MonoBehaviour
 
         closeInv.onClick.AddListener(CloseInv);
         closeMap.onClick.AddListener(CloseMap);
-        closeMenu.onClick.AddListener(CloseMenu);
     }
 
     void OnDisable()
@@ -70,7 +68,6 @@ public class VisualNovelScript : MonoBehaviour
         
         closeInv.onClick.RemoveListener(CloseInv);
         closeMap.onClick.RemoveListener(CloseMap);
-        closeMenu.onClick.RemoveListener(CloseMenu);
     }
 
     void ToggleUI()
@@ -126,11 +123,6 @@ public class VisualNovelScript : MonoBehaviour
     void CloseMap()
     {
         PersistentObjects.instance.CloseMap();
-    }
-
-    void CloseMenu()
-    {
-        SettingsScript.instance.CloseSettings();
     }
 
 }

@@ -359,7 +359,6 @@ MonoBehaviour:
   uiPanel: {fileID: 1256559029}
   closeInv: {fileID: 474863508}
   closeMap: {fileID: 0}
-  closeMenu: {fileID: 0}
   closeInstructions: {fileID: 0}
 --- !u!224 &124345821
 RectTransform:
@@ -419,6 +418,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VN_Office
   dialogTree: {fileID: 11400000, guid: 1125966352b0f0b4f82c0cb05599d981, type: 2}
   startSection: 0
+  addClue: {fileID: 0}
+  addObjectives: {fileID: 0}
+  addTestimony: {fileID: 0}
+  objectiveIndexToReveal: -1
+  revealObjectiveOnDialogEnd: 0
+  addClueOnDialogEnd: 0
+  addTestimonyOnDialogEnd: 0
 --- !u!114 &147438367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,54 +1051,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432447790}
   m_CullTransparentMesh: 1
---- !u!1 &440980190
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 440980191}
-  - component: {fileID: 440980192}
-  m_Layer: 0
-  m_Name: PersistentObjects
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &440980191
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 440980190}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.42127004, y: -0.9719201, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &440980192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 440980190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778d5c2b8099fbf4f8df633026a3528f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PersistentObjects
-  inventoryPanel: {fileID: 2022294490}
-  journalPanel: {fileID: 1243348662}
-  mapPanel: {fileID: 34679784}
-  main: {fileID: 1578464211}
 --- !u!1001 &447720640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1265,6 +1223,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 127.191605
       objectReference: {fileID: 0}
+    - target: {fileID: 6516542828731639687, guid: d42a6e536c445b342ab98af481767bbe, type: 3}
+      propertyPath: mainMap
+      value: 
+      objectReference: {fileID: 34679784}
     - target: {fileID: 6516542828731639687, guid: d42a6e536c445b342ab98af481767bbe, type: 3}
       propertyPath: locations.Array.data[0].Name
       value: Camp
@@ -1822,7 +1784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25b15073b0279d4caae9b679f57abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  persistentObjects: {fileID: 440980192}
+  persistentObjects: {fileID: 0}
   cfScript: {fileID: 1243348667}
   cluesScript: {fileID: 1243348666}
   creaturesScript: {fileID: 1243348665}
@@ -3174,20 +3136,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
-      propertyPath: m_AnchorMax.x
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
+      propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
-      propertyPath: m_AnchorMin.y
+      propertyPath: m_AnchorMax.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 102.17
       objectReference: {fileID: 0}
     - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 94.45
       objectReference: {fileID: 0}
     - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_LocalScale.x
@@ -3195,11 +3173,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -8910
+      value: 836.0727
       objectReference: {fileID: 0}
     - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1842.75
+      value: -17.788773
       objectReference: {fileID: 0}
     - target: {fileID: 5096689983940820412, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4307,6 +4285,7 @@ GameObject:
   - component: {fileID: 1950335559}
   - component: {fileID: 1950335558}
   - component: {fileID: 1950335557}
+  - component: {fileID: 1950335561}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -4399,6 +4378,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1950335561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950335556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778d5c2b8099fbf4f8df633026a3528f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersistentObjects
+  inventoryPanel: {fileID: 2022294490}
+  journalPanel: {fileID: 1243348662}
+  mapPanel: {fileID: 34679784}
+  main: {fileID: 1578464211}
 --- !u!224 &1977854558 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1629595560164198194, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
@@ -4888,7 +4883,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 588850210}
   - {fileID: 532323603}
-  - {fileID: 440980191}
   - {fileID: 804732801}
   - {fileID: 1824837062}
   - {fileID: 1578464212}

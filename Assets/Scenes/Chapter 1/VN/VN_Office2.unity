@@ -960,6 +960,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VN_Office
   dialogTree: {fileID: 11400000, guid: f72a5bb62188cb04d8101268526618c0, type: 2}
   startSection: 0
+  addClue: {fileID: 0}
+  addObjectives: {fileID: 0}
+  addTestimony: {fileID: 0}
+  objectiveIndexToReveal: -1
+  revealObjectiveOnDialogEnd: 0
+  addClueOnDialogEnd: 0
+  addTestimonyOnDialogEnd: 0
 --- !u!114 &948072514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,7 +993,6 @@ MonoBehaviour:
   uiPanel: {fileID: 1551020736}
   closeInv: {fileID: 1882183933}
   closeMap: {fileID: 2039080756}
-  closeMenu: {fileID: 0}
   closeInstructions: {fileID: 0}
 --- !u!114 &951862453
 MonoBehaviour:
