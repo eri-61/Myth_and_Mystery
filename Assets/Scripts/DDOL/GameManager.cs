@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public CluesScript cluesScript;
     public CreaturesScript creaturesScript;
 
+    public bool playOnStart = true;
     #endregion
 
     private void Awake()

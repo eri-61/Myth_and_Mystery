@@ -20,6 +20,7 @@ public class DialogStarter : MonoBehaviour
     [SerializeField] private VideoPlayer dayVideo;
 
     [SerializeField] private GameObject fadeUI;
+    [SerializeField] private float fadeDuration = 1f;
 
     /*
         [Header ("Scriptable Objects)")]
@@ -73,7 +74,7 @@ public class DialogStarter : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
             dayUI.SetActive(false);
             fadeUI.SetActive(true);
-            yield return new WaitForSecondsRealtime(5f);
+            yield return new WaitForSecondsRealtime(fadeDuration);
             fadeUI.SetActive(false);
         }
 
