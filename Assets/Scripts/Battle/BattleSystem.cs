@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public enum Battlestate { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 public enum DodgeResult { NotAttempted, Success, Failed }
@@ -29,16 +31,28 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject inventoryPanel;
 
+    public VideoPlayer battleIntro;
     [HideInInspector] public bool nextEnemyAttackDoubles = false;
     public ItemData correctItem;
+
+    public int Victory = 1;
+    public int Lost = 2;
     #endregion
 
     void Start()
     {
         state = Battlestate.START;
+        StartCoroutine(PlayAnimation());
+    }
+    IEnumerator PlayAnimation()
+    {
+        battleIntro.Play();
+        yield return new WaitForSecondsRealtime((float)battleIntro.clip.length);
+        battleIntro.gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(0.25f);
+
         StartCoroutine(SetupBattle());
     }
-
     IEnumerator SetupBattle()
     {
         GameObject playerGO = Instantiate(
@@ -175,10 +189,13 @@ public class BattleSystem : MonoBehaviour
         if (state == Battlestate.WON)
         {
             dialogueText.text = "You won agaisnt the " + enemyUnit.unitName + "!";
+            SceneManager.LoadScene(Victory);
         }
         else if (state == Battlestate.LOST)
         {
             dialogueText.text = "You were defeated...";
+            SceneManager.LoadScene(Lost);
+
         }
     }
 

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+using Newtonsoft.Json.Bson;
 public class GM_Puzzle1 : MonoBehaviour
 {
 
@@ -14,6 +16,23 @@ public class GM_Puzzle1 : MonoBehaviour
     public Image[] heartImages;           // Drag your 3 heart icons
     public GameObject winPanel;           // (Optional) “You Survived” panel
 
+    [Header("Instructions")]
+    public GameObject instructions;
+    public Button closeInstructions;
+
+    [Header("Scene Index")]
+    public int loseIndex = 1;
+    public int winIndex = 2;
+
+    private void OnEnable()
+    {
+        closeInstructions.onClick.AddListener(() => instructions.SetActive(true));
+    }
+
+    private void OnDisable()
+    {
+        
+    }
     void Start()
     {
         Time.timeScale = 1f; // Ensure game starts running
@@ -58,10 +77,13 @@ public class GM_Puzzle1 : MonoBehaviour
         {
             Debug.Log("🎉 You survived the full 60 seconds!");
             if (winPanel != null) winPanel.SetActive(true);
+            SceneManager.LoadScene(loseIndex);
+
         }
         else
         {
             Debug.Log("💀 Game Over!");
+            SceneManager.LoadScene(loseIndex);
         }
     }
 

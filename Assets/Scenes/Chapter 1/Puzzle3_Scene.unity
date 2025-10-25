@@ -1588,8 +1588,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 6810309344296846235, guid: 8a0310e638c985d47ab8196c8b8233e2, type: 3}
   playerSizeFactor: 0.6
   roomPrefab: {fileID: 2846218195026404372, guid: 6730942d11af22042b9880e55b2452e7, type: 3}
-  exitPrefab: {fileID: 6520125500815754250, guid: 7dc91c325981fa842ae93ea3cf02f240, type: 3}
   exitInstance: {fileID: 0}
+  exitSprite: {fileID: 0}
   numX: 10
   numY: 10
   roomWidth: 0
@@ -1603,8 +1603,8 @@ MonoBehaviour:
   enemySizeFactor: 0.6
   playerMoves: 0
   enemySpawned: 0
-  gameOver: 1
-  gameWin: 1
+  gameOver: 18
+  gameWin: 16
   allowExtraConnections: 1
   extraConnections: 8
   minOpenDirectionsForCollectible: 2

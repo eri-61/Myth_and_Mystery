@@ -33,8 +33,6 @@ public class VisualNovelScript : MonoBehaviour
     public GameObject uiPanel;
 
     [Header("Close  Panels Button")]
-    public Button closeInv;
-    public Button closeMap;
     public Button closeInstructions;
 
     [Header("Variables")]
