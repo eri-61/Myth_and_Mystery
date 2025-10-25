@@ -90,7 +90,7 @@ public class SaveManager
         }
         CurrentGameState.PlayerSaves.Add(CurrentGameSave);
         SelectedSaveIndex = CurrentGameState.PlayerSaves.Count - 1;
-        PlayerPrefs.SetInt("CurrentGameSaveIndex", SelectedSaveIndex);
+        //PlayerPrefs.SetInt("CurrentGameSaveIndex", SelectedSaveIndex);
         return SelectedSaveIndex;
     }
 
@@ -107,6 +107,7 @@ public class SaveManager
     public void LoadGameState(int SaveIndex)
     {
         Debug.Log($"SaveManager > LoadGameState started");
+        PlayerPrefs.SetInt("CurrentGameSaveIndex", SaveIndex);
         var gameSaveFilePath = $"{Application.persistentDataPath}/GameSaves/SaveFile{SaveIndex}.txt";
         var dataraw = File.ReadAllText(gameSaveFilePath);
         var dataTrans = JsonConvert.DeserializeObject<GameSave>(dataraw);

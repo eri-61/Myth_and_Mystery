@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 public class InvestigationScene : MonoBehaviour
 {
     [Header("Choice")]
@@ -56,6 +57,7 @@ public class InvestigationScene : MonoBehaviour
 
     void Start()
     {
+        Debug.Log($"InvestigationScene > Start");
         buttons.SetActive(true);
         back.SetActive(false);
         investigationButtons.SetActive(false);
@@ -75,6 +77,7 @@ public class InvestigationScene : MonoBehaviour
 
     void OnEnable()
     {
+        Debug.Log($"InvestigationScene > Enable");
         for (int i = 0; i < investigationPoints.Length; i++)
         {
             int index = i;
@@ -83,7 +86,7 @@ public class InvestigationScene : MonoBehaviour
 
         backButton.onClick.AddListener(GoBack);
         talk.onClick.AddListener(TalkToCharacter);
-        investigate.onClick.AddListener(StartInvestigation);
+        investigate.onClick.AddListener(async ()=> { await StartInvestigation(); });
 
         journalButton.onClick.AddListener(OpenJournal);
         mapButton.onClick.AddListener(OpenMap);
@@ -94,6 +97,7 @@ public class InvestigationScene : MonoBehaviour
 
     void OnDisable()
     {
+        Debug.Log($"InvestigationScene > Disable");
         foreach (Button point in investigationPoints)
             point.onClick.RemoveAllListeners();
 
@@ -129,8 +133,9 @@ public class InvestigationScene : MonoBehaviour
 
     }
 
-    void StartInvestigation()
+    async Task StartInvestigation()
     {
+        await Task.Delay(900);
         buttons.SetActive(false);
         character.SetActive(false);
 
@@ -138,10 +143,13 @@ public class InvestigationScene : MonoBehaviour
         investigationButtons.SetActive(true);
 
         ShowDialog("Click on the areas you want to investigate.");
+
     }
 
     void ClickInvestigationPoint(int index)
     {
+        Debug.Log($"InvestigationScene > ClickInvestigationPoint");
+
         if (isPointSearched[index])
         {
             ShowDialog("You’ve already searched this area.");
@@ -164,11 +172,13 @@ public class InvestigationScene : MonoBehaviour
         }
 
         isPointSearched[index] = true;
-        StartCoroutine(HideDialog(dialogHide));
+        //StartCoroutine(HideDialog(dialogHide));
+        HideDialogAsync();
     }
 
     void ShowDialog(string message)
     {
+        Debug.Log($"InvestigationScene > ShowDialog");
         dialogPanel.SetActive(true);
         description.text = message;
 
@@ -178,7 +188,8 @@ public class InvestigationScene : MonoBehaviour
             hideDialogCoroutine = null;
         }
 
-        hideDialogCoroutine = StartCoroutine(HideDialog(dialogHide));
+        //hideDialogCoroutine = StartCoroutine(HideDialog(dialogHide));
+        HideDialogAsync();
     }
 
     IEnumerator HideDialog(float delay)
@@ -188,30 +199,44 @@ public class InvestigationScene : MonoBehaviour
         hideDialogCoroutine = null;
     }
 
+    async Task HideDialogAsync()
+    {
+        Debug.Log($"InvestigationScene > HideDialogAsync");
+        await Task.Delay(900);
+        dialogPanel.SetActive(false);
+        hideDialogCoroutine = null;
+    }
+
 
     void OpenInventory()
     {
-        PersistentObjects.instance.OpenInventory();
+        Debug.Log($"InvestigationScene > OpenInventory");
+        //PersistentObjects.instance.OpenInventory();
+        inventoryPanel.SetActive(true);
         inventoryManager.LoadInventoryUI();
     }
 
     void OpenMenu()
     {
+        Debug.Log($"InvestigationScene > OpenInventory");
         settingsPanel.SetActive(true);
     }
 
     void OpenJournal()
     {
+        Debug.Log($"InvestigationScene > OpenJournal");
         journalPanel.SetActive(true);
     }
 
     void OpenMap()
     {
+        Debug.Log($"InvestigationScene > OpenMap");
         mapPanel.SetActive(true);
     }
 
     void AddClueToJournal(CluesData clue)
     {
+        Debug.Log($"InvestigationScene > AddClueToJournal");
         if (clue == null)
         {
             Debug.LogWarning("[InvestigationScene] AddClueToJournal called with null clue.");
@@ -231,6 +256,7 @@ public class InvestigationScene : MonoBehaviour
 
     void AddToInventory(ItemData newItem)
     {
+        Debug.Log($"InvestigationScene > AddToInventory");
         if (newItem == null)
         {
             Debug.LogWarning("[InvestigationScene] AddToInventory called with null item.");
@@ -246,6 +272,7 @@ public class InvestigationScene : MonoBehaviour
 
     public void GoToScene()
     {
+        Debug.Log($"InvestigationScene > GoToScene");
         SceneManager.LoadScene(tentScene);
     }
     

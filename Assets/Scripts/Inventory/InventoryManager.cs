@@ -32,11 +32,20 @@ public class InventoryManager : MonoBehaviour
     public Button useItem;
     public GameObject inventoryPanel;
 
-    private List<ItemData> currentItems = new List<ItemData>();
-    [HideInInspector] public ItemData selectedItem;
+    [HideInInspector]
+    public List<ItemData> currentItems = new List<ItemData>();
+    
+    [HideInInspector] 
+    public ItemData selectedItem;
     #endregion
 
     public event Action<ItemData> OnUseItemReq;
+
+    public InventoryManager()
+    {
+        Instance = this;
+    }
+
     private void Awake()
     {
         
@@ -57,7 +66,8 @@ public class InventoryManager : MonoBehaviour
     public void LoadInventoryUI()
     {
         int idx = 1;
-
+        Debug.Log($"InventoryManager > LoadInventoryUI");
+        Debug.Log($"InventoryManager > LoadInventoryUI > Item Count: {currentItems.Count}");
         foreach (var itm in currentItems)
         {
             if (idx == 1)
@@ -159,6 +169,24 @@ public class InventoryManager : MonoBehaviour
 
         if (!currentItems.Contains(newItem))
             currentItems.Add(newItem);
+
+
+        //Add Items to Game Save Memory
+        var curGS = SaveManager.Instance.GetGameState();
+        curGS.Inventory = new GameInventory();
+        curGS.Inventory.Items = new List<GameItem>();
+        int idx = 0;
+        Debug.Log($"InventoryManager > AddItem > Item Count: {InventoryManager.Instance.currentItems.Count}");
+        foreach (var itm in currentItems)
+        {
+            curGS.Inventory.Items.Add(new GameItem()
+            {
+                ItemIndex = idx,
+                ItemName = itm.name
+            });
+
+            idx++;
+        }
 
         LoadInventoryUI();
 

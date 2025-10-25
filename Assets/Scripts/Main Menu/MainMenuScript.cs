@@ -102,7 +102,8 @@ public class MainMenuScript : MonoBehaviour
                 SaveManager.Instance.PrintGameStatus();
                 int curChap = SaveManager.Instance.CurrentGameSave.CurrentChapter - 1;
                 int curDia = SaveManager.Instance.CurrentGameSave.CurrentDialog - 1;
-                SceneManager.LoadScene(GameConstants.ChapterDialogs[curChap, curDia]);
+                string incomingScene = GameConstants.ChapterDialogs[curChap, curDia];
+                SceneManager.LoadScene(incomingScene);
             });
         }
         closeLoadSlotsPanel.onClick.AddListener(() => loadSlotsPanel.SetActive(false));

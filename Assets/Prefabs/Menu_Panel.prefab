@@ -676,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1cf6c1f76cf9e04c9f33aacbc94cbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsScript
-  settingsPanel: {fileID: 0}
+  settingsPanel: {fileID: 2267927722001549941}
   musicSlider: {fileID: 5545179227886595948}
   vfxSlider: {fileID: 1639481798798093283}
   textSpeedSlider: {fileID: 221315351505412779}
@@ -687,6 +687,8 @@ MonoBehaviour:
   applyChanges: {fileID: 2576996147228092358}
   quit: {fileID: 1748152841461295400}
   closeBtn: {fileID: 3679653689737840510}
+  panelCanvas: {fileID: 0}
+  overrideSortingOrder: 1000
 --- !u!1 &2957809600400600311
 GameObject:
   m_ObjectHideFlags: 0

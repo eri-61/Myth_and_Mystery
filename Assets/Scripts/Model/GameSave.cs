@@ -9,7 +9,7 @@ public class GameState
 public class GameItem
 {
     public int ItemIndex { get; set; }
-    public int ItemName { get; set; }
+    public string ItemName { get; set; }
 }
 
 public class GameInventory

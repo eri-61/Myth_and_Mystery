@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PersistentObjects : MonoBehaviour
 {
-    public static PersistentObjects instance;
+    //public static PersistentObjects instance;
 
     [Header("UI Panels")]
     public GameObject inventoryPanel;
@@ -14,13 +14,13 @@ public class PersistentObjects : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        //if (instance != null && instance != this)
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
 
-        instance = this;
+        //instance = this;
         mapPanel.SetActive(false);
         journalPanel.SetActive(false);
         inventoryPanel.SetActive(false);
