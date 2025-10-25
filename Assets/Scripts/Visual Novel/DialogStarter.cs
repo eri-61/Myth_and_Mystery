@@ -58,26 +58,29 @@ public class DialogStarter : MonoBehaviour
             caseVideo.Stop();
         }
 
+        caseUI.SetActive(false);
+
         //play day
         if (dayAnimation)
         {
             yield return new WaitForSecondsRealtime(1f);
-            caseUI.SetActive(false);
+
             dayUI.SetActive(true);
             dayVideo.Play();
             yield return new WaitForSecondsRealtime((float)dayVideo.clip.length);
             dayVideo.Stop(); 
         }
+        dayUI.SetActive(false);
+
         //play fade
         if (fadeUI != null)
         {
             yield return new WaitForSecondsRealtime(1f);
-            dayUI.SetActive(false);
             fadeUI.SetActive(true);
             yield return new WaitForSecondsRealtime(fadeDuration);
-            fadeUI.SetActive(false);
         }
 
+        fadeUI.SetActive(false);
         DialogController.instance.StartDialog(dialogTree, startSection);
     }
     /*
