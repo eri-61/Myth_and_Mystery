@@ -31,8 +31,9 @@ public class GM_Puzzle1 : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        closeInstructions.onClick.RemoveAllListeners();
     }
+
     void Start()
     {
         Time.timeScale = 1f; // Ensure game starts running

@@ -30,6 +30,7 @@ public class InventoryManager : MonoBehaviour
     [Header("Nav Bar")]
     public Button close;
     public Button useItem;
+    public GameObject inventoryPanel;
 
     private List<ItemData> currentItems = new List<ItemData>();
     [HideInInspector] public ItemData selectedItem;
@@ -166,7 +167,7 @@ public class InventoryManager : MonoBehaviour
 
     void CloseInv()
     {
-        PersistentObjects.instance.CloseInventory();
+        inventoryPanel.SetActive(false);
     }
 
     private void OnUseItem()

@@ -49,7 +49,7 @@ public class DialogStarter : MonoBehaviour
     IEnumerator BeginSequence()
     {
         //play case
-        if (caseUI!= null && caseVideo != null && caseAnimation)
+        if (caseAnimation)
         {
             yield return new WaitForSecondsRealtime(1f);
             caseUI.SetActive(true);
@@ -59,7 +59,7 @@ public class DialogStarter : MonoBehaviour
         }
 
         //play day
-        if (dayUI != null && dayVideo !=null && dayAnimation)
+        if (dayAnimation)
         {
             yield return new WaitForSecondsRealtime(1f);
             caseUI.SetActive(false);
