@@ -24,19 +24,15 @@ public class GM_Puzzle1 : MonoBehaviour
     public int loseIndex = 1;
     public int winIndex = 2;
 
-    private void OnEnable()
-    {
-        closeInstructions.onClick.AddListener(() => instructions.SetActive(true));
-    }
-
-    private void OnDisable()
-    {
-        closeInstructions.onClick.RemoveAllListeners();
-    }
 
     void Start()
     {
-        Time.timeScale = 1f; // Ensure game starts running
+        instructions.SetActive(true);
+        closeInstructions.onClick.AddListener(() => {
+            instructions.SetActive(false);
+            Time.timeScale = 1f; // Start the game when instructions are closed
+        });
+
         UpdateUI();
     }
 

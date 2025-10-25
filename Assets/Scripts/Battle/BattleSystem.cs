@@ -37,6 +37,9 @@ public class BattleSystem : MonoBehaviour
 
     public int Victory = 1;
     public int Lost = 2;
+
+    // Prevent input spamming while an action is in progress
+    private bool inputLocked = false;
     #endregion
 
     void Start()
@@ -201,6 +204,8 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
+        // Allow player input when it's their turn
+        inputLocked = false;
         dialogueText.text = "Choose an action:";
     }
 
@@ -209,6 +214,10 @@ public class BattleSystem : MonoBehaviour
         if (state != Battlestate.PLAYERTURN)
             return;
 
+        if (inputLocked) // guard against spam
+            return;
+
+        inputLocked = true;
         StartCoroutine(AttackSequence());
     }
 
@@ -231,6 +240,8 @@ public class BattleSystem : MonoBehaviour
         if (InventoryManager.Instance != null)
             InventoryManager.Instance.OnUseItemReq -= OnInventoryUseItem;
 
+        // Lock input only when an item is actually used
+        inputLocked = true;
         UseItemInBattle(item);
     }
 
@@ -266,6 +277,10 @@ public class BattleSystem : MonoBehaviour
         if (state != Battlestate.PLAYERTURN)
             return;
 
+        if (inputLocked) // guard against spam
+            return;
+
+        inputLocked = true;
         StartCoroutine(HandleDodge());
     }
 
