@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class CluesScript : MonoBehaviour
 {
+    public static CluesScript Instance { get; private set; }
+
+    public CluesScript()
+    {
+        Instance = this;
+    }
+
     #region Variables
     [Header("Slots")]
     public List<Button> slots;
@@ -31,7 +38,7 @@ public class CluesScript : MonoBehaviour
     void Awake()
     {
         deductionButton.gameObject.SetActive(false);
-        GameManager.Instance.RegisterClues(this);
+        //GameManager.Instance.RegisterClues(this);
 
     }
 

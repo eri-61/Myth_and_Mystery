@@ -1,10 +1,12 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
+using System.Linq;
 using System.Threading.Tasks;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class InvestigationScene : MonoBehaviour
 {
     [Header("Choice")]
@@ -73,6 +75,43 @@ public class InvestigationScene : MonoBehaviour
         }
 
         inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
+
+        //Check Game Save and re-apply found items
+        var curGS = SaveManager.Instance.GetGameState();
+        if(curGS.Inventory != null)
+        {
+            if (curGS.Inventory.Items != null)
+            {
+                Debug.Log($"InvestigationScene > Reloading Inventory Items > Item Count: {curGS.Inventory.Items.Count}");
+                foreach (var itm in curGS.Inventory.Items)
+                {
+                    var incomingSprite = Resources.Load<Sprite>($"Assets/Game UI/Items/{itm.ItemName.ToLower().Replace("data", "")}.png");
+                    
+                    inventoryManager.currentItems.Add(new ItemData() { 
+                        itemName = itm.ItemName,
+                        itemDescription = itm.ItemDescription,
+                        itemSprite = incomingSprite
+                    });
+                }
+            }
+        }
+
+        if (curGS.Journal != null)
+        {
+            if (curGS.Journal.Clues != null)
+            {
+                Debug.Log($"InvestigationScene > Reloading Journal Clues > Clues Count: {curGS.Journal.Clues.Count}");
+                foreach (var itm in curGS.Journal.Clues)
+                {
+                    AddClueToJournal(new CluesData()
+                    {
+                        clueName = itm.ClueName,
+                        clueDescription = itm.ClueDescription,                        
+                    });
+                }
+            }
+        }
+
     }
 
     void OnEnable()
@@ -245,7 +284,35 @@ public class InvestigationScene : MonoBehaviour
 
         if (CluesScript != null)
         {
-            GameManager.Instance.cluesScript.AddClues(clue);
+            CluesScript.Instance.AddClues(clue);
+
+            Debug.Log($"InvestigationScene > AddClueToJournal > Add Clue to Game Save Memory");
+            var curGS = SaveManager.Instance.GetGameState();
+            if (curGS != null)
+            {
+                if (curGS.Journal == null)
+                {
+                    curGS.Journal = new GameJournal();
+                }
+
+                if (curGS.Journal.Clues == null)
+                {
+                    curGS.Journal.Clues = new List<JournalClue>();
+                }
+
+                var existingClue = curGS.Journal.Clues.Where(c => c.ClueName == clue.name).FirstOrDefault();
+
+                if(existingClue == null)
+                {
+                    curGS.Journal.Clues.Add(new JournalClue()
+                    {
+                        ClueName = clue.name,
+                        ClueDescription = clue.clueDescription
+                    });
+                }
+                
+            }
+
             Debug.Log($"[InvestigationScene] Added clue: {clue.clueName}");
         }
         else

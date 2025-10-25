@@ -10,6 +10,7 @@ public class GameItem
 {
     public int ItemIndex { get; set; }
     public string ItemName { get; set; }
+    public string ItemDescription { get; set; }
 }
 
 public class GameInventory
@@ -19,14 +20,15 @@ public class GameInventory
 
 public class  JournalCase
 {
-    public int CaseFile;
-    public List<string> Objectives;
+    public int CaseFile { get; set; }
+    public List<string> Objectives { get; set; }
 }
 
 public class JournalClue
 {
-    public int ClueNumber;
-    public string ClueDescription;
+    public int ClueNumber { get; set; }
+    public string ClueName { get; set; }
+    public string ClueDescription { get; set; }
 }
 
 public class GameJournal
