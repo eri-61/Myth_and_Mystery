@@ -42,10 +42,6 @@ public class VisualNovelScript : MonoBehaviour
 
     private void Start()
     {
-        PersistentObjects.instance.CloseInventory();
-        PersistentObjects.instance.CloseMap();
-        PersistentObjects.instance.CloseJournal();
-
         skipBtn.onClick.AddListener(Skip);
         hideBtn.onClick.AddListener(HideUI);
 

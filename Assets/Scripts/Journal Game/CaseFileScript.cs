@@ -18,7 +18,7 @@ public class CaseFileScript : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.RegitsterCaseFile(this);
+        //GameManager.Instance.RegitsterCaseFile(this);
     }
 
     private void Start()

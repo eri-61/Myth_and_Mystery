@@ -100,15 +100,9 @@ public class MainMenuScript : MonoBehaviour
             {
                 SaveManager.Instance.LoadGameState(index);
                 SaveManager.Instance.PrintGameStatus();
-                //Chapter + Dialog
-
-                string[,] chapDia = new string[4,10];
-                chapDia[0,0] = "VN_Office";
-                chapDia[0,1] = "VN_OfficeD2";
-
                 int curChap = SaveManager.Instance.CurrentGameSave.CurrentChapter - 1;
                 int curDia = SaveManager.Instance.CurrentGameSave.CurrentDialog - 1;
-                SceneManager.LoadScene(chapDia[curChap, curDia]);
+                SceneManager.LoadScene(GameConstants.ChapterDialogs[curChap, curDia]);
             });
         }
         closeLoadSlotsPanel.onClick.AddListener(() => loadSlotsPanel.SetActive(false));
