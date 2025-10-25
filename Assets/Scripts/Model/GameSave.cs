@@ -25,15 +25,14 @@ public class  JournalCase
 
 public class JournalClue
 {
-    public string ObjectiveDescription;
-    public bool IsCompleted;
+    public int ClueNumber;
+    public string ClueDescription;
 }
 
 public class GameJournal
 {
-    public List<int> CaseNumbers { get; set; }
-    public List<string> Objectives { get; set; }
-    public List<>
+    public List<JournalCase> CaseFile { get; set; }
+    public List<JournalClue> Clues { get; set; }
 }
 
 public class GameSettings
