@@ -197,17 +197,17 @@ public class InvestigationScene : MonoBehaviour
 
     void OpenMenu()
     {
-        SettingsScript.instance.OpenSettings();
+        settingsPanel.SetActive(true);
     }
 
     void OpenJournal()
     {
-        PersistentObjects.instance.OpenJournal();
+        journalPanel.SetActive(true);
     }
 
     void OpenMap()
     {
-        PersistentObjects.instance.OpenMap();
+        mapPanel.SetActive(true);
     }
 
     void AddClueToJournal(CluesData clue)

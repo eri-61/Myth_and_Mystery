@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class SettingsScript : MonoBehaviour
 {
-    public static SettingsScript instance;
-
     #region Variables
     [Header ("Panel")]
     public GameObject settingsPanel;
@@ -42,17 +40,6 @@ public class SettingsScript : MonoBehaviour
 
     void Start()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         EnsureModalSetup();
 
         SceneManager.sceneLoaded += OnSceneLoaded;

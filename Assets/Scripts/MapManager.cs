@@ -34,7 +34,6 @@ public class MapManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-
     private void Start()
     {
         InitializeMap();
