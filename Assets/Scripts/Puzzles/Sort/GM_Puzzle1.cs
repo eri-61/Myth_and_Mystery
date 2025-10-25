@@ -27,6 +27,7 @@ public class GM_Puzzle1 : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 0f;
         instructions.SetActive(true);
         closeInstructions.onClick.AddListener(() => {
             instructions.SetActive(false);
