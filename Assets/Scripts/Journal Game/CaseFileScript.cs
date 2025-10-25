@@ -23,6 +23,7 @@ public class CaseFileScript : MonoBehaviour
 
     private void Start()
     {
+        RevealCurrentObjectiveFromGameState();
         UpdateCaseFileUI();    
     }
 
@@ -46,23 +47,29 @@ public class CaseFileScript : MonoBehaviour
         UpdateCaseFileUI();
     }
 
-    public void RevealObjective(ObjectiveData objectiveData)
+    public void RevealCurrentObjectiveFromGameState()
     {
         if (currentCaseFile == null || currentCaseFile.objectives == null) return;
+        if (SaveManager.Instance == null) return;
 
-        for (int i= 0; i < currentCaseFile.objectives.Length; i++)
+        var gs = SaveManager.Instance.GetGameState();
+        if (gs == null) return;
+
+        int idx = gs.CurrentObjective;
+        if (idx < 0 || idx >= currentCaseFile.objectives.Length) return;
+
+        // Only flip visibility if not already visible
+        if (!currentCaseFile.objectives[idx].isVisible)
         {
-            if (currentCaseFile.objectives[i] == objectiveData)
-            {
-                currentCaseFile.objectives[i].isVisible = true;
-                UpdateCaseFileUI();
-                return;
-            }
+            currentCaseFile.objectives[idx].isVisible = true;
         }
     }
 
     public void UpdateCaseFileUI()
     {
+
+        RevealCurrentObjectiveFromGameState();
+
         if (currentCaseFile == null)
         {
             objectiveText.text = "There is no ongoing case.";
