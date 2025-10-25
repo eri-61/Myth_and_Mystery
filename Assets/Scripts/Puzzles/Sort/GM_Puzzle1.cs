@@ -60,13 +60,15 @@ public class GM_Puzzle1 : MonoBehaviour
     {
         if (gameEnded) return;
 
-        lives--;
+        lives -- ;
         UpdateUI();
 
         if (lives <= 0)
         {
             EndGame(false); // Player died
         }
+
+ 
     }
 
     void EndGame(bool survived)
@@ -78,7 +80,7 @@ public class GM_Puzzle1 : MonoBehaviour
         {
             Debug.Log("🎉 You survived the full 60 seconds!");
             if (winPanel != null) winPanel.SetActive(true);
-            SceneManager.LoadScene(loseIndex);
+            SceneManager.LoadScene(winIndex);
 
         }
         else

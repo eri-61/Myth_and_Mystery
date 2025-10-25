@@ -862,31 +862,39 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
             return;
         }
 
+        Vector3 exitPos = exitRoom.transform.position;
+
+        // If no prefab assigned, create a simple fallback trigger attached to this generator
         if (exitPrefab == null)
         {
-            Debug.LogWarning("[CreateExit] exitPrefab is not assigned. Cannot spawn exit prefab.");
+            Debug.LogWarning("[CreateExit] exitPrefab is not assigned. Creating fallback ExitZone GameObject.");
+            GameObject fallback = new GameObject("ExitZone");
+            fallback.transform.SetParent(transform);
+            fallback.transform.position = new Vector3(exitPos.x, exitPos.y, -0.2f);
+
+            var bc = fallback.AddComponent<BoxCollider2D>();
+            bc.isTrigger = true;
+
+            var trigger = fallback.AddComponent<ExitZoneTrigger>();
+            trigger.mazeGen = this;
+
+            exitCreated = true;
             return;
         }
-
-        Vector3 exitPos = exitRoom.transform.position;
 
         GameObject exitObj = Instantiate(exitPrefab, exitPos, Quaternion.identity, transform);
         exitObj.name = "ExitZone";
 
+        // Prefer to attach/assign the ExitZoneTrigger to the GameObject that actually has the Collider2D
         Collider2D col = exitObj.GetComponentInChildren<Collider2D>();
-        if (col == null)
+        if (col != null)
         {
-            var bc = exitObj.AddComponent<BoxCollider2D>();
-            bc.isTrigger = true;
-        }
-        else
-        {
+            // ensure it's a trigger
             col.isTrigger = true;
-        }
 
-        var trigger = exitObj.GetComponentInChildren<ExitZoneTrigger>();
-        if (trigger != null)
-        {
+            // attach or find the trigger component on the collider owner
+            var trigger = col.gameObject.GetComponent<ExitZoneTrigger>();
+            if (trigger == null) trigger = col.gameObject.AddComponent<ExitZoneTrigger>();
             trigger.mazeGen = this;
         }
         else
