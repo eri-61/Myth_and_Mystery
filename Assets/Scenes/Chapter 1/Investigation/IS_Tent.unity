@@ -425,31 +425,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6deb7dfd2340ab8408c411a66cc217bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InvestigationScene
-  buttons: {fileID: 0}
-  talk: {fileID: 0}
-  investigate: {fileID: 0}
-  mapButton: {fileID: 0}
-  journalButton: {fileID: 0}
-  inventoryButton: {fileID: 0}
-  settingsButton: {fileID: 0}
-  backButton: {fileID: 0}
-  back: {fileID: 0}
-  mapPanel: {fileID: 0}
-  inventoryPanel: {fileID: 0}
-  journalPanel: {fileID: 0}
-  settingsPanel: {fileID: 0}
-  character: {fileID: 0}
-  dialogPanel: {fileID: 0}
-  description: {fileID: 0}
+  buttons: {fileID: 327277059}
+  talk: {fileID: 1209774531}
+  investigate: {fileID: 1461150798}
+  mapButton: {fileID: 1474387496}
+  journalButton: {fileID: 1474387495}
+  inventoryButton: {fileID: 1474387494}
+  settingsButton: {fileID: 1474387493}
+  backButton: {fileID: 852655142}
+  back: {fileID: 2013689068}
+  mapPanel: {fileID: 831400615}
+  inventoryPanel: {fileID: 1567781206}
+  journalPanel: {fileID: 1813506661}
+  settingsPanel: {fileID: 1064742388}
+  character: {fileID: 721489544}
+  dialogPanel: {fileID: 19822819}
+  description: {fileID: 55972667}
   characterExists: 0
   talkSceneIndex: 2
   dialogHide: 0.5
   investigationButtons: {fileID: 0}
   investigationPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1601402529}
+  - {fileID: 426770038}
+  - {fileID: 345625078}
+  - {fileID: 898345023}
   textDescriptions:
   - There are two sleeping bags here. There are some garbage bags underneath.
   - The floor is too messy. There's a packet of salt that might be useful later.
@@ -461,8 +461,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 542a8fb074c514f41a0b78b7d5c71feb, type: 2}
   - {fileID: 11400000, guid: d1c423d06a1b32e45bfa61093fa1d736, type: 2}
   clues: []
-  CluesScript: {fileID: 0}
-  inventoryManager: {fileID: 0}
+  CluesScript: {fileID: 1813506656}
+  inventoryManager: {fileID: 1928263766}
 --- !u!114 &74929118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,7 +915,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.2822223}
   m_AnchorMax: {x: 1, y: 0.2822223}
-  m_AnchoredPosition: {x: -173.55566, y: 3.9985428}
+  m_AnchoredPosition: {x: -173.55566, y: 3.9985352}
   m_SizeDelta: {x: 309.51, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &345625078
@@ -1036,7 +1036,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 263.17932, y: 39.938103}
+  m_AnchoredPosition: {x: 263.17932, y: 39.93811}
   m_SizeDelta: {x: 33.09, y: 32.687}
   m_Pivot: {x: 0.5000001, y: 0.5000002}
 --- !u!114 &383135133
@@ -1549,7 +1549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 176.08391, y: -0.000002212405}
+  m_AnchoredPosition: {x: 176.08392, y: -0}
   m_SizeDelta: {x: 352.168, y: 40.918}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &649274205
@@ -2315,7 +2315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 30.592773, y: 79.90593}
+  m_AnchoredPosition: {x: 30.592773, y: 79.905945}
   m_SizeDelta: {x: 367.43, y: 225.01}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &898345023
@@ -2528,6 +2528,11 @@ PrefabInstance:
 --- !u!224 &1064742387 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3939131468451141853, guid: 74e5883fa4682ac4f85e7f43e17dd735, type: 3}
+  m_PrefabInstance: {fileID: 1064742386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1064742388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2267927722001549941, guid: 74e5883fa4682ac4f85e7f43e17dd735, type: 3}
   m_PrefabInstance: {fileID: 1064742386}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1156362956
@@ -3272,6 +3277,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5640992357093153451, guid: 116190c059e691a4389ff72669d4d989, type: 3}
   m_PrefabInstance: {fileID: 1474387491}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1474387493 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8720584328959024006, guid: 116190c059e691a4389ff72669d4d989, type: 3}
+  m_PrefabInstance: {fileID: 1474387491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &1474387494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2019196441511326477, guid: 116190c059e691a4389ff72669d4d989, type: 3}
+  m_PrefabInstance: {fileID: 1474387491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &1474387495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9099048244785770013, guid: 116190c059e691a4389ff72669d4d989, type: 3}
+  m_PrefabInstance: {fileID: 1474387491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &1474387496 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1190276278320677928, guid: 116190c059e691a4389ff72669d4d989, type: 3}
+  m_PrefabInstance: {fileID: 1474387491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &1567781186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4665,7 +4714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5025459919570048527, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -19.324692
+      value: -19.324707
       objectReference: {fileID: 0}
     - target: {fileID: 5096689983940820412, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5353,7 +5402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1900902181
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5377,6 +5426,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 230.76923}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1928263766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3975007924860031117, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 1567781186}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567781206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12aade00d4b72504d97c4e469acb8bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
 --- !u!1 &2013689068
 GameObject:
   m_ObjectHideFlags: 0

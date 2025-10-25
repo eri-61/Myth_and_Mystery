@@ -24,8 +24,7 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
 
     [Header("Room")]
     [SerializeField] GameObject roomPrefab;
-    public GameObject exitInstance;
-    [SerializeField] private Sprite exitSprite;
+    [SerializeField] public GameObject exitPrefab;
 
     [SerializeField] public int numX = 10;
     [SerializeField] public int numY = 10;
@@ -414,15 +413,8 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     public void SpawnEnemy()
     {
         if (enemySpawned) return;
-        if (rooms == null || rooms[0, 0] == null)
-        {
-            return;
-        }
-
-        if (enemyPrefab == null)
-        {
-            return;
-        }
+        if (rooms == null || rooms[0, 0] == null) return;
+        if (enemyPrefab == null) return;
 
         RoomScript startRoom = rooms[0, 0];
         Vector3 spawnPos = startRoom.transform.position;
@@ -430,8 +422,29 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         enemyInstance = Instantiate(enemyPrefab, spawnPos, Quaternion.identity, transform);
         enemyInstance.name = "KapreEnemy";
 
-        float desiredWorldSize = Mathf.Min(roomWidth, roomHeight) * enemySizeFactor;
+        // Ensure enemy has a trigger collider so OnTriggerEnter2D will fire
+        Collider2D enemyCol = enemyInstance.GetComponentInChildren<Collider2D>();
+        if (enemyCol == null)
+        {
+            var bc = enemyInstance.AddComponent<BoxCollider2D>();
+            bc.isTrigger = true;
+        }
+        else
+        {
+            enemyCol.isTrigger = true;
+        }
 
+        // Ensure a Rigidbody2D exists somewhere (player already adds a kinematic Rigidbody2D;
+        // if not present on enemy prefab add a kinematic one to be safe)
+        Rigidbody2D enemyRb = enemyInstance.GetComponent<Rigidbody2D>();
+        if (enemyRb == null)
+        {
+            enemyRb = enemyInstance.AddComponent<Rigidbody2D>();
+            enemyRb.bodyType = RigidbodyType2D.Kinematic;
+            enemyRb.simulated = true;
+        }
+
+        float desiredWorldSize = Mathf.Min(roomWidth, roomHeight) * enemySizeFactor;
         float mazeScale = Mathf.Abs(transform.lossyScale.x);
         if (Mathf.Approximately(mazeScale, 0f)) mazeScale = 1f;
 
@@ -819,35 +832,73 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
 
     private void CreateExit()
     {
-        // Top-right cell (exit)
-        RoomScript exitRoom = rooms[numX - 1, numY - 1];
+        if (exitCreated) return;
 
-        // Position the exit directly in the last room
+        if (rooms == null)
+        {
+            Debug.LogWarning("[CreateExit] rooms array is null. Cannot create exit.");
+            return;
+        }
+
+        if (numX <= 0 || numY <= 0)
+        {
+            Debug.LogWarning("[CreateExit] invalid maze dimensions.");
+            return;
+        }
+
+        int ex = numX - 1;
+        int ey = numY - 1;
+
+        if (ex < 0 || ey < 0 || ex >= rooms.GetLength(0) || ey >= rooms.GetLength(1))
+        {
+            Debug.LogWarning($"[CreateExit] exit coordinates out of range: {ex},{ey}");
+            return;
+        }
+
+        RoomScript exitRoom = rooms[ex, ey];
+        if (exitRoom == null)
+        {
+            Debug.LogWarning($"[CreateExit] exit room at {ex},{ey} is null.");
+            return;
+        }
+
+        if (exitPrefab == null)
+        {
+            Debug.LogWarning("[CreateExit] exitPrefab is not assigned. Cannot spawn exit prefab.");
+            return;
+        }
+
         Vector3 exitPos = exitRoom.transform.position;
 
-        GameObject exit = new GameObject("ExitZone");
-        exit.transform.position = exitPos;
-        exit.transform.localScale = new Vector3(roomWidth * 0.8f, roomHeight * 0.8f, 1f);
+        GameObject exitObj = Instantiate(exitPrefab, exitPos, Quaternion.identity, transform);
+        exitObj.name = "ExitZone";
 
-        // Collider setup
-        BoxCollider2D col = exit.AddComponent<BoxCollider2D>();
-        col.isTrigger = true;
-
-        // Sprite setup
-        SpriteRenderer rend = exit.AddComponent<SpriteRenderer>();
-        if (exitSprite != null)
+        Collider2D col = exitObj.GetComponentInChildren<Collider2D>();
+        if (col == null)
         {
-            rend.sprite = exitSprite;
-            rend.color = Color.white; // normal tint
+            var bc = exitObj.AddComponent<BoxCollider2D>();
+            bc.isTrigger = true;
         }
         else
         {
-            rend.color = new Color(0, 1, 0, 0.3f); // fallback if no sprite assigned
+            col.isTrigger = true;
         }
 
-        rend.sortingOrder = 10;
+        var trigger = exitObj.GetComponentInChildren<ExitZoneTrigger>();
+        if (trigger != null)
+        {
+            trigger.mazeGen = this;
+        }
+        else
+        {
+            var added = exitObj.AddComponent<ExitZoneTrigger>();
+            added.mazeGen = this;
+        }
 
-        Debug.Log("Exit created at room: " + (numX - 1) + "," + (numY - 1) + "  pos: " + exitPos);
+        exitObj.transform.position = new Vector3(exitPos.x, exitPos.y, -0.2f);
+
+        exitCreated = true;
+        Debug.Log($"Exit prefab instantiated at room: {ex},{ey}  pos: {exitPos}");
     }
 
 
