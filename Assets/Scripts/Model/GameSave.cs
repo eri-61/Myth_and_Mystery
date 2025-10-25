@@ -17,9 +17,23 @@ public class GameInventory
     public List<GameItem> Items { get; set; }
 }
 
+public class  JournalCase
+{
+    public int CaseFile;
+    public List<string> Objectives;
+}
+
+public class JournalClue
+{
+    public string ObjectiveDescription;
+    public bool IsCompleted;
+}
+
 public class GameJournal
 {
-
+    public List<int> CaseNumbers { get; set; }
+    public List<string> Objectives { get; set; }
+    public List<>
 }
 
 public class GameSettings
