@@ -742,6 +742,7 @@ GameObject:
   - component: {fileID: 2124870208}
   - component: {fileID: 2124870207}
   - component: {fileID: 2124870211}
+  - component: {fileID: 2124870212}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -865,6 +866,20 @@ MonoBehaviour:
   correctItem: {fileID: 11400000, guid: 542a8fb074c514f41a0b78b7d5c71feb, type: 2}
   Victory: 19
   Lost: 18
+--- !u!114 &2124870212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124870206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8303507cde9bfcb40a2f8e04dd9ae843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameChapter1
+  CurrentDialog: 7
+  CurrentObjective: 0
 --- !u!1001 &1261333598469968427
 PrefabInstance:
   m_ObjectHideFlags: 0
