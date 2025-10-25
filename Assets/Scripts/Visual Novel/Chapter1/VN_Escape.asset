@@ -14,9 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogTree
   sections:
   - characterName:
+<<<<<<< HEAD
+    - Eryn
+    - Kenji
+    - Cassie
+=======
     - ???
     - ???
     - ???
+>>>>>>> b0ad6a43470324d48505a955562caeaf1eaa949d
     dialog:
     - We're finally out of the forest!
     - We can go home!
@@ -26,5 +32,22 @@ MonoBehaviour:
     branchPoint:
       question: 
       answers: []
+<<<<<<< HEAD
+    characters:
+    - charaName: Eryn
+      characterPrefab: {fileID: 7227993682904605277, guid: 79b8d6fc989ba6f49a3620a571be5179, type: 3}
+      isTalking: 0
+    - charaName: Kenji
+      characterPrefab: {fileID: 4830255281968232306, guid: eaf460622774b244597660f726ea308a, type: 3}
+      isTalking: 0
+    - charaName: Cassie
+      characterPrefab: {fileID: 1037760765160548259, guid: 0e99ce33314cabc40988b10b7cc5579e, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+=======
     characters: []
     background: []
+>>>>>>> b0ad6a43470324d48505a955562caeaf1eaa949d
