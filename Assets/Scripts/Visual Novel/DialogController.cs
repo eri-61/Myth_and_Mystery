@@ -28,8 +28,11 @@ public class DialogController : MonoBehaviour
     [SerializeField] Image bgImage;
 
     [Header("Next Scene")]
-    [SerializeField] int sceneIndex;
+    [SerializeField] public int sceneIndex;
     [SerializeField] Button nextButton;
+
+    // Current section the dialog is running (set while RunDialog is active)
+    public int currentSectionIndex { get; private set; } = -1;
 
     public static event Action OnDialogStarted;
     public static event Action OnDialogEnded;
@@ -88,11 +91,18 @@ public class DialogController : MonoBehaviour
         answerBox.SetActive(false);
         skipLineTriggered = false;
         OnDialogStarted?.Invoke();
+
+        // ensure currentSectionIndex reflects the starting section
+        currentSectionIndex = startSection;
+
         StartCoroutine(RunDialog(dialogTree, startSection));
     }
 
     IEnumerator RunDialog(DialogTree dialogTree, int section)
     {
+        // update current section index so external handlers can inspect it
+        currentSectionIndex = section;
+
         DialogSection current = dialogTree.sections[section];
 
         for (int i = 0; i < current.dialog.Length; i++)
@@ -216,7 +226,6 @@ public class DialogController : MonoBehaviour
         dialogBox.SetActive(false);
         nextButton.gameObject.SetActive(true);
     }
-
     void ShowCharacters(DialogSection section, int index)
     {
         // Clear previously spawned instances under the parent

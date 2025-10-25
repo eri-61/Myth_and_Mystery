@@ -2372,6 +2372,7 @@ GameObject:
   - component: {fileID: 981393413}
   - component: {fileID: 981393412}
   - component: {fileID: 981393411}
+  - component: {fileID: 981393414}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -2474,6 +2475,23 @@ MonoBehaviour:
   mapPanel: {fileID: 1961314540}
   uiPanel: {fileID: 39065975}
   closeInstructions: {fileID: 0}
+--- !u!114 &981393414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981393409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89003df3cb71f884a9dde130b14608a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Visual_Novel.DialogBranchHandler
+  dialogTree: {fileID: 11400000, guid: 9e6eea5c1a455084d87a6cfb1a6e4751, type: 2}
+  badEndingSectionIndex: 1
+  badEndingSceneIndex: 17
+  goodEndingSectionIndex: 2
+  goodEndingSceneIndex: 10
 --- !u!1001 &1032918847
 PrefabInstance:
   m_ObjectHideFlags: 0
