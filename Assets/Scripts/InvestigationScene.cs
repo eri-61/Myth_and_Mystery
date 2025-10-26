@@ -99,7 +99,7 @@ public class InvestigationScene : MonoBehaviour
                     {
                         itemName = itm.ItemName,
                         itemDescription = itm.ItemDescription,
-                        //itemSprite = incomingSprite
+                        itemSprite = incomingSprite
                     });
                     //AddToInventory(itm.ItemIndex, items[itm.ItemIndex]);
                 }
@@ -122,13 +122,13 @@ public class InvestigationScene : MonoBehaviour
                     //    clueDescription = itm.ClueDescription,
                     //    clueImage = incomingSprite
                     //});
-                    //cluScript.gatheredClues.Add(new CluesData()
-                    //{
-                    //    clueName = itm.ClueName,
-                    //    clueDescription = itm.ClueDescription,
-                    //    //clueImage = incomingSprite
-                    //});
-                    AddClueToJournal(itm.ClueNumber, clues[itm.ClueNumber]);
+                    cluScript.gatheredClues.Add(new CluesData()
+                    {
+                        clueName = itm.ClueName,
+                        clueDescription = itm.ClueDescription,
+                        clueImage = incomingSprite
+                    });
+                    //AddClueToJournal(itm.ClueNumber, clues[itm.ClueNumber]);
                 }
             }
         }
