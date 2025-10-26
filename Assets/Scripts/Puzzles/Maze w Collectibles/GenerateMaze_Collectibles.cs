@@ -2,17 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GenerateMaze_wCollectibles : MonoBehaviour
 {
     #region Variables
     [Header("UI Objects")]
-    [SerializeField] private GameObject loadingPanel;
+    [SerializeField] private GameObject instructions;
+    [SerializeField] private Button close;
     [SerializeField] private TextMeshProUGUI text;
     public RoomScript[,] rooms = null;
 
@@ -182,13 +184,17 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GenerateMazeWithLoading());
+        close.onClick.AddListener(closeInstructions);
+    }
+
+    void closeInstructions()
+    {
+        instructions.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private IEnumerator GenerateMazeWithLoading()
     {
-        if (loadingPanel != null)
-            loadingPanel.SetActive(true);
-
         foreach (Transform child in transform)
             child.gameObject.SetActive(false);
 
@@ -202,9 +208,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
 
         foreach (Transform child in transform)
             child.gameObject.SetActive(true);
-
-        if (loadingPanel != null)
-            loadingPanel.SetActive(false);
     }
 
     IEnumerator GenerateMazeInstant()
