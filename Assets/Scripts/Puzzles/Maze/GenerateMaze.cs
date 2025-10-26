@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GenerateMaze : MonoBehaviour
 {
     [SerializeField] GameObject roomPrefab;
-    [SerializeField] private GameObject loadingPanel; 
+    [SerializeField] private GameObject instructionsPanel;
+    [SerializeField] private Button closeInstructions;
 
     public RoomScript[,] rooms = null;
     MazePlayerController player;
@@ -85,12 +87,17 @@ public class GenerateMaze : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GenerateMazeWithLoading());
+        closeInstructions.onClick.AddListener(CloseInstructions);    
     }
 
+    void CloseInstructions()
+    {
+        instructionsPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+
+    }
     private IEnumerator GenerateMazeWithLoading()
     {
-        if (loadingPanel != null)
-            loadingPanel.SetActive(true);
 
         foreach (Transform child in transform)
             child.gameObject.SetActive(false);
@@ -105,9 +112,6 @@ public class GenerateMaze : MonoBehaviour
 
         foreach (Transform child in transform)
             child.gameObject.SetActive(true);
-
-        if (loadingPanel != null)
-            loadingPanel.SetActive(false);
     }
 
     IEnumerator GenerateMazeInstant()

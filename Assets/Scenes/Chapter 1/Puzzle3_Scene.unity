@@ -287,10 +287,10 @@ RectTransform:
   - {fileID: 296061323}
   m_Father: {fileID: 1470165829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2340, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1170, y: -540}
+  m_SizeDelta: {x: 2340, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &279954985
 MonoBehaviour:
@@ -1657,10 +1657,10 @@ RectTransform:
   - {fileID: 1431671663}
   m_Father: {fileID: 1470165829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2340, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 5850, y: -540}
+  m_SizeDelta: {x: 2340, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1397207827
 MonoBehaviour:
@@ -2717,10 +2717,10 @@ RectTransform:
   - {fileID: 403957497}
   m_Father: {fileID: 1470165829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2340, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 3510, y: -540}
+  m_SizeDelta: {x: 2340, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1924541424
 MonoBehaviour:
@@ -2774,6 +2774,18 @@ PrefabInstance:
     - target: {fileID: 4673469910843217904, guid: 7eebf99d34658414197a4c8ea64cad0a, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673469910843217904, guid: 7eebf99d34658414197a4c8ea64cad0a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673469910843217904, guid: 7eebf99d34658414197a4c8ea64cad0a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673469910843217904, guid: 7eebf99d34658414197a4c8ea64cad0a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4673469910843217904, guid: 7eebf99d34658414197a4c8ea64cad0a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2873,7 +2885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9718f5301ef4b0148bea04bd584af4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenerateMaze_wCollectibles
-  loadingPanel: {fileID: 1019180023}
+  instructions: {fileID: 2115222654}
+  close: {fileID: 1215905377}
   text: {fileID: 263466252}
   playerPrefab: {fileID: 6810309344296846235, guid: 8a0310e638c985d47ab8196c8b8233e2, type: 3}
   playerSizeFactor: 0.6
