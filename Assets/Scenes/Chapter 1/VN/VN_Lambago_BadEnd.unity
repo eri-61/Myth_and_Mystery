@@ -1773,10 +1773,10 @@ MonoBehaviour:
   journalBtn: {fileID: 187565209}
   mapBtn: {fileID: 187565207}
   instructionsPanel: {fileID: 0}
-  settingsPanel: {fileID: 0}
-  inventoryPanel: {fileID: 0}
-  journalPanel: {fileID: 0}
-  mapPanel: {fileID: 0}
+  settingsPanel: {fileID: 863036732}
+  inventoryPanel: {fileID: 2040584574}
+  journalPanel: {fileID: 2040571795}
+  mapPanel: {fileID: 291720709}
   uiPanel: {fileID: 187565216}
   closeInstructions: {fileID: 0}
 --- !u!1 &820466716
@@ -5012,6 +5012,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040571795}
   m_CullTransparentMesh: 1
+--- !u!1 &2040584574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8210263244393334767, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 1298023134}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2041784186
 GameObject:
   m_ObjectHideFlags: 0

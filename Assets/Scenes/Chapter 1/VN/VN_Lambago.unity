@@ -2657,6 +2657,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &662383469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8210263244393334767, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 2090721604}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &663669690
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,10 +3178,10 @@ MonoBehaviour:
   journalBtn: {fileID: 187565209}
   mapBtn: {fileID: 187565207}
   instructionsPanel: {fileID: 0}
-  settingsPanel: {fileID: 0}
-  inventoryPanel: {fileID: 0}
-  journalPanel: {fileID: 0}
-  mapPanel: {fileID: 0}
+  settingsPanel: {fileID: 107464630}
+  inventoryPanel: {fileID: 662383469}
+  journalPanel: {fileID: 307577299}
+  mapPanel: {fileID: 714776268}
   uiPanel: {fileID: 187565216}
   closeInstructions: {fileID: 0}
 --- !u!114 &815394267
