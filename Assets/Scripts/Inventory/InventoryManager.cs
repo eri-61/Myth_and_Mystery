@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
+using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -157,7 +159,7 @@ public class InventoryManager : MonoBehaviour
         itemDetailsSection.SetActive(true);
     }
  
-    public void AddItem(ItemData newItem)
+    public void AddItem(int index,ItemData newItem)
     {
         if (newItem == null)
         {
@@ -173,19 +175,46 @@ public class InventoryManager : MonoBehaviour
 
         //Add Items to Game Save Memory
         var curGS = SaveManager.Instance.GetGameState();
-        curGS.Inventory = new GameInventory();
-        curGS.Inventory.Items = new List<GameItem>();
-        int idx = 0;
-        Debug.Log($"InventoryManager > AddItem > Item Count: {InventoryManager.Instance.currentItems.Count}");
-        foreach (var itm in currentItems)
-        {
-            curGS.Inventory.Items.Add(new GameItem()
-            {
-                ItemIndex = idx,
-                ItemName = itm.name
-            });
+        //curGS.Inventory = new GameInventory();
+        //curGS.Inventory.Items = new List<GameItem>();
+        //int idx = 0;
+        //Debug.Log($"InventoryManager > AddItem > Item Count: {InventoryManager.Instance.currentItems.Count}");
+        //foreach (var itm in currentItems)
+        //{
+        //    curGS.Inventory.Items.Add(new GameItem()
+        //    {
+        //        ItemIndex = idx,
+        //        ItemName = itm.name,
+        //        ItemDescription = itm.itemDescription,
+        //    });
 
-            idx++;
+        //    idx++;
+        //}
+
+        if (curGS != null)
+        {
+            if (curGS.Inventory == null)
+            {
+                curGS.Inventory = new GameInventory();
+            }
+
+            if (curGS.Inventory.Items == null)
+            {
+                curGS.Inventory.Items = new List<GameItem>();
+            }
+
+            var existingClue = curGS.Inventory.Items.Where(c => c.ItemName == newItem.name).FirstOrDefault();
+
+            if (existingClue == null && !string.IsNullOrWhiteSpace(newItem.name))
+            {
+                curGS.Inventory.Items.Add(new GameItem()
+                {
+                    ItemIndex = index,
+                    ItemName = newItem.name,
+                    ItemDescription = newItem.itemDescription
+                });
+            }
+
         }
 
         LoadInventoryUI();

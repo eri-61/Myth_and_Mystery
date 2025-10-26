@@ -101,7 +101,7 @@ public class MainMenuScript : MonoBehaviour
                 SaveManager.Instance.LoadGameState(index);
                 SaveManager.Instance.PrintGameStatus();
                 int curChap = SaveManager.Instance.CurrentGameSave.CurrentChapter - 1;
-                int curDia = SaveManager.Instance.CurrentGameSave.CurrentDialog - 1;
+                int curDia = SaveManager.Instance.CurrentGameSave.CurrentDialog;
                 string incomingScene = GameConstants.ChapterDialogs[curChap, curDia];
                 SceneManager.LoadScene(incomingScene);
             });
@@ -136,19 +136,19 @@ public class MainMenuScript : MonoBehaviour
             int index = i; // Capture the current value of i
             loadSlot[i].onClick.RemoveListener(() => 
             {
-                SaveManager.Instance.LoadGameState(index);
-                SaveManager.Instance.PrintGameStatus();
-                SceneManager.LoadScene(SaveManager.Instance.CurrentGameState.PlayerSaves[index].CurrentDialog);
+                //SaveManager.Instance.LoadGameState(index);
+                //SaveManager.Instance.PrintGameStatus();
+                //SceneManager.LoadScene(SaveManager.Instance.CurrentGameState.PlayerSaves[index].CurrentDialog);
             });
         }
         closeLoadSlotsPanel.onClick.RemoveListener(() => loadSlotsPanel.SetActive(false));
 
         //load chapters
         closeLoadPanel.onClick.RemoveListener(() => loadPanel.SetActive(false));
-        loadChap1.onClick.RemoveListener(LoadChapter1);
-        loadChap2.onClick.RemoveListener(LoadChapter2);
-        loadChap3.onClick.RemoveListener(LoadChapter3);
-        loadChap4.onClick.RemoveListener(LoadChapter4);
+        //loadChap1.onClick.RemoveListener(LoadChapter1);
+        //loadChap2.onClick.RemoveListener(LoadChapter2);
+        //loadChap3.onClick.RemoveListener(LoadChapter3);
+        //loadChap4.onClick.RemoveListener(LoadChapter4);
 
         //quit
         yesBtn.onClick.RemoveListener(() => Application.Quit());

@@ -1,8 +1,10 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class JournalManager : MonoBehaviour
 {
@@ -70,29 +72,8 @@ public class JournalManager : MonoBehaviour
         var curGS = SaveManager.Instance.GetGameState();
         if (curGS != null) 
         {
-            curGS.LastSaveDateTime = DateTime.Now;
-            if(InventoryManager.Instance != null)
-            {
-                if (InventoryManager.Instance.currentItems != null)
-                {
-                    //Rebuilding inventory save
-                    //curGS.Inventory = new GameInventory();
-                    //curGS.Inventory.Items = new List<GameItem>();
-                    //int idx = 0;
-                    //Debug.Log($"JournalManager > openSL > Item Count: {InventoryManager.Instance.currentItems.Count}");
-                    //foreach (var itm in InventoryManager.Instance.currentItems)
-                    //{
-                    //    curGS.Inventory.Items.Add(new GameItem() { 
-                    //        ItemIndex = idx,
-                    //        ItemName = itm.name
-                    //    });
-
-                    //    idx++;
-                    //}
-                }
-            }            
+            curGS.LastSaveDateTime = DateTime.Now; 
             SaveManager.Instance.SaveGameState(SaveManager.Instance.SelectedSaveIndex);
-
             SaveManager.Instance.PrintGameStatus();
         }
 

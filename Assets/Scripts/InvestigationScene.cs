@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -51,7 +52,7 @@ public class InvestigationScene : MonoBehaviour
     public CluesData[] clues;
 
     [Header("Items & Clues script")]
-    [SerializeField] private CluesScript CluesScript;
+    [SerializeField] private CluesScript cluScript;
     [SerializeField] private InventoryManager inventoryManager;
 
     private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
@@ -85,13 +86,22 @@ public class InvestigationScene : MonoBehaviour
                 Debug.Log($"InvestigationScene > Reloading Inventory Items > Item Count: {curGS.Inventory.Items.Count}");
                 foreach (var itm in curGS.Inventory.Items)
                 {
-                    var incomingSprite = Resources.Load<Sprite>($"Assets/Game UI/Items/{itm.ItemName.ToLower().Replace("data", "")}.png");
-                    
-                    inventoryManager.currentItems.Add(new ItemData() { 
+                    Sprite incomingSprite = Resources.Load<Sprite>($"Assets/Game UI/Items/{itm.ItemName.ToLower().Replace("data", "")}_0");
+
+                    //inventoryManager.currentItems.Add
+                    //AddToInventory(itm.ItemIndex,new ItemData()
+                    //{
+                    //    itemName = itm.ItemName,
+                    //    itemDescription = itm.ItemDescription,
+                    //    itemSprite = incomingSprite
+                    //});
+                    inventoryManager.currentItems.Add(new ItemData()
+                    {
                         itemName = itm.ItemName,
                         itemDescription = itm.ItemDescription,
-                        itemSprite = incomingSprite
+                        //itemSprite = incomingSprite
                     });
+                    //AddToInventory(itm.ItemIndex, items[itm.ItemIndex]);
                 }
             }
         }
@@ -103,11 +113,22 @@ public class InvestigationScene : MonoBehaviour
                 Debug.Log($"InvestigationScene > Reloading Journal Clues > Clues Count: {curGS.Journal.Clues.Count}");
                 foreach (var itm in curGS.Journal.Clues)
                 {
-                    AddClueToJournal(new CluesData()
-                    {
-                        clueName = itm.ClueName,
-                        clueDescription = itm.ClueDescription,                        
-                    });
+                    string spritePath = $"Assets/Game UI/Clues and Testimony/{itm.ClueName.ToLower().Replace("data", "")}_0";
+                    Sprite incomingSprite = Resources.Load<Sprite>(spritePath);
+
+                    //AddClueToJournal(itm.ClueNumber, new CluesData()
+                    //{
+                    //    clueName = itm.ClueName,
+                    //    clueDescription = itm.ClueDescription,
+                    //    clueImage = incomingSprite
+                    //});
+                    //cluScript.gatheredClues.Add(new CluesData()
+                    //{
+                    //    clueName = itm.ClueName,
+                    //    clueDescription = itm.ClueDescription,
+                    //    //clueImage = incomingSprite
+                    //});
+                    AddClueToJournal(itm.ClueNumber, clues[itm.ClueNumber]);
                 }
             }
         }
@@ -202,12 +223,12 @@ public class InvestigationScene : MonoBehaviour
 
         if (index < clues.Length && clues[index] != null)
         {
-            AddClueToJournal(clues[index]);
+            AddClueToJournal(index,clues[index]);
         }
 
         if (index < items.Length && items[index] != null)
         {
-            AddToInventory(items[index]);
+            AddToInventory(index,items[index]);
         }
 
         isPointSearched[index] = true;
@@ -273,7 +294,7 @@ public class InvestigationScene : MonoBehaviour
         mapPanel.SetActive(true);
     }
 
-    void AddClueToJournal(CluesData clue)
+    void AddClueToJournal(int index,CluesData clue)
     {
         Debug.Log($"InvestigationScene > AddClueToJournal");
         if (clue == null)
@@ -282,7 +303,7 @@ public class InvestigationScene : MonoBehaviour
             return;
         }
 
-        if (CluesScript != null)
+        if (cluScript != null)
         {
             CluesScript.Instance.AddClues(clue);
 
@@ -302,10 +323,11 @@ public class InvestigationScene : MonoBehaviour
 
                 var existingClue = curGS.Journal.Clues.Where(c => c.ClueName == clue.name).FirstOrDefault();
 
-                if(existingClue == null)
+                if(existingClue == null && !string.IsNullOrWhiteSpace(clue.name))
                 {
                     curGS.Journal.Clues.Add(new JournalClue()
                     {
+                        ClueNumber = index,
                         ClueName = clue.name,
                         ClueDescription = clue.clueDescription
                     });
@@ -321,7 +343,7 @@ public class InvestigationScene : MonoBehaviour
         }
     }
 
-    void AddToInventory(ItemData newItem)
+    void AddToInventory(int index, ItemData newItem)
     {
         Debug.Log($"InvestigationScene > AddToInventory");
         if (newItem == null)
@@ -332,7 +354,7 @@ public class InvestigationScene : MonoBehaviour
 
         if (inventoryManager != null)
         {
-            inventoryManager.AddItem(newItem);
+            inventoryManager.AddItem(index,newItem);
             Debug.Log($"[InvestigationScene] Added item via serialized ref: {newItem.itemName}");
         }
     }

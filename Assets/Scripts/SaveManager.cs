@@ -45,7 +45,7 @@ public class SaveManager
                 PlayerSaves = new List<GameSave>()
             };
 
-            SelectedSaveIndex = PlayerPrefs.GetInt("CurrentGameSaveIndex");
+            //SelectedSaveIndex = PlayerPrefs.GetInt("CurrentGameSaveIndex");
 
             foreach (var fil in Directory.GetFiles(gameSavesFolderPath))
             {
@@ -68,7 +68,7 @@ public class SaveManager
     public GameSave GetGameState()
     {
         Debug.Log($"SaveManager > GetGameState started");
-        SelectedSaveIndex = PlayerPrefs.GetInt("CurrentGameSaveIndex");
+        //SelectedSaveIndex = PlayerPrefs.GetInt("CurrentGameSaveIndex");
         return CurrentGameSave;
     }
 
@@ -89,6 +89,7 @@ public class SaveManager
             CurrentGameState.PlayerSaves = new List<GameSave>();
         }
         CurrentGameState.PlayerSaves.Add(CurrentGameSave);
+        //PlayerPrefs.DeleteKey("CurrentGameSaveIndex");
         SelectedSaveIndex = CurrentGameState.PlayerSaves.Count - 1;
         //PlayerPrefs.SetInt("CurrentGameSaveIndex", SelectedSaveIndex);
         return SelectedSaveIndex;
@@ -107,7 +108,8 @@ public class SaveManager
     public void LoadGameState(int SaveIndex)
     {
         Debug.Log($"SaveManager > LoadGameState started");
-        PlayerPrefs.SetInt("CurrentGameSaveIndex", SaveIndex);
+        SelectedSaveIndex = SaveIndex;
+        //PlayerPrefs.SetInt("CurrentGameSaveIndex", SaveIndex);
         var gameSaveFilePath = $"{Application.persistentDataPath}/GameSaves/SaveFile{SaveIndex}.txt";
         var dataraw = File.ReadAllText(gameSaveFilePath);
         var dataTrans = JsonConvert.DeserializeObject<GameSave>(dataraw);
