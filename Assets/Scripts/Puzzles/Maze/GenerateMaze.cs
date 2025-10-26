@@ -323,7 +323,7 @@ public class GenerateMaze : MonoBehaviour
         }
 
         // Fixed scale — visible for testing
-        playerInstance.transform.localScale = new Vector3(1f, 1f, 1f);
+        playerInstance.transform.localScale = new Vector3(2f, 2f, 1f);
 
         // Set z position to be on top
         playerInstance.transform.position = new Vector3(spawnPos.x, spawnPos.y, -1f);
@@ -365,6 +365,7 @@ public class GenerateMaze : MonoBehaviour
         GameObject exit = new GameObject("ExitZone");
         exit.transform.position = exitPos;
         exit.transform.localScale = new Vector3(roomWidth * 0.8f, roomHeight * 0.8f, 1f);
+        exit.transform.SetParent(transform); // keep hierarchy tidy
 
         BoxCollider2D col = exit.AddComponent<BoxCollider2D>();
         col.isTrigger = true;
