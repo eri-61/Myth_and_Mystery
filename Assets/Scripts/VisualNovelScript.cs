@@ -26,11 +26,13 @@ public class VisualNovelScript : MonoBehaviour
 
     [Header("Panels")]
     public GameObject instructionsPanel;
+    public GameObject settingsPanel;
+    public GameObject inventoryPanel;
+    public GameObject journalPanel;
+    public GameObject mapPanel;
     public GameObject uiPanel;
 
     [Header("Close  Panels Button")]
-    public Button closeInv;
-    public Button closeMap;
     public Button closeInstructions;
 
     [Header("Variables")]
@@ -40,10 +42,6 @@ public class VisualNovelScript : MonoBehaviour
 
     private void Start()
     {
-        PersistentObjects.instance.CloseInventory();
-        PersistentObjects.instance.CloseMap();
-        PersistentObjects.instance.CloseJournal();
-
         skipBtn.onClick.AddListener(Skip);
         hideBtn.onClick.AddListener(HideUI);
 
@@ -51,9 +49,6 @@ public class VisualNovelScript : MonoBehaviour
         menuBtn.onClick.AddListener(OpenMenu);
         journalBtn.onClick.AddListener(OpenJournal);
         mapBtn.onClick.AddListener(OpenMap);
-
-        closeInv.onClick.AddListener(CloseInv);
-        closeMap.onClick.AddListener(CloseMap);
     }
 
     void OnDisable()
@@ -65,9 +60,7 @@ public class VisualNovelScript : MonoBehaviour
         menuBtn.onClick.RemoveListener(OpenMenu);
         journalBtn.onClick.RemoveListener(OpenJournal);
         mapBtn.onClick.RemoveListener(OpenMap);
-        
-        closeInv.onClick.RemoveListener(CloseInv);
-        closeMap.onClick.RemoveListener(CloseMap);
+      
     }
 
     void ToggleUI()
@@ -97,32 +90,22 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenInventory()
     {
-        PersistentObjects.instance.OpenInventory();
+        inventoryPanel.SetActive(true);
     }
 
     void OpenMenu()
     {
-        SettingsScript.instance.OpenSettings();
+       settingsPanel.SetActive(true);
     }
 
     void OpenJournal()
     {
-        PersistentObjects.instance.OpenJournal();
+        journalPanel.SetActive(true);
     }
 
     void OpenMap()
     {
-        PersistentObjects.instance.OpenMap();
-    }
-
-    void CloseInv()
-    {
-        PersistentObjects.instance.CloseInventory();
-    }
-
-    void CloseMap()
-    {
-        PersistentObjects.instance.CloseMap();
+        mapPanel.SetActive(true);
     }
 
 }

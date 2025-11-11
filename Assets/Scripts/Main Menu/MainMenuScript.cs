@@ -18,7 +18,19 @@ public class MainMenuScript : MonoBehaviour
     public Button yesBtn;
     public Button noBtn;
 
-    [Header("LoadPanel")]
+    [Header("Load Save Slots")]
+    public Button closeLoadSlotsPanel;
+    public Button[] loadSlot;
+    //public Button loadSlot1;
+    //public Button loadSlot2;
+    //public Button loadSlot3;
+    //public Button loadSlot4;
+    //public Button loadSlot5;
+    //public Button loadSlot6;
+    //public Button loadSlot7;
+    //public Button loadSlot8;
+
+    [Header("Lod  Chapters Panel")]
     public Button closeLoadPanel;
     public Button loadChap1;
     public Button loadChap2;
@@ -27,6 +39,8 @@ public class MainMenuScript : MonoBehaviour
 
     [Header("Panels")]
     public GameObject loadPanel;
+    public GameObject loadSlotsPanel;    
+    public GameObject settingsPanel;
     public GameObject quitPanel;
 
     [Header("Variables")]
@@ -41,46 +55,30 @@ public class MainMenuScript : MonoBehaviour
 
     private void Start()
     {
-        if (SettingsScript.instance == null)
-        {
-            //SettingsScript.instance.CloseSettings();
-        }
         loadPanel.SetActive(false);
         quitPanel.SetActive(false);
-        loadChap1.interactable = false;
+
+        loadChap1.interactable = true;
         loadChap2.interactable = false;
         loadChap3.interactable = false;
         loadChap4.interactable = false;
 
-
-
-        if(SaveManager.Instance == null)
+        for (int i = 0; i < loadSlot.Length; i++)
+        {
+            int index = i;
+            loadSlot[index].interactable = false;
+        }
+        if (SaveManager.Instance == null)
         {
             SaveManager sm = new SaveManager();
         }
         
         SaveManager.Instance.InitGameStates();
 
-        switch (SaveManager.Instance.CurrentGameState.PlayerSaves.Count)
+        for(int i = 0; i < SaveManager.Instance.CurrentGameState.PlayerSaves.Count; i++)
         {
-            case 1:
-                loadChap1.interactable = true;
-                break;
-            case 2:
-                loadChap1.interactable = true;
-                loadChap2.interactable = true;
-                break;
-            case 3:
-                loadChap1.interactable = true;
-                loadChap2.interactable = true;
-                loadChap3.interactable = true;
-                break;
-            case 4:
-                loadChap1.interactable = true;
-                loadChap2.interactable = true;
-                loadChap3.interactable = true;
-                loadChap4.interactable = true;
-                break;
+            int index = i;
+            loadSlot[index].interactable = true;
         }
     }
 
@@ -94,8 +92,24 @@ public class MainMenuScript : MonoBehaviour
         settingsBtn.onClick.AddListener(OpenSettings);
         exitBtn.onClick.AddListener(ExitGame);
 
+        //load slots
+        for(int i =0; i < loadSlot.Length; i++)
+        {
+            int index = i; // Capture the current value of i
+            loadSlot[i].onClick.AddListener(() => 
+            {
+                SaveManager.Instance.LoadGameState(index);
+                SaveManager.Instance.PrintGameStatus();
+                int curChap = SaveManager.Instance.CurrentGameSave.CurrentChapter - 1;
+                int curDia = SaveManager.Instance.CurrentGameSave.CurrentDialog;
+                string incomingScene = GameConstants.ChapterDialogs[curChap, curDia];
+                SceneManager.LoadScene(incomingScene);
+            });
+        }
+        closeLoadSlotsPanel.onClick.AddListener(() => loadSlotsPanel.SetActive(false));
+
         //load chapters
-        closeLoadPanel.onClick.AddListener(CloseLoad);
+        closeLoadPanel.onClick.AddListener(() => loadPanel.SetActive(false));
         loadChap1.onClick.AddListener(LoadChapter1);
         loadChap2.onClick.AddListener(LoadChapter2);
         loadChap3.onClick.AddListener(LoadChapter3);
@@ -116,12 +130,25 @@ public class MainMenuScript : MonoBehaviour
         settingsBtn.onClick.RemoveListener(OpenSettings);
         exitBtn.onClick.RemoveListener(ExitGame);
 
+        //load slots
+        for (int i = 0; i < loadSlot.Length; i++)
+        { 
+            int index = i; // Capture the current value of i
+            loadSlot[i].onClick.RemoveListener(() => 
+            {
+                //SaveManager.Instance.LoadGameState(index);
+                //SaveManager.Instance.PrintGameStatus();
+                //SceneManager.LoadScene(SaveManager.Instance.CurrentGameState.PlayerSaves[index].CurrentDialog);
+            });
+        }
+        closeLoadSlotsPanel.onClick.RemoveListener(() => loadSlotsPanel.SetActive(false));
+
         //load chapters
-        closeLoadPanel.onClick.RemoveListener(CloseLoad);
-        loadChap1.onClick.RemoveListener(LoadChapter1);
-        loadChap2.onClick.RemoveListener(LoadChapter2);
-        loadChap3.onClick.RemoveListener(LoadChapter3);
-        loadChap4.onClick.RemoveListener(LoadChapter4);
+        closeLoadPanel.onClick.RemoveListener(() => loadPanel.SetActive(false));
+        //loadChap1.onClick.RemoveListener(LoadChapter1);
+        //loadChap2.onClick.RemoveListener(LoadChapter2);
+        //loadChap3.onClick.RemoveListener(LoadChapter3);
+        //loadChap4.onClick.RemoveListener(LoadChapter4);
 
         //quit
         yesBtn.onClick.RemoveListener(() => Application.Quit());
@@ -139,13 +166,11 @@ public class MainMenuScript : MonoBehaviour
 
     void LoadGame()
     {
-        // Load from save file
-        loadPanel.SetActive(true);
+        loadSlotsPanel.SetActive(true);
     }
 
     void LoadChapter()
     {
-        // Load a chapter
         loadPanel.SetActive(true);
     }
 
@@ -156,7 +181,7 @@ public class MainMenuScript : MonoBehaviour
 
     void OpenSettings()
     {
-        SettingsScript.instance.OpenSettings();
+        settingsPanel.SetActive(true);
     }
 
     void ExitGame()
@@ -167,28 +192,12 @@ public class MainMenuScript : MonoBehaviour
     //load panels
     void LoadChapter1()
     {
-        //temp Save 1
-        SaveManager.Instance.LoadGameState(0);
-        SaveManager.Instance.PrintGameStatus();
-
-        //Load Chapter
-        //if Chapter 1 Dialog 2, then load "VN_OfficeD2"
-        SceneManager.LoadScene("VN_Office");
-
-        //SceneManager.LoadScene(chapter1SceneIndex);
+        SceneManager.LoadScene(chapter1SceneIndex);
     }
 
     void LoadChapter2()
     {
-        //temp Save 2
-        SaveManager.Instance.LoadGameState(1);
-        SaveManager.Instance.PrintGameStatus();
-
-        //Load Chapter
-        //if Chapter 1 Dialog 2, then load "VN_OfficeD2"
-        SceneManager.LoadScene("VN_OfficeD2");
-
-        //SceneManager.LoadScene(chapter2SceneIndex);
+        SceneManager.LoadScene(chapter2SceneIndex);
     }
 
     void LoadChapter3()
@@ -199,10 +208,5 @@ public class MainMenuScript : MonoBehaviour
     void LoadChapter4()
     {
         SceneManager.LoadScene(chapter4SceneIndex);
-    }
-
-    void CloseLoad()
-    {
-        loadPanel.SetActive(false);
     }
 }

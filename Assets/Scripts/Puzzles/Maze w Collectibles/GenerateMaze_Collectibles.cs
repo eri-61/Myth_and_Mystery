@@ -2,17 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GenerateMaze_wCollectibles : MonoBehaviour
 {
     #region Variables
     [Header("UI Objects")]
-    [SerializeField] private GameObject loadingPanel;
+    [SerializeField] private GameObject instructions;
+    [SerializeField] private Button close;
     [SerializeField] private TextMeshProUGUI text;
     public RoomScript[,] rooms = null;
 
@@ -20,12 +22,11 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     MazePlayerController_wCollectibles player;
     [SerializeField] private GameObject playerPrefab;
     private GameObject playerInstance;
-    [SerializeField] private float playerSizeFactor = 0.6f; 
+    [SerializeField] private float playerSizeFactor = 0.6f;
 
     [Header("Room")]
     [SerializeField] GameObject roomPrefab;
-    public GameObject exitInstance;
-    [SerializeField] private Sprite exitSprite;
+    [SerializeField] public GameObject exitPrefab;
 
     [SerializeField] public int numX = 10;
     [SerializeField] public int numY = 10;
@@ -133,7 +134,7 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         cam.transform.position = center;
 
         float screenAspect = (float)Screen.width / (float)Screen.height;
-        float padding = 1.10f; 
+        float padding = 1.10f;
 
         float targetOrtho;
         float mazeAspect = mazeWidth / mazeHeight;
@@ -183,13 +184,17 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GenerateMazeWithLoading());
+        close.onClick.AddListener(closeInstructions);
+    }
+
+    void closeInstructions()
+    {
+        instructions.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private IEnumerator GenerateMazeWithLoading()
     {
-        if (loadingPanel != null)
-            loadingPanel.SetActive(true);
-
         foreach (Transform child in transform)
             child.gameObject.SetActive(false);
 
@@ -203,9 +208,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
 
         foreach (Transform child in transform)
             child.gameObject.SetActive(true);
-
-        if (loadingPanel != null)
-            loadingPanel.SetActive(false);
     }
 
     IEnumerator GenerateMazeInstant()
@@ -414,15 +416,8 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     public void SpawnEnemy()
     {
         if (enemySpawned) return;
-        if (rooms == null || rooms[0, 0] == null)
-        {
-            return;
-        }
-
-        if (enemyPrefab == null)
-        {
-            return;
-        }
+        if (rooms == null || rooms[0, 0] == null) return;
+        if (enemyPrefab == null) return;
 
         RoomScript startRoom = rooms[0, 0];
         Vector3 spawnPos = startRoom.transform.position;
@@ -430,8 +425,29 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         enemyInstance = Instantiate(enemyPrefab, spawnPos, Quaternion.identity, transform);
         enemyInstance.name = "KapreEnemy";
 
-        float desiredWorldSize = Mathf.Min(roomWidth, roomHeight) * enemySizeFactor;
+        // Ensure enemy has a trigger collider so OnTriggerEnter2D will fire
+        Collider2D enemyCol = enemyInstance.GetComponentInChildren<Collider2D>();
+        if (enemyCol == null)
+        {
+            var bc = enemyInstance.AddComponent<BoxCollider2D>();
+            bc.isTrigger = true;
+        }
+        else
+        {
+            enemyCol.isTrigger = true;
+        }
 
+        // Ensure a Rigidbody2D exists somewhere (player already adds a kinematic Rigidbody2D;
+        // if not present on enemy prefab add a kinematic one to be safe)
+        Rigidbody2D enemyRb = enemyInstance.GetComponent<Rigidbody2D>();
+        if (enemyRb == null)
+        {
+            enemyRb = enemyInstance.AddComponent<Rigidbody2D>();
+            enemyRb.bodyType = RigidbodyType2D.Kinematic;
+            enemyRb.simulated = true;
+        }
+
+        float desiredWorldSize = Mathf.Min(roomWidth, roomHeight) * enemySizeFactor;
         float mazeScale = Mathf.Abs(transform.lossyScale.x);
         if (Mathf.Approximately(mazeScale, 0f)) mazeScale = 1f;
 
@@ -772,7 +788,7 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     {
         Debug.Log("💀 Game Over! The enemy caught you!");
         SceneManager.LoadScene(gameOver);
-      
+
     }
 
     public void OnPlayerExit()
@@ -785,7 +801,7 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
             else
             {
                 Debug.LogWarning("[GenerateMaze] UI text reference is not assigned; skipping victory UI update.");
-            } 
+            }
 
             SceneManager.LoadScene(gameWin);
         }
@@ -800,8 +816,8 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     {
         playerMoves++;
 
-        // Spawn Kapre after 3 moves
-        if (!enemySpawned && playerMoves >= 3)
+        // Spawn Kapre after 4 moves
+        if (!enemySpawned && playerMoves >= 4)
         {
             SpawnEnemy();
             enemySpawned = true;
@@ -819,36 +835,160 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
 
     private void CreateExit()
     {
-        // Top-right cell (exit)
-        RoomScript exitRoom = rooms[numX - 1, numY - 1];
+        Debug.Log($"[DEBUG] CreateExit() called — rooms={rooms}, numX={numX}, numY={numY}");
 
-        // Position the exit directly in the last room
-        Vector3 exitPos = exitRoom.transform.position;
-
-        GameObject exit = new GameObject("ExitZone");
-        exit.transform.position = exitPos;
-        exit.transform.localScale = new Vector3(roomWidth * 0.8f, roomHeight * 0.8f, 1f);
-
-        // Collider setup
-        BoxCollider2D col = exit.AddComponent<BoxCollider2D>();
-        col.isTrigger = true;
-
-        // Sprite setup
-        SpriteRenderer rend = exit.AddComponent<SpriteRenderer>();
-        if (exitSprite != null)
+        if (rooms != null)
         {
-            rend.sprite = exitSprite;
-            rend.color = Color.white; // normal tint
+            Debug.Log($"[DEBUG] rooms.GetLength(0)={rooms.GetLength(0)}, rooms.GetLength(1)={rooms.GetLength(1)}");
+            Debug.Log($"[DEBUG] Trying to access exit room at [{numX - 1}, {numY - 1}]");
+            if (numX - 1 < rooms.GetLength(0) && numY - 1 < rooms.GetLength(1))
+            {
+                var r = rooms[numX - 1, numY - 1];
+                Debug.Log($"[DEBUG] rooms[{numX - 1},{numY - 1}] exists? {r != null}");
+            }
         }
         else
         {
-            rend.color = new Color(0, 1, 0, 0.3f); // fallback if no sprite assigned
+            Debug.LogWarning("[DEBUG] rooms array is null at CreateExit.");
         }
 
-        rend.sortingOrder = 10;
+        if (exitCreated) return;
 
-        Debug.Log("Exit created at room: " + (numX - 1) + "," + (numY - 1) + "  pos: " + exitPos);
+        if (rooms == null)
+        {
+            Debug.LogWarning("[CreateExit] rooms array is null. Cannot create exit.");
+            return;
+        }
+
+        if (numX <= 0 || numY <= 0)
+        {
+            Debug.LogWarning("[CreateExit] invalid maze dimensions.");
+            return;
+        }
+
+        int ex = numX - 1;
+        int ey = numY - 1;
+
+        if (ex < 0 || ey < 0 || ex >= rooms.GetLength(0) || ey >= rooms.GetLength(1))
+        {
+            Debug.LogWarning($"[CreateExit] exit coordinates out of range: {ex},{ey}");
+            return;
+        }
+
+        RoomScript exitRoom = rooms[ex, ey];
+        if (exitRoom == null)
+        {
+            Debug.LogWarning($"[CreateExit] exit room at {ex},{ey} is null.");
+            return;
+        }
+
+        Vector3 exitPos = exitRoom.transform.position;
+        GameObject exitObj = null;
+
+        try
+        {
+            // If no prefab provided: fallback simple trigger
+            if (exitPrefab == null)
+            {
+                Debug.LogWarning("[CreateExit] exitPrefab is not assigned. Creating fallback ExitZone GameObject.");
+                exitObj = new GameObject("ExitZone");
+                exitObj.transform.SetParent(transform);
+                exitObj.transform.position = new Vector3(exitPos.x, exitPos.y, -0.2f);
+
+                var bc = exitObj.AddComponent<BoxCollider2D>();
+                bc.isTrigger = true;
+                bc.size = new Vector2(roomWidth * 0.8f, roomHeight * 0.8f);
+
+                var trigger = exitObj.AddComponent<ExitZoneTrigger>();
+                trigger.mazeGen = this;
+
+                exitCreated = true;
+                Debug.Log("[CreateExit] fallback ExitZone created.");
+                return;
+            }
+
+            // Instantiate prefab
+            exitObj = Instantiate(exitPrefab, exitPos, Quaternion.identity, transform);
+            exitObj.name = "ExitZone";
+            if (!exitObj.activeInHierarchy) exitObj.SetActive(true);
+
+            // Find colliders (include inactive children)
+            Collider2D[] exitColliders = exitObj.GetComponentsInChildren<Collider2D>(true);
+
+            // If no colliders found, add a BoxCollider2D to the root
+            if (exitColliders == null || exitColliders.Length == 0)
+            {
+                Debug.LogWarning("[CreateExit] No Collider2D found on exitPrefab. Adding fallback BoxCollider2D to root.");
+                var bc = exitObj.AddComponent<BoxCollider2D>();
+                bc.isTrigger = true;
+                bc.size = new Vector2(roomWidth * 0.8f, roomHeight * 0.8f);
+                exitColliders = new Collider2D[] { bc };
+            }
+
+            // Ensure all colliders are triggers and pick a collider owner
+            GameObject colliderOwner = null;
+            for (int i = 0; i < exitColliders.Length; i++)
+            {
+                var c = exitColliders[i];
+                if (c == null) continue;
+                c.isTrigger = true;
+                if (colliderOwner == null) colliderOwner = c.gameObject;
+            }
+
+            if (colliderOwner == null)
+            {
+                // last-resort: use root object
+                colliderOwner = exitObj;
+                var bc = colliderOwner.GetComponent<Collider2D>();
+                if (bc == null) bc = colliderOwner.AddComponent<BoxCollider2D>();
+                bc.isTrigger = true;
+                Debug.LogWarning("[CreateExit] colliderOwner was null; attached BoxCollider2D to root.");
+            }
+
+            // Attach or find ExitZoneTrigger on the collider owner and wire the generator
+            var exitTrigger = colliderOwner.GetComponent<ExitZoneTrigger>();
+            if (exitTrigger == null) exitTrigger = colliderOwner.AddComponent<ExitZoneTrigger>();
+            exitTrigger.mazeGen = this;
+
+            Debug.Log($"[CreateExit] exitObj created: {exitObj.name}, colliderOwner: {colliderOwner.name}, colliders: {exitColliders.Length}");
+
+            // Position the exit slightly above floor so it renders correctly
+            exitObj.transform.position = new Vector3(exitPos.x, exitPos.y, -0.2f);
+
+            // Immediate overlap detection - if player already standing on exit, trigger exit now
+            if (playerInstance != null)
+            {
+                Vector2 playerPos = playerInstance.transform.position;
+                Collider2D[] overlaps = Physics2D.OverlapPointAll(playerPos);
+
+                bool playerInsideExit = false;
+                foreach (var oc in overlaps)
+                {
+                    if (oc == null) continue;
+                    // check if the overlap collider belongs to the exit collider owner (or its children)
+                    if (oc.gameObject == colliderOwner || oc.transform.IsChildOf(colliderOwner.transform))
+                    {
+                        playerInsideExit = true;
+                        break;
+                    }
+                }
+
+                if (playerInsideExit)
+                {
+                    Debug.Log("[CreateExit] Player already overlaps new exit — invoking OnPlayerExit()");
+                    OnPlayerExit();
+                }
+            }
+
+            exitCreated = true;
+            Debug.Log($"Exit prefab instantiated at room: {ex},{ey}  pos: {exitPos}");
+        }
+        catch (Exception x)
+        {
+            Debug.LogException(x);
+        }
     }
 
-
 }
+
+

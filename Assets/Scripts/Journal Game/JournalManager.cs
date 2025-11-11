@@ -1,7 +1,10 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class JournalManager : MonoBehaviour
 {
@@ -69,9 +72,8 @@ public class JournalManager : MonoBehaviour
         var curGS = SaveManager.Instance.GetGameState();
         if (curGS != null) 
         {
-            curGS.LastSaveDateTime = DateTime.Now;
+            curGS.LastSaveDateTime = DateTime.Now; 
             SaveManager.Instance.SaveGameState(SaveManager.Instance.SelectedSaveIndex);
-
             SaveManager.Instance.PrintGameStatus();
         }
 

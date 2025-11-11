@@ -28,8 +28,11 @@ public class DialogController : MonoBehaviour
     [SerializeField] Image bgImage;
 
     [Header("Next Scene")]
-    [SerializeField] int sceneIndex;
+    [SerializeField] public int sceneIndex;
     [SerializeField] Button nextButton;
+
+    // Current section the dialog is running (set while RunDialog is active)
+    public int currentSectionIndex { get; private set; } = -1;
 
     public static event Action OnDialogStarted;
     public static event Action OnDialogEnded;
@@ -88,11 +91,18 @@ public class DialogController : MonoBehaviour
         answerBox.SetActive(false);
         skipLineTriggered = false;
         OnDialogStarted?.Invoke();
+
+        // ensure currentSectionIndex reflects the starting section
+        currentSectionIndex = startSection;
+
         StartCoroutine(RunDialog(dialogTree, startSection));
     }
 
     IEnumerator RunDialog(DialogTree dialogTree, int section)
     {
+        // update current section index so external handlers can inspect it
+        currentSectionIndex = section;
+
         DialogSection current = dialogTree.sections[section];
 
         for (int i = 0; i < current.dialog.Length; i++)
@@ -216,7 +226,6 @@ public class DialogController : MonoBehaviour
         dialogBox.SetActive(false);
         nextButton.gameObject.SetActive(true);
     }
-
     void ShowCharacters(DialogSection section, int index)
     {
         // Clear previously spawned instances under the parent
@@ -233,43 +242,45 @@ public class DialogController : MonoBehaviour
         string speakerName = (section.characterName != null && index < section.characterName.Length) ? section.characterName[index] : null;
         if (string.IsNullOrEmpty(speakerName)) return;
 
-        foreach (var c in section.characters)
+        // Primary behavior: use the prefab at the same index in section.characters (parallel arrays).
+        GameObject prefabToSpawn = null;
+
+        if (section.characters != null && index < section.characters.Length)
         {
-            if (c.characterPrefab == null) continue;
-            if (c.charaName != speakerName) continue;
-
-            Transform parentAnchor = (charactersParent != null) ? charactersParent.transform : null;
-
-            // Instantiate while preserving the prefab's local transform (use worldPositionStays = false to keep local values)
-            if (parentAnchor != null)
-                activeCharacterInstance = Instantiate(c.characterPrefab, parentAnchor, false);
-            else
-                activeCharacterInstance = Instantiate(c.characterPrefab);
-
-            // If prefab is UI (RectTransform) copy the prefab RectTransform values so top/bottom numbers are preserved.
-            var prefabRT = c.characterPrefab.GetComponent<RectTransform>();
-            var instRT = activeCharacterInstance.GetComponent<RectTransform>();
-            if (prefabRT != null && instRT != null)
+            var candidate = section.characters[index];
+            if (candidate.characterPrefab != null)
             {
-                // copy anchors/pivot/size/position/scale so the offsets you tuned in the prefab remain identical
-                instRT.anchorMin = prefabRT.anchorMin;
-                instRT.anchorMax = prefabRT.anchorMax;
-                instRT.pivot = prefabRT.pivot;
-                instRT.anchoredPosition = prefabRT.anchoredPosition;
-                instRT.sizeDelta = prefabRT.sizeDelta;
-                instRT.localScale = prefabRT.localScale;
-            }
-            else
-            {
-                // Non-UI fallback: keep prefab localScale and reset position/rotation relative to parent
-                activeCharacterInstance.transform.localScale = c.characterPrefab.transform.localScale;
-                activeCharacterInstance.transform.localPosition = Vector3.zero;
-                activeCharacterInstance.transform.localRotation = Quaternion.identity;
-            }
+                prefabToSpawn = candidate.characterPrefab;
 
-            SetVFXVolumeOnInstance(activeCharacterInstance, AudioManager.Instance != null ? AudioManager.Instance.VFXVolume : 1f);
-            break;
+                if (!string.IsNullOrEmpty(candidate.charaName) && candidate.charaName != speakerName)
+                    Debug.LogWarning($"DialogSection.characters[{index}].charaName ('{candidate.charaName}') does not match speaker name ('{speakerName}'). Using prefab by index anyway.");
+            }
         }
+
+        // Fallback: find first prefab that matches speakerName (name-based setup)
+        if (prefabToSpawn == null && section.characters != null)
+        {
+            foreach (var c in section.characters)
+            {
+                if (c.characterPrefab == null) continue;
+                if (c.charaName != speakerName) continue;
+                prefabToSpawn = c.characterPrefab;
+                break;
+            }
+        }
+
+        if (prefabToSpawn == null)
+        {
+            Debug.LogWarning($"No character prefab found for '{speakerName}'.");
+            return;
+        }
+
+        if (charactersParent != null)
+            activeCharacterInstance = Instantiate(prefabToSpawn, charactersParent.transform, false);
+        else
+            activeCharacterInstance = Instantiate(prefabToSpawn);
+
+        SetVFXVolumeOnInstance(activeCharacterInstance, AudioManager.Instance != null ? AudioManager.Instance.VFXVolume : 1f);
     }
 
     void ResetDialog()

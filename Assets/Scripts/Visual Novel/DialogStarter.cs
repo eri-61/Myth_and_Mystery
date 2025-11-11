@@ -49,7 +49,7 @@ public class DialogStarter : MonoBehaviour
     IEnumerator BeginSequence()
     {
         //play case
-        if (caseUI!= null && caseVideo != null && caseAnimation)
+        if (caseAnimation)
         {
             yield return new WaitForSecondsRealtime(1f);
             caseUI.SetActive(true);
@@ -58,26 +58,23 @@ public class DialogStarter : MonoBehaviour
             caseVideo.Stop();
         }
 
+        caseUI.SetActive(false);
+        dayUI.SetActive(true);
         //play day
-        if (dayUI != null && dayVideo !=null && dayAnimation)
+        if (dayAnimation)
         {
             yield return new WaitForSecondsRealtime(1f);
-            caseUI.SetActive(false);
-            dayUI.SetActive(true);
             dayVideo.Play();
             yield return new WaitForSecondsRealtime((float)dayVideo.clip.length);
             dayVideo.Stop(); 
         }
-        //play fade
-        if (fadeUI != null)
-        {
-            yield return new WaitForSecondsRealtime(1f);
-            dayUI.SetActive(false);
-            fadeUI.SetActive(true);
-            yield return new WaitForSecondsRealtime(fadeDuration);
-            fadeUI.SetActive(false);
-        }
 
+        dayUI.SetActive(false);
+        fadeUI.SetActive(true);
+ 
+        yield return new WaitForSecondsRealtime(fadeDuration);
+
+        fadeUI.SetActive(false);
         DialogController.instance.StartDialog(dialogTree, startSection);
     }
     /*

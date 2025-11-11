@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
+
 
 public class InventoryManager : MonoBehaviour
 {
@@ -30,12 +32,22 @@ public class InventoryManager : MonoBehaviour
     [Header("Nav Bar")]
     public Button close;
     public Button useItem;
+    public GameObject inventoryPanel;
 
-    private List<ItemData> currentItems = new List<ItemData>();
-    [HideInInspector] public ItemData selectedItem;
+    [HideInInspector]
+    public List<ItemData> currentItems = new List<ItemData>();
+    
+    [HideInInspector] 
+    public ItemData selectedItem;
     #endregion
 
     public event Action<ItemData> OnUseItemReq;
+
+    public InventoryManager()
+    {
+        Instance = this;
+    }
+
     private void Awake()
     {
         
@@ -56,7 +68,8 @@ public class InventoryManager : MonoBehaviour
     public void LoadInventoryUI()
     {
         int idx = 1;
-
+        Debug.Log($"InventoryManager > LoadInventoryUI");
+        Debug.Log($"InventoryManager > LoadInventoryUI > Item Count: {currentItems.Count}");
         foreach (var itm in currentItems)
         {
             if (idx == 1)
@@ -146,7 +159,7 @@ public class InventoryManager : MonoBehaviour
         itemDetailsSection.SetActive(true);
     }
  
-    public void AddItem(ItemData newItem)
+    public void AddItem(int index,ItemData newItem)
     {
         if (newItem == null)
         {
@@ -159,6 +172,51 @@ public class InventoryManager : MonoBehaviour
         if (!currentItems.Contains(newItem))
             currentItems.Add(newItem);
 
+
+        //Add Items to Game Save Memory
+        var curGS = SaveManager.Instance.GetGameState();
+        //curGS.Inventory = new GameInventory();
+        //curGS.Inventory.Items = new List<GameItem>();
+        //int idx = 0;
+        //Debug.Log($"InventoryManager > AddItem > Item Count: {InventoryManager.Instance.currentItems.Count}");
+        //foreach (var itm in currentItems)
+        //{
+        //    curGS.Inventory.Items.Add(new GameItem()
+        //    {
+        //        ItemIndex = idx,
+        //        ItemName = itm.name,
+        //        ItemDescription = itm.itemDescription,
+        //    });
+
+        //    idx++;
+        //}
+
+        if (curGS != null)
+        {
+            if (curGS.Inventory == null)
+            {
+                curGS.Inventory = new GameInventory();
+            }
+
+            if (curGS.Inventory.Items == null)
+            {
+                curGS.Inventory.Items = new List<GameItem>();
+            }
+
+            var existingClue = curGS.Inventory.Items.Where(c => c.ItemName == newItem.name).FirstOrDefault();
+
+            if (existingClue == null && !string.IsNullOrWhiteSpace(newItem.name))
+            {
+                curGS.Inventory.Items.Add(new GameItem()
+                {
+                    ItemIndex = index,
+                    ItemName = newItem.name,
+                    ItemDescription = newItem.itemDescription
+                });
+            }
+
+        }
+
         LoadInventoryUI();
 
         Debug.Log($"[InventoryManager] Added item: {newItem.itemName}");
@@ -166,7 +224,7 @@ public class InventoryManager : MonoBehaviour
 
     void CloseInv()
     {
-        PersistentObjects.instance.CloseInventory();
+        inventoryPanel.SetActive(false);
     }
 
     private void OnUseItem()
