@@ -7,5 +7,5 @@ public class BackgroundData : ScriptableObject
     public Sprite bgSprite;
     public string backgroundName;
 
-
+    [HideInInspector] public bool hasBeenUsed;
 }

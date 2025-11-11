@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898ab583c2d85ab458e950064ac6d514, type: 3}
+  m_Name: VN_Office2
+  m_EditorClassIdentifier: Assembly-CSharp::DialogTree
+  sections:
+  - characterName:
+    - Rafael
+    - Javier
+    - Javier
+    - Rafael
+    - Rafael
+    - Javier
+    - Rafael
+    - Rafael
+    - Rafael
+    dialog:
+    - I'm back!
+    - Welcome back.
+    - Did you manage to get tickets to Cagayan de Oro?
+    - Yes.
+    - Here you go two freshly bought tickets to Cagayan de Oro at 2pm today.
+    - Good job
+    - ...
+    - By the way, we should review the case file before we go to the site.
+    - 'Open your journal. '
+    endAfterDialog: 0
+    nextDialog: 1
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 4860379806214962725, guid: 6c941e5a4f6072b41a5358c68dc3af53, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: 2116520452050511185, guid: be098a65acf51614b878264289626bf0, type: 3}
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}
+  - characterName:
+    - Javier
+    - Javier
+    - Rafael
+    dialog:
+    - According to the Case File, our client wants us to investigate her apo's disappearance.
+    - Our main objective by going to Cagayan de Oro is find clues on why they disappeared,
+    - hmm... Okay then let's prepare our stuff to go to Cagayan de Oro.
+    endAfterDialog: 1
+    nextDialog: -1
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}
+    - {fileID: 4726522335782357095, guid: ff4e594482588004aa27752c74b78327, type: 3}

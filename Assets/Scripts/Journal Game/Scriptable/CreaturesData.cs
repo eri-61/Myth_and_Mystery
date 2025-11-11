@@ -10,7 +10,7 @@ public class CreaturesData : ScriptableObject
     public Sprite CreatureImage;
 
     public GameObject CreaturePrefab;
-    public InventoryData weaknessItem;
+    public ItemData weaknessItem;
 
     public bool hasInteracted;
 }

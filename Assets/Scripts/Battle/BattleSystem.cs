@@ -3,8 +3,11 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public enum Battlestate { START, PLAYERTURN, ENEMYTURN, WON, LOST }
+public enum DodgeResult { NotAttempted, Success, Failed }
 
 public class BattleSystem : MonoBehaviour
 {
@@ -16,6 +19,7 @@ public class BattleSystem : MonoBehaviour
     public Transform enemyBattleStation;
 
     public Battlestate state;
+    public DodgeResult dodgeResult = DodgeResult.NotAttempted;
 
     public Unit playerUnit;
     public Unit enemyUnit;
@@ -25,28 +29,40 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD enemyHUD;
     public BattleHUD playerHUD;
 
-    private bool playerDodged = false;
-
     public GameObject inventoryPanel;
 
+    public VideoPlayer battleIntro;
     [HideInInspector] public bool nextEnemyAttackDoubles = false;
-    public InventoryData correctItem;
+    public ItemData correctItem;
+
+    public int Victory = 1;
+    public int Lost = 2;
+
+    // Prevent input spamming while an action is in progress
+    private bool inputLocked = false;
     #endregion
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         state = Battlestate.START;
+        StartCoroutine(PlayAnimation());
+    }
+    IEnumerator PlayAnimation()
+    {
+        battleIntro.Play();
+        yield return new WaitForSecondsRealtime((float)battleIntro.clip.length);
+        battleIntro.gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(0.25f);
+
         StartCoroutine(SetupBattle());
     }
-
     IEnumerator SetupBattle()
     {
         GameObject playerGO = Instantiate(
-        playerPrefab,
-        playerBattleStation.position,
-        playerBattleStation.rotation,
-        playerBattleStation
+            playerPrefab,
+            playerBattleStation.position,
+            playerBattleStation.rotation,
+            playerBattleStation
         );
         playerUnit = playerGO.GetComponent<Unit>();
 
@@ -59,7 +75,7 @@ public class BattleSystem : MonoBehaviour
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         dialogueText.text = "The " + enemyUnit.unitName + " has ambushed you!";
-        
+
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
@@ -84,50 +100,69 @@ public class BattleSystem : MonoBehaviour
             state = Battlestate.WON;
             EndBattle();
         }
-        
         else
         {
             state = Battlestate.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
-
     }
 
     public IEnumerator EnemyTurn()
     {
-        dialogueText.text = "The "+ enemyUnit.unitName + " attacked you!";
-
+        dialogueText.text = "The " + enemyUnit.unitName + " attacked you!";
         yield return new WaitForSeconds(1f);
 
-        int damage = enemyUnit.damage;
-
-        if(nextEnemyAttackDoubles)
-        {
-            damage *= 2;
-            nextEnemyAttackDoubles = false;
-            dialogueText.text = "The "+ enemyUnit.unitName + "'s strikes harder due to you using the wrong item!";
-            yield return new WaitForSeconds(2f);
-        }
-
-        if (playerDodged)
+        if (dodgeResult == DodgeResult.Success)
         {
             dialogueText.text = "You dodged the attack!";
-            playerDodged = false;
             yield return new WaitForSeconds(2f);
         }
-        else
+        else if (dodgeResult == DodgeResult.Failed)
         {
-            bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-            playerHUD.setHP(playerUnit.currentHP);
+            dialogueText.text = "You failed to dodge!";
+            yield return new WaitForSeconds(2f);
 
+            int damage = enemyUnit.damage;
+            if (nextEnemyAttackDoubles)
+            {
+                damage *= 2;
+                nextEnemyAttackDoubles = false;
+                dialogueText.text = "The " + enemyUnit.unitName + "'s strikes harder due to you using the wrong item!";
+                yield return new WaitForSeconds(2f);
+            }
+
+            bool isDead = playerUnit.TakeDamage(damage);
+            playerHUD.setHP(playerUnit.currentHP);
             if (isDead)
             {
                 state = Battlestate.LOST;
                 EndBattle();
                 yield break;
             }
-
         }
+        else
+        {
+            int damage = enemyUnit.damage;
+            if (nextEnemyAttackDoubles)
+            {
+                damage *= 2;
+                nextEnemyAttackDoubles = false;
+                dialogueText.text = "The " + enemyUnit.unitName + "'s strikes harder due to you using the wrong item!";
+                yield return new WaitForSeconds(2f);
+            }
+
+            bool isDead = playerUnit.TakeDamage(damage);
+            playerHUD.setHP(playerUnit.currentHP);
+            if (isDead)
+            {
+                state = Battlestate.LOST;
+                EndBattle();
+                yield break;
+            }
+        }
+
+        dodgeResult = DodgeResult.NotAttempted;
+
         state = Battlestate.PLAYERTURN;
         PlayerTurn();
     }
@@ -137,22 +172,12 @@ public class BattleSystem : MonoBehaviour
         float dodgeChance = 0.15f;
         float roll = Random.Range(0f, 1f);
 
-        if (roll < dodgeChance)
-        {
-            dialogueText.text = "You dodged the attack!";
-            playerDodged = true;
-        }
-        else
-        {
-            dialogueText.text = "Dodge failed!";
-            playerDodged = false;
-        }
+        dodgeResult = (roll < dodgeChance) ? DodgeResult.Success : DodgeResult.Failed;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.2f); 
 
         state = Battlestate.ENEMYTURN;
         StartCoroutine(EnemyTurn());
-
     }
 
     public IEnumerator AttackSequence()
@@ -166,16 +191,21 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == Battlestate.WON)
         {
-            dialogueText.text = "You won agaisnt the "+enemyUnit.unitName + "!";
+            dialogueText.text = "You won agaisnt the " + enemyUnit.unitName + "!";
+            SceneManager.LoadScene(Victory);
         }
         else if (state == Battlestate.LOST)
         {
             dialogueText.text = "You were defeated...";
+            SceneManager.LoadScene(Lost);
+
         }
     }
 
     void PlayerTurn()
     {
+        // Allow player input when it's their turn
+        inputLocked = false;
         dialogueText.text = "Choose an action:";
     }
 
@@ -184,6 +214,10 @@ public class BattleSystem : MonoBehaviour
         if (state != Battlestate.PLAYERTURN)
             return;
 
+        if (inputLocked) // guard against spam
+            return;
+
+        inputLocked = true;
         StartCoroutine(AttackSequence());
     }
 
@@ -192,14 +226,50 @@ public class BattleSystem : MonoBehaviour
         if (state != Battlestate.PLAYERTURN)
             return;
 
+        if(InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.OnUseItemReq -= OnInventoryUseItem; // guard double-subscribe
+            InventoryManager.Instance.OnUseItemReq += OnInventoryUseItem;
+        }
         inventoryPanel.SetActive(true);
         dialogueText.text = "Choose an item to use:";
     }
 
-    public void oncloseInventory()
+    private void OnInventoryUseItem(ItemData item)
     {
-        inventoryPanel.SetActive(false);
-        dialogueText.text = "Choose an action:";
+        if (InventoryManager.Instance != null)
+            InventoryManager.Instance.OnUseItemReq -= OnInventoryUseItem;
+
+        // Lock input only when an item is actually used
+        inputLocked = true;
+        UseItemInBattle(item);
+    }
+
+
+    private void UseItemInBattle(ItemData item)
+    {
+        if (state != Battlestate.PLAYERTURN) return;
+        if (item == null) return;
+        if (item == correctItem)
+        {
+            dialogueText.text = $"You used {item.itemName}! It was super effective!";
+            enemyUnit.currentHP = 1;
+            enemyHUD.setHP(1);
+        }
+        else
+        {
+            dialogueText.text = $"You used {item.itemName}, but it had no effect!";
+            nextEnemyAttackDoubles = true;
+        }
+        state = Battlestate.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+    public IEnumerator AfterUseItem()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        state = Battlestate.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
     }
 
     public void OnDodgeButton()
@@ -207,34 +277,11 @@ public class BattleSystem : MonoBehaviour
         if (state != Battlestate.PLAYERTURN)
             return;
 
-        StartCoroutine(HandleDodge());
-    }
-
-    public void UseItem(InventoryData item)
-    {
-        if (state != Battlestate.PLAYERTURN)
+        if (inputLocked) // guard against spam
             return;
-     
-        
-        if(item == correctItem)
-        {
-            // Right item used
-            dialogueText.text = "You used the right item! The enemy is weakened!";
-            enemyUnit.currentHP = 1;
-            enemyUnit.damage = 1;
-            enemyHUD.setHP(enemyUnit.currentHP);
 
-            state = Battlestate.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
-        }
-        else
-        {
-            // Wrong item used
-            dialogueText.text = "You used the wrong item! The enemy is enraged!";
-            nextEnemyAttackDoubles = true;
-            state = Battlestate.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
-        }
+        inputLocked = true;
+        StartCoroutine(HandleDodge());
     }
 
 }

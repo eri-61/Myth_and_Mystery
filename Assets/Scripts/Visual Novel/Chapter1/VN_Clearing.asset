@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898ab583c2d85ab458e950064ac6d514, type: 3}
+  m_Name: VN_Clearing
+  m_EditorClassIdentifier: Assembly-CSharp::DialogTree
+  sections:
+  - characterName:
+    - 
+    - Kenji
+    - Jay
+    - Samantha
+    - Rafael
+    - Rafael
+    - Cassie
+    - Cassie
+    - Javier
+    - Javier
+    - Samantha
+    - Eryn
+    - Kenji
+    - Jay
+    dialog:
+    - 
+    - Guys! There's someone there.
+    - Who are you guys?
+    - Are you lost too?
+    - 'No, we''re not lost. '
+    - Is Cassie here? We were hired by your lola to find you and your friends.
+    - My lola? Tou're really here to save us?
+    - Thank you. We've been stuck here for so long.
+    - Can you guys move?
+    - We need to get out of the forest before it gets too dark.
+    - My body hurts, but I can endure it if ti means getting out of here.
+    - Don't worry, Ara. I'll hep you!
+    - Do you guys hear that?
+    - What's that sound?
+    endAfterDialog: 0
+    nextDialog: 1
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: 
+      characterPrefab: {fileID: 0}
+      isTalking: 0
+    - charaName: Kenji
+      characterPrefab: {fileID: 1254374792277268401, guid: 29eb5ee05e9715f48b81abb31a208abc, type: 3}
+      isTalking: 0
+    - charaName: Jay
+      characterPrefab: {fileID: 4652093632972869357, guid: 98dffe32eca12274c85ae6a702901bb4, type: 3}
+      isTalking: 0
+    - charaName: Samantha
+      characterPrefab: {fileID: 3331602663079251059, guid: 9c131f3b44311c7438f1ff7bf6f3d438, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    - charaName: Cassie
+      characterPrefab: {fileID: 4421322051415340455, guid: 373923e3e2632c145b7384c5ff8a6879, type: 3}
+      isTalking: 0
+    - charaName: Cassie
+      characterPrefab: {fileID: 1037760765160548259, guid: 0e99ce33314cabc40988b10b7cc5579e, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 7903138030592585080, guid: 664d0ce8198922c479fecf1b31654a76, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 7903138030592585080, guid: 664d0ce8198922c479fecf1b31654a76, type: 3}
+      isTalking: 0
+    - charaName: Samantha
+      characterPrefab: {fileID: 3331602663079251059, guid: 9c131f3b44311c7438f1ff7bf6f3d438, type: 3}
+      isTalking: 0
+    - charaName: Eryn
+      characterPrefab: {fileID: 7227993682904605277, guid: 79b8d6fc989ba6f49a3620a571be5179, type: 3}
+      isTalking: 0
+    - charaName: Kenji
+      characterPrefab: {fileID: 1254374792277268401, guid: 29eb5ee05e9715f48b81abb31a208abc, type: 3}
+      isTalking: 0
+    - charaName: Jay
+      characterPrefab: {fileID: 4652093632972869357, guid: 98dffe32eca12274c85ae6a702901bb4, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -5439355546973803624, guid: 324d8db8cc60b7f4cba8f08248e93210, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+  - characterName:
+    - 
+    - Kenji
+    dialog:
+    - 
+    - RUN!!!
+    endAfterDialog: 0
+    nextDialog: 2
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: 
+      characterPrefab: {fileID: 0}
+      isTalking: 0
+    - charaName: Kenji
+      characterPrefab: {fileID: 1254374792277268401, guid: 29eb5ee05e9715f48b81abb31a208abc, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: 8395325799919703782, guid: d9ffbb971d7483246978999b674ec40d, type: 3}
+    - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
+  - characterName:
+    - Javier
+    - Javier
+    dialog:
+    - 'We''ve been separated. '
+    - I need to find Rafael and the campers before escaping this forest.
+    endAfterDialog: 1
+    nextDialog: -1
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: Javier
+      characterPrefab: {fileID: 7723065548182894045, guid: 0a37311e34965fa48b44cb57d7ac4cb5, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 7723065548182894045, guid: 0a37311e34965fa48b44cb57d7ac4cb5, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: 4251731714145846241, guid: 54042d36fa0a7e146b1223ed9b5df41d, type: 3}
+    - {fileID: 4251731714145846241, guid: 54042d36fa0a7e146b1223ed9b5df41d, type: 3}

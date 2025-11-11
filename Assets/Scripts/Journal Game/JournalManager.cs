@@ -1,10 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class JournalManager : MonoBehaviour
 {
     #region Journal Variables
+    public GameObject Journal;
+
     [Header("Journal Buttons")]
     public Button caseButton;
     public Button cluesBtn;
@@ -34,6 +40,7 @@ public class JournalManager : MonoBehaviour
         slBtn.onClick.AddListener(openSL);
         creaturesBtn.onClick.AddListener(openCreatures);
         closeBtn.onClick.AddListener(CloseTab);
+        Time.timeScale = 0f;
     }
 
     void OnDisable()
@@ -60,6 +67,16 @@ public class JournalManager : MonoBehaviour
 
     void openSL()
     {
+        //Saving Game here
+
+        var curGS = SaveManager.Instance.GetGameState();
+        if (curGS != null) 
+        {
+            curGS.LastSaveDateTime = DateTime.Now; 
+            SaveManager.Instance.SaveGameState(SaveManager.Instance.SelectedSaveIndex);
+            SaveManager.Instance.PrintGameStatus();
+        }
+
         ShowTab(saveLoadTab);
         //slScript.UpdateSLUI();
     }
@@ -85,7 +102,7 @@ public class JournalManager : MonoBehaviour
 
     private void CloseTab()
     {
-        SceneController.Instance.GoBackToPreviousScene();
+        Journal.SetActive(false);
     }
 }
 
