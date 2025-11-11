@@ -376,7 +376,6 @@ GameObject:
   - component: {fileID: 74929119}
   - component: {fileID: 74929118}
   - component: {fileID: 74929117}
-  - component: {fileID: 74929116}
   - component: {fileID: 74929115}
   m_Layer: 5
   m_Name: Canvas
@@ -399,20 +398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameChapter1
   CurrentDialog: 3
   CurrentObjective: 0
---- !u!114 &74929116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 74929114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efb95a60eeb5acf4f9d129a03966501f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InstructionManagerMechanics
-  instructionsPanel: {fileID: 0}
-  close: {fileID: 0}
 --- !u!114 &74929117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +446,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 542a8fb074c514f41a0b78b7d5c71feb, type: 2}
   - {fileID: 11400000, guid: d1c423d06a1b32e45bfa61093fa1d736, type: 2}
   clues: []
-  CluesScript: {fileID: 1813506656}
+  cluScript: {fileID: 1813506656}
   inventoryManager: {fileID: 1928263766}
 --- !u!114 &74929118
 MonoBehaviour:
