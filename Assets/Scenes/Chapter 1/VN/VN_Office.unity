@@ -4036,24 +4036,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e51ed53c1054a24882aafd84e72d3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaseFileScript
---- !u!1 &1255364418 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 155479323182917864, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
-  m_PrefabInstance: {fileID: 7960805800298423707}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1255364420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255364418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a485806b05dbffb44b544f94f54b45ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogSetUp
-  sceneDialog: []
 --- !u!1 &1256559029 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8207311712423985326, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
@@ -5164,9 +5146,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8207311712423985326, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1977854559}
-    - targetCorrespondingSourceObject: {fileID: 155479323182917864, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1255364420}
     - targetCorrespondingSourceObject: {fileID: 5506715835612498419, guid: b75544c533bcec84d9141e38a28201dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7960805800298423713}
