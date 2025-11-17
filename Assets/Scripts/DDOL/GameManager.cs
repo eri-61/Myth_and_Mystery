@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
 
     private void CleanUpAndDestroy()
     {
-        Destroy(persistentObjects.gameObject);
         Destroy(gameObject);
     }
 
