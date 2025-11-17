@@ -226,10 +226,10 @@ public class BattleSystem : MonoBehaviour
         if (state != Battlestate.PLAYERTURN)
             return;
 
-        if(InventoryManager.Instance != null)
+        if(OLD_InventoryManager.Instance != null)
         {
-            InventoryManager.Instance.OnUseItemReq -= OnInventoryUseItem; // guard double-subscribe
-            InventoryManager.Instance.OnUseItemReq += OnInventoryUseItem;
+            OLD_InventoryManager.Instance.OnUseItemReq -= OnInventoryUseItem; // guard double-subscribe
+            OLD_InventoryManager.Instance.OnUseItemReq += OnInventoryUseItem;
         }
         inventoryPanel.SetActive(true);
         dialogueText.text = "Choose an item to use:";
@@ -237,8 +237,8 @@ public class BattleSystem : MonoBehaviour
 
     private void OnInventoryUseItem(ItemData item)
     {
-        if (InventoryManager.Instance != null)
-            InventoryManager.Instance.OnUseItemReq -= OnInventoryUseItem;
+        if (OLD_InventoryManager.Instance != null)
+            OLD_InventoryManager.Instance.OnUseItemReq -= OnInventoryUseItem;
 
         // Lock input only when an item is actually used
         inputLocked = true;
