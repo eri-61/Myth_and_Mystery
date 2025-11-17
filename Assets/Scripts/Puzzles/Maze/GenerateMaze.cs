@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
-using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GenerateMaze : MonoBehaviour
 {
     [SerializeField] GameObject roomPrefab;
-    [SerializeField] private GameObject loadingPanel; 
+    [SerializeField] private GameObject instructionsPanel;
+    [SerializeField] private Button closeInstructions;
 
     public RoomScript[,] rooms = null;
     MazePlayerController player;
@@ -84,12 +87,17 @@ public class GenerateMaze : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GenerateMazeWithLoading());
+        closeInstructions.onClick.AddListener(CloseInstructions);    
     }
 
+    void CloseInstructions()
+    {
+        instructionsPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+
+    }
     private IEnumerator GenerateMazeWithLoading()
     {
-        if (loadingPanel != null)
-            loadingPanel.SetActive(true);
 
         foreach (Transform child in transform)
             child.gameObject.SetActive(false);
@@ -104,9 +112,6 @@ public class GenerateMaze : MonoBehaviour
 
         foreach (Transform child in transform)
             child.gameObject.SetActive(true);
-
-        if (loadingPanel != null)
-            loadingPanel.SetActive(false);
     }
 
     IEnumerator GenerateMazeInstant()
@@ -299,8 +304,26 @@ public class GenerateMaze : MonoBehaviour
         playerInstance.name = "Player";
         playerInstance.transform.SetParent(transform); // Keep hierarchy tidy
 
+        // Ensure the instance has the "Player" tag (warn if tag not defined)
+        try
+        {
+            playerInstance.tag = "Player";
+        }
+        catch (Exception)
+        {
+            Debug.LogWarning("[SpawnPlayer] Tag 'Player' is not defined in project Tags. Add it in Tags & Layers or assign tag on the prefab.");
+        }
+
+        // Ensure a Rigidbody2D exists so triggers will fire reliably
+        if (playerInstance.GetComponent<Rigidbody2D>() == null)
+        {
+            var rb = playerInstance.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.simulated = true;
+        }
+
         // Fixed scale — visible for testing
-        playerInstance.transform.localScale = new Vector3(100f, 100f, 1f);
+        playerInstance.transform.localScale = new Vector3(2f, 2f, 1f);
 
         // Set z position to be on top
         playerInstance.transform.position = new Vector3(spawnPos.x, spawnPos.y, -1f);
@@ -336,18 +359,21 @@ public class GenerateMaze : MonoBehaviour
         // Top-right cell (exit)
         RoomScript exitRoom = rooms[numX - 1, numY - 1];
 
-        // Open right wall
-        exitRoom.SetDirFlag(RoomScript.Direction.RIGHT, false);
-
-        // Create a small visible "Exit" marker outside the maze
-        Vector3 exitPos = exitRoom.transform.position + new Vector3(roomWidth, 0, 0);
+        // Create a small visible "Exit" marker
+        Vector3 exitPos = exitRoom.transform.position;
 
         GameObject exit = new GameObject("ExitZone");
         exit.transform.position = exitPos;
         exit.transform.localScale = new Vector3(roomWidth * 0.8f, roomHeight * 0.8f, 1f);
+        exit.transform.SetParent(transform); // keep hierarchy tidy
 
         BoxCollider2D col = exit.AddComponent<BoxCollider2D>();
         col.isTrigger = true;
+
+        // Attach the generic ExitZoneTrigger and wire to this GenerateMaze
+        var trigger = exit.GetComponent<ExitZoneTrigger>();
+        if (trigger == null) trigger = exit.AddComponent<ExitZoneTrigger>();
+        trigger.mazeGenSimple = this;
 
         SpriteRenderer rend = exit.AddComponent<SpriteRenderer>();
         rend.color = new Color(0, 1, 0, 0.3f); // green transparent
@@ -385,16 +411,15 @@ public class GenerateMaze : MonoBehaviour
     public void GameWin()
     {
         Debug.Log("🎉 You escaped the maze!");
-        // Disable player input (optional)
         if (playerInstance != null)
             playerInstance.GetComponent<MazePlayerController>().enabled = false;
 
-        SceneController.Instance.LoadScene(nextScene);
+       SceneManager.LoadScene(nextScene);
     }
 
     public void GameLost()
     {
-        SceneController.Instance.LoadScene(lostScene);
+        SceneManager.LoadScene(lostScene);
 
     }
 

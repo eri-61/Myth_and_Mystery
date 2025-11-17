@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898ab583c2d85ab458e950064ac6d514, type: 3}
+  m_Name: VN_Escape
+  m_EditorClassIdentifier: Assembly-CSharp::DialogTree
+  sections:
+  - characterName:
+    - Eryn
+    - Kenji
+    - Samantha
+    dialog:
+    - We're finally out of the forest!
+    - We can go home!
+    - Thank you so much!
+    endAfterDialog: 1
+    nextDialog: 0
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: Eryn
+      characterPrefab: {fileID: 7227993682904605277, guid: 79b8d6fc989ba6f49a3620a571be5179, type: 3}
+      isTalking: 0
+    - charaName: Kenji
+      characterPrefab: {fileID: 4830255281968232306, guid: eaf460622774b244597660f726ea308a, type: 3}
+      isTalking: 0
+    - charaName: Samantha
+      characterPrefab: {fileID: 657200258188705206, guid: 53d328f69f274f446ba91ea4a7d76209, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}

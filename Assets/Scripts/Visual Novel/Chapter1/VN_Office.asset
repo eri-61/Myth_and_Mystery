@@ -1,0 +1,279 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898ab583c2d85ab458e950064ac6d514, type: 3}
+  m_Name: VN_Office
+  m_EditorClassIdentifier: Assembly-CSharp::DialogTree
+  sections:
+  - characterName:
+    - Rafael
+    - Javier
+    - Rafael
+    dialog:
+    - Hey! Javier, wake up! Wake up, it's time to open the agency!
+    - Ugh.. You're too loud.
+    - Seriously? Did you fall asleep at the office again?
+    endAfterDialog: 0
+    nextDialog: -1
+    branchPoint:
+      question: Seriously? Did you fall asleep at the office again?
+      answers:
+      - answerLabel: Yes... Sorry I fell asleep reviewing cases
+        nextElement: 1
+      - answerLabel: No... I was just resting my eyes for a few seconds
+        nextElement: 2
+    characters:
+    - charaName: Rafael
+      characterPrefab: {fileID: 963812418090814742, guid: 54dc9849852385744b62e571b45ca441, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8314928333923898037, guid: 8dca2188baea0b74e87a6867af5a8956, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 963812418090814742, guid: 54dc9849852385744b62e571b45ca441, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -3231186124988075587, guid: e65f1ac4ea7e1f94581340962f929cdb, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+  - characterName:
+    - Javier
+    - Rafael
+    dialog:
+    - Yes... Sorry I fell asleep reviewing cases.
+    - Hmph... I told you that you should stop sleeping here because it's bad for
+      your back.
+    endAfterDialog: 0
+    nextDialog: 3
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: Javier
+      characterPrefab: {fileID: 5068511743598465375, guid: 7aca185d58db1954c9ee0fac51e9b2c2, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 2109511865993098689, guid: 9018ac180b7570f4688a918b628ebdbe, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+  - characterName:
+    - Javier
+    - Rafael
+    dialog:
+    - No... I was just resting my eyes for a few seconds.
+    - Huh?! Resting your eyes?! I can see the mess you've made in the office.
+    endAfterDialog: 0
+    nextDialog: 3
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: Javier
+      characterPrefab: {fileID: 521022998325408405, guid: 5ae7324905f576d4d80d5daacbb3704f, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 963812418090814742, guid: 54dc9849852385744b62e571b45ca441, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+  - characterName:
+    - Rafael
+    - Door
+    - Rafael
+    - ???
+    - Rafael
+    - Javier
+    dialog:
+    - I told you that you should start taking better care of yourself. You should
+      stop staying up too late and-
+    - '*Knock* *Knock*'
+    - Let's continue this talk later...
+    - Hello? Are you open yet?
+    - Please come in. Sorry about the mess.
+    - Welcome to Myth & Mystery Detective Agency. How may we help you?
+    endAfterDialog: 0
+    nextDialog: 4
+    branchPoint:
+      question: 
+      answers:
+      - answerLabel: 
+        nextElement: 3
+    characters:
+    - charaName: Rafael
+      characterPrefab: {fileID: 2109511865993098689, guid: 9018ac180b7570f4688a918b628ebdbe, type: 3}
+      isTalking: 0
+    - charaName: Door
+      characterPrefab: {fileID: 0}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 8256252293960858144, guid: 3c211ad4eb42fa44682c469e1cd43ea6, type: 3}
+      isTalking: 0
+    - charaName: ???
+      characterPrefab: {fileID: 3315799618747320419, guid: b62ae0c2b8737514eaea8a9ef856307f, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6782463466856831777, guid: f5570e008aa05ea41adfdfdb0f421715, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: 2116520452050511185, guid: be098a65acf51614b878264289626bf0, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: 2116520452050511185, guid: be098a65acf51614b878264289626bf0, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+  - characterName:
+    - Lola Remy
+    - Lola Remy
+    - Rafael
+    - Lola Remy
+    - Rafael
+    - Lola Remy
+    - Lola Remy
+    - Lola Remy
+    - Javier
+    - Lola Remy
+    - Javier
+    - Lola Remy
+    - Rafael
+    - Lola Remy
+    dialog:
+    - Good morning, hijos, the mess is fine. I am Remedios but you may call me Lola
+      Remy.
+    - You see.... I'm here because my apo and her friends went missing a week ago.
+    - Missing...?
+    - Yes. They went to Cagayan de Oro to go camping and then they never returned.
+    - Have you gone to someone else about this ma'am?
+    - Yes, and they told me that maybe the kids got into an accident or did something
+      they shouldn't have.
+    - I don't have a concrete evidence but, I believe that something happened to
+      them on that campsite....
+    - That's why I came to your agency because I heard that you were experts in matters
+      like this.
+    - Do you have any more information ma'am..?
+    - I only have their pictures and the location of their campsite...
+    - Don't worry ma'am. Those are enough.
+    - Please help me find them .... or at the very least know what happened...
+    - Leave it to us, lola.
+    - Goodbye.
+    endAfterDialog: 0
+    nextDialog: 5
+    branchPoint:
+      question: 
+      answers:
+      - answerLabel: 
+        nextElement: 3
+    characters:
+    - charaName: Lola Remy
+      characterPrefab: {fileID: 5876170782494498840, guid: 7e348ba725cee704fa74dfae0b8f5945, type: 3}
+      isTalking: 0
+    - charaName: Lola Remy
+      characterPrefab: {fileID: 4338818851571367959, guid: 0aff6041b36148449b92b84c0b168ae8, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    - charaName: Lola Remy
+      characterPrefab: {fileID: 4338818851571367959, guid: 0aff6041b36148449b92b84c0b168ae8, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 2109511865993098689, guid: 9018ac180b7570f4688a918b628ebdbe, type: 3}
+      isTalking: 0
+    - charaName: Lola Remy
+      characterPrefab: {fileID: 4338818851571367959, guid: 0aff6041b36148449b92b84c0b168ae8, type: 3}
+      isTalking: 0
+    - charaName: Lola Remy
+      characterPrefab: {fileID: 4338818851571367959, guid: 0aff6041b36148449b92b84c0b168ae8, type: 3}
+      isTalking: 0
+    - charaName: Lola Remy
+      characterPrefab: {fileID: 3315799618747320419, guid: b62ae0c2b8737514eaea8a9ef856307f, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: Lola Remy
+      characterPrefab: {fileID: 4338818851571367959, guid: 0aff6041b36148449b92b84c0b168ae8, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: Lola Remy
+      characterPrefab: {fileID: 4338818851571367959, guid: 0aff6041b36148449b92b84c0b168ae8, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    - charaName: Lola Remy
+      characterPrefab: {fileID: 4151763501469840054, guid: 850c34239ef10684e848f8c1d0f5b36a, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: 2116520452050511185, guid: be098a65acf51614b878264289626bf0, type: 3}
+  - characterName:
+    - Rafael
+    - Javier
+    - Javier
+    - Rafael
+    - Javier
+    dialog:
+    - We should get all out things and get ready for tomorrow.
+    - No... We should start investigating today, the sooner the better.
+    - It's been a week since those kids were last heard from, and if they are still
+      alive, a single second might mean life or death.
+    - Okay, then I'll drive to NAIA while you ready our things and clean the mess
+      you've made.
+    - Okay...
+    endAfterDialog: 0
+    nextDialog: -1
+    branchPoint:
+      question: 
+      answers:
+      - answerLabel: 
+        nextElement: 3
+    characters:
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 1488302579190930587, guid: 951b1c66dfecdda438c26c382c572928, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 7903138030592585080, guid: 664d0ce8198922c479fecf1b31654a76, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    - charaName: javier
+      characterPrefab: {fileID: 521022998325408405, guid: 5ae7324905f576d4d80d5daacbb3704f, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}
+    - {fileID: -2265602484769090674, guid: 98bc3496dc2474b42aedc0a64903d553, type: 3}

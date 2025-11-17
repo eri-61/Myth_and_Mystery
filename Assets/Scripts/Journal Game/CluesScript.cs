@@ -2,9 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class CluesScript : MonoBehaviour
 {
+    public static CluesScript Instance { get; private set; }
+
+    public CluesScript()
+    {
+        Instance = this;
+    }
+
     #region Variables
     [Header("Slots")]
     public List<Button> slots;
@@ -24,14 +32,13 @@ public class CluesScript : MonoBehaviour
     public List<TestimonyData> gatheredTestimonies = new();
     #endregion
 
-    public Dialog result;
     private enum EntryType { Clue, Testimony }
     private List<EntryType> entrytypes = new();
 
     void Awake()
     {
         deductionButton.gameObject.SetActive(false);
-        GameManager.Instance.RegisterClues(this);
+        //GameManager.Instance.RegisterClues(this);
 
     }
 
@@ -77,10 +84,10 @@ public class CluesScript : MonoBehaviour
 
     public void goToDeductionMode()
     {
-        SceneController.Instance.LoadScene(sceneIndex);
+        SceneManager.LoadScene(sceneIndex);
     }
 
-    public void DeductionComplete(Dialog result)
+    /*public void DeductionComplete(Dialog result)
     {
         this.result = result;
 
@@ -101,7 +108,7 @@ public class CluesScript : MonoBehaviour
             Debug.Log("[CluesScript] Deduction result stored; UI not present to update now.");
 
         }
-    }
+    }*/
 
     public void AddClues(CluesData newClue)
     {

@@ -1,10 +1,13 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Content;
-
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class InvestigationScene : MonoBehaviour
 {
     [Header("Choice")]
@@ -13,9 +16,7 @@ public class InvestigationScene : MonoBehaviour
     [SerializeField] private Button investigate;
 
     [Header("Main Buttons")]
-    [SerializeField] private Button mapButton;
     [SerializeField] private Button journalButton;
-    [SerializeField] private Button inventoryButton;
     [SerializeField] private Button settingsButton;
 
     [Header("Back Button")]
@@ -49,7 +50,7 @@ public class InvestigationScene : MonoBehaviour
     public CluesData[] clues;
 
     [Header("Items & Clues script")]
-    [SerializeField] private CluesScript CluesScript;
+    [SerializeField] private CluesScript cluScript;
     [SerializeField] private InventoryManager inventoryManager;
 
     private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
@@ -57,6 +58,7 @@ public class InvestigationScene : MonoBehaviour
 
     void Start()
     {
+        Debug.Log($"InvestigationScene > Start");
         buttons.SetActive(true);
         back.SetActive(false);
         investigationButtons.SetActive(false);
@@ -72,10 +74,68 @@ public class InvestigationScene : MonoBehaviour
         }
 
         inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
+
+        //Check Game Save and re-apply found items
+        var curGS = SaveManager.Instance.GetGameState();
+        if(curGS.Inventory != null)
+        {
+            if (curGS.Inventory.Items != null)
+            {
+                Debug.Log($"InvestigationScene > Reloading Inventory Items > Item Count: {curGS.Inventory.Items.Count}");
+                foreach (var itm in curGS.Inventory.Items)
+                {
+                    Sprite incomingSprite = Resources.Load<Sprite>($"Assets/Game UI/Items/{itm.ItemName.ToLower().Replace("data", "")}_0");
+
+                    //inventoryManager.currentItems.Add
+                    //AddToInventory(itm.ItemIndex,new ItemData()
+                    //{
+                    //    itemName = itm.ItemName,
+                    //    itemDescription = itm.ItemDescription,
+                    //    itemSprite = incomingSprite
+                    //});
+                    inventoryManager.currentItems.Add(new ItemData()
+                    {
+                        itemName = itm.ItemName,
+                        itemDescription = itm.ItemDescription,
+                        itemSprite = incomingSprite
+                    });
+                    //AddToInventory(itm.ItemIndex, items[itm.ItemIndex]);
+                }
+            }
+        }
+
+        if (curGS.Journal != null)
+        {
+            if (curGS.Journal.Clues != null)
+            {
+                Debug.Log($"InvestigationScene > Reloading Journal Clues > Clues Count: {curGS.Journal.Clues.Count}");
+                foreach (var itm in curGS.Journal.Clues)
+                {
+                    string spritePath = $"Assets/Game UI/Clues and Testimony/{itm.ClueName.ToLower().Replace("data", "")}_0";
+                    Sprite incomingSprite = Resources.Load<Sprite>(spritePath);
+
+                    //AddClueToJournal(itm.ClueNumber, new CluesData()
+                    //{
+                    //    clueName = itm.ClueName,
+                    //    clueDescription = itm.ClueDescription,
+                    //    clueImage = incomingSprite
+                    //});
+                    cluScript.gatheredClues.Add(new CluesData()
+                    {
+                        clueName = itm.ClueName,
+                        clueDescription = itm.ClueDescription,
+                        clueImage = incomingSprite
+                    });
+                    //AddClueToJournal(itm.ClueNumber, clues[itm.ClueNumber]);
+                }
+            }
+        }
+
     }
 
     void OnEnable()
     {
+        Debug.Log($"InvestigationScene > Enable");
         for (int i = 0; i < investigationPoints.Length; i++)
         {
             int index = i;
@@ -84,17 +144,15 @@ public class InvestigationScene : MonoBehaviour
 
         backButton.onClick.AddListener(GoBack);
         talk.onClick.AddListener(TalkToCharacter);
-        investigate.onClick.AddListener(StartInvestigation);
+        investigate.onClick.AddListener(async ()=> { await StartInvestigation(); });
 
         journalButton.onClick.AddListener(OpenJournal);
-        mapButton.onClick.AddListener(OpenMap);
         settingsButton.onClick.AddListener(OpenMenu);
-        inventoryButton.onClick.AddListener(OpenInventory);
-
     }
 
     void OnDisable()
     {
+        Debug.Log($"InvestigationScene > Disable");
         foreach (Button point in investigationPoints)
             point.onClick.RemoveAllListeners();
 
@@ -103,9 +161,7 @@ public class InvestigationScene : MonoBehaviour
         investigate.onClick.RemoveAllListeners();
 
         journalButton.onClick.RemoveAllListeners();
-        mapButton.onClick.RemoveAllListeners();
         settingsButton.onClick.RemoveAllListeners();
-        inventoryButton.onClick.RemoveAllListeners();
     }
 
     void TalkToCharacter()
@@ -116,7 +172,7 @@ public class InvestigationScene : MonoBehaviour
         }
         else
         {
-            SceneController.Instance.LoadScene(talkSceneIndex);
+            SceneManager.LoadScene(talkSceneIndex);
         }
     }
 
@@ -130,8 +186,9 @@ public class InvestigationScene : MonoBehaviour
 
     }
 
-    void StartInvestigation()
+    async Task StartInvestigation()
     {
+        await Task.Delay(900);
         buttons.SetActive(false);
         character.SetActive(false);
 
@@ -139,10 +196,13 @@ public class InvestigationScene : MonoBehaviour
         investigationButtons.SetActive(true);
 
         ShowDialog("Click on the areas you want to investigate.");
+
     }
 
     void ClickInvestigationPoint(int index)
     {
+        Debug.Log($"InvestigationScene > ClickInvestigationPoint");
+
         if (isPointSearched[index])
         {
             ShowDialog("You’ve already searched this area.");
@@ -156,29 +216,33 @@ public class InvestigationScene : MonoBehaviour
 
         if (index < clues.Length && clues[index] != null)
         {
-            AddClueToJournal(clues[index]);
+            AddClueToJournal(index,clues[index]);
         }
 
         if (index < items.Length && items[index] != null)
         {
-            AddToInventory(items[index]);
+            AddToInventory(index,items[index]);
         }
 
         isPointSearched[index] = true;
-        StartCoroutine(HideDialog(dialogHide));
+        //StartCoroutine(HideDialog(dialogHide));
+        HideDialogAsync();
     }
 
     void ShowDialog(string message)
     {
+        Debug.Log($"InvestigationScene > ShowDialog");
         dialogPanel.SetActive(true);
         description.text = message;
 
-        // Stop previous coroutine if running
         if (hideDialogCoroutine != null)
         {
             StopCoroutine(hideDialogCoroutine);
+            hideDialogCoroutine = null;
         }
-        hideDialogCoroutine = StartCoroutine(HideDialog(dialogHide));
+
+        //hideDialogCoroutine = StartCoroutine(HideDialog(dialogHide));
+        HideDialogAsync();
     }
 
     IEnumerator HideDialog(float delay)
@@ -188,53 +252,73 @@ public class InvestigationScene : MonoBehaviour
         hideDialogCoroutine = null;
     }
 
-
-    void OpenInventory()
+    async Task HideDialogAsync()
     {
-        PersistentObjects.instance.OpenInventory();
-        inventoryManager.LoadInventoryUI();
+        Debug.Log($"InvestigationScene > HideDialogAsync");
+        await Task.Delay(900);
+        dialogPanel.SetActive(false);
+        hideDialogCoroutine = null;
     }
 
     void OpenMenu()
     {
-        PersistentObjects.instance.OpenSettings();
+        Debug.Log($"InvestigationScene > OpenInventory");
+        settingsPanel.SetActive(true);
     }
 
     void OpenJournal()
     {
-        PersistentObjects.instance.OpenJournal();
+        Debug.Log($"InvestigationScene > OpenJournal");
+        journalPanel.SetActive(true);
     }
 
     void OpenMap()
     {
-        PersistentObjects.instance.OpenMap();
+        Debug.Log($"InvestigationScene > OpenMap");
+        mapPanel.SetActive(true);
     }
 
-    void CloseInv()
+    void AddClueToJournal(int index,CluesData clue)
     {
-        PersistentObjects.instance.CloseInventory();
-    }
-
-    void CloseMap()
-    {
-        PersistentObjects.instance.CloseMap();
-    }
-
-    void CloseMenu()
-    {
-        PersistentObjects.instance.CloseSettings();
-    }
-    void AddClueToJournal(CluesData clue)
-    {
+        Debug.Log($"InvestigationScene > AddClueToJournal");
         if (clue == null)
         {
             Debug.LogWarning("[InvestigationScene] AddClueToJournal called with null clue.");
             return;
         }
 
-        if (CluesScript != null)
+        if (cluScript != null)
         {
-            GameManager.Instance.cluesScript.AddClues(clue);
+            CluesScript.Instance.AddClues(clue);
+
+            Debug.Log($"InvestigationScene > AddClueToJournal > Add Clue to Game Save Memory");
+            var curGS = SaveManager.Instance.GetGameState();
+            if (curGS != null)
+            {
+                if (curGS.Journal == null)
+                {
+                    curGS.Journal = new GameJournal();
+                }
+
+                if (curGS.Journal.Clues == null)
+                {
+                    curGS.Journal.Clues = new List<JournalClue>();
+                }
+
+                var existingClue = curGS.Journal.Clues.Where(c => c.ClueName == clue.name).FirstOrDefault();
+
+                if(existingClue == null && !string.IsNullOrWhiteSpace(clue.name))
+                {
+                    curGS.Journal.Clues.Add(new JournalClue()
+                    {
+                        ClueNumber = index,
+                        ClueName = clue.name,
+                        ClueDescription = clue.clueDescription
+                    });
+                }
+                
+            }
+
             Debug.Log($"[InvestigationScene] Added clue: {clue.clueName}");
         }
         else
@@ -243,8 +327,9 @@ public class InvestigationScene : MonoBehaviour
         }
     }
 
-    void AddToInventory(ItemData newItem)
+    void AddToInventory(int index, ItemData newItem)
     {
+        Debug.Log($"InvestigationScene > AddToInventory");
         if (newItem == null)
         {
             Debug.LogWarning("[InvestigationScene] AddToInventory called with null item.");
@@ -253,14 +338,15 @@ public class InvestigationScene : MonoBehaviour
 
         if (inventoryManager != null)
         {
-            inventoryManager.AddItem(newItem);
+            inventoryManager.AddItem(index,newItem);
             Debug.Log($"[InvestigationScene] Added item via serialized ref: {newItem.itemName}");
         }
     }
 
     public void GoToScene()
     {
-        SceneController.Instance.LoadScene(tentScene);
+        Debug.Log($"InvestigationScene > GoToScene");
+        SceneManager.LoadScene(tentScene);
     }
     
 }

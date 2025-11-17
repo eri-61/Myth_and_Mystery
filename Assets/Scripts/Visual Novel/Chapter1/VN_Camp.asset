@@ -1,0 +1,204 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898ab583c2d85ab458e950064ac6d514, type: 3}
+  m_Name: VN_Camp
+  m_EditorClassIdentifier: Assembly-CSharp::DialogTree
+  sections:
+  - characterName:
+    - Javier
+    - Javier
+    - ???
+    - Rafael
+    dialog:
+    - 'It seems like we''ve already gathered all the clues here... '
+    - Let's explore the forest to see if we can find more clues.
+    - '*Rustle" *Rustle*'
+    - What was that?
+    endAfterDialog: 0
+    nextDialog: 0
+    branchPoint:
+      question: Did you hear that?
+      answers:
+      - answerLabel: It was probably nothing.
+        nextElement: 1
+      - answerLabel: Yes. Let's take a look.
+        nextElement: 2
+    characters:
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: ???
+      characterPrefab: {fileID: 0}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -8381300683025980698, guid: 9c4d12ffc4de63b4590ecb12491a480b, type: 3}
+    - {fileID: -8381300683025980698, guid: 9c4d12ffc4de63b4590ecb12491a480b, type: 3}
+    - {fileID: -8381300683025980698, guid: 9c4d12ffc4de63b4590ecb12491a480b, type: 3}
+    - {fileID: -8381300683025980698, guid: 9c4d12ffc4de63b4590ecb12491a480b, type: 3}
+  - characterName:
+    - Rafael
+    - Rafael
+    - Javier
+    - ???
+    - Rafael
+    - Javier
+    - Rafael
+    dialog:
+    - 'There! Look! '
+    - it's faint but there are traces of human footprints on the ground
+    - It seems like the campers went here.
+    - 'Help! Is there anyone there? Please help! '
+    - What was that?
+    - Someone is screaming for help.
+    - Let's go!
+    endAfterDialog: 1
+    nextDialog: -1
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: ???
+      characterPrefab: {fileID: 0}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 2109511865993098689, guid: 9018ac180b7570f4688a918b628ebdbe, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 7903138030592585080, guid: 664d0ce8198922c479fecf1b31654a76, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 2109511865993098689, guid: 9018ac180b7570f4688a918b628ebdbe, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+  - characterName:
+    - Rafael
+    - ???
+    - Rafael
+    - ???
+    - Anayo
+    - Anayo
+    - Javier
+    - Anayo
+    - Rafael
+    - Rafael
+    - Javier
+    - Anayo
+    - Rafael
+    - Rafael
+    - Javier
+    dialog:
+    - Javier... there's a lambago tree.
+    - What are you humans doing here?!
+    - Huh? Who are you?
+    - You - What do you mean who am I?!
+    - I am an anayo and this is my territory!
+    - And you! YOU humans are probably also here to make a mess of this forest!
+    - Also? Then have you seen the humans who were there at that campsite 7 days
+      ago?
+    - Why should <b>I</b> answer you?!
+    - It's quite messy here..
+    - Humans have trasheed this place, right? And you're having a hard time cleaning
+      it up?
+    - If you help us find those campers, then we will clean up the mess around here.
+    - ... upheld your end of the deal, humans.
+    - 'She vanished... '
+    - Okay Javier, let's clean this place up!
+    - Let's start.
+    endAfterDialog: 1
+    nextDialog: -1
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    - charaName: ???
+      characterPrefab: {fileID: 6118170855184954784, guid: c55b239abaff7f045a539dad90dc6d59, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    - charaName: ???
+      characterPrefab: {fileID: 6118170855184954784, guid: c55b239abaff7f045a539dad90dc6d59, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 6118170855184954784, guid: c55b239abaff7f045a539dad90dc6d59, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 6118170855184954784, guid: c55b239abaff7f045a539dad90dc6d59, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 6118170855184954784, guid: c55b239abaff7f045a539dad90dc6d59, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 2109511865993098689, guid: 9018ac180b7570f4688a918b628ebdbe, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 6118170855184954784, guid: c55b239abaff7f045a539dad90dc6d59, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6154401713937081376, guid: c8212530ab8bba649b4fab7881f83d3d, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}
+    - {fileID: -2737511585455105719, guid: 3282aa73b18d2f84482b799806776124, type: 3}

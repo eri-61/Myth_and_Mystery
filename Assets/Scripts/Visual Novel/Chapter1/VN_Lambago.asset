@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898ab583c2d85ab458e950064ac6d514, type: 3}
+  m_Name: VN_Lambago
+  m_EditorClassIdentifier: Assembly-CSharp::DialogTree
+  sections:
+  - characterName:
+    - Javier
+    - Rafael
+    - Anayo
+    - Rafael
+    - Rafael
+    - Anayo
+    - Anayo
+    - Anayo
+    - Javier
+    - Anayo
+    - Anayo
+    - Javier
+    - Anayo
+    - Anayo
+    dialog:
+    - We're done
+    - Miss Anayo! Miss Anayo! MISS ANAYO!
+    - ' I''m here! Stop your screeching, you''re scaring the animals!'
+    - ' Oops! Sorry...'
+    - We're done cleaning up the mess!
+    - ...
+    - ' You''ve uphelp your end of the bargain.'
+    - Here.
+    - Flowers?
+    - ' A trick has been placed on the forest....'
+    - 'Without my flowers, you''ll end up wandering around in circles unable to escape. '
+    - Then.. thank you
+    - I was only upholding my part in the bargain.
+    - ... Good luck
+    endAfterDialog: 0
+    nextDialog: 1
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: Javier
+      characterPrefab: {fileID: 7903138030592585080, guid: 664d0ce8198922c479fecf1b31654a76, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 6118170855184954784, guid: c55b239abaff7f045a539dad90dc6d59, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6782463466856831777, guid: f5570e008aa05ea41adfdfdb0f421715, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 6153548522005682009, guid: e628683d42e3ffc40ae39f3e4a7f2ebd, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 3136760433167873160, guid: ff0109b4aeb144542a7b717194f67830, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 6944723744035680690, guid: 03754b6adda2cb649b08a6bd99dca489, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 9059798720570984695, guid: 537661eecf3a51047a81d91ae8db4012, type: 3}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 8307382706389257478, guid: 9a800297305386d46956855b0341fed5, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 3136760433167873160, guid: ff0109b4aeb144542a7b717194f67830, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 0}
+      isTalking: 0
+    - charaName: Javier
+      characterPrefab: {fileID: 7903138030592585080, guid: 664d0ce8198922c479fecf1b31654a76, type: 3}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 0}
+      isTalking: 0
+    - charaName: Anayo
+      characterPrefab: {fileID: 6944723744035680690, guid: 03754b6adda2cb649b08a6bd99dca489, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+    - {fileID: -5933298519527752763, guid: 5db2a138cb928aa44897afecab7c9f4b, type: 3}
+  - characterName:
+    - Javier
+    - Rafael
+    dialog:
+    - Since the Anayo has given us this flower, let's go find the campers.
+    - Let's go!
+    endAfterDialog: 1
+    nextDialog: -1
+    branchPoint:
+      question: 
+      answers: []
+    characters:
+    - charaName: Javier
+      characterPrefab: {fileID: 7903138030592585080, guid: 664d0ce8198922c479fecf1b31654a76, type: 3}
+      isTalking: 0
+    - charaName: Rafael
+      characterPrefab: {fileID: 3996681304385360613, guid: b759ded3ef100e148bec3ff2312dbe8c, type: 3}
+      isTalking: 0
+    background:
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}
+    - {fileID: -5853957616262885276, guid: 7bcd6812bfca4a04793ec9fb302f7623, type: 3}

@@ -8,26 +8,25 @@ public class GameManager : MonoBehaviour
 
     #region Variables
     public static GameManager Instance;
-    public PersistentObjects persistentObjects;
-
     public CaseFileScript cfScript;
     public CluesScript cluesScript;
     public CreaturesScript creaturesScript;
 
+    public bool playOnStart = true;
     #endregion
 
     private void Awake()
     {
         if (Instance != null)
         {
-            CleanUpAndDestroy();
-            return;
+            //CleanUpAndDestroy();
+            //return;
         }
         else
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            DontDestroyOnLoad(persistentObjects.gameObject);
+            //Instance = this;
+            //DontDestroyOnLoad(gameObject);
+            //ontDestroyOnLoad(persistentObjects.gameObject);
         }
     }
 

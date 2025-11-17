@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5236908327568594775}
   - component: {fileID: 3784426415045584136}
   - component: {fileID: 8796537847301696}
-  - component: {fileID: -3346540892920800779}
+  - component: {fileID: 2953165413670179408}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: EditorOnly
@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 6698805406140057485}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 1}
+  m_LocalScale: {x: 20, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -136,8 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589cf35939586044193c369abc19b2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MazeEnemyController
---- !u!61 &-3346540892920800779
-BoxCollider2D:
+--- !u!58 &2953165413670179408
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -166,19 +166,9 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 5}
-    newSize: {x: 5, y: 5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 5, y: 5}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.025, y: 0}
+  m_Radius: 1.775

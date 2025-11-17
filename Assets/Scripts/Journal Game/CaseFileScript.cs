@@ -18,10 +18,12 @@ public class CaseFileScript : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.RegitsterCaseFile(this);
+        //GameManager.Instance.RegitsterCaseFile(this);
     }
+
     private void Start()
     {
+        RevealCurrentObjectiveFromGameState();
         UpdateCaseFileUI();    
     }
 
@@ -45,9 +47,29 @@ public class CaseFileScript : MonoBehaviour
         UpdateCaseFileUI();
     }
 
+    public void RevealCurrentObjectiveFromGameState()
+    {
+        if (currentCaseFile == null || currentCaseFile.objectives == null) return;
+        if (SaveManager.Instance == null) return;
+
+        var gs = SaveManager.Instance.GetGameState();
+        if (gs == null) return;
+
+        int idx = gs.CurrentObjective;
+        if (idx < 0 || idx >= currentCaseFile.objectives.Length) return;
+
+        // Only flip visibility if not already visible
+        if (!currentCaseFile.objectives[idx].isVisible)
+        {
+            currentCaseFile.objectives[idx].isVisible = true;
+        }
+    }
 
     public void UpdateCaseFileUI()
     {
+
+        RevealCurrentObjectiveFromGameState();
+
         if (currentCaseFile == null)
         {
             objectiveText.text = "There is no ongoing case.";

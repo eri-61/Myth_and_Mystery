@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems; 
 
 public class MazePlayerController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class MazePlayerController : MonoBehaviour
     private bool isDragging = false;
     private Vector3 dragStartWorldPos;
     private Vector2Int dragDirection = Vector2Int.zero;
+    private Collider2D col;
 
     private void Awake()
     {
@@ -18,45 +20,93 @@ public class MazePlayerController : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
-
-        // Ensure collider for OnMouseDown to work
-        if (GetComponent<Collider2D>() == null)
+        if (cam == null)
         {
-            BoxCollider2D col = gameObject.AddComponent<BoxCollider2D>();
-            col.isTrigger = true;
+            cam = Camera.main;
+            Debug.LogWarning("⚠️ Camera reference was null — reassigning Camera.main");
+        }
+        // Ensure collider exists
+        col = GetComponent<Collider2D>();
+        if (col == null)
+        {
+            BoxCollider2D box = gameObject.AddComponent<BoxCollider2D>();
+            box.isTrigger = false; 
+            col = box;
         }
     }
 
-    private void OnMouseDown()
+    private void Update()
     {
-        isDragging = true;
-        dragStartWorldPos = cam.ScreenToWorldPoint(Input.mousePosition);
-        dragStartWorldPos.z = 0;
+        // --- Input Start (mouse or touch) ---
+        if (IsPointerDown())
+        {
+            Vector3 inputPos = GetInputWorldPosition();
+            Vector2 inputPos2D = new Vector2(inputPos.x, inputPos.y);
+
+            RaycastHit2D hit = Physics2D.Raycast(inputPos2D, Vector2.zero);
+            if (hit.collider != null && hit.collider.gameObject == gameObject)
+            {
+                isDragging = true;
+                dragStartWorldPos = inputPos;
+                Debug.Log($"🟢 CLICKED PLAYER at {dragStartWorldPos}");
+            }
+            else
+            {
+                Debug.Log($"❌ Clicked something else: {hit.collider?.name ?? "nothing"}");
+            }
+        }
+
+        // --- Input End (mouse up or touch end) ---
+        if (isDragging && IsPointerUp())
+        {
+            isDragging = false;
+
+            Vector3 dragEndWorldPos = GetInputWorldPosition();
+            Vector3 dragVector = dragEndWorldPos - dragStartWorldPos;
+
+            if (Mathf.Abs(dragVector.x) > Mathf.Abs(dragVector.y))
+                dragDirection = dragVector.x > 0 ? Vector2Int.right : Vector2Int.left;
+            else
+                dragDirection = dragVector.y > 0 ? Vector2Int.up : Vector2Int.down;
+
+            Debug.Log($"🔵 RELEASED at {dragEndWorldPos} — Direction: {dragDirection}");
+
+            TryMoveToNextRoom();
+        }
     }
 
-    private void OnMouseUp()
+    private bool IsPointerDown()
     {
-        if (!isDragging || generateMaze == null)
-            return;
+        // Detect first touch or mouse down
+        return (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            || Input.GetMouseButtonDown(0);
+    }
 
-        isDragging = false;
+    private bool IsPointerUp()
+    {
+        // Detect touch end or mouse up
+        return (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            || Input.GetMouseButtonUp(0);
+    }
 
-        Vector3 dragEndWorldPos = cam.ScreenToWorldPoint(Input.mousePosition);
-        dragEndWorldPos.z = 0;
+    private Vector3 GetInputWorldPosition()
+    {
+        Vector3 inputPos;
 
-        Vector3 dragVector = dragEndWorldPos - dragStartWorldPos;
-
-        // Decide movement direction
-        if (Mathf.Abs(dragVector.x) > Mathf.Abs(dragVector.y))
-            dragDirection = dragVector.x > 0 ? Vector2Int.right : Vector2Int.left;
+        if (Input.touchCount > 0)
+            inputPos = Input.GetTouch(0).position;
         else
-            dragDirection = dragVector.y > 0 ? Vector2Int.up : Vector2Int.down;
+            inputPos = Input.mousePosition;
 
-        TryMoveToNextRoom();
+        Vector3 worldPos = cam.ScreenToWorldPoint(inputPos);
+        worldPos.z = 0f; // ✅ Match player and maze plane
+        return worldPos;
     }
 
     private void TryMoveToNextRoom()
     {
+        if (generateMaze == null) return;
+
         RoomScript currentRoom = generateMaze.rooms[currentCell.x, currentCell.y];
 
         RoomScript.Direction dir = RoomScript.Direction.NONE;
@@ -84,7 +134,9 @@ public class MazePlayerController : MonoBehaviour
             return;
 
         RoomScript nextRoom = generateMaze.rooms[nextCell.x, nextCell.y];
-        transform.position = new Vector3(nextRoom.transform.position.x, nextRoom.transform.position.y, -1f);
+
+        // ✅ Keep everything on same Z plane for raycast consistency
+        transform.position = new Vector3(nextRoom.transform.position.x, nextRoom.transform.position.y, 0f);
         currentCell = nextCell;
 
         Debug.Log($"Moved to room {currentCell}");
