@@ -51,7 +51,7 @@ public class InvestigationScene : MonoBehaviour
 
     [Header("Items & Clues script")]
     [SerializeField] private CluesScript cluScript;
-    [SerializeField] private InventoryManager inventoryManager;
+    [SerializeField] private OLD_InventoryManager inventoryManager;
 
     private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
     private Coroutine hideDialogCoroutine;
@@ -73,7 +73,7 @@ public class InvestigationScene : MonoBehaviour
             isPointSearched[i] = false;
         }
 
-        inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
+        inventoryManager = inventoryPanel.GetComponent<OLD_InventoryManager>();
 
         //Check Game Save and re-apply found items
         var curGS = SaveManager.Instance.GetGameState();

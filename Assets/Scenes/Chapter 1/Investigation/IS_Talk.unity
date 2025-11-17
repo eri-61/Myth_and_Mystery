@@ -342,6 +342,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slot8
       objectReference: {fileID: 0}
+    - target: {fileID: 2520590517888460232, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520590517888460232, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520590517888460232, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520590517888460232, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520590517888460232, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520590517888460232, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2544119263701109217, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
       propertyPath: m_Type
       value: 1
@@ -350,6 +374,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 2962952859152524863, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_Name
+      value: InventoryItem
+      objectReference: {fileID: 0}
     - target: {fileID: 3545650058790422805, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
       propertyPath: m_Name
       value: Slot6
@@ -726,6 +754,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slot2
       objectReference: {fileID: 0}
+    - target: {fileID: 7076009837754816197, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076009837754816197, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076009837754816197, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076009837754816197, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076009837754816197, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076009837754816197, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7216256195560563688, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1073,6 +1125,61 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8781328018258717829, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
   m_PrefabInstance: {fileID: 60263743}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &60263745 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8321726009388498926, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 60263743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891287b3b8f2bfa48b347780c4cf092d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
+--- !u!114 &60263746 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4608962620453431646, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 60263743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891287b3b8f2bfa48b347780c4cf092d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
+--- !u!114 &60263747 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 924530466693582153, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 60263743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891287b3b8f2bfa48b347780c4cf092d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
+--- !u!114 &60263748 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4584935001762441933, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 60263743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891287b3b8f2bfa48b347780c4cf092d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
+--- !u!114 &60263749 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8176700115305133053, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 60263743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891287b3b8f2bfa48b347780c4cf092d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
 --- !u!1 &60263763 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8210263244393334767, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
@@ -2814,31 +2921,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 475149515}
-  - component: {fileID: 475149514}
+  - component: {fileID: 475149516}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: InventoryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &475149514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475149513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b25b15073b0279d4caae9b679f57abd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  persistentObjects: {fileID: 0}
-  cfScript: {fileID: 0}
-  cluesScript: {fileID: 0}
-  creaturesScript: {fileID: 0}
-  playOnStart: 1
 --- !u!4 &475149515
 Transform:
   m_ObjectHideFlags: 0
@@ -2848,12 +2938,31 @@ Transform:
   m_GameObject: {fileID: 475149513}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.42127, y: -0.97192, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -7.7884927, y: -17.968979, z: -1.4059478}
+  m_LocalScale: {x: 18.488125, y: 18.488125, z: 18.488125}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 823264092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &475149516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475149513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bc6836562518241b13ca4d07bee390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
+  inventorySlots:
+  - {fileID: 60263749}
+  - {fileID: 60263748}
+  - {fileID: 60263747}
+  - {fileID: 60263746}
+  - {fileID: 60263745}
+  inventoryItemPrefab: {fileID: 2111690608436617061, guid: 53a416c6ccb07ea4daa4a3e62a85c1df, type: 3}
 --- !u!1 &587673341
 GameObject:
   m_ObjectHideFlags: 0
@@ -3287,6 +3396,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 475149515}
   - {fileID: 815932905}
   - {fileID: 1357982552}
   m_Father: {fileID: 0}
@@ -4421,5 +4531,4 @@ SceneRoots:
   - {fileID: 823264092}
   - {fileID: 1022069873}
   - {fileID: 637611662}
-  - {fileID: 475149515}
   - {fileID: 587673344}
