@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
 
     #region Variables
     public static GameManager Instance;
-    public PersistentObjects persistentObjects;
-
     public CaseFileScript cfScript;
     public CluesScript cluesScript;
     public CreaturesScript creaturesScript;
@@ -34,7 +32,6 @@ public class GameManager : MonoBehaviour
 
     private void CleanUpAndDestroy()
     {
-        Destroy(persistentObjects.gameObject);
         Destroy(gameObject);
     }
 

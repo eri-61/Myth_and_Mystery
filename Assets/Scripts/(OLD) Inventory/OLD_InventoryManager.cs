@@ -6,10 +6,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class InventoryManager : MonoBehaviour
+public class OLD_InventoryManager : MonoBehaviour
 {
     #region Variables
-    public static InventoryManager Instance { private set; get; }
+    public static OLD_InventoryManager Instance { private set; get; }
 
     [Header("Item detals")]
     public GameObject itemDetailsSection;
@@ -43,14 +43,9 @@ public class InventoryManager : MonoBehaviour
 
     public event Action<ItemData> OnUseItemReq;
 
-    public InventoryManager()
+    public OLD_InventoryManager()
     {
         Instance = this;
-    }
-
-    private void Awake()
-    {
-        
     }
 
     private void OnEnable()
