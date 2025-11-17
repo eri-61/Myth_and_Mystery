@@ -16,9 +16,7 @@ public class InvestigationScene : MonoBehaviour
     [SerializeField] private Button investigate;
 
     [Header("Main Buttons")]
-    [SerializeField] private Button mapButton;
     [SerializeField] private Button journalButton;
-    [SerializeField] private Button inventoryButton;
     [SerializeField] private Button settingsButton;
 
     [Header("Back Button")]
@@ -149,10 +147,7 @@ public class InvestigationScene : MonoBehaviour
         investigate.onClick.AddListener(async ()=> { await StartInvestigation(); });
 
         journalButton.onClick.AddListener(OpenJournal);
-        mapButton.onClick.AddListener(OpenMap);
         settingsButton.onClick.AddListener(OpenMenu);
-        inventoryButton.onClick.AddListener(OpenInventory);
-
     }
 
     void OnDisable()
@@ -166,9 +161,7 @@ public class InvestigationScene : MonoBehaviour
         investigate.onClick.RemoveAllListeners();
 
         journalButton.onClick.RemoveAllListeners();
-        mapButton.onClick.RemoveAllListeners();
         settingsButton.onClick.RemoveAllListeners();
-        inventoryButton.onClick.RemoveAllListeners();
     }
 
     void TalkToCharacter()
@@ -265,15 +258,6 @@ public class InvestigationScene : MonoBehaviour
         await Task.Delay(900);
         dialogPanel.SetActive(false);
         hideDialogCoroutine = null;
-    }
-
-
-    void OpenInventory()
-    {
-        Debug.Log($"InvestigationScene > OpenInventory");
-        //PersistentObjects.instance.OpenInventory();
-        inventoryPanel.SetActive(true);
-        inventoryManager.LoadInventoryUI();
     }
 
     void OpenMenu()
