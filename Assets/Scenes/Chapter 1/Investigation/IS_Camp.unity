@@ -239,103 +239,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &147170407
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 147170408}
-  - component: {fileID: 147170409}
-  - component: {fileID: 147170410}
-  m_Layer: 5
-  m_Name: InventoryManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &147170408
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147170407}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1632811323}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &147170409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147170407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56bc6836562518241b13ca4d07bee390, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
-  inventorySlots:
-  - {fileID: 2014897697}
-  - {fileID: 2014897696}
-  - {fileID: 2014897695}
-  - {fileID: 2014897694}
-  - {fileID: 2014897693}
-  inventoryItemPrefab: {fileID: 2111690608436617061, guid: 53a416c6ccb07ea4daa4a3e62a85c1df, type: 3}
---- !u!114 &147170410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147170407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6deb7dfd2340ab8408c411a66cc217bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InvestigationScene
-  buttons: {fileID: 1776032857}
-  talk: {fileID: 1142475141}
-  investigate: {fileID: 1595826438}
-  journalButton: {fileID: 1814681245}
-  settingsButton: {fileID: 1814681244}
-  backButton: {fileID: 341887}
-  back: {fileID: 1614277328}
-  mapPanel: {fileID: 0}
-  inventoryPanel: {fileID: 0}
-  journalPanel: {fileID: 1542242011}
-  settingsPanel: {fileID: 2144505115}
-  character: {fileID: 528267603}
-  dialogPanel: {fileID: 160861421}
-  description: {fileID: 1078018590}
-  characterExists: 1
-  talkSceneIndex: 2
-  dialogHide: 0.05
-  investigationButtons: {fileID: 0}
-  investigationPoints:
-  - {fileID: 1644459390}
-  - {fileID: 427573118}
-  - {fileID: 1936300612}
-  - {fileID: 1526259711}
-  textDescriptions: []
-  tentScene: 1
-  items: []
-  clues: []
-  cluScript: {fileID: 0}
-  inventoryManager: {fileID: 0}
 --- !u!1 &160861421
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +446,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172615813}
   m_CullTransparentMesh: 1
+--- !u!1 &298525590 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8210263244393334767, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 2014897691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &314123382
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &356575217
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1093,7 +1001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &659338368
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1464,9 +1372,9 @@ RectTransform:
   - {fileID: 1950178250}
   m_Father: {fileID: 1776032858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -184.61539}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1142475141
@@ -2881,9 +2789,9 @@ RectTransform:
   - {fileID: 2131385454}
   m_Father: {fileID: 1776032858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -184.61539}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1595826438
@@ -3048,8 +2956,8 @@ GameObject:
   - component: {fileID: 1632811321}
   - component: {fileID: 1632811320}
   - component: {fileID: 1632811319}
-  - component: {fileID: 1632811318}
   - component: {fileID: 1632811324}
+  - component: {fileID: 1632811326}
   - component: {fileID: 1632811325}
   m_Layer: 5
   m_Name: Canvas
@@ -3058,18 +2966,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1632811318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632811317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efb95a60eeb5acf4f9d129a03966501f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InstructionManagerMechanics
 --- !u!114 &1632811319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3085,12 +2981,11 @@ MonoBehaviour:
   buttons: {fileID: 1776032857}
   talk: {fileID: 1142475141}
   investigate: {fileID: 1595826438}
-  journalButton: {fileID: 0}
-  settingsButton: {fileID: 0}
+  journalButton: {fileID: 1814681245}
+  settingsButton: {fileID: 1814681244}
   backButton: {fileID: 341887}
   back: {fileID: 1614277328}
-  mapPanel: {fileID: 0}
-  inventoryPanel: {fileID: 0}
+  inventoryPanel: {fileID: 298525590}
   journalPanel: {fileID: 1542242011}
   settingsPanel: {fileID: 2144505115}
   character: {fileID: 528267603}
@@ -3111,13 +3006,13 @@ MonoBehaviour:
   - The campsite is close to the forest.
   - This is one of the camper's tent.
   tentScene: 7
-  items: []
+  itemsToAdd: []
   clues:
   - {fileID: 11400000, guid: 8f90be73483e3ff49963e4a2b2387f5c, type: 2}
   - {fileID: 11400000, guid: 346fad07cd0bfcb46b41373da284956d, type: 2}
   - {fileID: 11400000, guid: 273dcb3f018540f468aa79a3c0ba95e0, type: 2}
   cluScript: {fileID: 1542242006}
-  inventoryManager: {fileID: 0}
+  inventoryManager: {fileID: 1682288779}
 --- !u!114 &1632811320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3193,7 +3088,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 147170408}
   - {fileID: 781887604}
   - {fileID: 2014897692}
   m_Father: {fileID: 0}
@@ -3243,6 +3137,26 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1632811326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632811317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bc6836562518241b13ca4d07bee390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
+  inventorySlots:
+  - {fileID: 2014897697}
+  - {fileID: 2014897696}
+  - {fileID: 2014897695}
+  - {fileID: 2014897694}
+  - {fileID: 2014897693}
+  inventoryItemPrefab: {fileID: 2111690608436617061, guid: 53a416c6ccb07ea4daa4a3e62a85c1df, type: 3}
+  currentItems: []
 --- !u!1 &1644459386
 GameObject:
   m_ObjectHideFlags: 0
@@ -3467,6 +3381,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1682288779 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1455005465923424732, guid: aa437a7dc6c320b4ca86aaeb0bc18d07, type: 3}
+  m_PrefabInstance: {fileID: 2014897691}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298525590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bc6836562518241b13ca4d07bee390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
 --- !u!1 &1776032857
 GameObject:
   m_ObjectHideFlags: 0

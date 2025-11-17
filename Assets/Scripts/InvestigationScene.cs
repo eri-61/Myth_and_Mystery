@@ -24,7 +24,6 @@ public class InvestigationScene : MonoBehaviour
     [SerializeField] private GameObject back;
 
     [Header("Panels")]
-    [SerializeField] private GameObject mapPanel;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject journalPanel;
     [SerializeField] private GameObject settingsPanel;
@@ -46,12 +45,12 @@ public class InvestigationScene : MonoBehaviour
     public int tentScene = 1;
 
     [Header("Items & Clues (Match by Index)")]
-    public ItemData[] items;
+    public Items[] itemsToAdd;
     public CluesData[] clues;
 
     [Header("Items & Clues script")]
     [SerializeField] private CluesScript cluScript;
-    [SerializeField] private OLD_InventoryManager inventoryManager;
+    [SerializeField] private InventoryManager inventoryManager;
 
     private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
     private Coroutine hideDialogCoroutine;
@@ -73,7 +72,7 @@ public class InvestigationScene : MonoBehaviour
             isPointSearched[i] = false;
         }
 
-        inventoryManager = inventoryPanel.GetComponent<OLD_InventoryManager>();
+        inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
 
         //Check Game Save and re-apply found items
         var curGS = SaveManager.Instance.GetGameState();
@@ -93,11 +92,10 @@ public class InvestigationScene : MonoBehaviour
                     //    itemDescription = itm.ItemDescription,
                     //    itemSprite = incomingSprite
                     //});
-                    inventoryManager.currentItems.Add(new ItemData()
+                    inventoryManager.currentItems.Add(new Items()
                     {
-                        itemName = itm.ItemName,
-                        itemDescription = itm.ItemDescription,
-                        itemSprite = incomingSprite
+                        name = itm.ItemName,
+                        image = incomingSprite
                     });
                     //AddToInventory(itm.ItemIndex, items[itm.ItemIndex]);
                 }
@@ -199,7 +197,7 @@ public class InvestigationScene : MonoBehaviour
 
     }
 
-    void ClickInvestigationPoint(int index)
+    public void ClickInvestigationPoint(int index)
     {
         Debug.Log($"InvestigationScene > ClickInvestigationPoint");
 
@@ -211,6 +209,7 @@ public class InvestigationScene : MonoBehaviour
 
         if (index < textDescriptions.Length)
             ShowDialog(textDescriptions[index]);
+
         else
             ShowDialog("There’s nothing of interest here.");
 
@@ -219,9 +218,9 @@ public class InvestigationScene : MonoBehaviour
             AddClueToJournal(index,clues[index]);
         }
 
-        if (index < items.Length && items[index] != null)
+        if (index < itemsToAdd.Length && itemsToAdd[index] != null)
         {
-            AddToInventory(index,items[index]);
+            AddToInventory(index);
         }
 
         isPointSearched[index] = true;
@@ -272,75 +271,47 @@ public class InvestigationScene : MonoBehaviour
         journalPanel.SetActive(true);
     }
 
-    void OpenMap()
-    {
-        Debug.Log($"InvestigationScene > OpenMap");
-        mapPanel.SetActive(true);
-    }
-
     void AddClueToJournal(int index,CluesData clue)
     {
-        Debug.Log($"InvestigationScene > AddClueToJournal");
-        if (clue == null)
-        {
-            Debug.LogWarning("[InvestigationScene] AddClueToJournal called with null clue.");
-            return;
-        }
+        CluesScript.Instance.AddClues(clue);
 
-        if (cluScript != null)
+        Debug.Log($"InvestigationScene > AddClueToJournal > Add Clue to Game Save Memory");
+        var curGS = SaveManager.Instance.GetGameState();
+        if (curGS != null)
         {
-            CluesScript.Instance.AddClues(clue);
-
-            Debug.Log($"InvestigationScene > AddClueToJournal > Add Clue to Game Save Memory");
-            var curGS = SaveManager.Instance.GetGameState();
-            if (curGS != null)
+            if (curGS.Journal == null)
             {
-                if (curGS.Journal == null)
-                {
-                    curGS.Journal = new GameJournal();
-                }
-
-                if (curGS.Journal.Clues == null)
-                {
-                    curGS.Journal.Clues = new List<JournalClue>();
-                }
-
-                var existingClue = curGS.Journal.Clues.Where(c => c.ClueName == clue.name).FirstOrDefault();
-
-                if(existingClue == null && !string.IsNullOrWhiteSpace(clue.name))
-                {
-                    curGS.Journal.Clues.Add(new JournalClue()
-                    {
-                        ClueNumber = index,
-                        ClueName = clue.name,
-                        ClueDescription = clue.clueDescription
-                    });
-                }
-                
+                curGS.Journal = new GameJournal();
             }
 
-            Debug.Log($"[InvestigationScene] Added clue: {clue.clueName}");
+            if (curGS.Journal.Clues == null)
+            {
+                curGS.Journal.Clues = new List<JournalClue>();
+            }
+
+            var existingClue = curGS.Journal.Clues.Where(c => c.ClueName == clue.name).FirstOrDefault();
+
+            if(existingClue == null && !string.IsNullOrWhiteSpace(clue.name))
+            {
+                curGS.Journal.Clues.Add(new JournalClue()
+                {
+                    ClueNumber = index,
+                    ClueName = clue.name,
+                    ClueDescription = clue.clueDescription
+                });
+            }
+                
         }
-        else
-        {
-            Debug.LogWarning("[InvestigationScene] CluesScript reference is not set in the Inspector.");
-        }
+
+        Debug.Log($"[InvestigationScene] Added clue: {clue.clueName}");
+
     }
 
-    void AddToInventory(int index, ItemData newItem)
+    public void AddToInventory(int index)
     {
-        Debug.Log($"InvestigationScene > AddToInventory");
-        if (newItem == null)
-        {
-            Debug.LogWarning("[InvestigationScene] AddToInventory called with null item.");
-            return;
-        }
-
-        if (inventoryManager != null)
-        {
-            inventoryManager.AddItem(index,newItem);
-            Debug.Log($"[InvestigationScene] Added item via serialized ref: {newItem.itemName}");
-        }
+        inventoryManager.AddItem(itemsToAdd[index]);
+        Debug.Log($"[InvestigationScene] Added item via serialized ref: {itemsToAdd[index].name}");
+        
     }
 
     public void GoToScene()
