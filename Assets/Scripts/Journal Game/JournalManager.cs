@@ -5,6 +5,8 @@ public class JournalManager : MonoBehaviour
     #region Variables
     public static JournalManager instance { get; set; }
 
+    public GameObject journalPanel;
+
     [Header("Scripts")]
     public CaseFileScript csScript;
     public CluesScript cluesScript;
@@ -24,6 +26,11 @@ public class JournalManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void OpenJournal()
+    {
+        journalPanel.SetActive(true);
     }
 }
 

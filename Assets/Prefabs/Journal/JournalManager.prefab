@@ -849,12 +849,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5832358661426921835}
-  m_Father: {fileID: 7579696295784321898}
+  m_Father: {fileID: 5980287671903403053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 2678, y: 1184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7952821095513935213
 CanvasRenderer:
@@ -906,7 +906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ec131d211a48d4c9ddfc1934646628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JournalManager
-  Journal: {fileID: 5394214379483559059}
+  Journal: {fileID: 3055835827936927918}
   caseButton: {fileID: 8357201482567187511}
   cluesBtn: {fileID: 5245037032162189926}
   slBtn: {fileID: 572604110624899866}
@@ -916,10 +916,6 @@ MonoBehaviour:
   creaturesTab: {fileID: 2925978756984485777}
   saveLoadTab: {fileID: 6156181773784914491}
   closeBtn: {fileID: 4039776045207502861}
-  csScript: {fileID: 1726877657004686649}
-  cluesScript: {fileID: 196971392470267482}
-  creaturesScript: {fileID: 1951556626792137111}
-  slScript: {fileID: 7034010610066974297}
 --- !u!114 &196971392470267482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,7 +942,6 @@ MonoBehaviour:
   sceneIndex: 8
   allCluesAndTestimonies: 2
   gatheredClues: []
-  gatheredTestimonies: []
 --- !u!1 &2925978756984485777
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,12 +975,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3880559925162725755}
-  m_Father: {fileID: 7579696295784321898}
+  m_Father: {fileID: 5980287671903403053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 2678, y: 1184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7029832608245606473
 CanvasRenderer:
@@ -1037,7 +1032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ec131d211a48d4c9ddfc1934646628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JournalManager
-  Journal: {fileID: 5394214379483559059}
+  Journal: {fileID: 3055835827936927918}
   caseButton: {fileID: 2369060944683394550}
   cluesBtn: {fileID: 1324280906413721143}
   slBtn: {fileID: 2334128204012567887}
@@ -1047,10 +1042,6 @@ MonoBehaviour:
   creaturesTab: {fileID: 2925978756984485777}
   saveLoadTab: {fileID: 6156181773784914491}
   closeBtn: {fileID: 4039776045207502861}
-  csScript: {fileID: 1726877657004686649}
-  cluesScript: {fileID: 196971392470267482}
-  creaturesScript: {fileID: 1951556626792137111}
-  slScript: {fileID: 7034010610066974297}
 --- !u!114 &1951556626792137111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1079,6 +1070,46 @@ MonoBehaviour:
   creatures:
   - {fileID: 11400000, guid: e2c2322c80a291847bfd6b6264f7139d, type: 2}
   - {fileID: 11400000, guid: 3894c08f0582f9e419e12f21968732d1, type: 2}
+--- !u!1 &3055835827936927918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5980287671903403053}
+  m_Layer: 0
+  m_Name: Journal_Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &5980287671903403053
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055835827936927918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 783149184032834934}
+  - {fileID: 355125409536947466}
+  - {fileID: 3573107823561785341}
+  - {fileID: 5651896720739073931}
+  - {fileID: 5025459919570048527}
+  m_Father: {fileID: 7579696295784321898}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3084747724254002057
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,8 +2269,9 @@ GameObject:
   - component: {fileID: 5441109453955191904}
   - component: {fileID: 7895482419839017821}
   - component: {fileID: 7359752695126228036}
+  - component: {fileID: 947709571630181418}
   m_Layer: 0
-  m_Name: Journal
+  m_Name: JournalManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2257,11 +2289,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 783149184032834934}
-  - {fileID: 355125409536947466}
-  - {fileID: 3573107823561785341}
-  - {fileID: 5651896720739073931}
-  - {fileID: 5025459919570048527}
+  - {fileID: 5980287671903403053}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2317,6 +2345,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5394214379483559059}
   m_CullTransparentMesh: 1
+--- !u!114 &947709571630181418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5394214379483559059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb969cad2211f5d4fac8574f907262bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JournalManager
+  journalPanel: {fileID: 3055835827936927918}
+  csScript: {fileID: 1726877657004686649}
+  cluesScript: {fileID: 196971392470267482}
+  creaturesScript: {fileID: 1951556626792137111}
+  slScript: {fileID: 7034010610066974297}
 --- !u!1 &5510071314729984999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,11 +2393,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7579696295784321898}
+  m_Father: {fileID: 5980287671903403053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1339, y: 592}
   m_SizeDelta: {x: 260, y: 301}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5425912983663535689
@@ -2685,12 +2730,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2676705916916354766}
-  m_Father: {fileID: 7579696295784321898}
+  m_Father: {fileID: 5980287671903403053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 2678, y: 1184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8629856499079358021
 CanvasRenderer:
@@ -2742,7 +2787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ec131d211a48d4c9ddfc1934646628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JournalManager
-  Journal: {fileID: 5394214379483559059}
+  Journal: {fileID: 3055835827936927918}
   caseButton: {fileID: 6167140189518609591}
   cluesBtn: {fileID: 879500652501470194}
   slBtn: {fileID: 8287427207349627077}
@@ -2752,10 +2797,6 @@ MonoBehaviour:
   creaturesTab: {fileID: 2925978756984485777}
   saveLoadTab: {fileID: 6156181773784914491}
   closeBtn: {fileID: 4039776045207502861}
-  csScript: {fileID: 1726877657004686649}
-  cluesScript: {fileID: 196971392470267482}
-  creaturesScript: {fileID: 1951556626792137111}
-  slScript: {fileID: 7034010610066974297}
 --- !u!114 &7034010610066974297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3041,12 +3082,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 885842198546511948}
-  m_Father: {fileID: 7579696295784321898}
+  m_Father: {fileID: 5980287671903403053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 2678, y: 1184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6256369194478395528
 CanvasRenderer:
@@ -3098,7 +3139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ec131d211a48d4c9ddfc1934646628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JournalManager
-  Journal: {fileID: 5394214379483559059}
+  Journal: {fileID: 3055835827936927918}
   caseButton: {fileID: 1561787349524805899}
   cluesBtn: {fileID: 5923900537541624021}
   slBtn: {fileID: 8287427207349627077}
@@ -3108,10 +3149,6 @@ MonoBehaviour:
   creaturesTab: {fileID: 2925978756984485777}
   saveLoadTab: {fileID: 6156181773784914491}
   closeBtn: {fileID: 4039776045207502861}
-  csScript: {fileID: 1726877657004686649}
-  cluesScript: {fileID: 196971392470267482}
-  creaturesScript: {fileID: 1951556626792137111}
-  slScript: {fileID: 7034010610066974297}
 --- !u!114 &1726877657004686649
 MonoBehaviour:
   m_ObjectHideFlags: 0

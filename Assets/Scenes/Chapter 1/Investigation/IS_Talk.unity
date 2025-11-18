@@ -825,7 +825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2267927722001549941, guid: 74e5883fa4682ac4f85e7f43e17dd735, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3241897419436391157, guid: 74e5883fa4682ac4f85e7f43e17dd735, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1278,9 +1278,7 @@ MonoBehaviour:
   mapBtn: {fileID: 0}
   instructionsPanel: {fileID: 0}
   settingsPanel: {fileID: 0}
-  inventoryPanel: {fileID: 0}
   journalPanel: {fileID: 443031791}
-  mapPanel: {fileID: 0}
   uiPanel: {fileID: 267391769}
   closeInstructions: {fileID: 0}
 --- !u!1 &438873162
@@ -2321,7 +2319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394214379483559059, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7579696295784321898, guid: 65223f9161d914b43b6276600f4427fe, type: 3}
       propertyPath: m_Pivot.x

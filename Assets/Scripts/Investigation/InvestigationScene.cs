@@ -239,7 +239,7 @@ public class InvestigationScene : MonoBehaviour
     void OpenJournal()
     {
         Debug.Log($"InvestigationScene > OpenJournal");
-        journalPanel.SetActive(true);
+        JournalManager.instance.OpenJournal();
     }
 
     void AddClueToJournal(int index,CluesData clue)
