@@ -9,8 +9,13 @@ public class VisualNovelScript : MonoBehaviour
     #region Variables
 
     [Header("Visual Novel Buttons")]
-    public Button skipBtn;
+    public Button autoButton;
     public Button hideBtn;
+
+    [Header ("AutoPlay Button")]
+    public Image autoButtonImage;
+    public Sprite autoPlaySprite;
+    public Sprite pauseSprite;
 
     [Header("Visual Novel Button - Image")]
     public Image hsButton;
@@ -19,17 +24,13 @@ public class VisualNovelScript : MonoBehaviour
 
     [Header("Other Buttons")]
     public GameObject buttons;
-    public Button inventoryBtn;
     public Button menuBtn;
     public Button journalBtn;
-    public Button mapBtn;
 
     [Header("Panels")]
     public GameObject instructionsPanel;
     public GameObject settingsPanel;
-    public GameObject inventoryPanel;
     public GameObject journalPanel;
-    public GameObject mapPanel;
     public GameObject uiPanel;
 
     [Header("Close  Panels Button")]
@@ -38,28 +39,25 @@ public class VisualNovelScript : MonoBehaviour
     [Header("Variables")]
     bool isUIHidden = false;
     bool skipAllMode = false;
+    bool isAutoPlaying = false;
     #endregion
 
     private void Start()
     {
-        skipBtn.onClick.AddListener(Skip);
+        autoButton.onClick.AddListener(Skip);
         hideBtn.onClick.AddListener(HideUI);
 
-        inventoryBtn.onClick.AddListener(OpenInventory);
         menuBtn.onClick.AddListener(OpenMenu);
         journalBtn.onClick.AddListener(OpenJournal);
-        mapBtn.onClick.AddListener(OpenMap);
     }
 
     void OnDisable()
     {
-        skipBtn.onClick.RemoveListener(Skip);
+        autoButton.onClick.RemoveListener(Skip);
         hideBtn.onClick.RemoveListener(HideUI);
 
-        inventoryBtn.onClick.RemoveListener(OpenInventory);
         menuBtn.onClick.RemoveListener(OpenMenu);
         journalBtn.onClick.RemoveListener(OpenJournal);
-        mapBtn.onClick.RemoveListener(OpenMap);
       
     }
 
@@ -70,6 +68,15 @@ public class VisualNovelScript : MonoBehaviour
         if(hsButton != null)
         {
             hsButton.sprite = isUIHidden ? showSprite : hideSprite;
+        }
+    }
+    void TogglePlayPause()
+    {
+        isAutoPlaying = !isAutoPlaying;
+
+        if (autoButton != null)
+        {
+            autoButtonImage.sprite = isAutoPlaying ? pauseSprite : autoPlaySprite;
         }
     }
 
@@ -85,12 +92,7 @@ public class VisualNovelScript : MonoBehaviour
         ToggleUI();
         uiPanel.SetActive(!isUIHidden);
         buttons.SetActive(!isUIHidden);
-        skipBtn.gameObject.SetActive(!isUIHidden);
-    }
-
-    void OpenInventory()
-    {
-        inventoryPanel.SetActive(true);
+        autoButton.gameObject.SetActive(!isUIHidden);
     }
 
     void OpenMenu()
@@ -100,12 +102,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void OpenJournal()
     {
-        journalPanel.SetActive(true);
-    }
-
-    void OpenMap()
-    {
-        mapPanel.SetActive(true);
+        JournalManager.instance.OpenJournal();
     }
 
 }

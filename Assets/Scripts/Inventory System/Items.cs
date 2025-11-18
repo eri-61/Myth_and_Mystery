@@ -5,8 +5,9 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "Items", menuName = "Scriptable Objects/Items")]
 public class Items : ScriptableObject
 {
-    public string name;
+    public string itemName;
     public Sprite image;
+    bool inInventory = false;
     public ItemType type;
     public ActionType actionType;
 }
