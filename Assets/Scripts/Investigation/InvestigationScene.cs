@@ -16,10 +16,6 @@ public class InvestigationScene : MonoBehaviour
     [SerializeField] private Button talk;
     [SerializeField] private Button investigate;
 
-    [Header("Main Buttons")]
-    [SerializeField] private Button journalButton;
-    [SerializeField] private Button settingsButton;
-
     [Header("Back Button")]
     [SerializeField] private Button backButton;
     [SerializeField] private GameObject back;
@@ -116,8 +112,6 @@ public class InvestigationScene : MonoBehaviour
         talk.onClick.AddListener(TalkToCharacter);
         investigate.onClick.AddListener(async ()=> { await StartInvestigation(); });
 
-        journalButton.onClick.AddListener(OpenJournal);
-        settingsButton.onClick.AddListener(OpenMenu);
     }
 
     void OnDisable()
@@ -129,9 +123,6 @@ public class InvestigationScene : MonoBehaviour
         backButton.onClick.RemoveAllListeners();
         talk.onClick.RemoveAllListeners();
         investigate.onClick.RemoveAllListeners();
-
-        journalButton.onClick.RemoveAllListeners();
-        settingsButton.onClick.RemoveAllListeners();
     }
 
     void TalkToCharacter()
@@ -234,12 +225,6 @@ public class InvestigationScene : MonoBehaviour
     {
         Debug.Log($"InvestigationScene > OpenInventory");
         settingsPanel.SetActive(true);
-    }
-
-    void OpenJournal()
-    {
-        Debug.Log($"InvestigationScene > OpenJournal");
-        JournalManager.instance.OpenJournal();
     }
 
     void AddClueToJournal(int index,CluesData clue)

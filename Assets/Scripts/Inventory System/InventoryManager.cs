@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -10,6 +9,9 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager instance { private set; get; }
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
+
+    public Button journalButton;
+    public Button settingsButton;
 
     int selectedSlot = -1;
     [HideInInspector] public List<Items> currentItems = new List<Items>();
@@ -54,6 +56,24 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         LoadInventoryUI();
+    }
+
+    private void OnEnable()
+    {
+        journalButton.onClick.AddListener(() =>
+        {
+            JournalManager.instance.OpenJournal();
+        });
+        settingsButton.onClick.AddListener(() =>
+        {
+            SettingsScript.instance.OpenSettings();
+        });
+    }
+
+    private void OnDisable()
+    {
+        journalButton.onClick.RemoveAllListeners();
+        settingsButton.onClick.RemoveAllListeners();
     }
 
     private void Update()
