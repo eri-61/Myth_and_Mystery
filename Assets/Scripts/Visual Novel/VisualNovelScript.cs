@@ -82,6 +82,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void Skip()
     {
+        TogglePlayPause();
         skipAllMode = !skipAllMode;
         if (DialogController.instance != null)
             DialogController.instance.ToggleSkipAll(skipAllMode);

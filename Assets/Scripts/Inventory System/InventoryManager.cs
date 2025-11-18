@@ -53,6 +53,12 @@ public class InventoryManager : MonoBehaviour
 
     }
 
+    public void CleanUpAndDestroy()
+    {
+        instance = null;
+        Destroy(this.gameObject);
+    }
+
     private void Start()
     {
         LoadInventoryUI();

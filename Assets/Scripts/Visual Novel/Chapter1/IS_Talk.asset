@@ -29,8 +29,8 @@ MonoBehaviour:
     - It smells strongly of tobacco.
     - ...
     - It seems to be coming from the forest.
-    endAfterDialog: 1
-    nextDialog: -1
+    endAfterDialog: 0
+    nextDialog: 1
     branchPoint:
       question: 
       answers: []
@@ -63,4 +63,21 @@ MonoBehaviour:
     - {fileID: -8381300683025980698, guid: 9c4d12ffc4de63b4590ecb12491a480b, type: 3}
     - {fileID: -8381300683025980698, guid: 9c4d12ffc4de63b4590ecb12491a480b, type: 3}
     - {fileID: -8381300683025980698, guid: 9c4d12ffc4de63b4590ecb12491a480b, type: 3}
+    - {fileID: -8381300683025980698, guid: 9c4d12ffc4de63b4590ecb12491a480b, type: 3}
+  - characterName:
+    - Rafael
+    dialog:
+    - Let's add this to the Journal
+    endAfterDialog: 0
+    nextDialog: -1
+    branchPoint:
+      question: Add the Testimony to the Journal.
+      answers:
+      - answerLabel: Add Rafael's Testimony
+        nextElement: -1
+    characters:
+    - charaName: Rafael
+      characterPrefab: {fileID: 6042120147672625312, guid: 51cd8c3af699cfe419484b4b38f5f77d, type: 3}
+      isTalking: 0
+    background:
     - {fileID: -8381300683025980698, guid: 9c4d12ffc4de63b4590ecb12491a480b, type: 3}
