@@ -73,40 +73,45 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
             return;
         }
 
-        SpriteRenderer[] spriteRenderers = roomPrefab.GetComponentsInChildren<SpriteRenderer>();
-
-        if (spriteRenderers == null || spriteRenderers.Length == 0)
+        Collider2D[] colliders = roomPrefab.GetComponentsInChildren<Collider2D>();
+        if (colliders != null && colliders.Length > 0)
         {
-            Debug.LogWarning("[GenerateMaze] GetRoomSize: roomPrefab has no SpriteRenderer children. Using default size 1x1. Check prefab PPU/graphics.");
-            roomWidth = 1f;
-            roomHeight = 1f;
-            return;
+            Bounds combinedBounds = colliders[0].bounds;
+            for (int i = 1; i < colliders.Length; i++)
+            {
+                combinedBounds.Encapsulate(colliders[i].bounds);
+            }
+            roomWidth = combinedBounds.size.x;
+            roomHeight = combinedBounds.size.y;
+        }
+        else
+        {
+            SpriteRenderer[] spriteRenderers = roomPrefab.GetComponentsInChildren<SpriteRenderer>();
+
+            if (spriteRenderers == null || spriteRenderers.Length == 0)
+            {
+                Debug.LogWarning("[GenerateMaze] GetRoomSize: roomPrefab has no Collider2D or SpriteRenderer children. Using default size 1x1.");
+                roomWidth = 1f;
+                roomHeight = 1f;
+                return;
+            }
+
+            Vector3 minBounds = Vector3.positiveInfinity;
+            Vector3 maxBounds = Vector3.negativeInfinity;
+
+            foreach (SpriteRenderer ren in spriteRenderers)
+            {
+                if (ren == null || ren.sprite == null) continue;
+                minBounds = Vector3.Min(minBounds, ren.bounds.min);
+                maxBounds = Vector3.Max(maxBounds, ren.bounds.max);
+            }
+
+            roomWidth = maxBounds.x - minBounds.x;
+            roomHeight = maxBounds.y - minBounds.y;
         }
 
-        Vector3 minBounds = Vector3.positiveInfinity;
-        Vector3 maxBounds = Vector3.negativeInfinity;
-
-        foreach (SpriteRenderer ren in spriteRenderers)
-        {
-            if (ren == null || ren.sprite == null) continue;
-            minBounds = Vector3.Min(minBounds, ren.bounds.min);
-            maxBounds = Vector3.Max(maxBounds, ren.bounds.max);
-        }
-
-        if (minBounds == Vector3.positiveInfinity || maxBounds == Vector3.negativeInfinity)
-        {
-            Debug.LogWarning("[GenerateMaze] GetRoomSize: couldn't calculate bounds from SpriteRenderers. Using default size 1x1.");
-            roomWidth = 1f;
-            roomHeight = 1f;
-            return;
-        }
-
-        roomWidth = maxBounds.x - minBounds.x;
-        roomHeight = maxBounds.y - minBounds.y;
-
-        // Safety: avoid zero sizes
-        if (roomWidth <= 0f) roomWidth = 1f;
-        if (roomHeight <= 0f) roomHeight = 1f;
+        if (roomWidth <= 0.01f) roomWidth = 1f;
+        if (roomHeight <= 0.01f) roomHeight = 1f;
     }
 
     private void SetCamera()

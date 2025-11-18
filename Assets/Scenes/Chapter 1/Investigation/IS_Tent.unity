@@ -197,13 +197,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 62bdf7bd410d29840b7fbae88f23c265, type: 2}
   - {fileID: 11400000, guid: 51cd628162b761f4cb850239ededd107, type: 2}
   - {fileID: 11400000, guid: 46a20de63f5737b4aa809e6cb5476f56, type: 2}
-  - {fileID: 0}
-  clues:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  cluScript: {fileID: 0}
+  clues: []
 --- !u!114 &74929118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,7 +567,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2013689069}
   - {fileID: 1209774530}
   - {fileID: 1461150797}
   m_Father: {fileID: 1200630093}
@@ -1140,8 +1133,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
-  m_SizeDelta: {x: 63.658, y: 51.538}
+  m_AnchoredPosition: {x: 18.9418, y: -14.066883}
+  m_SizeDelta: {x: 45.17, y: 51.538}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &852655142
 MonoBehaviour:
@@ -1512,6 +1505,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 327277060}
+  - {fileID: 2013689069}
   m_Father: {fileID: 1838749346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3128,11 +3122,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 852655141}
-  m_Father: {fileID: 327277060}
+  m_Father: {fileID: 1200630093}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -0.000030517578, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &4395254778486427020
@@ -3423,8 +3417,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 515540337}
   - {fileID: 1370307433}
-  - {fileID: 1221116257}
   - {fileID: 1770716012}
   - {fileID: 946357000}
   - {fileID: 4395254778486427020}
+  - {fileID: 1221116257}
   - {fileID: 74929121}

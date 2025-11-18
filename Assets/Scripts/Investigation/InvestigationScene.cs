@@ -45,9 +45,6 @@ public class InvestigationScene : MonoBehaviour
     public Items[] itemsToAdd;
     public CluesData[] clues;
 
-    [Header("Items & Clues script")]
-    [SerializeField] private CluesScript cluScript;
-
     private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
     private Coroutine hideDialogCoroutine;
     #endregion
@@ -86,7 +83,7 @@ public class InvestigationScene : MonoBehaviour
                     //    clueDescription = itm.ClueDescription,
                     //    clueImage = incomingSprite
                     //});
-                    cluScript.gatheredClues.Add(new CluesData()
+                    JournalManager.instance.cluesScript.gatheredClues.Add(new CluesData()
                     {
                         clueName = itm.ClueName,
                         clueDescription = itm.ClueDescription,
@@ -206,12 +203,12 @@ public class InvestigationScene : MonoBehaviour
         HideDialogAsync();
     }
 
-    IEnumerator HideDialog(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        dialogPanel.SetActive(false);
-        hideDialogCoroutine = null;
-    }
+    //IEnumerator HideDialog(float delay)
+    //{
+    //    yield return new WaitForSeconds(delay);
+    //    dialogPanel.SetActive(false);
+    //    hideDialogCoroutine = null;
+    //}
 
     async Task HideDialogAsync()
     {
@@ -221,15 +218,9 @@ public class InvestigationScene : MonoBehaviour
         hideDialogCoroutine = null;
     }
 
-    void OpenMenu()
+    public void AddClueToJournal(int index,CluesData clue)
     {
-        Debug.Log($"InvestigationScene > OpenInventory");
-        settingsPanel.SetActive(true);
-    }
-
-    void AddClueToJournal(int index,CluesData clue)
-    {
-        CluesScript.Instance.AddClues(clue);
+        JournalManager.instance.cluesScript.AddClues(clue);
 
         Debug.Log($"InvestigationScene > AddClueToJournal > Add Clue to Game Save Memory");
         var curGS = SaveManager.Instance.GetGameState();

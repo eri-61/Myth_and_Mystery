@@ -1,8 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
-
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class VisualNovelScript : MonoBehaviour
 {
@@ -40,6 +40,9 @@ public class VisualNovelScript : MonoBehaviour
     bool isUIHidden = false;
     bool skipAllMode = false;
     bool isAutoPlaying = false;
+
+    [Header("CreatureData")]
+    public CreaturesData creature;
     #endregion
 
     private void Start()
@@ -82,6 +85,7 @@ public class VisualNovelScript : MonoBehaviour
 
     void Skip()
     {
+        TogglePlayPause();
         skipAllMode = !skipAllMode;
         if (DialogController.instance != null)
             DialogController.instance.ToggleSkipAll(skipAllMode);
@@ -105,4 +109,43 @@ public class VisualNovelScript : MonoBehaviour
         JournalManager.instance.OpenJournal();
     }
 
+    public void AddCreatures(CreaturesData newCreature)
+    {
+        JournalManager.instance.creaturesScript.AddCreature(newCreature);
+
+        Debug.Log($"InvestigationScene > AddClueToJournal > Add Clue to Game Save Memory");
+        var curGS = SaveManager.Instance.GetGameState();
+        if (curGS != null)
+        {
+            if (curGS.Journal == null)
+            {
+                curGS.Journal = new GameJournal();
+            }
+
+            if (curGS.Journal.Creatures == null)
+            {
+                curGS.Journal.Creatures = new List<JournalCreatures>();
+            }
+
+            var existingCreature = curGS.Journal.Creatures.Where(c => c.CreatureName == newCreature.name).FirstOrDefault();
+            int index = curGS.Journal.Clues.Count + 1;
+
+            if (existingCreature == null && !string.IsNullOrWhiteSpace(newCreature.name))
+            {
+                curGS.Journal.Creatures.Add(new JournalCreatures()
+                {
+                    CreatureID = index,
+                    CreatureName = newCreature.name,
+                    CreatureDescription = newCreature.shortDescription,
+                    AdditionalNotes = newCreature.longDescription
+                });
+            }
+
+        }
+
+        Debug.Log($"[InvestigationScene] Added creature: {newCreature.CreatureName}");
+
+    }
 }
+
+

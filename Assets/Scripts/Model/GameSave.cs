@@ -31,8 +31,17 @@ public class JournalClue
     public string ClueDescription { get; set; }
 }
 
+public class JournalCreatures
+{
+    public int CreatureID { get; set; }
+    public string CreatureName { get; set; }
+    public string CreatureDescription { get; set; }
+    public string AdditionalNotes { get; set; }
+}
+
 public class GameJournal
 {
+    public List<JournalCreatures> Creatures { get; set; }
     public List<JournalCase> CaseFile { get; set; }
     public List<JournalClue> Clues { get; set; }
 }

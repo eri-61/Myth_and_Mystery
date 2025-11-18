@@ -1932,7 +1932,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1632811319}
+      - m_Target: {fileID: 1632811325}
         m_TargetAssemblyTypeName: InvestigationScene, Assembly-CSharp
         m_MethodName: GoToScene
         m_Mode: 1
@@ -3070,8 +3070,8 @@ GameObject:
   - component: {fileID: 1632811322}
   - component: {fileID: 1632811321}
   - component: {fileID: 1632811320}
-  - component: {fileID: 1632811319}
   - component: {fileID: 1632811324}
+  - component: {fileID: 1632811325}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3079,55 +3079,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1632811319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632811317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6deb7dfd2340ab8408c411a66cc217bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InvestigationScene
-  buttons: {fileID: 1776032857}
-  talk: {fileID: 1142475141}
-  investigate: {fileID: 1595826438}
-  backButton: {fileID: 341887}
-  back: {fileID: 1614277328}
-  inventoryPanel: {fileID: 284428047}
-  journalPanel: {fileID: 1542242011}
-  settingsPanel: {fileID: 2144505115}
-  character: {fileID: 528267603}
-  dialogPanel: {fileID: 160861421}
-  description: {fileID: 1078018590}
-  characterExists: 1
-  talkSceneIndex: 6
-  dialogHide: 0.5
-  investigationButtons: {fileID: 659338367}
-  investigationPoints:
-  - {fileID: 427573118}
-  - {fileID: 1644459390}
-  - {fileID: 1936300612}
-  - {fileID: 1526259711}
-  textDescriptions:
-  - There are footprints on the ground.
-  - There are traces of ashes here.
-  - The campsite is close to the forest.
-  - This is one of the camper's tent.
-  tentScene: 7
-  itemsToAdd:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  clues:
-  - {fileID: 11400000, guid: 8f90be73483e3ff49963e4a2b2387f5c, type: 2}
-  - {fileID: 11400000, guid: 346fad07cd0bfcb46b41373da284956d, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  cluScript: {fileID: 1542242006}
 --- !u!114 &1632811320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3225,6 +3176,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameChapter1
   CurrentDialog: 3
   CurrentObjective: 3
+--- !u!114 &1632811325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632811317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0513fc667663e4688b3533db4198c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InvestigationScene
+  buttons: {fileID: 1776032857}
+  talk: {fileID: 1142475141}
+  investigate: {fileID: 1595826438}
+  backButton: {fileID: 341887}
+  back: {fileID: 1614277328}
+  inventoryPanel: {fileID: 284428047}
+  journalPanel: {fileID: 1542242011}
+  settingsPanel: {fileID: 2144505115}
+  character: {fileID: 528267603}
+  dialogPanel: {fileID: 160861421}
+  description: {fileID: 1078018590}
+  characterExists: 1
+  talkSceneIndex: 6
+  dialogHide: 0.05
+  investigationButtons: {fileID: 659338367}
+  investigationPoints:
+  - {fileID: 1644459390}
+  - {fileID: 427573118}
+  - {fileID: 1936300612}
+  - {fileID: 1526259711}
+  textDescriptions:
+  - There are traces of ash next to this campfire.
+  - There's a huge footprint on the ground... It doesn't look like a human footprint.
+  - The campsite is next to the forest.
+  - I should investigate this tent.
+  tentScene: 7
+  itemsToAdd: []
+  clues:
+  - {fileID: 11400000, guid: 346fad07cd0bfcb46b41373da284956d, type: 2}
+  - {fileID: 11400000, guid: 8f90be73483e3ff49963e4a2b2387f5c, type: 2}
 --- !u!1 &1644459386
 GameObject:
   m_ObjectHideFlags: 0

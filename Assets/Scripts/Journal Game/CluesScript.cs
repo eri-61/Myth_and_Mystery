@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class CluesScript : MonoBehaviour
 {
-    public static CluesScript Instance { get; private set; }
-
     #region Variables
     [Header("Slots")]
     public List<Button> slots;

@@ -55,7 +55,9 @@ public class CreaturesScript : MonoBehaviour
     {
         if (index < 0 || index >= creatures.Count) return;
         var creature = creatures[index];
-        creatureName.text = creature.name;
+
+        creatureName.text = creature.CreatureName;
+
         creatureDescription.text = creature.shortDescription;
         creatureImage.sprite = creature.CreatureImage;
     }

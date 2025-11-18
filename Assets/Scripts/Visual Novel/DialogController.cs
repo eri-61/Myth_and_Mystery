@@ -30,6 +30,13 @@ public class DialogController : MonoBehaviour
     [Header("Next Scene")]
     [SerializeField] public int sceneIndex;
     [SerializeField] Button nextButton;
+    [SerializeField] private bool needsItem = false;
+    [SerializeField] private string requiredItemName;
+
+    [Header("Warning")]
+    [SerializeField] private string speakerName = "Player";
+    [SerializeField] [TextArea]
+    private string warningMessage = "You need a specific item to proceed.";
 
     // Current section the dialog is running (set while RunDialog is active)
     public int currentSectionIndex { get; private set; } = -1;
@@ -68,9 +75,70 @@ public class DialogController : MonoBehaviour
 
     void NextScene()
     {
-        SceneManager.LoadScene(sceneIndex);
+        if (needsItem)
+        {
+            string selectedItemName = InventoryManager.instance.GetSelectedName();
+            bool itemIsCorrect = selectedItemName != null && selectedItemName.Equals(requiredItemName, System.StringComparison.OrdinalIgnoreCase);
+            
+            if (itemIsCorrect)
+            {
+                Items usedItem = InventoryManager.instance.GetSelectedItem(true);
+
+                if (usedItem != null)
+                {
+                    Debug.Log($"Used item: {usedItem.name}. Proceeding to scene {sceneIndex}.");
+                    SceneManager.LoadScene(sceneIndex);
+                    return;
+                }
+
+                StartCoroutine(ShowItemRequiredWarning());
+            }
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneIndex);
+            return;
+        }
+       
     }
 
+    IEnumerator ShowItemRequiredWarning()
+    {
+        dialogBox.SetActive(true);
+        answerBox.SetActive(false);
+        nextButton.gameObject.SetActive(false);
+
+        nameText.text = speakerName;
+
+        string finalMessage = warningMessage.Replace("[requiredItemName]", requiredItemName);
+
+        dialogText.text = "";
+        skipLineTriggered = false;
+
+        // Type the warning text
+        foreach (char letter in finalMessage)
+        {
+            if (skipLineTriggered)
+            {
+                dialogText.text = finalMessage;
+                break;
+            }
+
+            dialogText.text += letter;
+
+            if (!skipAll)
+                yield return new WaitForSecondsRealtime(typingSpeed);
+        }
+
+        skipLineTriggered = false;
+        while (!skipLineTriggered)
+            yield return null;
+
+        dialogText.text = "";
+        nameText.text = "";
+
+        Debug.Log("Item requirement warning dismissed.");
+    }
     private void Update()
     {
         if (!dialogBox.activeSelf) return;

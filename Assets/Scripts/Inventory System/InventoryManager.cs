@@ -53,6 +53,12 @@ public class InventoryManager : MonoBehaviour
 
     }
 
+    public void CleanUpAndDestroy()
+    {
+        instance = null;
+        Destroy(this.gameObject);
+    }
+
     private void Start()
     {
         LoadInventoryUI();
@@ -151,24 +157,73 @@ public class InventoryManager : MonoBehaviour
         currentItems.Add(item);
     }
 
+    public string GetSelectedName()
+    {
+        if (selectedSlot >= 0 && selectedSlot < inventorySlots.Length)
+        {
+            InventorySlot slot = inventorySlots[selectedSlot];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+            if (itemInSlot != null && itemInSlot.item != null)
+            {
+                return itemInSlot.item.name;
+            }
+        }
+        return null;
+    }
+
     public Items GetSelectedItem(bool use)
     {
+        if (selectedSlot < 0 || selectedSlot >= inventorySlots.Length)
+        {
+            return null;
+        }
+
         InventorySlot slot = inventorySlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-        if(itemInSlot != null)
+
+        if (itemInSlot != null)
         {
             Items item = itemInSlot.item;
+
             if (use == true)
             {
                 itemInSlot.Count--;
                 if (itemInSlot.Count <= 0)
                 {
+                    currentItems.Remove(item);
+                    RemoveItemFromSave(item.name);
                     Destroy(itemInSlot.gameObject);
+
+                    ChangeSelectedSlot(-1); 
+                    LoadInventoryUI(); 
+                    return item;
                 }
             }
             return item;
         }
         return null;
+    }
+
+    public void RemoveItemFromSave(string itemName)
+    {
+        var curGS = SaveManager.Instance.GetGameState();
+
+        if (curGS != null && curGS.Inventory != null && curGS.Inventory.Items != null)
+        {
+            var itemToRemove = curGS.Inventory.Items
+                .FirstOrDefault(gi => gi.ItemName.Equals(itemName, System.StringComparison.OrdinalIgnoreCase));
+
+            if (itemToRemove != null)
+            {
+                curGS.Inventory.Items.Remove(itemToRemove);
+                Debug.Log($"[InventoryManager] Successfully removed item '{itemName}' from save data.");
+            }
+            else
+            {
+                Debug.LogWarning($"[InventoryManager] Item '{itemName}' not found in save data to remove.");
+            }
+        }
     }
 
     public void LoadInventoryUI()
