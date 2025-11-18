@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogTree
   sections:
   - characterName:
-    - 
     - Kenji
     - Jay
     - Samantha
@@ -29,7 +28,6 @@ MonoBehaviour:
     - Kenji
     - Jay
     dialog:
-    - 
     - Guys! There's someone there.
     - Who are you guys?
     - Are you lost too?
@@ -49,9 +47,6 @@ MonoBehaviour:
       question: 
       answers: []
     characters:
-    - charaName: 
-      characterPrefab: {fileID: 0}
-      isTalking: 0
     - charaName: Kenji
       characterPrefab: {fileID: 1254374792277268401, guid: 29eb5ee05e9715f48b81abb31a208abc, type: 3}
       isTalking: 0
@@ -92,7 +87,6 @@ MonoBehaviour:
       characterPrefab: {fileID: 4652093632972869357, guid: 98dffe32eca12274c85ae6a702901bb4, type: 3}
       isTalking: 0
     background:
-    - {fileID: -5439355546973803624, guid: 324d8db8cc60b7f4cba8f08248e93210, type: 3}
     - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
     - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
     - {fileID: -6054258722776619967, guid: 94a457179b527f6438615fa634d8ef74, type: 3}
@@ -110,7 +104,7 @@ MonoBehaviour:
     - 
     - Kenji
     dialog:
-    - 
+    - '*THUD* *THUD* *THUD*'
     - RUN!!!
     endAfterDialog: 0
     nextDialog: 2
