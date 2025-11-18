@@ -27,7 +27,7 @@ namespace TS.PageSlider
         /// Duration (in seconds) for the page snapping animation.
         /// </summary>
         [Tooltip("Duration (in seconds) for the page snapping animation")]
-        [SerializeField] private float _snapDuration = 0.3f;
+        [SerializeField] private float _snapDuration = 0.0f;
 
         [Header("Events")]
 
@@ -206,6 +206,8 @@ namespace TS.PageSlider
                 page--;
             }
 
+            page = Mathf.Clamp(page, 0, GetPageCount() - 1);
+
             // Call the ScrollToPage function to initiate the page change animation for the determined page.
             ScrollToPage(page);
         }
@@ -221,15 +223,26 @@ namespace TS.PageSlider
             // Calculate the target normalized position for the scroll rect based on the target page index.
             _targetNormalizedPosition = GetTargetPagePosition(page);
 
+            _scrollRect.horizontalNormalizedPosition = _targetNormalizedPosition;
+
             // Calculate the speed required to reach the target position within the snap duration.
-            _moveSpeed = (_targetNormalizedPosition - _scrollRect.horizontalNormalizedPosition) / _snapDuration;
+            _moveSpeed = 0;
+
+            int previousPage = _currentPage;
 
             // Update the target page variable to reflect the new target page.
             _targetPage = page;
+            _currentPage = page;
 
             // If the target page is different from the current page, 
             // invoke the OnPageChangeStarted event to signal the beginning of the page change animation.
-            if (_targetPage != _currentPage)
+            if (_targetPage != previousPage)
+            {
+                OnPageChangeEnded?.Invoke(previousPage, _targetPage);
+            }
+
+            // If the page was set programmatically (not via drag) and we want an event:
+            else if (_targetPage != _currentPage) // Original check, kept for safety
             {
                 OnPageChangeStarted?.Invoke(_currentPage, _targetPage);
             }
@@ -241,14 +254,18 @@ namespace TS.PageSlider
         /// <returns>The number of scrollable pages.</returns>
         private int GetPageCount()
         {
-            var contentWidth = _scrollRect.content.rect.width;
-            var rectWidth = ((RectTransform)_scrollRect.transform).rect.size.x;
-            return Mathf.RoundToInt(contentWidth / rectWidth) - 1;
+            int count = Content.transform.childCount;
+            return Mathf.Max(1, count);
         }
 
         private float GetTargetPagePosition(int page)
         {
-            return page * (1f / GetPageCount());
+            int pageCount = GetPageCount();
+            int steps = pageCount - 1;
+            if (steps <= 0)
+                return 0f;
+
+            return (float)page / steps;
         }
 
         private ScrollRect FindScrollRect()

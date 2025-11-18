@@ -28,8 +28,15 @@ public class JournalManager : MonoBehaviour
         }
     }
 
+    public void CleanUpAndDestroy()
+    {
+        instance = null;
+        Destroy(this.gameObject);
+    }
+
     public void OpenJournal()
     {
+        Time.timeScale = 0f;
         journalPanel.SetActive(true);
     }
 }

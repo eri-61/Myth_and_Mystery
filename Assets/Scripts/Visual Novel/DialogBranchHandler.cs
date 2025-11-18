@@ -14,6 +14,8 @@ namespace Assets.Scripts.Visual_Novel
         [SerializeField] public int goodEndingSectionIndex = 2;
         [SerializeField] public int goodEndingSceneIndex = 1;
 
+        [SerializeField] public CreaturesData newCreature;
+
         void OnEnable()
         {
             DialogController.OnDialogEnded += HandleDialogEnded;
@@ -38,6 +40,8 @@ namespace Assets.Scripts.Visual_Novel
             else if (current == goodEndingSectionIndex && goodEndingSceneIndex >= 0)
             {
                 dc.sceneIndex = goodEndingSceneIndex;
+                if(newCreature != null)
+                    JournalManager.instance.creaturesScript.AddCreature(newCreature);
             }
         }
     }

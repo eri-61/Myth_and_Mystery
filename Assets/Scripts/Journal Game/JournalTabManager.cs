@@ -87,6 +87,7 @@ public class JournalTabManager : MonoBehaviour
 
     private void CloseTab()
     {
+        Time.timeScale = 1f;
         Journal.SetActive(false);
     }
 }

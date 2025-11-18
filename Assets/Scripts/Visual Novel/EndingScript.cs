@@ -33,6 +33,8 @@ public class EndingScript : MonoBehaviour
     void BackToMain()
     {
         if (!allowSceneLoad) return;
+        JournalManager.instance.CleanUpAndDestroy(); // destroy journal manager to reset static instance
+        InventoryManager.instance.CleanUpAndDestroy();   // destroy inventory manager to reset static instance 
 
         SceneManager.LoadScene(1);
     }
