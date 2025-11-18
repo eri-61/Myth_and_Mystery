@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class InvestigationScene : MonoBehaviour
 {
+    #region Variables
     [Header("Choice")]
     [SerializeField] private GameObject buttons;
     [SerializeField] private Button talk;
@@ -50,10 +51,10 @@ public class InvestigationScene : MonoBehaviour
 
     [Header("Items & Clues script")]
     [SerializeField] private CluesScript cluScript;
-    [SerializeField] private InventoryManager inventoryManager;
 
     private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
     private Coroutine hideDialogCoroutine;
+    #endregion
 
     void Start()
     {
@@ -72,36 +73,7 @@ public class InvestigationScene : MonoBehaviour
             isPointSearched[i] = false;
         }
 
-        inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
-
-        //Check Game Save and re-apply found items
         var curGS = SaveManager.Instance.GetGameState();
-        if(curGS.Inventory != null)
-        {
-            if (curGS.Inventory.Items != null)
-            {
-                Debug.Log($"InvestigationScene > Reloading Inventory Items > Item Count: {curGS.Inventory.Items.Count}");
-                foreach (var itm in curGS.Inventory.Items)
-                {
-                    Sprite incomingSprite = Resources.Load<Sprite>($"Assets/Game UI/Items/{itm.ItemName.ToLower().Replace("data", "")}_0");
-
-                    //inventoryManager.currentItems.Add
-                    //AddToInventory(itm.ItemIndex,new ItemData()
-                    //{
-                    //    itemName = itm.ItemName,
-                    //    itemDescription = itm.ItemDescription,
-                    //    itemSprite = incomingSprite
-                    //});
-                    inventoryManager.currentItems.Add(new Items()
-                    {
-                        name = itm.ItemName,
-                        image = incomingSprite
-                    });
-                    //AddToInventory(itm.ItemIndex, items[itm.ItemIndex]);
-                }
-            }
-        }
-
         if (curGS.Journal != null)
         {
             if (curGS.Journal.Clues != null)
@@ -208,10 +180,10 @@ public class InvestigationScene : MonoBehaviour
         }
 
         if (index < textDescriptions.Length)
+        {
             ShowDialog(textDescriptions[index]);
-
-        else
-            ShowDialog("There’s nothing of interest here.");
+            isPointSearched[index] = true;
+        }
 
         if (index < clues.Length && clues[index] != null)
         {
@@ -220,10 +192,9 @@ public class InvestigationScene : MonoBehaviour
 
         if (index < itemsToAdd.Length && itemsToAdd[index] != null)
         {
-            AddToInventory(index);
+            AddToInventory(index, itemsToAdd[index]);
         }
 
-        isPointSearched[index] = true;
         //StartCoroutine(HideDialog(dialogHide));
         HideDialogAsync();
     }
@@ -307,9 +278,9 @@ public class InvestigationScene : MonoBehaviour
 
     }
 
-    public void AddToInventory(int index)
+    public void AddToInventory(int index, Items item)
     {
-        inventoryManager.AddItem(itemsToAdd[index]);
+        InventoryManager.instance.AddItem(item);
         Debug.Log($"[InvestigationScene] Added item via serialized ref: {itemsToAdd[index].name}");
         
     }
@@ -319,5 +290,18 @@ public class InvestigationScene : MonoBehaviour
         Debug.Log($"InvestigationScene > GoToScene");
         SceneManager.LoadScene(tentScene);
     }
+
+    public void GetSelectedItem()
+    {
+        Items selectedItem = InventoryManager.instance.GetSelectedItem(false);
+    }
     
+    public void UseSelectedItem()
+    {
+        Items selectedItem = InventoryManager.instance.GetSelectedItem(true);
+        if(selectedItem != null)
+        {
+            Debug.Log($"InvestigationScene > UseSelectedItem > Used Item: {selectedItem.name}");
+        }
+    }
 }

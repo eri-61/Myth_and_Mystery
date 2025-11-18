@@ -14,8 +14,8 @@ public class Items : ScriptableObject
 public enum ItemType
 {
     Weapon,
-    Key,
     Weakness,
+    Key,
     PuzzleItem,
     Flashlight
 }
