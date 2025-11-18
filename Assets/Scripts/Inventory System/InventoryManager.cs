@@ -15,9 +15,37 @@ public class InventoryManager : MonoBehaviour
     [HideInInspector] public List<Items> currentItems = new List<Items>();
     #endregion
 
-    public InventoryManager()
+    void Awake()
     {
-        instance = this;
+        if(instance==null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
+        //Check Game Save and re-apply found items
+        var curGS = SaveManager.Instance.GetGameState();
+
+        if (curGS.Inventory != null)
+        {
+            if (curGS.Inventory.Items != null)
+            {
+                Debug.Log($"InvestigationScene > Reloading Inventory Items > Item Count: {curGS.Inventory.Items.Count}");
+                foreach (var itm in curGS.Inventory.Items)
+                {
+                    Sprite incomingSprite = Resources.Load<Sprite>($"Assets/Game UI/Items/{itm.ItemName.ToLower()}");
+
+                    Items loadedItem = ScriptableObject.CreateInstance<Items>();
+                    loadedItem.name = itm.ItemName;
+                    loadedItem.image = incomingSprite;
+                    InventoryManager.instance.AddItem(loadedItem);
+                }
+            }
+        }
     }
 
     private void Update()
