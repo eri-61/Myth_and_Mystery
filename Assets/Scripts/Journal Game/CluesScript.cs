@@ -38,8 +38,6 @@ public class CluesScript : MonoBehaviour
     void Awake()
     {
         deductionButton.gameObject.SetActive(false);
-        //GameManager.Instance.RegisterClues(this);
-
     }
 
     void OnEnable()
@@ -122,21 +120,9 @@ public class CluesScript : MonoBehaviour
         }
     }
 
-    public void addTestimony(TestimonyData newTestimony)
+    public void UpdateClueUI()
     {
-        if (!gatheredTestimonies.Contains(newTestimony))
-        {
-            gatheredTestimonies.Add(newTestimony);
-            entrytypes.Add(EntryType.Testimony);
-
-            UpdateClueUI();
-            CheckDeductionButton();
-        }
-    }
-
-    private void UpdateClueUI()
-    {
-        int totalEntries = gatheredClues.Count + gatheredTestimonies.Count;
+        int totalEntries = gatheredClues.Count;
 
         for (int i = 0; i < slots.Count; i++)
         {

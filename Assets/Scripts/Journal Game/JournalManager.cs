@@ -1,30 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class JournalManager : MonoBehaviour
 {
-    #region Journal Variables
-    public GameObject Journal;
-
-    [Header("Journal Buttons")]
-    public Button caseButton;
-    public Button cluesBtn;
-    public Button slBtn;
-    public Button creaturesBtn;
-
-    [Header("Tabs")]
-    public GameObject caseFileTab;
-    public GameObject cluesTab;
-    public GameObject creaturesTab;
-    public GameObject saveLoadTab;
-
-    [Header("Close Button")]
-    public Button closeBtn;
+    #region Variables
+    public static JournalManager instance { get; set; }
 
     [Header("Scripts")]
     public CaseFileScript csScript;
@@ -33,76 +12,18 @@ public class JournalManager : MonoBehaviour
     public SaveLoadScript slScript;
     #endregion
 
-    void OnEnable()
+    private void Awake()
     {
-        caseButton.onClick.AddListener(OpenCaseFile);
-        cluesBtn.onClick.AddListener(openClues);
-        slBtn.onClick.AddListener(openSL);
-        creaturesBtn.onClick.AddListener(openCreatures);
-        closeBtn.onClick.AddListener(CloseTab);
-        Time.timeScale = 0f;
-    }
-
-    void OnDisable()
-    {
-        caseButton.onClick.RemoveListener(OpenCaseFile);
-        cluesBtn.onClick.RemoveListener(openClues);
-        slBtn.onClick.RemoveListener(openSL);
-        creaturesBtn.onClick.RemoveListener(openCreatures);
-        closeBtn.onClick.RemoveListener(CloseTab);
-    }
-
-    //open tabs
-    void OpenCaseFile()
-    {
-        ShowTab(caseFileTab);
-        csScript.UpdateCaseFileUI();
-    }
-
-    void openClues()
-    {
-        ShowTab(cluesTab);
-        //cluesScript.UpdateCluesUI();
-    }
-
-    void openSL()
-    {
-        //Saving Game here
-
-        var curGS = SaveManager.Instance.GetGameState();
-        if (curGS != null) 
+        if(instance == null)
         {
-            curGS.LastSaveDateTime = DateTime.Now; 
-            SaveManager.Instance.SaveGameState(SaveManager.Instance.SelectedSaveIndex);
-            SaveManager.Instance.PrintGameStatus();
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
-        ShowTab(saveLoadTab);
-        //slScript.UpdateSLUI();
-    }
-
-    void openCreatures()
-    {
-        ShowTab(creaturesTab);
-        //creaturesScript.UpdateCreaturesUI();
-    }
-
-    private void ShowTab(GameObject activeTab)
-    {
-        caseFileTab.SetActive(false);
-        cluesTab.SetActive(false);
-        creaturesTab.SetActive(false);
-        saveLoadTab.SetActive(false);
-
-        if (activeTab != null)
+        else
         {
-            activeTab.SetActive(true);
+            Destroy(gameObject);
         }
-    }
-
-    private void CloseTab()
-    {
-        Journal.SetActive(false);
     }
 }
 

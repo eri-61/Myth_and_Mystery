@@ -21,31 +21,39 @@ public class InventoryManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+
+            //Check Game Save and re-apply found items
+            var curGS = SaveManager.Instance.GetGameState();
+
+            if (curGS.Inventory != null)
+            {
+                if (curGS.Inventory.Items != null)
+                {
+                    Debug.Log($"InvestigationScene > Reloading Inventory Items > Item Count: {curGS.Inventory.Items.Count}");
+                    foreach (var itm in curGS.Inventory.Items)
+                    {
+                        Sprite incomingSprite = Resources.Load<Sprite>($"Assets/Game UI/Items/{itm.ItemName.ToLower()}");
+
+                        Items loadedItem = ScriptableObject.CreateInstance<Items>();
+                        loadedItem.name = itm.ItemName;
+                        loadedItem.image = incomingSprite;
+                        currentItems.Add(loadedItem);
+                    }
+                }
+            }
         }
         else
         {
             Destroy(this.gameObject);
+            return;
         }
 
-        //Check Game Save and re-apply found items
-        var curGS = SaveManager.Instance.GetGameState();
+    }
 
-        if (curGS.Inventory != null)
-        {
-            if (curGS.Inventory.Items != null)
-            {
-                Debug.Log($"InvestigationScene > Reloading Inventory Items > Item Count: {curGS.Inventory.Items.Count}");
-                foreach (var itm in curGS.Inventory.Items)
-                {
-                    Sprite incomingSprite = Resources.Load<Sprite>($"Assets/Game UI/Items/{itm.ItemName.ToLower()}");
-
-                    Items loadedItem = ScriptableObject.CreateInstance<Items>();
-                    loadedItem.name = itm.ItemName;
-                    loadedItem.image = incomingSprite;
-                    InventoryManager.instance.AddItem(loadedItem);
-                }
-            }
-        }
+    private void Start()
+    {
+        LoadInventoryUI();
     }
 
     private void Update()
@@ -71,7 +79,13 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(Items item)
     {
-        for(int i = 0; i< inventorySlots.Length; i++)
+        if (currentItems.Any(i => i.name == item.name))
+        {
+            Debug.LogWarning($"[InventoryManager] Item '{item.name}' already exists in inventory. Skipping addition.");
+            return; 
+        }
+
+        for (int i = 0; i< inventorySlots.Length; i++)
         {
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
@@ -146,9 +160,17 @@ public class InventoryManager : MonoBehaviour
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
             if(itemInSlot == null)
             {
+                Sprite incomingSprite = Resources.Load<Sprite>($"Assets/Game UI/Items/{item.name.ToLower()}");
+                item.image = incomingSprite;
+
                 SpawnNewItem(item, slot);
             }
             index++;
+
+            if (index >= inventorySlots.Length)
+            {
+                break;
+            }
         }
     }
 }
