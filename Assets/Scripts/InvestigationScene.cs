@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class InvestigationScene : MonoBehaviour
 {
+    #region Variables
     [Header("Choice")]
     [SerializeField] private GameObject buttons;
     [SerializeField] private Button talk;
@@ -50,10 +51,10 @@ public class InvestigationScene : MonoBehaviour
 
     [Header("Items & Clues script")]
     [SerializeField] private CluesScript cluScript;
-    [SerializeField] private InventoryManager inventoryManager;
 
     private Dictionary<int, bool> isPointSearched = new Dictionary<int, bool>();
     private Coroutine hideDialogCoroutine;
+    #endregion
 
     void Start()
     {
@@ -67,33 +68,12 @@ public class InvestigationScene : MonoBehaviour
 
         character.SetActive(characterExists);
 
-        inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
-
         for (int i = 0; i < investigationPoints.Length; i++)
         {
             isPointSearched[i] = false;
         }
 
-        //Check Game Save and re-apply found items
         var curGS = SaveManager.Instance.GetGameState();
-
-        if (curGS.Inventory != null)
-        {
-            if (curGS.Inventory.Items != null)
-            {
-                Debug.Log($"InvestigationScene > Reloading Inventory Items > Item Count: {curGS.Inventory.Items.Count}");
-                foreach (var itm in curGS.Inventory.Items)
-                {
-                    Sprite incomingSprite = Resources.Load<Sprite>($"Assets/Game UI/Items/{itm.ItemName.ToLower().Replace("data", "")}_0");
-
-                    Items loadedItem = ScriptableObject.CreateInstance<Items>();
-                    loadedItem.name = itm.ItemName;
-                    loadedItem.image = incomingSprite;
-                    inventoryManager.AddItem(loadedItem);
-                }
-            }
-        }
-
         if (curGS.Journal != null)
         {
             if (curGS.Journal.Clues != null)
@@ -300,7 +280,7 @@ public class InvestigationScene : MonoBehaviour
 
     public void AddToInventory(int index, Items item)
     {
-        inventoryManager.AddItem(item);
+        InventoryManager.instance.AddItem(item);
         Debug.Log($"[InvestigationScene] Added item via serialized ref: {itemsToAdd[index].name}");
         
     }
@@ -313,12 +293,12 @@ public class InvestigationScene : MonoBehaviour
 
     public void GetSelectedItem()
     {
-        Items selectedItem = inventoryManager.GetSelectedItem(false);
+        Items selectedItem = InventoryManager.instance.GetSelectedItem(false);
     }
     
     public void UseSelectedItem()
     {
-        Items selectedItem = inventoryManager.GetSelectedItem(true);
+        Items selectedItem = InventoryManager.instance.GetSelectedItem(true);
         if(selectedItem != null)
         {
             Debug.Log($"InvestigationScene > UseSelectedItem > Used Item: {selectedItem.name}");
