@@ -8,11 +8,6 @@ public class CluesScript : MonoBehaviour
 {
     public static CluesScript Instance { get; private set; }
 
-    public CluesScript()
-    {
-        Instance = this;
-    }
-
     #region Variables
     [Header("Slots")]
     public List<Button> slots;
@@ -29,17 +24,19 @@ public class CluesScript : MonoBehaviour
     public int sceneIndex = 1;
     public int allCluesAndTestimonies = 0; 
     public List<CluesData> gatheredClues = new();
-    public List<TestimonyData> gatheredTestimonies = new();
     #endregion
 
+    public enum Dialog { RIGHT, WRONG }
+    private Dialog lastDeductionResult;
     private enum EntryType { Clue, Testimony }
     private List<EntryType> entrytypes = new();
 
     void Awake()
     {
-        deductionButton.gameObject.SetActive(false);
-        //GameManager.Instance.RegisterClues(this);
-
+        if (deductionButton != null)
+        {
+            deductionButton.gameObject.SetActive(false);
+        }
     }
 
     void OnEnable()
@@ -66,20 +63,14 @@ public class CluesScript : MonoBehaviour
 
     public void showDetails(int index)
     {
-        if (entrytypes[index] == EntryType.Clue)
-        {
-            var clue = gatheredClues[index];
-            entryName.text = "Clue: " + clue.clueName;
-            entryDescription.text = clue.clueDescription;
-            entryImage.sprite = clue.clueImage;
-        }
-        else if (entrytypes[index] == EntryType.Testimony)
-        {
-            var testimony = gatheredTestimonies[index - gatheredClues.Count];
-            entryName.text = "Witness: " + testimony.witnessName;
-            entryDescription.text = testimony.testimonyText;
-            entryImage.sprite = testimony.witnessPortrait;
-        }
+        if (index < 0 || index >= gatheredClues.Count) return;
+
+        var entry = gatheredClues[index];
+        string prefix = (entry.entryType == JournalEntryType.Clue) ? "Clue: " : "Testimony: ";
+
+        entryName.text = prefix + entry.clueName;
+        entryDescription.text = entry.clueDescription;
+        entryImage.sprite = entry.clueImage;
     }
 
     public void goToDeductionMode()
@@ -87,56 +78,49 @@ public class CluesScript : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
-    /*public void DeductionComplete(Dialog result)
+    public void DeductionComplete(Dialog result)
     {
-        this.result = result;
+        lastDeductionResult = result;
 
         if (deductionButton != null)
         {
             if (result == Dialog.RIGHT)
             {
+                deductionButton.gameObject.SetActive(true);
                 deductionButton.interactable = false;
-                entryDescription.text = "<b> Deduction Completed.</b>";
+                entryDescription.text = "<b>Deduction Completed.</b>";
+                Debug.Log("[CluesScript] Deduction Completed Successfully.");
             }
             else if (result == Dialog.WRONG)
             {
-                entryDescription.text = "<b>Wrong Deduction.</b>";
+                deductionButton.gameObject.SetActive(true);
+                deductionButton.interactable = false;
+                entryDescription.text = "<b>Wrong Deduction. Try again.</b>";
+                Debug.Log("[CluesScript] Deduction was incorrect.");
             }
         }
         else
         {
             Debug.Log("[CluesScript] Deduction result stored; UI not present to update now.");
-
         }
-    }*/
+    }
 
-    public void AddClues(CluesData newClue)
+    public void AddClues(CluesData newEntry)
     {
-        if (!gatheredClues.Contains(newClue))
+        if (newEntry == null) return;
+
+        if (!gatheredClues.Contains(newEntry))
         {
-            gatheredClues.Add(newClue);
-            entrytypes.Add(EntryType.Clue);
+            gatheredClues.Add(newEntry);
 
             UpdateClueUI();
             CheckDeductionButton();
         }
     }
 
-    public void addTestimony(TestimonyData newTestimony)
+    public void UpdateClueUI()
     {
-        if (!gatheredTestimonies.Contains(newTestimony))
-        {
-            gatheredTestimonies.Add(newTestimony);
-            entrytypes.Add(EntryType.Testimony);
-
-            UpdateClueUI();
-            CheckDeductionButton();
-        }
-    }
-
-    private void UpdateClueUI()
-    {
-        int totalEntries = gatheredClues.Count + gatheredTestimonies.Count;
+        int totalEntries = gatheredClues.Count;
 
         for (int i = 0; i < slots.Count; i++)
         {
@@ -144,19 +128,13 @@ public class CluesScript : MonoBehaviour
 
             if (i < totalEntries)
             {
-                if (i < gatheredClues.Count)
-                {
-                    slotImage.sprite = gatheredClues[i].clueIcon;
-                }
-                else
-                {
-                    int tIndex = i - gatheredClues.Count;
-                    slotImage.sprite = gatheredTestimonies[tIndex].testimonyIcon;
-                }
+                slotImage.sprite = gatheredClues[i].clueIcon;
                 slots[i].interactable = true;
             }
             else
             {
+                // Clear the slot if there's no entry
+                slotImage.sprite = null;
                 slots[i].interactable = false;
             }
         }
@@ -165,8 +143,9 @@ public class CluesScript : MonoBehaviour
 
     private void CheckDeductionButton()
     {
-        int totalGathered = gatheredClues.Count + gatheredTestimonies.Count;
-        if (totalGathered >= allCluesAndTestimonies)
+        int totalGathered = gatheredClues.Count;
+        
+        if (allCluesAndTestimonies > 0 && totalGathered >= allCluesAndTestimonies)
         {
             deductionButton.gameObject.SetActive(true);
         }

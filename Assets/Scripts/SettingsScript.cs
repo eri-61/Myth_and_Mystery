@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SettingsScript : MonoBehaviour
 {
+    public static SettingsScript instance;
     #region Variables
     [Header ("Panel")]
     public GameObject settingsPanel;
@@ -29,72 +30,20 @@ public class SettingsScript : MonoBehaviour
     public Button closeBtn;
     #endregion
 
-    [Header("Modal settings (optional)")]
-    [Tooltip("If empty a Canvas + GraphicRaycaster will be added to the panel at runtime.")]
-    [SerializeField] Canvas panelCanvas;
-    [Tooltip("Sorting order used when opening the settings to guarantee it's on top of other UI.")]
-    [SerializeField] int overrideSortingOrder = 1000;
-
     Coroutine sampleCoroutine;
     bool suppressChangeEvents = false;
 
-    void Start()
+    private void Awake()
     {
-        EnsureModalSetup();
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        CloseSettings();
-    }
-
-    void EnsureModalSetup()
-    {
-        if (settingsPanel == null) return;
-
-        panelCanvas = settingsPanel.GetComponent<Canvas>();
-        if (panelCanvas == null)
+        if (instance == null)
         {
-            panelCanvas = settingsPanel.AddComponent<Canvas>();
-            settingsPanel.AddComponent<GraphicRaycaster>();
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-
-        var cg = settingsPanel.GetComponent<CanvasGroup>();
-        if (cg == null)
-            cg = settingsPanel.AddComponent<CanvasGroup>();
-        cg.blocksRaycasts = true; 
-        cg.interactable = true;
-
-        if (settingsPanel.transform.Find("Blocker") == null)
+        else
         {
-            var blockerGO = new GameObject("Blocker", typeof(RectTransform));
-            blockerGO.transform.SetParent(settingsPanel.transform, false);
-
-            var rt = blockerGO.GetComponent<RectTransform>();
-            rt.anchorMin = Vector2.zero;
-            rt.anchorMax = Vector2.one;
-            rt.sizeDelta = Vector2.zero;
-            rt.offsetMin = Vector2.zero;
-            rt.offsetMax = Vector2.zero;
-
-            var img = blockerGO.AddComponent<Image>();
-            img.color = new Color(0f, 0f, 0f, 0f);
-            img.raycastTarget = true;
-
-            blockerGO.transform.SetAsFirstSibling();
-        }
-
-        panelCanvas = settingsPanel.GetComponent<Canvas>();
-        if (panelCanvas != null)
-        {
-            panelCanvas.overrideSorting = false; 
+            Destroy(this.gameObject);
+            return;
         }
     }
 
@@ -149,16 +98,7 @@ public class SettingsScript : MonoBehaviour
     {
         if (settingsPanel == null) return;
 
-        EnsureModalSetup();
-
         settingsPanel.transform.SetAsLastSibling();
-
-        // force this panel's canvas to be top-most
-        if (panelCanvas != null)
-        {
-            panelCanvas.overrideSorting = true;
-            panelCanvas.sortingOrder = overrideSortingOrder;
-        }
 
         var cg = settingsPanel.GetComponent<CanvasGroup>();
         if (cg != null)
@@ -173,11 +113,6 @@ public class SettingsScript : MonoBehaviour
     public void CloseSettings()
     {
         if (settingsPanel == null) return;
-
-        if (panelCanvas != null)
-        {
-            panelCanvas.overrideSorting = false;
-        }
 
         settingsPanel.SetActive(false);
     }

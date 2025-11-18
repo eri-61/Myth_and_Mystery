@@ -26,7 +26,4 @@ public class Unit : MonoBehaviour
             return false;
         }
     }
-
-    [Header ("Weakness")]
-    public ItemData weaknessItem;
 }
