@@ -95,12 +95,19 @@ public class InventoryManager : MonoBehaviour
 
     public void ChangeSelectedSlot(int itemSlot)
     {
-        if(selectedSlot >= 0)
+        // Deselect previous
+        if (selectedSlot >= 0 && selectedSlot < inventorySlots.Length)
         {
             inventorySlots[selectedSlot].Deselect();
         }
+
         selectedSlot = itemSlot;
-        inventorySlots[selectedSlot].Select();
+
+        // Only select if valid
+        if (selectedSlot >= 0 && selectedSlot < inventorySlots.Length)
+        {
+            inventorySlots[selectedSlot].Select();
+        }
     }
 
     public void AddItem(Items item)

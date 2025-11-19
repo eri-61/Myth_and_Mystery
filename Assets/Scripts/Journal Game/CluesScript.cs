@@ -42,9 +42,11 @@ public class CluesScript : MonoBehaviour
         for (int i = 0; i < slots.Count; i++)
         {
             int index = i;
+            slots[i].onClick.RemoveAllListeners();
             slots[i].onClick.AddListener(() => showDetails(index));
         }
 
+        deductionButton.onClick.RemoveAllListeners();
         deductionButton.onClick.AddListener(goToDeductionMode);
         UpdateClueUI();
     }

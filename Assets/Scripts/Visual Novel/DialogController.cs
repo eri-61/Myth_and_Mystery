@@ -93,7 +93,10 @@ public class DialogController : MonoBehaviour
                     return;
                 }
 
-                StartCoroutine(ShowItemRequiredWarning());
+                else
+                {
+                    StartCoroutine(ShowItemRequiredWarning());
+                }
             }
         }
         else
