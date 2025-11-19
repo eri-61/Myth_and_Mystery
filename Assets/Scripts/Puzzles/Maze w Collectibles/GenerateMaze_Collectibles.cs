@@ -50,7 +50,7 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
     public int playerMoves = 0;
     public bool enemySpawned = false;
 
-    [Header("Scene")]
+    [Header("Scene Index")]
     public int gameOver = 1;
     public int gameWin = 1;
 
@@ -236,65 +236,113 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         SpawnCollectibles();
     }
 
+    private HashSet<Vector2Int> GetReachableRooms(int startX, int startY)
+    {
+        HashSet<Vector2Int> reachable = new HashSet<Vector2Int>();
+        if (rooms == null) return reachable;
+        if (startX < 0 || startX >= numX || startY < 0 || startY >= numY) return reachable;
+        RoomScript start = rooms[startX, startY];
+        if (start == null) return reachable;
+
+        Queue<RoomScript> q = new Queue<RoomScript>();
+        q.Enqueue(start);
+        reachable.Add(new Vector2Int(startX, startY));
+
+        while (q.Count > 0)
+        {
+            RoomScript cur = q.Dequeue();
+            Vector2Int idx = cur.Index;
+            int cx = idx.x;
+            int cy = idx.y;
+
+            foreach (RoomScript.Direction dir in Enum.GetValues(typeof(RoomScript.Direction)))
+            {
+                if (dir == RoomScript.Direction.NONE) continue;
+                if (!cur.CanMove(dir)) continue;
+
+                int nx = cx;
+                int ny = cy;
+                switch (dir)
+                {
+                    case RoomScript.Direction.TOP: ny++; break;
+                    case RoomScript.Direction.BOTTOM: ny--; break;
+                    case RoomScript.Direction.RIGHT: nx++; break;
+                    case RoomScript.Direction.LEFT: nx--; break;
+                }
+
+                if (nx < 0 || nx >= numX || ny < 0 || ny >= numY) continue;
+                if (rooms[nx, ny] == null) continue;
+
+                Vector2Int npos = new Vector2Int(nx, ny);
+                if (reachable.Contains(npos)) continue;
+
+                reachable.Add(npos);
+                q.Enqueue(rooms[nx, ny]);
+            }
+        }
+
+        return reachable;
+    }
     private void SpawnCollectibles()
     {
-        if (collectiblePrefabs == null || collectiblePrefabs.Length == 0)
-        {
-            return;
-        }
+        if (collectiblePrefabs == null || collectiblePrefabs.Length == 0) return;
+        if (rooms == null) return;
 
-        if (rooms == null)
-        {
-            return;
-        }
+        int exitX = numX - 1;
+        int exitY = numY - 1;
 
-        HashSet<Vector2Int> usedRooms = new HashSet<Vector2Int>();
-        usedRooms.Add(new Vector2Int(0, 0)); // start
-        usedRooms.Add(new Vector2Int(numX - 1, numY - 1)); // exit
+        var fromStart = GetReachableRooms(0, 0);
+        var toExit = GetReachableRooms(exitX, exitY);
 
         List<Vector2Int> candidates = new List<Vector2Int>();
-        for (int x = 0; x < numX; x++)
+        foreach (var pos in fromStart)
         {
-            for (int y = 0; y < numY; y++)
-            {
-                var pos = new Vector2Int(x, y);
-                if (usedRooms.Contains(pos)) continue;
-
-                RoomScript r = rooms[x, y];
-                if (r == null) continue;
-
-                int openCount = CountOpenDirections(r);
-                if (openCount >= minOpenDirectionsForCollectible)
-                    candidates.Add(pos);
-            }
+            if ((pos.x == 0 && pos.y == 0) || (pos.x == exitX && pos.y == exitY)) continue;
+            if (toExit.Contains(pos)) candidates.Add(pos);
         }
 
         if (candidates.Count < collectiblePrefabs.Length)
         {
+            candidates.Clear();
+            HashSet<Vector2Int> usedRooms = new HashSet<Vector2Int> { new Vector2Int(0, 0), new Vector2Int(exitX, exitY) };
             for (int x = 0; x < numX; x++)
             {
                 for (int y = 0; y < numY; y++)
                 {
                     var pos = new Vector2Int(x, y);
-                    if (usedRooms.Contains(pos) || candidates.Contains(pos)) continue;
+                    if (usedRooms.Contains(pos)) continue;
                     RoomScript r = rooms[x, y];
                     if (r == null) continue;
-                    int openCount = CountOpenDirections(r);
-                    if (openCount >= 1)
-                        candidates.Add(pos);
+                    if (CountOpenDirections(r) >= minOpenDirectionsForCollectible) candidates.Add(pos);
                 }
             }
-        }
 
-        if (candidates.Count < collectiblePrefabs.Length)
-        {
-            for (int x = 0; x < numX; x++)
+            if (candidates.Count < collectiblePrefabs.Length)
             {
-                for (int y = 0; y < numY; y++)
+                for (int x = 0; x < numX; x++)
                 {
-                    var pos = new Vector2Int(x, y);
-                    if (usedRooms.Contains(pos) || candidates.Contains(pos)) continue;
-                    candidates.Add(pos);
+                    for (int y = 0; y < numY; y++)
+                    {
+                        var pos = new Vector2Int(x, y);
+                        if ((pos.x == 0 && pos.y == 0) || (pos.x == exitX && pos.y == exitY)) continue;
+                        if (candidates.Contains(pos)) continue;
+                        RoomScript r = rooms[x, y];
+                        if (r == null) continue;
+                        if (CountOpenDirections(r) >= 1) candidates.Add(pos);
+                    }
+                }
+            }
+
+            if (candidates.Count < collectiblePrefabs.Length)
+            {
+                for (int x = 0; x < numX; x++)
+                {
+                    for (int y = 0; y < numY; y++)
+                    {
+                        var pos = new Vector2Int(x, y);
+                        if ((pos.x == 0 && pos.y == 0) || (pos.x == exitX && pos.y == exitY)) continue;
+                        if (!candidates.Contains(pos)) candidates.Add(pos);
+                    }
                 }
             }
         }
@@ -305,29 +353,19 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
         int spawnIndex = 0;
         foreach (GameObject prefab in collectiblePrefabs)
         {
-            if (spawnIndex >= candidates.Count)
-            {
-                break;
-            }
+            if (spawnIndex >= candidates.Count) break;
 
             Vector2Int pos = candidates[spawnIndex++];
-            usedRooms.Add(pos);
-
             RoomScript room = rooms[pos.x, pos.y];
             if (room == null) continue;
+
             Vector3 spawnPos = room.transform.position;
             GameObject collectible = Instantiate(prefab, spawnPos, Quaternion.identity, transform);
 
             collectible.name = $"Collectible_{prefab.name}";
             spawnedCollectibles.Add(collectible);
 
-            try
-            {
-                collectible.tag = "Collectibles";
-            }
-            catch (Exception)
-            {
-            }
+            try { collectible.tag = "Collectibles"; } catch (Exception) { }
 
             Collider2D existingCol = collectible.GetComponent<Collider2D>();
             if (existingCol == null)
@@ -335,10 +373,7 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
                 var col = collectible.AddComponent<CircleCollider2D>();
                 col.isTrigger = true;
             }
-            else
-            {
-                existingCol.isTrigger = true;
-            }
+            else existingCol.isTrigger = true;
 
             if (collectible.GetComponent<Rigidbody2D>() == null)
             {
@@ -347,8 +382,6 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
                 rb.simulated = true;
             }
         }
-
-        Debug.Log($"Spawned {spawnedCollectibles.Count} collectibles across the maze.");
     }
 
     private int CountOpenDirections(RoomScript room)
@@ -840,34 +873,11 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
 
     private void CreateExit()
     {
-        Debug.Log($"[DEBUG] CreateExit() called — rooms={rooms}, numX={numX}, numY={numY}");
-
-        if (rooms != null)
-        {
-            Debug.Log($"[DEBUG] rooms.GetLength(0)={rooms.GetLength(0)}, rooms.GetLength(1)={rooms.GetLength(1)}");
-            Debug.Log($"[DEBUG] Trying to access exit room at [{numX - 1}, {numY - 1}]");
-            if (numX - 1 < rooms.GetLength(0) && numY - 1 < rooms.GetLength(1))
-            {
-                var r = rooms[numX - 1, numY - 1];
-                Debug.Log($"[DEBUG] rooms[{numX - 1},{numY - 1}] exists? {r != null}");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("[DEBUG] rooms array is null at CreateExit.");
-        }
-
         if (exitCreated) return;
 
-        if (rooms == null)
+        if (rooms == null || numX <= 0 || numY <= 0)
         {
-            Debug.LogWarning("[CreateExit] rooms array is null. Cannot create exit.");
-            return;
-        }
-
-        if (numX <= 0 || numY <= 0)
-        {
-            Debug.LogWarning("[CreateExit] invalid maze dimensions.");
+            Debug.LogWarning("[CreateExit] Invalid maze or rooms array.");
             return;
         }
 
@@ -876,14 +886,14 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
 
         if (ex < 0 || ey < 0 || ex >= rooms.GetLength(0) || ey >= rooms.GetLength(1))
         {
-            Debug.LogWarning($"[CreateExit] exit coordinates out of range: {ex},{ey}");
+            Debug.LogWarning($"[CreateExit] Exit coordinates out of range: {ex},{ey}");
             return;
         }
 
         RoomScript exitRoom = rooms[ex, ey];
         if (exitRoom == null)
         {
-            Debug.LogWarning($"[CreateExit] exit room at {ex},{ey} is null.");
+            Debug.LogWarning($"[CreateExit] Exit room at {ex},{ey} is null.");
             return;
         }
 
@@ -892,10 +902,9 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
 
         try
         {
-            // If no prefab provided: fallback simple trigger
+            // If no prefab is assigned, create a fallback ExitZone
             if (exitPrefab == null)
             {
-                Debug.LogWarning("[CreateExit] exitPrefab is not assigned. Creating fallback ExitZone GameObject.");
                 exitObj = new GameObject("ExitZone");
                 exitObj.transform.SetParent(transform);
                 exitObj.transform.position = new Vector3(exitPos.x, exitPos.y, -0.2f);
@@ -906,92 +915,83 @@ public class GenerateMaze_wCollectibles : MonoBehaviour
 
                 var trigger = exitObj.AddComponent<ExitZoneTrigger>();
                 trigger.mazeGen = this;
-
-                exitCreated = true;
-                Debug.Log("[CreateExit] fallback ExitZone created.");
-                return;
             }
-
-            // Instantiate prefab
-            exitObj = Instantiate(exitPrefab, exitPos, Quaternion.identity, transform);
-            exitObj.name = "ExitZone";
-            if (!exitObj.activeInHierarchy) exitObj.SetActive(true);
-
-            // Find colliders (include inactive children)
-            Collider2D[] exitColliders = exitObj.GetComponentsInChildren<Collider2D>(true);
-
-            // If no colliders found, add a BoxCollider2D to the root
-            if (exitColliders == null || exitColliders.Length == 0)
+            else
             {
-                Debug.LogWarning("[CreateExit] No Collider2D found on exitPrefab. Adding fallback BoxCollider2D to root.");
-                var bc = exitObj.AddComponent<BoxCollider2D>();
-                bc.isTrigger = true;
-                bc.size = new Vector2(roomWidth * 0.8f, roomHeight * 0.8f);
-                exitColliders = new Collider2D[] { bc };
+                // Instantiate prefab
+                exitObj = Instantiate(exitPrefab, exitPos, Quaternion.identity, transform);
+                exitObj.name = "ExitZone";
+                if (!exitObj.activeInHierarchy) exitObj.SetActive(true);
+
+                // Ensure collider exists and is trigger
+                Collider2D[] exitColliders = exitObj.GetComponentsInChildren<Collider2D>(true);
+                GameObject colliderOwner = null;
+                if (exitColliders == null || exitColliders.Length == 0)
+                {
+                    var bc = exitObj.AddComponent<BoxCollider2D>();
+                    bc.isTrigger = true;
+                    bc.size = new Vector2(roomWidth * 0.8f, roomHeight * 0.8f);
+                    colliderOwner = exitObj;
+                }
+                else
+                {
+                    foreach (var c in exitColliders)
+                    {
+                        if (c == null) continue;
+                        c.isTrigger = true;
+                        if (colliderOwner == null) colliderOwner = c.gameObject;
+                    }
+                }
+
+                // Ensure ExitZoneTrigger exists
+                var exitTrigger = colliderOwner.GetComponent<ExitZoneTrigger>();
+                if (exitTrigger == null) exitTrigger = colliderOwner.AddComponent<ExitZoneTrigger>();
+                exitTrigger.mazeGen = this;
+
+                // Position slightly above floor
+                exitObj.transform.position = new Vector3(exitPos.x, exitPos.y, -0.2f);
             }
 
-            // Ensure all colliders are triggers and pick a collider owner
-            GameObject colliderOwner = null;
-            for (int i = 0; i < exitColliders.Length; i++)
-            {
-                var c = exitColliders[i];
-                if (c == null) continue;
-                c.isTrigger = true;
-                if (colliderOwner == null) colliderOwner = c.gameObject;
-            }
+            exitCreated = true;
 
-            if (colliderOwner == null)
-            {
-                // last-resort: use root object
-                colliderOwner = exitObj;
-                var bc = colliderOwner.GetComponent<Collider2D>();
-                if (bc == null) bc = colliderOwner.AddComponent<BoxCollider2D>();
-                bc.isTrigger = true;
-                Debug.LogWarning("[CreateExit] colliderOwner was null; attached BoxCollider2D to root.");
-            }
+            // Show temporary popup message
+            StartCoroutine(ShowPopupText("A way out has appeared!", 2f));
 
-            // Attach or find ExitZoneTrigger on the collider owner and wire the generator
-            var exitTrigger = colliderOwner.GetComponent<ExitZoneTrigger>();
-            if (exitTrigger == null) exitTrigger = colliderOwner.AddComponent<ExitZoneTrigger>();
-            exitTrigger.mazeGen = this;
-
-            Debug.Log($"[CreateExit] exitObj created: {exitObj.name}, colliderOwner: {colliderOwner.name}, colliders: {exitColliders.Length}");
-
-            // Position the exit slightly above floor so it renders correctly
-            exitObj.transform.position = new Vector3(exitPos.x, exitPos.y, -0.2f);
-
-            // Immediate overlap detection - if player already standing on exit, trigger exit now
+            // If player is already on the exit, trigger it immediately
             if (playerInstance != null)
             {
                 Vector2 playerPos = playerInstance.transform.position;
                 Collider2D[] overlaps = Physics2D.OverlapPointAll(playerPos);
-
-                bool playerInsideExit = false;
                 foreach (var oc in overlaps)
                 {
                     if (oc == null) continue;
-                    // check if the overlap collider belongs to the exit collider owner (or its children)
-                    if (oc.gameObject == colliderOwner || oc.transform.IsChildOf(colliderOwner.transform))
+                    if (oc.gameObject == exitObj || oc.transform.IsChildOf(exitObj.transform))
                     {
-                        playerInsideExit = true;
+                        OnPlayerExit();
                         break;
                     }
                 }
-
-                if (playerInsideExit)
-                {
-                    Debug.Log("[CreateExit] Player already overlaps new exit — invoking OnPlayerExit()");
-                    OnPlayerExit();
-                }
             }
 
-            exitCreated = true;
-            Debug.Log($"Exit prefab instantiated at room: {ex},{ey}  pos: {exitPos}");
+            Debug.Log($"Exit created at room: {ex},{ey} pos: {exitPos}");
         }
         catch (Exception x)
         {
             Debug.LogException(x);
         }
+    }
+
+    private IEnumerator ShowPopupText(string message, float duration = 2f)
+    {
+        if (text == null) yield break;
+
+        string original = text.text;
+        text.text = message;
+        text.enabled = true;
+
+        yield return new WaitForSeconds(duration);
+
+        text.text = original;
     }
 
 }
