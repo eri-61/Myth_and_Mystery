@@ -10,7 +10,9 @@ public class DialogStarter : MonoBehaviour
     [SerializeField] private DialogTree dialogTree;
     [SerializeField] private int startSection = 0;
 
-    [Header ("Animations")]
+    [Header("Animations")]
+    [SerializeField] private GameObject background;
+
     [SerializeField] private bool caseAnimation = false;
     [SerializeField] private GameObject caseUI;
     [SerializeField] private VideoPlayer caseVideo;
@@ -75,6 +77,7 @@ public class DialogStarter : MonoBehaviour
         yield return new WaitForSecondsRealtime(fadeDuration);
 
         fadeUI.SetActive(false);
+        background.SetActive(false);
         DialogController.instance.StartDialog(dialogTree, startSection);
     }
     /*

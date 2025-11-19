@@ -159,16 +159,19 @@ public class InventoryManager : MonoBehaviour
 
     public string GetSelectedName()
     {
-        if (selectedSlot >= 0 && selectedSlot < inventorySlots.Length)
+        if (selectedSlot < 0 || selectedSlot >= inventorySlots.Length)
         {
-            InventorySlot slot = inventorySlots[selectedSlot];
-            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-
-            if (itemInSlot != null && itemInSlot.item != null)
-            {
-                return itemInSlot.item.name;
-            }
+            return null;
         }
+
+        InventorySlot slot = inventorySlots[selectedSlot];
+        InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+        if (itemInSlot != null && itemInSlot.item != null)
+        {
+            return itemInSlot.item.name;
+        }
+
         return null;
     }
 
