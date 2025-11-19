@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
 
     [Header ("Damage")]
     public int damage;
+    public Items weaknessItem;
 
     public bool TakeDamage(int dmg)
     {

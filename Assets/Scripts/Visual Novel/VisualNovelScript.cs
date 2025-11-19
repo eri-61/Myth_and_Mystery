@@ -52,6 +52,9 @@ public class VisualNovelScript : MonoBehaviour
 
         menuBtn.onClick.AddListener(OpenMenu);
         journalBtn.onClick.AddListener(OpenJournal);
+
+        SettingsScript.instance.CloseSettings();
+        JournalManager.instance.CloseJournal();
     }
 
     void OnDisable()

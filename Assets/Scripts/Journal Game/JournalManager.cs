@@ -40,5 +40,12 @@ public class JournalManager : MonoBehaviour
         DialogController.instance.DisableDialogInput();
         journalPanel.SetActive(true);
     }
+
+    public void CloseJournal()
+    {
+        Time.timeScale = 1f;
+        DialogController.instance.EnableDialogInput();
+        journalPanel.SetActive(false);
+    }
 }
 
