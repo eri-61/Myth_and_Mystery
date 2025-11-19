@@ -96,6 +96,7 @@ public class SettingsScript : MonoBehaviour
 
     public void OpenSettings()
     {
+        Time.timeScale = 0f;
         if (settingsPanel == null) return;
 
         settingsPanel.transform.SetAsLastSibling();
@@ -112,6 +113,7 @@ public class SettingsScript : MonoBehaviour
 
     public void CloseSettings()
     {
+        Time.timeScale = 1f;
         if (settingsPanel == null) return;
 
         settingsPanel.SetActive(false);

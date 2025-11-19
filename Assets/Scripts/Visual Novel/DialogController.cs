@@ -9,6 +9,8 @@ public class DialogController : MonoBehaviour
 {
     public static DialogController instance;
 
+    private bool inputEnabled = true;
+
     [Header("DialogBox")]
     [SerializeField] TextMeshProUGUI dialogText;
     [SerializeField] TextMeshProUGUI nameText;
@@ -142,6 +144,8 @@ public class DialogController : MonoBehaviour
     private void Update()
     {
         if (!dialogBox.activeSelf) return;
+
+        if (!inputEnabled) return;
 
         if (Input.GetMouseButtonDown(0))
             SkipLine();
@@ -440,5 +444,15 @@ public class DialogController : MonoBehaviour
         answerIndex = answer;
         answerTriggered = true;
     }
+    public void EnableDialogInput()
+    {
+        inputEnabled = true;
+    }
+
+    public void DisableDialogInput()
+    {
+        inputEnabled = false;
+    }
+
 
 }

@@ -88,6 +88,7 @@ public class JournalTabManager : MonoBehaviour
     private void CloseTab()
     {
         Time.timeScale = 1f;
+        DialogController.instance.EnableDialogInput();
         Journal.SetActive(false);
     }
 }

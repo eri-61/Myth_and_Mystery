@@ -37,6 +37,7 @@ public class JournalManager : MonoBehaviour
     public void OpenJournal()
     {
         Time.timeScale = 0f;
+        DialogController.instance.DisableDialogInput();
         journalPanel.SetActive(true);
     }
 }
